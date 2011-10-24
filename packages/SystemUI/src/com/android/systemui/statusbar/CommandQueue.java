@@ -702,11 +702,8 @@ public class CommandQueue extends IStatusBar.Stub {
                 case MSG_SET_TOP_APP_HIDES_STATUS_BAR:
                     for (int i = 0; i < mCallbacks.size(); i++) {
                         mCallbacks.get(i).setTopAppHidesStatusBar(msg.arg1 != 0);
-<<<<<<< HEAD
-=======
 		    }
 		    break;
->>>>>>> 65552ed595f39b1b2c31704f6800b99c33afadbe
                 case MSG_SCREEN_PINNING_STATE_CHANGED:
                     for (int i = 0; i < mCallbacks.size(); i++) {
                         mCallbacks.get(i).screenPinningStateChanged(msg.arg1 != 0);
