@@ -43,4 +43,8 @@
   <!-- Power button fingerprint -->
   <java-symbol type="bool" name="config_powerButtonFingerprint" />
 
+  <!-- Package Manager -->
+  <java-symbol type="array" name="config_deviceDisabledComponents" />
+  <java-symbol type="array" name="config_globallyDisabledComponents" />
+  <java-symbol type="array" name="config_forceEnabledComponents" />
 </resources>
