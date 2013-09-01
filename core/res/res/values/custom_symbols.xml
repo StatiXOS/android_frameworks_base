@@ -73,4 +73,11 @@
   
   <!-- Pocket Service -->
   <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
+
+  <!-- Package Manager -->
+  <java-symbol type="array" name="config_deviceDisabledComponents" />
+  <java-symbol type="array" name="config_globallyDisabledComponents" />
+  <java-symbol type="array" name="config_forceEnabledComponents" />
+
+>>>>>>> 3321815dfd5... PackageManager: allow build-time disabling of components
 </resources>
