@@ -105,4 +105,8 @@
     <!-- Whether the OnePlus device has an haptic motor -->
     <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
 
+    <!-- ADB notification -->
+    <java-symbol type="string" name="adb_net_active_notification_title" />
+    <java-symbol type="string" name="adb_both_active_notification_title" />
+    <java-symbol type="string" name="adb_active_generic_notification_message" />
 </resources>
