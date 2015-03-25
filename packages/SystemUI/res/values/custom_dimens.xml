@@ -20,4 +20,8 @@
     <item type="dimen" name="elmyra_progress_detect_threshold">0.5</item>
     <item type="dimen" name="elmyra_progress_report_threshold">0.55</item>
     <item type="dimen" name="elmyra_screen_off_adjustment">-0.1</item>
+
+    <!-- QS detail view scrolling -->
+   <dimen name="qs_detail_item_height_twoline">72dp</dimen>
+
 </resources>
