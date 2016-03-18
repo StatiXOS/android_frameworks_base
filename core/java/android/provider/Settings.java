@@ -4496,6 +4496,16 @@ public final class Settings {
          */
         public static final String APP_SWITCH_WAKE_SCREEN = "app_switch_wake_screen";
 
+        /** Whether to skip music track with volume rocker
+        /**
+        * @hide
+        */
+        public static final String VOLUME_BUTTON_MUSIC_CONTROL = "volume_button_music_control";
+
+        /** @hide */
+        private static final Validator VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -4564,6 +4574,7 @@ public final class Settings {
             BATTERY_LIGHT_MEDIUM_COLOR,
             BATTERY_LIGHT_FULL_COLOR,
             BATTERY_LIGHT_REALLYFULL_COLOR,
+            VOLUME_BUTTON_MUSIC_CONTROL,
             NOTIFICATION_LIGHT_PULSE
         };
 
@@ -4695,6 +4706,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ENABLE);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
+            PRIVATE_SETTINGS.add(VOLUME_BUTTON_MUSIC_CONTROL);
         }
 
         /**
@@ -4794,6 +4806,7 @@ public final class Settings {
             VALIDATORS.put(BATTERY_LIGHT_REALLYFULL_COLOR, BATTERY_LIGHT_REALLYFULL_COLOR_VALIDATOR);
             VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(VOLUME_BUTTON_MUSIC_CONTROL,VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
         }
 
         /**
