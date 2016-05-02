@@ -88,5 +88,6 @@ public class SystemSettings {
         Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN,
         Settings.System.FOOTER_TEXT_SHOW,
         Settings.System.QS_HEADER_BG_ALPHA
+        Settings.System.FP_WAKE_UNLOCK
     };
 }
