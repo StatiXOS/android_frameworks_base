@@ -18,6 +18,10 @@ package com.android.systemui.qs;
 
 import static com.android.systemui.qs.tileimpl.QSTileImpl.getColorForState;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -25,6 +29,8 @@ import android.content.res.Resources;
 import android.metrics.LogMaker;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -615,8 +621,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         boolean updateResources();
 
         void setListening(boolean listening);
-
-        boolean isShowTitles();
     }
 
     private void setAnimationTile(QSTileView v) {
@@ -668,43 +672,15 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                     t.click();
                     setAnimationTile(v);
             });
-            if (t.isDualTarget()) {
-                if (!mTileLayout.isShowTitles()) {
-                    v.setOnLongClickListener(view -> {
-                        t.secondaryClick();
-                        mHost.openPanels();
-                        return true;
-                    });
-                } else {
-                    v.setOnLongClickListener(view -> {
-                        t.longClick();
-                        return true;
-                    });
-                }
-            }
         }
-}
+   }
 
     public void updateSettings() {
-        if (mTileLayout != null) {
-            mTileLayout.updateSettings();
-        }
-        if (mCustomizePanel != null) {
-            mCustomizePanel.updateSettings();
-        }
-        if (mFooter != null) {
-            mFooter.updateSettings();
-        }
-        if (mTileLayout != null) {
-            for (TileRecord r : mRecords) {
-                configureTile(r.tile, r.tileView);
-            }
-        }
         mAnimStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.ANIM_TILE_STYLE, 0, UserHandle.USER_CURRENT);
         mAnimDuration = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.ANIM_TILE_DURATION, 2000, UserHandle.USER_CURRENT);
         mInterpolatorType = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.ANIM_TILE_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
-    }
+   }
 }
