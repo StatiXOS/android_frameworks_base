@@ -27,6 +27,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.service.quicksettings.Tile;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -84,6 +93,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     private BrightnessMirrorController mBrightnessMirrorController;
     private View mDivider;
+
+    private int mAnimStyle;
+    private int mAnimDuration;
+    private int mInterpolatorType;
 
     public QSPanel(Context context) {
         this(context, null);
@@ -602,5 +615,96 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         boolean updateResources();
 
         void setListening(boolean listening);
+
+        boolean isShowTitles();
+    }
+
+    private void setAnimationTile(QSTileView v) {
+        ObjectAnimator animTile;
+        if (mAnimStyle == 0) {
+            //No animation
+            return;
+        }
+        if (mAnimStyle == 1) {
+            animTile = ObjectAnimator.ofFloat(v, "rotationY", 0f, 360f);
+        } else {
+            animTile = ObjectAnimator.ofFloat(v, "rotation", 0f, 360f);
+        }
+        switch (mInterpolatorType) {
+            case 0:
+                animTile.setInterpolator(new LinearInterpolator());
+                break;
+            case 1:
+                animTile.setInterpolator(new AccelerateInterpolator());
+                break;
+            case 2:
+                animTile.setInterpolator(new DecelerateInterpolator());
+                break;
+            case 3:
+                animTile.setInterpolator(new AccelerateDecelerateInterpolator());
+                break;
+            case 4:
+                animTile.setInterpolator(new BounceInterpolator());
+                break;
+            case 5:
+                animTile.setInterpolator(new OvershootInterpolator());
+                break;
+            case 6:
+                animTile.setInterpolator(new AnticipateInterpolator());
+                break;
+            case 7:
+                animTile.setInterpolator(new AnticipateOvershootInterpolator());
+                break;
+            default:
+                break;
+        }
+        animTile.setDuration(mAnimDuration);
+        animTile.start();
+    }
+
+    private void configureTile(QSTile t, QSTileView v) {
+        if (mTileLayout != null) {
+            v.setOnClickListener(view -> {
+                    t.click();
+                    setAnimationTile(v);
+            });
+            if (t.isDualTarget()) {
+                if (!mTileLayout.isShowTitles()) {
+                    v.setOnLongClickListener(view -> {
+                        t.secondaryClick();
+                        mHost.openPanels();
+                        return true;
+                    });
+                } else {
+                    v.setOnLongClickListener(view -> {
+                        t.longClick();
+                        return true;
+                    });
+                }
+            }
+        }
+}
+
+    public void updateSettings() {
+        if (mTileLayout != null) {
+            mTileLayout.updateSettings();
+        }
+        if (mCustomizePanel != null) {
+            mCustomizePanel.updateSettings();
+        }
+        if (mFooter != null) {
+            mFooter.updateSettings();
+        }
+        if (mTileLayout != null) {
+            for (TileRecord r : mRecords) {
+                configureTile(r.tile, r.tileView);
+            }
+        }
+        mAnimStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ANIM_TILE_STYLE, 0, UserHandle.USER_CURRENT);
+        mAnimDuration = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ANIM_TILE_DURATION, 2000, UserHandle.USER_CURRENT);
+        mInterpolatorType = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ANIM_TILE_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
     }
 }
