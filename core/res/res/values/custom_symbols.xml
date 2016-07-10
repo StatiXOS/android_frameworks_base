@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright (C) 2018-2019 StatixOS
+   Copyright (C) 2018-2020 StatixOS
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
    limitations under the License.
 -->
 <resources>
+
   <!-- Device keyhandlers -->
 <!--  <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
   <java-symbol type="array" name="config_deviceKeyHandlerClasses" />-->
@@ -77,4 +78,8 @@
   <java-symbol type="anim" name="custom_app_in" />
   <java-symbol type="anim" name="custom_app_out" />
   <java-symbol type="integer" name="config_deviceHardwareKeys" />
+
+  <!-- Whether device has DASH support. -->
+  <java-symbol type="bool" name="config_hasDashCharger" />
+
 </resources>
