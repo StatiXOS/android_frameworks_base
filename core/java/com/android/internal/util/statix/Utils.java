@@ -26,6 +26,11 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Utils {
 
     // Check to see if device is WiFi only
@@ -89,5 +94,20 @@ public class Utils {
     // Check to see if device has FOD
     public static boolean hasFodSupport(Context context) {
         return context.getResources().getBoolean(com.android.internal.R.bool.config_supportsInDisplayFingerprint);
+    }
+
+    // Check if device has DASH support
+    public static boolean isDashCharger() {
+        try {
+            FileReader file = new FileReader("/sys/class/power_supply/battery/fastchg_status");
+            BufferedReader br = new BufferedReader(file);
+            String state = br.readLine();
+            br.close();
+            file.close();
+            return "1".equals(state);
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        }
+        return false;
     }
 }
