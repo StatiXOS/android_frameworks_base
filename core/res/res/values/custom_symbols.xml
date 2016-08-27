@@ -118,5 +118,13 @@
   <!-- System fonts -->
   <java-symbol type="array" name="config_fontPackages" />
 
+  <!-- Notification icon/text dynamic tint -->
+  <java-symbol type="bool" name="config_allowNotificationIconTextTinting" />
+  <java-symbol type="color" name="notification_text_default_color" />
+  <java-symbol type="color" name="notification_icon_default_color" />
+
+  <!-- Notification sender text color -->
+  <java-symbol type="color" name="sender_text_color" />
+
 </resources>
 
