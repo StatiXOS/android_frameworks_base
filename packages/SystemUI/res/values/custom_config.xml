@@ -52,4 +52,7 @@
         <item>com.google.android.systemui.GoogleServices</item>
     </string-array>
 
+    <!-- Allow Opa (Pixel navbar) layout -->
+    <bool name="config_allowOpaLayout">true</bool>
+
 </resources>
