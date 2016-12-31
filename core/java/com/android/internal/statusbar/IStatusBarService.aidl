@@ -106,6 +106,7 @@ interface IStatusBarService
      * ABC
      */
     void toggleCameraFlash();
+    void restartUI();
 
     // Start SmartNav methods
     void toggleRecentApps();
