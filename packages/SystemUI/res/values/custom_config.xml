@@ -25,4 +25,9 @@
 
     <!-- The minimum bottom margin of the keyguard security container -->
     <dimen name="kg_security_container_min_bottom_margin">0dp</dimen>
+
+    <!-- Burn-in protection -->
+    <bool name="config_statusBarBurnInProtection">false</bool>
+    <integer name="config_shift_interval">60</integer>
+
 </resources>
