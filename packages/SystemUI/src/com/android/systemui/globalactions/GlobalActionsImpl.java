@@ -95,7 +95,7 @@ public class GlobalActionsImpl implements GlobalActions, CommandQueue.Callbacks 
     }
 
     @Override
-    public void showShutdownUi(boolean isReboot, String reason) {
+    public void showShutdownUi(boolean isReboot, String reason, boolean rebootCustom) {
         ScrimDrawable background = new ScrimDrawable();
 
         final Dialog d = new Dialog(mContext,
@@ -167,7 +167,9 @@ public class GlobalActionsImpl implements GlobalActions, CommandQueue.Callbacks 
         if (reason != null && reason.startsWith(PowerManager.REBOOT_RECOVERY_UPDATE)) {
             return R.string.reboot_to_update_reboot;
         } else if (reason != null && reason.equals(PowerManager.REBOOT_RECOVERY)) {
-            return R.string.reboot_to_reset_message;
+            return com.android.internal.R.string.reboot_to_recovery_message;
+        } else if (reason != null && reason.equals(PowerManager.REBOOT_BOOTLOADER)) {
+            return com.android.internal.R.string.reboot_to_bootloader_message;
         } else if (isReboot) {
             return R.string.reboot_to_reset_message;
         } else {
