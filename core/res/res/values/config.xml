@@ -2773,8 +2773,23 @@
         <item>lockdown</item>
         <item>power</item>
         <item>restart</item>
+<<<<<<< HEAD   (12fe86 UpdateEngine: Add perf mode binder interface)
+=======
+        <item>recovery</item>
+        <item>lockdown</item>
+>>>>>>> CHANGE (7a8588 base: Global Actions with Advanced Reboot [1/2])
         <item>logout</item>
         <item>bugreport</item>
+<<<<<<< HEAD   (12fe86 UpdateEngine: Add perf mode binder interface)
+=======
+        <item>screenshot</item>
+        <item>emergency</item>
+        <item>airplane</item>
+        <item>settings</item>
+        <item>flashlight</item>
+        <item>users</item>
+        <item>silent</item>
+>>>>>>> CHANGE (7a8588 base: Global Actions with Advanced Reboot [1/2])
     </string-array>
 
     <!-- Number of milliseconds to hold a wake lock to ensure that drawing is fully

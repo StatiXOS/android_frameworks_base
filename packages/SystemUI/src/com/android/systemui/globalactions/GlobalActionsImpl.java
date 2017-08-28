@@ -95,7 +95,7 @@ public class GlobalActionsImpl implements GlobalActions, CommandQueue.Callbacks 
     }
 
     @Override
-    public void showShutdownUi(boolean isReboot, String reason) {
+    public void showShutdownUi(boolean isReboot, String reason, boolean rebootCustom) {
         ScrimDrawable background = new ScrimDrawable();
 
         final Dialog d = new Dialog(mContext,
@@ -145,6 +145,26 @@ public class GlobalActionsImpl implements GlobalActions, CommandQueue.Callbacks 
 
         ProgressBar bar = d.findViewById(R.id.progress);
         bar.getIndeterminateDrawable().setTint(color);
+<<<<<<< HEAD   (12fe86 UpdateEngine: Add perf mode binder interface)
+=======
+        TextView message = d.findViewById(R.id.text1);
+        message.setTextColor(color);
+        if (rebootCustom) {
+            if (reason != null) {
+                if (PowerManager.REBOOT_BOOTLOADER.equals(reason)) {
+                    message.setText(com.android.internal.R.string.reboot_to_bootloader_message);
+                } else if (PowerManager.REBOOT_RECOVERY.equals(reason)) {
+                    message.setText(com.android.internal.R.string.reboot_to_recovery_message);
+                }
+            } else {
+                message.setText(com.android.internal.R.string.reboot_system_message);
+            }
+        } else {
+            if (isReboot) {
+                message.setText(R.string.reboot_to_reset_message);
+            }
+        }
+>>>>>>> CHANGE (7a8588 base: Global Actions with Advanced Reboot [1/2])
 
         TextView reasonView = d.findViewById(R.id.text1);
         TextView messageView = d.findViewById(R.id.text2);

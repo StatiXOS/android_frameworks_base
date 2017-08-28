@@ -29,4 +29,22 @@
   <java-symbol type="id" name="aerr_copy" />
   <java-symbol type="string" name="url_copy_success" />
   <java-symbol type="string" name="url_copy_failed" />
+<<<<<<< HEAD   (12fe86 UpdateEngine: Add perf mode binder interface)
+=======
+
+  <!-- Max visible notification icons -->
+  <java-symbol type="integer" name="config_maxVisibleNotificationIcons" />
+  <java-symbol type="integer" name="config_maxVisibleNotificationIconsWhenDark" />
+
+  <!-- Power menu reboot -->
+  <java-symbol name="reboot_to_bootloader_title" type="string" />
+  <java-symbol name="reboot_to_bootloader_message" type="string" />
+  <java-symbol name="reboot_to_recovery_title" type="string" />
+  <java-symbol name="reboot_to_recovery_message" type="string" />
+  <java-symbol name="reboot_system_title" type="string" />
+  <java-symbol name="reboot_system_message" type="string" />
+  <java-symbol type="array" name="config_rebootActionsList" />
+  <java-symbol type="array" name="values_globalActionsList" />
+
+>>>>>>> CHANGE (7a8588 base: Global Actions with Advanced Reboot [1/2])
 </resources>
