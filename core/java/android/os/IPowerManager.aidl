@@ -120,6 +120,7 @@ interface IPowerManager
     @UnsupportedAppUsage
     void reboot(boolean confirm, String reason, boolean wait);
     void rebootSafeMode(boolean confirm, boolean wait);
+    void rebootCustom(boolean confirm, String reason, boolean wait);
 
     @JavaPassthrough(annotation="@android.annotation.RequiresPermission(android.Manifest.permission.REBOOT)")
     void shutdown(boolean confirm, String reason, boolean wait);
