@@ -3782,6 +3782,18 @@ public class WindowManagerService extends IWindowManager.Stub
                 confirm);
     }
 
+    // Called by window manager policy.  Not exposed externally.
+    @Override
+    public void reboot(String reason, boolean confirm) {
+        ShutdownThread.reboot(ActivityThread.currentActivityThread().getSystemUiContext(), reason, confirm);
+    }
+
+    // Called by window manager policy.  Not exposed externally.
+    @Override
+    public void rebootCustom(String reason, boolean confirm) {
+        ShutdownThread.rebootCustom(ActivityThread.currentActivityThread().getSystemUiContext(), reason, confirm);
+    }
+
     public void setCurrentUser(@UserIdInt int newUserId) {
         synchronized (mGlobalLock) {
             final TransitionController controller = mAtmService.getTransitionController();
