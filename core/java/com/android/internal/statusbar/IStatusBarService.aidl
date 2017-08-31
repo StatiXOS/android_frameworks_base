@@ -226,4 +226,10 @@ interface IStatusBarService
 
     /** Unregisters a nearby media devices provider. */
     void unregisterNearbyMediaDevicesProvider(in INearbyMediaDevicesProvider provider);
+
+    /**
+     * @hide
+     */    
+    void toggleCameraFlash();
+
 }
