@@ -4520,6 +4520,12 @@ public final class Settings {
          */
         public static final String GLOBAL_ACTIONS_RESTART = "global_actions_restart";
 
+	/**
+         * Double tap on lockscreen to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_LOCKSCREEN = "double_tap_sleep_lockscreen";
+
         /**
          * Whether to display sound panel in the power menu
          *
