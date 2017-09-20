@@ -9,4 +9,6 @@
     <dimen name="config_customCutoutBottomWidth">0.0px</dimen>
     <dimen name="config_customCutoutBottomHeight">0.0px</dimen>
 
+    <!-- QS tile height without label -->
+    <dimen name="qs_tile_height_wo_label">48dp</dimen>
 </resources>
