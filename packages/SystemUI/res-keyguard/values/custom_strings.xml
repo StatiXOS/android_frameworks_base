@@ -18,4 +18,6 @@
     <string name="clock_title_default_bold" translatable="false">Default (bold)</string>
     <string name="clock_title_samsung" translatable="false">Samsung</string>
     <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
+
+    <dimen name="qs_tile_height_wo_label">48dp</dimen>
 </resources>
