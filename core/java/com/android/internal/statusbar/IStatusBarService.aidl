@@ -118,4 +118,10 @@ interface IStatusBarService
     // Used to show or hide in display fingerprint view
     void showInDisplayFingerprintView();
     void hideInDisplayFingerprintView();
+    // Used to set hw keys gestures
+    void toggleRecentApps();
+    void toggleSplitScreen();
+    void preloadRecentApps();
+    void cancelPreloadRecentApps();
+    void startAssist(in Bundle args);
 }
