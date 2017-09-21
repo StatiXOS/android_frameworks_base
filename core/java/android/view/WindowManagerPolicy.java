@@ -68,6 +68,7 @@ import android.annotation.Nullable;
 import android.annotation.SystemApi;
 import android.app.ActivityManager.StackId;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
@@ -157,13 +158,12 @@ public interface WindowManagerPolicy {
     int NAV_BAR_BOTTOM = 1 << 2;
 
     public final static boolean WATCH_POINTER = false;
-
-    /**
+     /**
      * Sticky broadcast of the current HDMI plugged state.
      */
     public final static String ACTION_HDMI_PLUGGED = "android.intent.action.HDMI_PLUGGED";
 
-    /**
+     /**
      * Extra in {@link #ACTION_HDMI_PLUGGED} indicating the state: true if
      * plugged in to HDMI, false if not.
      */
@@ -1583,6 +1583,11 @@ public interface WindowManagerPolicy {
      * Specifies whether there is an on-screen navigation bar separate from the status bar.
      */
     public boolean hasNavigationBar();
+
+    /**
+     * Send some ActionHandler commands to WindowManager.
+     */
+    public void sendCustomAction(Intent intent);
 
     /**
      * Lock the device now.
