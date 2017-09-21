@@ -4282,7 +4282,7 @@ public final class Settings {
 
          /** @hide */
         private static final Validator QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR =
-                ANY_STRING_VALIDATOR;
+                ANY_INTEGER_VALIDATOR;
 
         /**
          * @hide
@@ -4291,7 +4291,16 @@ public final class Settings {
 
          /** @hide */
         private static final Validator QS_LAYOUT_COLUMNS_VALIDATOR =
-                ANY_STRING_VALIDATOR;
+                ANY_INTEGER_VALIDATOR;
+
+        /**
+         * @hide
+         */
+        public static final String QS_LAYOUT_ROWS = "qs_layout_rows";
+
+        /** @hide */
+        private static final Validator QS_LAYOUT_ROWS_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
 
         /**
          * Whether to play notification sound and vibration if screen is ON
@@ -4642,6 +4651,7 @@ public final class Settings {
             BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
             QS_LAYOUT_COLUMNS_LANDSCAPE,
             QS_LAYOUT_COLUMNS,
+            QS_LAYOUT_ROWS,
         };
 
         /**
@@ -4776,6 +4786,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
             PRIVATE_SETTINGS.add(QS_LAYOUT_COLUMNS_LANDSCAPE);
             PRIVATE_SETTINGS.add(QS_LAYOUT_COLUMNS);
+            PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS);
         }
 
         /**
@@ -4890,6 +4901,7 @@ public final class Settings {
             VALIDATORS.put(QS_LAYOUT_COLUMNS_LANDSCAPE,
                     QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR);
             VALIDATORS.put(QS_LAYOUT_COLUMNS, QS_LAYOUT_COLUMNS_VALIDATOR);
+            VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
         }
 
         /**
