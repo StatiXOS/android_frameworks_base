@@ -4675,6 +4675,17 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Indicates whether ANBI (Accidental navigation button interaction) is enabled.
+         *
+         * @hide
+         */
+        public static final String ANBI_ENABLED_OPTION = "anbi_enabled_option";
+
+        /** @hide */
+        private static final Validator ANBI_ENABLED_OPTION_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4742,6 +4753,7 @@ public final class Settings {
             SCREENSHOT_SHUTTER_SOUND,
             BACK_GESTURE_HEIGHT,
             ALLOW_INCALL_HOME,
+            ANBI_ENABLED_OPTION,
         };
 
         /**
@@ -4868,6 +4880,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED);
             PRIVATE_SETTINGS.add(BUTTON_BRIGHTNESS);
             PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
+            PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
         }
 
         /**
@@ -4969,6 +4982,7 @@ public final class Settings {
             VALIDATORS.put(BUTTON_BRIGHTNESS, BUTTON_BRIGHTNESS_VALIDATOR);
             VALIDATORS.put(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED, BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED_VALIDATOR);
             VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
+            VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
         }
 
         /**
