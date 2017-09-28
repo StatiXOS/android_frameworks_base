@@ -40,6 +40,7 @@ import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.SmartPixelsTile;
+import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -104,6 +105,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new SmartPixelsTile(mHost);
             case "caffeine":
                 return new CaffeineTile(mHost);
+            case "usb_tether":
+                return new UsbTetherTile(mHost);
         }
 
         // Intent tiles.
