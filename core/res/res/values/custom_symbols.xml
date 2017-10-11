@@ -34,4 +34,8 @@
   <java-symbol type="array" name="config_rebootActionsList" />
   <java-symbol type="array" name="values_globalActionsList" />
 
+  <!-- Device keyhandlers -->
+  <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+  <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+
 </resources>
