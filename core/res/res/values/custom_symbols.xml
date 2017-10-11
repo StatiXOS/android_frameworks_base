@@ -42,5 +42,9 @@
 
   <!-- Power button fingerprint -->
   <java-symbol type="bool" name="config_powerButtonFingerprint" />
+	
+  <!-- Device keyhandlers -->
+  <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+  <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
 
 </resources>
