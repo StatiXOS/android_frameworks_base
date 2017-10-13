@@ -22,4 +22,8 @@
   <!-- Whether the device supports Smart Pixels -->
   <bool name="config_enableSmartPixels">false</bool>
 
+    <!-- The list of components which should be automatically disabled. -->
+    <string-array name="config_disabledComponents" translatable="false">
+    </string-array>
+
 </resources>
