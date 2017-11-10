@@ -141,7 +141,7 @@ final class NativeDaemonConnector implements Runnable, Handler.Callback, Watchdo
             } catch (Exception e) {
                 loge("Error in NativeDaemonConnector: " + e);
                 if (isShuttingDown()) break;
-                SystemClock.sleep(5000);
+                SystemClock.sleep(1000);
             }
         }
     }
