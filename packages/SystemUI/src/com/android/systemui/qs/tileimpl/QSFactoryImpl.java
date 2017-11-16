@@ -40,6 +40,7 @@ import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
+import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
@@ -116,6 +117,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new ScreenshotTile(mHost);
             case "heads_up":
                 return new HeadsUpTile(mHost);
+            case "reboot":
+                return new RebootTile(mHost);
         }
 
         // Intent tiles.
