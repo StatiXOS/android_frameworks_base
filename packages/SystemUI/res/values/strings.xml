@@ -1932,6 +1932,9 @@
     <!-- Name of the alarm status bar icon. -->
     <string name="status_bar_alarm">Alarm</string>
 
+    <!-- Name of the VPN status bar icon. -->
+    <string name="status_bar_vpn">VPN</string>
+
     <!-- Format string for the content description of the icon that indicates that a Mode is on.
        For example, if the mode name is Bedtime, this will be "Bedtime is on". This content
        description will be associated to the mode icon in status bar, smartspace, and everyone else
