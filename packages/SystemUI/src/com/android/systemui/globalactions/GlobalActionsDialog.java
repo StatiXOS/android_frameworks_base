@@ -1233,12 +1233,15 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
+            return getView(position, convertView, parent, false);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent, boolean noDivider) {
             Action action = getItem(position);
             View view = action.create(mContext, convertView, parent, LayoutInflater.from(mContext));
-            // Everything but screenshot, the last item, gets white background.
-            /*if (position == 2) {
+            if (!noDivider && position == 99) {
                 HardwareUiLayout.get(parent).setDivisionView(view);
-            }*/
+            }
             return view;
         }
     }
