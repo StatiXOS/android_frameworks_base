@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
-** Copyright 2006, The Android Open Source Project
+** Copyright 2016, CarbonROM
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -16,19 +16,9 @@
 ** limitations under the License.
 */
 -->
-<resources>
 
-  <!-- Power menu reboot -->
-  <java-symbol name="reboot_to_bootloader_title" type="string" />
-  <java-symbol name="reboot_to_bootloader_message" type="string" />
-  <java-symbol name="reboot_to_recovery_title" type="string" />
-  <java-symbol name="reboot_to_recovery_message" type="string" />
-  <java-symbol name="reboot_system_title" type="string" />
-  <java-symbol name="reboot_system_message" type="string" />
-  <java-symbol type="array" name="config_rebootActionsList" />
-  <java-symbol type="array" name="values_globalActionsList" />
-
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Whether the device supports Smart Pixels -->
-  <java-symbol type="bool" name="config_enableSmartPixels" />
+  <bool name="config_enableSmartPixels">false</bool>
 
 </resources>
