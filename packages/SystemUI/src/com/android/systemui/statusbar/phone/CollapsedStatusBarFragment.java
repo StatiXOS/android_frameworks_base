@@ -21,6 +21,7 @@ import static com.android.systemui.statusbar.phone.StatusBar.reinflateSignalClus
 
 import android.annotation.Nullable;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.app.StatusBarManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.SysUiServiceProvider;
+import com.android.systemui.BatteryMeterView;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.SignalClusterView;
 import com.android.systemui.statusbar.phone.StatusBarIconController.DarkIconManager;
@@ -61,6 +63,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private DarkIconManager mDarkIconManager;
     private SignalClusterView mSignalClusterView;
 
+    private View mClock;
+    private View mLeftClock;
+    private BatteryMeterView mBattery;
+
+    private ContentResolver mContentResolver;
+
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
         public void setIsAirplaneMode(NetworkController.IconState icon) {
@@ -75,6 +83,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mNetworkController = Dependency.get(NetworkController.class);
         mStatusBarComponent = SysUiServiceProvider.getComponent(getContext(), StatusBar.class);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -93,6 +102,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         Dependency.get(StatusBarIconController.class).addIconGroup(mDarkIconManager);
         mSystemIconArea = mStatusBar.findViewById(R.id.system_icon_area);
         mSignalClusterView = mStatusBar.findViewById(R.id.signal_cluster);
+        mBattery = mStatusBar.findViewById(R.id.battery);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
