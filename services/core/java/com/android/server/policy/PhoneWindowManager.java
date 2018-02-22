@@ -2773,7 +2773,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     public int getNonDecorDisplayWidth(int fullWidth, int fullHeight, int rotation, int uiMode,
             int displayId) {
         // TODO(multi-display): Support navigation bar on secondary displays.
-        if (displayId == DEFAULT_DISPLAY && hasNavigationBar) {
+        if (displayId == DEFAULT_DISPLAY && hasNavigationBar()) {
             // For a basic navigation bar, when we are in landscape mode we place
             // the navigation bar to the side.
             if (mNavigationBarCanMove && fullWidth > fullHeight) {
@@ -8275,11 +8275,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 mHandler.post(mScreenrecordRunnable);
             }*/
         }
-    }
-
-    @Override
-    public boolean hasPermanentMenuKey() {
-        return !hasNavigationBar() && mHasPermanentMenuKey;
     }
 
     @Override

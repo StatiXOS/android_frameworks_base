@@ -879,6 +879,7 @@ public class ViewConfiguration {
      *
      * @return true if a permanent menu key is present, false otherwise.
      */
+
     public boolean hasPermanentMenuKey() {
         return sHasPermanentMenuKey;
     }

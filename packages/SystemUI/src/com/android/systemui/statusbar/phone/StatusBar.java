@@ -278,7 +278,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         OnHeadsUpChangedListener, VisualStabilityManager.Callback, CommandQueue.Callbacks,
         ActivatableNotificationView.OnActivatedListener,
         ExpandableNotificationRow.ExpansionLogger, NotificationData.Environment,
-        ColorExtractor.OnColorsChangedListener, ConfigurationListener {
+        ColorExtractor.OnColorsChangedListener, ConfigurationListener,
         ExpandableNotificationRow.OnExpandClickListener, InflationCallback, PackageChangedListener {
     public static final boolean MULTIUSER_DEBUG = false;
 
@@ -591,6 +591,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected PorterDuffXfermode mSrcOverXferMode =
             new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER);
 
+    private Entry mEntryToRefresh;
+    private String[] mNavMediaArrowsExcludeList;
     private MediaSessionManager mMediaSessionManager;
     private MediaController mMediaController;
     private String mMediaNotificationKey;
@@ -634,11 +636,18 @@ public class StatusBar extends SystemUI implements DemoMode,
     };
 
     public void setMediaPlaying() {
-        if (mNavigationBar != null) {
-            if (PlaybackState.STATE_PLAYING ==
-                    getMediaControllerPlaybackState(mMediaController)
-                    || PlaybackState.STATE_BUFFERING ==
-                    getMediaControllerPlaybackState(mMediaController)) {
+        if (PlaybackState.STATE_PLAYING ==
+                getMediaControllerPlaybackState(mMediaController)
+                || PlaybackState.STATE_BUFFERING ==
+                getMediaControllerPlaybackState(mMediaController)) {
+            final String currentPkg = mMediaController.getPackageName().toLowerCase();
+            for (String packageName : mNavMediaArrowsExcludeList) {
+                if (currentPkg.contains(packageName)) {
+                    return;
+                }
+            }
+            if (mNavigationBar != null) {
+                // pulse colors already set by tickTrackInfo
                 mNavigationBar.setMediaPlaying(true);
             } else {
                 mNavigationBar.setMediaPlaying(false);
@@ -1786,6 +1795,15 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateNotificationShade();
         }
         entry.row.setLowPriorityStateUpdated(false);
+
+        if (mEntryToRefresh == entry) {
+            if (mNavigationBar != null) {
+                Notification n = entry.notification.getNotification();
+                int[] colors = {n.backgroundColor, n.foregroundColor,
+                        n.primaryTextColor, n.secondaryTextColor};
+                mNavigationBar.setPulseColors(n.isColorizedMedia(), colors);
+            }
+        }
     }
 
     private boolean shouldSuppressFullScreenIntent(String key) {
