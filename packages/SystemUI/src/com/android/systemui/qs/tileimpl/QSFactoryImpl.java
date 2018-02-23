@@ -26,6 +26,7 @@ import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.plugins.qs.QSTileView;
 import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.qs.external.CustomTile;
+import com.android.systemui.qs.tiles.AdbOverNetworkTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.BatterySaverTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
@@ -84,6 +85,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
     private final Provider<ScreenRecordTile> mScreenRecordTileProvider;
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
+    private final Provider<AdbOverNetworkTile> mAdbOverNetworkTileProvider;
 
     private QSTileHost mHost;
 
@@ -110,7 +112,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<ScreenshotTile> screenshotTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<ScreenRecordTile> screenRecordTileProvider,
-            Provider<HeadsUpTile> headsUpTileProvider) {
+            Provider<HeadsUpTile> headsUpTileProvider,
+            Provider<AdbOverNetworkTile> adbOverNetworkTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -134,6 +137,7 @@ public class QSFactoryImpl implements QSFactory {
         mDataSwitchTileProvider = dataSwitchTileProvider;
         mScreenRecordTileProvider = screenRecordTileProvider;
         mHeadsUpTileProvider = headsUpTileProvider;
+        mAdbOverNetworkTileProvider = adbOverNetworkTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -199,6 +203,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mDataSwitchTileProvider.get();
             case "heads_up":
                 return mHeadsUpTileProvider.get();
+            case "adb_network":
+                return mAdbOverNetworkTileProvider.get();
         }
 
         // Intent tiles.
