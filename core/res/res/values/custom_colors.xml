@@ -70,4 +70,18 @@
     <!-- Fastscroller -->
     <color name="fastscroller_text_color">#FFFFFFFF</color>
 
+    <!-- Power menu -->
+    <color name="power_menu_power_off">#ff202020</color>
+    <color name="power_menu_restart">#ff202020</color>
+    <color name="power_menu_bootloader">#ff202020</color>
+    <color name="power_menu_recovery">#ff202020</color>
+    <color name="power_menu_hot_reboot">#ff202020</color>
+    <color name="power_menu_screenshot">#ff202020</color>
+    <color name="power_menu_airplane_mode">#ff202020</color>
+    <color name="power_menu_airplane_mode_off">#ff202020</color>
+    <color name="power_menu_flashlight">#ff202020</color>
+    <color name="power_menu_settings">#ff202020</color>
+    <color name="power_menu_lockdown">#ff202020</color>
+    <color name="power_menu_screenrecord">#ff202020</color>
+    <color name="power_menu_user">#ff202020</color>
 </resources>

@@ -792,7 +792,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     private class ScreenshotAction extends SinglePressAction {
         public ScreenshotAction() {
-            super(R.drawable.ic_screenshot, R.string.global_action_screenshot);
+            super(com.android.systemui.R.drawable.ic_screenshot, R.string.global_action_screenshot);
         }
 
         @Override
@@ -1071,8 +1071,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 if (user.supportsSwitchToByUser()) {
                     boolean isCurrentUser = currentUser == null
                             ? user.id == 0 : (currentUser.id == user.id);
-                    Drawable icon = user.iconPath != null ? Drawable.createFromPath(user.iconPath)
-                            : null;
+                    Drawable icon = mContext.getDrawable(com.android.systemui.R.drawable.ic_lock_user);
                     SinglePressAction switchToUser = new SinglePressAction(
                             R.drawable.ic_menu_cc, icon,
                             (user.name != null ? user.name : "Primary")
