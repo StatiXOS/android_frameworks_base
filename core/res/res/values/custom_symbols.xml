@@ -18,7 +18,7 @@
 -->
 <resources>
 
-  <!-- Power menu reboot -->
+  <!-- Power menu items -->
   <java-symbol name="reboot_to_bootloader_title" type="string" />
   <java-symbol name="reboot_to_bootloader_message" type="string" />
   <java-symbol name="reboot_to_recovery_title" type="string" />
@@ -27,7 +27,20 @@
   <java-symbol name="reboot_system_message" type="string" />
   <java-symbol type="array" name="config_rebootActionsList" />
   <java-symbol type="array" name="values_globalActionsList" />
-
+  <java-symbol type="color" name="power_menu_power_off" />
+  <java-symbol type="color" name="power_menu_restart" />
+  <java-symbol type="color" name="power_menu_bootloader" />
+  <java-symbol type="color" name="power_menu_recovery" />
+  <java-symbol type="color" name="power_menu_hot_reboot" />
+  <java-symbol type="color" name="power_menu_screenshot" />
+  <java-symbol type="color" name="power_menu_airplane_mode" />
+  <java-symbol type="color" name="power_menu_airplane_mode_off" />
+  <java-symbol type="color" name="power_menu_flashlight" />
+  <java-symbol type="color" name="power_menu_settings" />
+  <java-symbol type="color" name="power_menu_lockdown" />
+  <java-symbol type="color" name="power_menu_screenrecord" />
+  <java-symbol type="color" name="power_menu_user" />
+  
   <!-- Whether the device supports Smart Pixels -->
   <java-symbol type="bool" name="config_enableSmartPixels" />
 
