@@ -213,9 +213,9 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         lp.type = mWindowType;
         lp.format = PixelFormat.TRANSLUCENT;
         lp.setTitle(VolumeDialogImpl.class.getSimpleName());
-        lp.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-        lp.y = res.getDimensionPixelSize(R.dimen.volume_offset_top);
-        lp.gravity = Gravity.TOP;
+        lp.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+        lp.y = res.getDimensionPixelSize(R.dimen.volume_offset_right);
+        lp.gravity = Gravity.RIGHT;
         lp.windowAnimations = -1;
         mWindow.setAttributes(lp);
         mWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -431,11 +431,11 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
             public boolean onTouch(View v, MotionEvent event) {
                 row.slider.getHitRect(mSliderHitRect);
                 if (!mDragging && event.getActionMasked() == MotionEvent.ACTION_DOWN
-                        && event.getY() < mSliderHitRect.top) {
+                        && event.getY() < mSliderHitRect.right) {
                     mDragging = true;
                 }
                 if (mDragging) {
-                    event.offsetLocation(-mSliderHitRect.left, -mSliderHitRect.top);
+                    event.offsetLocation(-mSliderHitRect.left, -mSliderHitRect.right);
                     row.slider.dispatchTouchEvent(event);
                     if (event.getActionMasked() == MotionEvent.ACTION_UP
                             || event.getActionMasked() == MotionEvent.ACTION_CANCEL) {
