@@ -52,4 +52,7 @@
     <!-- QS Header opacity slider -->
     <string name="qs_header_bg_title">Adjust header opacity</string>
 
+    <!-- Brightness slider -->
+    <string name="tuner_show_brightness_new">Show brightness slider</string>
+    <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
 </resources>
