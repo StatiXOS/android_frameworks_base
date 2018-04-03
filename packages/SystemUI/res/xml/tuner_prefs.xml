@@ -59,6 +59,17 @@
             android:key="footer_text_show"
             android:title="@string/footer_text_show_title"
             android:defaultValue="false" />
+
+        <com.android.systemui.tuner.TunerSwitch
+            android:key="qs_show_brightness"
+            android:title="@string/tuner_show_brightness_new"
+            sysui:defValue="true" />
+
+        <com.android.systemui.tuner.TunerSwitch
+            android:key="qs_brightness_position_bottom"
+            android:title="@string/tuner_brightness_position_bottom"
+            sysui:defValue="false" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
