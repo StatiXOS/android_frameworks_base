@@ -53,4 +53,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">64</integer>
 
+    <!-- Whether device has physical triple state switch. -->
+    <bool name="config_hasAlertSlider">false</bool>
+
 </resources>
