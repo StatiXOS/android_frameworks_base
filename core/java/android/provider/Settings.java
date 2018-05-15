@@ -4869,6 +4869,15 @@ public final class Settings {
          * @hide
          */
         public static final String BATTERY_LIGHT_REALLYFULL_COLOR = "battery_light_reallyfull_color";
+         
+	/**
+	 * Whether user can swap the order of the Alert Slider.
+         * * Whether user can invert the order of the Alert Slider.
+         * 0: Default
+         * 1: Inverted
+         * @hide
+         */
+        public static final String ALERT_SLIDER_ORDER = "alert_slider_order";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
