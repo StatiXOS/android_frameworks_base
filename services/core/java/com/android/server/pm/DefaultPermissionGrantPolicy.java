@@ -585,6 +585,7 @@ final class DefaultPermissionGrantPolicy {
                     "com.google.android.gms.persistent");
             if (gmscorePackagePersistent != null
                     && doesPackageSupportRuntimePermissions(gmscorePackagePersistent)) {
+                grantRuntimePermissionsLPw(gmscorePackagePersistent, ACCESS_FINE_LOCATION, userId);
                 grantRuntimePermissionsLPw(gmscorePackagePersistent, SENSORS_PERMISSIONS, userId);
                 grantRuntimePermissionsLPw(gmscorePackagePersistent, CALENDAR_PERMISSIONS, userId);
                 grantRuntimePermissionsLPw(gmscorePackagePersistent, CAMERA_PERMISSIONS, userId);
