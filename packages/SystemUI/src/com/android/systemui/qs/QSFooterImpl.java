@@ -327,4 +327,64 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         }
         mMultiUserAvatar.setImageDrawable(picture);
     }
+
+    private void handleUpdateState() {
+        mMobileGroup.setVisibility(mInfo.visible ? View.VISIBLE : View.GONE);
+        if (mInfo.visible) {
+            mMobileRoaming.setVisibility(mInfo.roaming ? View.VISIBLE : View.GONE);
+            mMobileRoaming.setImageTintList(ColorStateList.valueOf(mColorForeground));
+            SignalDrawable d = new SignalDrawable(mContext);
+            d.setDarkIntensity(QuickStatusBarHeader.getColorIntensity(mColorForeground));
+            mMobileSignal.setImageDrawable(d);
+            mMobileSignal.setImageLevel(mInfo.mobileSignalIconId);
+
+            StringBuilder contentDescription = new StringBuilder();
+            if (mInfo.contentDescription != null) {
+                contentDescription.append(mInfo.contentDescription).append(", ");
+            }
+            if (mInfo.roaming) {
+                contentDescription
+                        .append(mContext.getString(R.string.data_connection_roaming))
+                        .append(", ");
+            }
+            // TODO: show mobile data off/no internet text for 5 seconds before carrier text
+            if (TextUtils.equals(mInfo.typeContentDescription,
+                    mContext.getString(R.string.data_connection_no_internet))
+                || TextUtils.equals(mInfo.typeContentDescription,
+                    mContext.getString(R.string.cell_data_off_content_description))) {
+                contentDescription.append(mInfo.typeContentDescription);
+            }
+            mMobileSignal.setContentDescription(contentDescription);
+        }
+    }
+
+    @Override
+    public void setMobileDataIndicators(NetworkController.IconState statusIcon,
+            NetworkController.IconState qsIcon, int statusType,
+            int qsType, boolean activityIn, boolean activityOut, int volteId,
+            String typeContentDescription,
+            String description, boolean isWide, int subId, boolean roaming) {
+        mInfo.visible = statusIcon.visible;
+        mInfo.mobileSignalIconId = statusIcon.icon;
+        mInfo.contentDescription = statusIcon.contentDescription;
+        mInfo.typeContentDescription = typeContentDescription;
+        mInfo.roaming = roaming;
+        handleUpdateState();
+    }
+
+    @Override
+    public void setNoSims(boolean hasNoSims, boolean simDetected) {
+        if (hasNoSims) {
+            mInfo.visible = false;
+        }
+        handleUpdateState();
+    }
+
+    private final class CellSignalState {
+        boolean visible;
+        int mobileSignalIconId;
+        public String contentDescription;
+        String typeContentDescription;
+        boolean roaming;
+    }
 }
