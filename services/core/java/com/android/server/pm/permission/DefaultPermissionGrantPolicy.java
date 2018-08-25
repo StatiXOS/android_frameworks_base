@@ -934,6 +934,41 @@ public final class DefaultPermissionGrantPolicy {
             grantRuntimePermissions(vendingPackage, SMS_PERMISSIONS, userId);
             grantRuntimePermissions(vendingPackage, STORAGE_PERMISSIONS, userId);
         }
+        // Project Fi
+        PackageParser.Package fiPackage = getDefaultProviderAuthorityPackage("com.google.android.apps.tycho", userId);
+        if (fiPackage != null) {
+            grantRuntimePermissions(fiPackage, CONTACTS_PERMISSIONS, userId);
+            grantRuntimePermissions(fiPackage, PHONE_PERMISSIONS, userId);
+            grantRuntimePermissions(fiPackage, MICROPHONE_PERMISSIONS, userId);
+            grantRuntimePermissions(fiPackage, LOCATION_PERMISSIONS, userId);
+            grantRuntimePermissions(fiPackage, SMS_PERMISSIONS, userId);
+        }
+        // ContactsProvider2
+        PackageParser.Package conpro2Package = getDefaultProviderAuthorityPackage("com.android.providers.contacts.ContactsProvider2", userId);
+        if (conpro2Package != null) {
+            grantRuntimePermissions(conpro2Package, CONTACTS_PERMISSIONS, true, userId);
+            grantRuntimePermissions(conpro2Package, STORAGE_PERMISSIONS, true, userId);
+        }
+        // Google Calendar
+        PackageParser.Package googlecalendarPackage = getSystemPackage("com.google.android.calendar");
+        if (googlecalendarPackage != null && doesPackageSupportRuntimePermissions(googlecalendarPackage)) {
+            grantRuntimePermissions(googlecalendarPackage, CALENDAR_PERMISSIONS, true, userId);
+            grantRuntimePermissions(googlecalendarPackage, CONTACTS_PERMISSIONS, true, userId);
+            grantRuntimePermissions(googlecalendarPackage, PHONE_PERMISSIONS, userId);
+        }
+        // Chromium Sign-in
+        PackageParser.Package chromiumPackage = getDefaultProviderAuthorityPackage("org.chromium.chrome", userId);
+        if (chromiumPackage != null) {
+            grantRuntimePermissions(chromiumPackage, CONTACTS_PERMISSIONS, userId);
+            grantRuntimePermissions(chromiumPackage, STORAGE_PERMISSIONS, userId);
+        }
+        // Google dialer
+        PackageParser.Package googledialerPackage = getSystemPackage("com.google.android.dialer");
+        if (googledialerPackage != null && doesPackageSupportRuntimePermissions(googledialerPackage)) {
+            grantRuntimePermissions(googledialerPackage, PHONE_PERMISSIONS, true, userId);
+            grantRuntimePermissions(googledialerPackage, CONTACTS_PERMISSIONS, true, userId);
+            grantRuntimePermissions(googledialerPackage, SMS_PERMISSIONS, userId);
+        }
 
         if (mPermissionGrantedCallback != null) {
             mPermissionGrantedCallback.onDefaultRuntimePermissionsGranted(userId);
