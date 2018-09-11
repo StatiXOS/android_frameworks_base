@@ -22,6 +22,8 @@ import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 
 public class Utils {
@@ -75,5 +77,13 @@ public class Utils {
     // Check to see if device has power button fingerprint
     public static boolean hasPowerButtonFingerprint(Context context) {
         return context.getResources().getBoolean(com.android.internal.R.bool.config_powerButtonFingerprint);
+    }
+
+    // Method to turn off the screen
+    public static void switchScreenOff(Context ctx) {
+        PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+        if (pm!= null) {
+            pm.goToSleep(SystemClock.uptimeMillis());
+        }
     }
 }
