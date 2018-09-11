@@ -24,6 +24,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 
 public class Utils {
@@ -93,5 +95,12 @@ public class Utils {
      public static boolean isPackageInstalled(Context context, String pkg) {
          return isPackageInstalled(context, pkg, true);
      }
-}
 
+     // Method to turn off the screen
+     public static void switchScreenOff(Context ctx) {
+         PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+         if (pm!= null) {
+             pm.goToSleep(SystemClock.uptimeMillis());
+         }
+     }
+}
