@@ -4531,6 +4531,14 @@ public final class Settings {
         public static final String LOCKSCREEN_ALBUM_ART_FILTER = "lockscreen_album_art_filter";
 
         /**
+         * @hide
+         */
+        public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";
+
+        /** @hide */
+        private static final Validator USE_OLD_MOBILETYPE_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4606,7 +4614,8 @@ public final class Settings {
             CUSTOM_BUTTON_USE_SCREEN_BRIGHTNESS,
             BUTTON_BACKLIGHT_ENABLE,
             BUTTON_BACKLIGHT_TIMEOUT,
-            BUTTON_BACKLIGHT_ON_TOUCH_ONLY
+            BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
+            USE_OLD_MOBILETYPE,
         };
 
         /**
@@ -4739,6 +4748,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ENABLE);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
+            PRIVATE_SETTINGS.add(USE_OLD_MOBILETYPE);
+
         }
 
         /**
@@ -4849,7 +4860,8 @@ public final class Settings {
             VALIDATORS.put(BUTTON_BACKLIGHT_TIMEOUT,
                     BUTTON_BACKLIGHT_TIMEOUT_VALIDATOR);
             VALIDATORS.put(BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
-                    BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
+		    BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
+            VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
         }
 
         /**
