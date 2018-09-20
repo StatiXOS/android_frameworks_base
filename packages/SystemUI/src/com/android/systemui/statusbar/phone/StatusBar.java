@@ -2082,6 +2082,20 @@ public class StatusBar extends SystemUI implements DemoMode,
         return themeInfo != null && themeInfo.isEnabled();
     }
 
+    public void unloadStockDarkTheme() {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = mOverlayManager.getOverlayInfo("com.android.systemui.theme.dark",
+                    mLockscreenUserManager.getCurrentUserId());
+            if (themeInfo != null && themeInfo.isEnabled()) {
+                mOverlayManager.setEnabled("com.android.systemui.theme.dark",
+                        false /*disable*/, mLockscreenUserManager.getCurrentUserId());
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Nullable
     public View getAmbientIndicationContainer() {
         return mAmbientIndicationContainer;
@@ -3882,11 +3896,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                             useDarkTheme, mLockscreenUserManager.getCurrentUserId());
                     mOverlayManager.setEnabled("com.android.gboard.theme.dark",
                             useDarkTheme, mLockscreenUserManager.getCurrentUserId());
+                     if (useDarkTheme) {
+                            unloadStockDarkTheme();
+                     }
                 } catch (RemoteException e) {
                     Log.w(TAG, "Can't change theme", e);
                 }
             });
-        }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
         // to set our default theme.
