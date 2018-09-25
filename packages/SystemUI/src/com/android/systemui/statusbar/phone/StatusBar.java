@@ -749,7 +749,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         setHeadsUpUser(mLockscreenUserManager.getCurrentUserId());
 
-        IntentFilter internalFilter = new IntentFilter();
+        IntentFilter internalFilter"com.android.systemui.qstheme.dark", // 2 = new IntentFilter();
         internalFilter.addAction(BANNER_ACTION_CANCEL);
         internalFilter.addAction(BANNER_ACTION_SETUP);
         mContext.registerReceiver(mBannerActionBroadcastReceiver, internalFilter, PERMISSION_SELF,
@@ -814,7 +814,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 this,
                 mNotificationPanel,
                 mStackScroller);
-        mGutsManager.setUpWithPresenter(this, mEntryManager, mStackScroller, mCheckSaveListener,
+        mGutsManager.setUpWithPresenter(this, mEntryManager, mStackScroller, mSaveListener,
                 key -> {
                     try {
                         mBarService.onNotificationSettingsViewed(key);
@@ -2072,13 +2072,16 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTheme();
     }
 
+    // Check for the dark system theme
     public boolean isUsingDarkTheme() {
         return ThemeAccentUtils.isUsingDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Unloads the stock dark theme
     public void unloadStockDarkTheme() {
         ThemeAccentUtils.unloadStockDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
+
 
     @Nullable
     public View getAmbientIndicationContainer() {
@@ -3901,6 +3904,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    // Switches theme accent from to another or back to stock
+    public void updateAccents() {
+        int accentSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ACCENT_PICKER, 0, mLockscreenUserManager.getCurrentUserId());
+        ThemeAccentUtils.updateAccents(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), accentSetting);
+    }
+
+    // Unload all the theme accents
+    public void unloadAccents() {
+        ThemeAccentUtils.unloadAccents(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     private void updateDozingState() {
         Trace.traceCounter(Trace.TRACE_TAG_APP, "dozing", mDozing ? 1 : 0);
         Trace.beginSection("StatusBar#updateDozingState");
@@ -5055,6 +5070,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SYSTEM_THEME),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.ACCENT_PICKER),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5062,6 +5080,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (uri.equals(Settings.System.getUriFor(
                     Settings.System.SYSTEM_THEME))) {
                 updateTheme();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.ACCENT_PICKER))) {
+                unloadAccents(); // Unload the accents when users request it
+                updateAccents(); // Update the accents when users request it
             }
         }
 
