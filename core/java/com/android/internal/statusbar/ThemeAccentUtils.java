@@ -53,6 +53,13 @@ public class ThemeAccentUtils {
         "com.accents.amber", // 14
         "com.accents.orange", // 15
         "com.accents.deeporange", // 16
+        "com.accents.userone", // 17
+        "com.accents.usertwo", // 18
+        "com.accents.userthree", // 19
+        "com.accents.userfour", // 20
+        "com.accents.userfive", // 21
+        "com.accents.usersix", // 22
+        "com.accents.userseven", // 23
     };
 
     // Unloads the stock dark theme
@@ -100,7 +107,13 @@ public class ThemeAccentUtils {
     public static void updateAccents(IOverlayManager om, int userId, int accentSetting) {
         if (accentSetting == 0) {
             unloadAccents(om, userId);
-        } else if (accentSetting < 16) {
+        } else if (accentSetting < 15) {
+            try {
+                om.setEnabled(ACCENTS[accentSetting],
+                        true, userId);
+            } catch (RemoteException e) {
+            }
+        } else if (accentSetting > 16) {
             try {
                 om.setEnabled(ACCENTS[accentSetting],
                         true, userId);
