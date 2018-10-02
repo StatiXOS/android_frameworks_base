@@ -25,4 +25,5 @@
   <string-array translatable="false" name="unloggable_phone_numbers">
     <item>016</item>
   </string-array>
+
 </resources>
