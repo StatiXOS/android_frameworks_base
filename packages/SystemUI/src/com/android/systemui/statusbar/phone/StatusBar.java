@@ -2082,11 +2082,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         ThemeAccentUtils.unloadStockDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
-    // Check for black and white accent overlays
-    public void unfuckBlackWhiteAccent() {
-        ThemeAccentUtils.unfuckBlackWhiteAccent(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-    }
-
     @Nullable
     public View getAmbientIndicationContainer() {
         return mAmbientIndicationContainer;
@@ -3877,7 +3872,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             useDarkTheme = userThemeSetting == 2;
         }
         if (isUsingDarkTheme() != useDarkTheme) {
-            unfuckBlackWhiteAccent(); // Check for black and white accent
             ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
         }
 

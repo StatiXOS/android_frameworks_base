@@ -31,6 +31,7 @@ public class ThemeAccentUtils {
     private static final String[] DARK_THEMES = {
         "com.android.system.theme.dark", // 0
         "com.android.settings.theme.dark", // 1
+	"com.android.systemui.qstheme.dark", // 2
     };
 
     // Accents
@@ -106,13 +107,13 @@ public class ThemeAccentUtils {
     public static void updateAccents(IOverlayManager om, int userId, int accentSetting) {
         if (accentSetting == 0) {
             unloadAccents(om, userId);
-        } else if (accentSetting < 15) {
+        } else if (accentSetting < 16) {
             try {
                 om.setEnabled(ACCENTS[accentSetting],
                         true, userId);
             } catch (RemoteException e) {
             }
-        } else if (accentSetting > 16) {
+        } else if (accentSetting > 17) {
             try {
                 om.setEnabled(ACCENTS[accentSetting],
                         true, userId);
