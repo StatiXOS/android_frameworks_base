@@ -3839,7 +3839,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
         mNotificationPanel.setBarState(mState, mKeyguardFadingAway, goingToFullShade);
-        updateTheme();
+	updateTheme();
         updateDozingState();
         updatePublicMode();
         updateStackScrollerState(goingToFullShade, fromShadeLocked);
@@ -3853,6 +3853,44 @@ public class StatusBar extends SystemUI implements DemoMode,
         Trace.endSection();
     }
 
+    /**
+      *QS Switcher
+      */
+      protected void QSswitcher() {
+ 	int QSThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.QS_SELECTOR, 0, mLockscreenUserManager.getCurrentUserId());
+ 	try {
+ 		switch (QSThemeSetting) {
+ 		    	case 0:  mOverlayManager.setEnabled("com.statix.qs.overlay.framed", false, mLockscreenUserManager.getCurrentUserId());
+        			 mOverlayManager.setEnabled("com.statix.qs.overlay.split", false, mLockscreenUserManager.getCurrentUserId());
+ 			         mOverlayManager.setEnabled("com.statix.qs.overlay.superbubble", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.teardrop", false, mLockscreenUserManager.getCurrentUserId());
+ 			         break;
+                        case 1:  mOverlayManager.setEnabled("com.statix.qs.overlay.framed", true, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.split", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.superbubble", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.teardrop", false, mLockscreenUserManager.getCurrentUserId());
+                                 break;
+                        case 2:  mOverlayManager.setEnabled("com.statix.qs.overlay.framed", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.split", true, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.superbubble", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.teardrop", false, mLockscreenUserManager.getCurrentUserId());
+                                 break;
+                        case 3:  mOverlayManager.setEnabled("com.statix.qs.overlay.framed", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.split", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.superbubble", true, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.teardrop", false, mLockscreenUserManager.getCurrentUserId());
+                                 break;
+                        case 4:  mOverlayManager.setEnabled("com.statix.qs.overlay.framed", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.split", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.superbubble", false, mLockscreenUserManager.getCurrentUserId());
+                                 mOverlayManager.setEnabled("com.statix.qs.overlay.teardrop", true, mLockscreenUserManager.getCurrentUserId());
+                                 break;
+ 	  }
+        } catch(RemoteException e) {
+ 		Log.w(TAG, "Can't change QS!", e);
+ 	}
+     }
     /**
      * Switches theme from light to dark and vice-versa.
      */
@@ -5073,6 +5111,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ACCENT_PICKER),
                     false, this, UserHandle.USER_ALL);
+	    resolver.registerContentObserver(Settings.System.getUriFor(
+ 		    Settings.System.QS_SELECTOR),
+ 		    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5084,10 +5125,14 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.ACCENT_PICKER))) {
                 unloadAccents(); // Unload the accents when users request it
                 updateAccents(); // Update the accents when users request it
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.QS_SELECTOR))) {
+                QSswitcher();
             }
         }
 
         public void update() {
+          QSswitcher();
         }
     }
 
