@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 The Android Open Source Project
+<!-- Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,9 +13,14 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<com.android.systemui.statusbar.policy.KeyButtonView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:systemui="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search"
+    android:layout_width="@dimen/navigation_extra_key_width"
+    android:layout_height="match_parent"
+    android:layout_weight="0"
+    systemui:keyCode="84"
+    android:scaleType="center"
+    android:contentDescription="@string/accessibility_key" />
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sysui="http://schemas.android.com/apk/res-auto"
-    android:title="@string/system_ui_tuner">
-
-</PreferenceScreen>

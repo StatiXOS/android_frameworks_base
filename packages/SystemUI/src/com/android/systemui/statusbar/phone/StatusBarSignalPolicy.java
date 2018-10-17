@@ -38,6 +38,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 import com.android.systemui.statusbar.policy.NetworkControllerImpl;
 import com.android.systemui.statusbar.policy.SecurityController;
+import com.android.systemui.tuner.TunerService;
 import com.android.systemui.tuner.TunerService.Tunable;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,11 +91,15 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
 
         mNetworkController.addCallback(this);
         mSecurityController.addCallback(this);
+
+        Dependency.get(TunerService.class).addTunable(this, StatusBarIconController.ICON_BLACKLIST);
+
     }
 
     public void destroy() {
         mNetworkController.removeCallback(this);
         mSecurityController.removeCallback(this);
+        Dependency.get(TunerService.class).removeTunable(this);
     }
 
     private void updateVpn() {
@@ -136,6 +141,7 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
             mBlockWifi = blockWifi || mForceBlockWifi;
             // Re-register to get new callbacks.
             mNetworkController.removeCallback(this);
+            mNetworkController.addCallback(this);
         }
     }
 

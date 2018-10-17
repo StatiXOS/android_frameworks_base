@@ -60,9 +60,11 @@ public class NavigationBarInflaterView extends FrameLayout
     public static final String NAV_BAR_RIGHT = "sysui_nav_bar_right";
 
     public static final String MENU_IME_ROTATE = "menu_ime";
+    public static final String MENU_IME_ALWAYS_SHOW = "menu_ime_always_show";
     public static final String BACK = "back";
     public static final String HOME = "home";
     public static final String RECENT = "recent";
+    public static final String SEARCH = "search";
     public static final String NAVSPACE = "space";
     public static final String CLIPBOARD = "clipboard";
     public static final String KEY = "key";
@@ -79,8 +81,8 @@ public class NavigationBarInflaterView extends FrameLayout
     public static final String KEY_CODE_START = "(";
     public static final String KEY_IMAGE_DELIM = ":";
     public static final String KEY_CODE_END = ")";
-    private static final String WEIGHT_SUFFIX = "W";
-    private static final String WEIGHT_CENTERED_SUFFIX = "WC";
+    public static final String WEIGHT_SUFFIX = "W";
+    public static final String WEIGHT_CENTERED_SUFFIX = "WC";
 
     private final List<NavBarButtonProvider> mPlugins = new ArrayList<>();
     private final Display mDisplay;
@@ -387,6 +389,10 @@ public class NavigationBarInflaterView extends FrameLayout
             v = inflater.inflate(R.layout.recent_apps, parent, false);
         } else if (MENU_IME_ROTATE.equals(button)) {
             v = inflater.inflate(R.layout.menu_ime, parent, false);
+        } else if (MENU_IME_ALWAYS_SHOW.equals(button)) {
+            v = inflater.inflate(R.layout.menu_ime_always_show, parent, false);
+        } else if (SEARCH.equals(button)) {
+            v = inflater.inflate(R.layout.search, parent, false);
         } else if (NAVSPACE.equals(button)) {
             v = inflater.inflate(R.layout.nav_key_space, parent, false);
         } else if (CLIPBOARD.equals(button)) {
