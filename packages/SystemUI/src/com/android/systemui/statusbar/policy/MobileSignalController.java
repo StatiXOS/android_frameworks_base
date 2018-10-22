@@ -85,6 +85,8 @@ public class MobileSignalController extends SignalController<
 
     private boolean mShow4gForLte;
     private ImsManager mImsManager;
+    private boolean mRoamingIconAllowed;
+    private boolean mVoLTEicon;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -141,6 +143,9 @@ public class MobileSignalController extends SignalController<
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.SHOW_FOURG_ICON), false,
                     this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.SHOW_VOLTE_ICON), false,
+                    this, UserHandle.USER_ALL);
             updateSettings();
         }
          /*
@@ -156,7 +161,15 @@ public class MobileSignalController extends SignalController<
          mShow4gForLte = Settings.System.getIntForUser(resolver,
                 Settings.System.SHOW_FOURG_ICON, 0,
                 UserHandle.USER_CURRENT) == 1;
+<<<<<<< HEAD
          mapIconSets();
+=======
+
+        mVoLTEicon = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_VOLTE_ICON, 0,
+                UserHandle.USER_CURRENT) == 1;
+
+>>>>>>> 1f8d29d88a4... Add VOLTE icon toggle [1/2]
         updateTelephony();
     }
 
@@ -345,8 +358,13 @@ public class MobileSignalController extends SignalController<
     private int getVolteResId() {
         int resId = 0;
 
+<<<<<<< HEAD
         if ( mCurrentState.imsResitered ) {
             resId = R.drawable.ic_volte;
+=======
+        if ( mCurrentState.imsResitered && mVoLTEicon ) {
+            resId = R.drawable.volte;
+>>>>>>> 1f8d29d88a4... Add VOLTE icon toggle [1/2]
         }
         return resId;
     }

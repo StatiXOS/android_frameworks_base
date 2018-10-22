@@ -4305,7 +4305,16 @@ public final class Settings {
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
 
         /**
+		
          * Three Finger Gesture from Oppo
+
+         * Whether to show VoLTE icon or not
+         * @hide
+         */
+        public static final String SHOW_VOLTE_ICON = "volte_icon";
+
+        /**
+         * Allow all rotations.
          * @hide
          */
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
