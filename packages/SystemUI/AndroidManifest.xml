@@ -251,6 +251,9 @@
     <protected-broadcast android:name="com.android.settingslib.action.UNREGISTER_SLICE_RECEIVER" />
     <protected-broadcast android:name="com.android.settings.flashlight.action.FLASHLIGHT_CHANGED" />
 
+    <!-- Weather on lockscreen -->
+    <uses-permission android:name="com.android.providers.weather.READ_WEATHER" />
+
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
