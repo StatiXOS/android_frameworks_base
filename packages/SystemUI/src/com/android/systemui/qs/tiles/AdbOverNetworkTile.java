@@ -103,6 +103,7 @@ public class AdbOverNetworkTile extends QSTileImpl<BooleanState> {
         }
         boolean wifiConnected = cb.enabled && (cb.wifiSignalIconId > 0) && (cb.enabledDesc != null);
         state.value = isAdbNetworkEnabled();
+        state.icon = ResourceIcon.get(R.drawable.ic_qs_network_adb_on);
         if (state.value) {
             WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -117,12 +118,10 @@ public class AdbOverNetworkTile extends QSTileImpl<BooleanState> {
                 state.label = mContext.getString(R.string.quick_settings_network_adb_enabled_label);
                 mAddressLabel = null;
             }
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_network_adb_on);
             state.state = Tile.STATE_ACTIVE;
         } else {
             // Otherwise set the label and disabled icon
             state.label = mContext.getString(R.string.quick_settings_network_adb_disabled_label);
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_network_adb_off);
             mAddressLabel = null;
             state.state = Tile.STATE_INACTIVE;
         }
