@@ -463,22 +463,23 @@ public class PhoneStatusBarPolicy
     }
 
     private final void updateBluetooth() {
-        int iconId = R.drawable.stat_sys_data_bluetooth_connected;
         String contentDescription =
                 mResources.getString(R.string.accessibility_quick_settings_bluetooth_on);
         boolean bluetoothVisible = false;
+        int batteryLevel = -1;
         if (mBluetooth != null) {
             if (mBluetooth.isBluetoothConnected()
                     && (mBluetooth.isBluetoothAudioActive()
                     || !mBluetooth.isBluetoothAudioProfileOnly())) {
+                bluetoothVisible = mBluetooth.isBluetoothEnabled();
+                batteryLevel = mBluetooth.getBatteryLevel();
                 contentDescription = mResources.getString(
                         R.string.accessibility_bluetooth_connected);
-                bluetoothVisible = mBluetooth.isBluetoothEnabled();
             }
         }
 
-        mIconController.setIcon(mSlotBluetooth, iconId, contentDescription);
-        mIconController.setIconVisibility(mSlotBluetooth, bluetoothVisible);
+        mIconController.setBluetoothIcon(mSlotBluetooth,
+                new BluetoothIconState(bluetoothVisible, batteryLevel, contentDescription));
     }
 
     private final void updateTTY() {
@@ -828,5 +829,22 @@ public class PhoneStatusBarPolicy
         }
 
         mIconController.setIconVisibility(mSlotConnectedDisplay, visible);
+    }
+
+    public static class BluetoothIconState {
+        public boolean visible;
+        public int batteryLevel;
+        public String contentDescription;
+
+        public BluetoothIconState(boolean visible, int batteryLevel, String contentDescription) {
+            this.visible = visible;
+            this.batteryLevel = batteryLevel;
+            this.contentDescription = contentDescription;
+        }
+
+        @Override
+        public String toString() {
+            return "BluetoothIconState(visible=" + visible + " batteryLevel=" + batteryLevel + ")";
+        }
     }
 }

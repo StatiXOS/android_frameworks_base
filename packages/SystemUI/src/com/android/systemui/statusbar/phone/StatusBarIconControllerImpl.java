@@ -211,6 +211,25 @@ public class StatusBarIconControllerImpl implements Tunable,
         }
     }
 
+    @Override
+    public void setBluetoothIcon(String slot, BluetoothIconState state) {
+        int index = getSlotIndex(slot);
+
+        if (state == null) {
+            removeIcon(index, 0);
+            return;
+        }
+
+        StatusBarIconHolder holder = getIcon(index, 0);
+        if (holder == null) {
+            holder = StatusBarIconHolder.fromBluetoothIconState(state);
+            setIcon(index, holder);
+        } else {
+            holder.setBluetoothState(state);
+            handleSet(index, holder);
+        }
+    }
+
     /**
      * Accept a list of MobileIconStates, which all live in the same slot(?!), and then are sorted
      * by subId. Don't worry this definitely makes sense and works.
