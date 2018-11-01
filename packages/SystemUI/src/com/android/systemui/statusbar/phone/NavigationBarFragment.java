@@ -261,6 +261,9 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         mContentResolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.FULL_GESTURE_NAVBAR), false,
                 mSettingsObserver, UserHandle.USER_ALL);
+        mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.FULL_GESTURE_NAVBAR_DT2S), false,
+                mSettingsObserver, UserHandle.USER_ALL);
 
         if (savedInstanceState != null) {
             mDisabledFlags1 = savedInstanceState.getInt(EXTRA_DISABLE_STATE, 0);
@@ -1143,6 +1146,7 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
     private final AccessibilityServicesStateChangeListener mAccessibilityListener =
             this::updateAccessibilityServicesState;
 
+<<<<<<< HEAD
 	private class SettingsObserver extends ContentObserver {
 
 		public SettingsObserver(Handler handler) {
@@ -1177,6 +1181,45 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
 			}
 		}
 	}
+=======
+    private class SettingsObserver extends ContentObserver {
+
+        public SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            NavigationBarFragment.this.updateAccessibilityServicesState(mAccessibilityManager);
+            NavigationBarFragment.this.setFullGestureMode();
+            if (mNavigationBarView != null) {
+                mNavigationBarView.updateNavButtonIcons();
+            }
+        }
+    }
+
+    private void setFullGestureMode() {
+        boolean fullModeEnabled = false;
+        boolean dt2sEnabled = false;
+        try {
+            if (Settings.System.getIntForUser(mContentResolver,
+                    Settings.System.FULL_GESTURE_NAVBAR,
+                    UserHandle.USER_CURRENT) == 1) {
+                fullModeEnabled = true;
+            }
+            if (Settings.System.getIntForUser(mContentResolver,
+                    Settings.System.FULL_GESTURE_NAVBAR_DT2S,
+                    UserHandle.USER_CURRENT) == 1) {
+                dt2sEnabled = fullModeEnabled;
+            }
+        } catch (Settings.SettingNotFoundException e) {
+        }
+        mFullGestureMode = mOverviewProxyService.shouldShowSwipeUpUI() && fullModeEnabled;
+        if (mNavigationBarView != null) {
+            mNavigationBarView.setFullGestureMode(mFullGestureMode, dt2sEnabled);
+        }
+    }
+>>>>>>> b0ea244ed4b... Full nav gesture: home action on the whole bar and doubletap2sleep [1/2]
 
     private final Stub mRotationWatcher = new Stub() {
         @Override
