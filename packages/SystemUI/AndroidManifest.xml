@@ -216,6 +216,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
 
+    <!-- to perform hot reboot -->
+    <uses-permission android:name="android.permission.SET_ACTIVITY_WATCHER" />
+    <uses-permission android:name="android.permission.SHUTDOWN" />
+
     <protected-broadcast android:name="com.android.settingslib.action.REGISTER_SLICE_RECEIVER" />
     <protected-broadcast android:name="com.android.settingslib.action.UNREGISTER_SLICE_RECEIVER" />
 
