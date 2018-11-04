@@ -69,6 +69,15 @@ public class ThemeAccentUtils {
         "com.accents.userseven", // 23
     };
 
+    // QS overlays
+    private static final String[] QS_THEMES = {
+        "default", // 0
+        "com.statix.overlay.qs.framed", // 1
+        "com.statix.overlay.qs.split", // 2
+        "com.statix.overlay.qs.superbubble", // 3
+        "com.statix.overlay.qs.teardrop", // 4
+    }
+
     // Unloads the stock dark theme
     public static void unloadStockDarkTheme(IOverlayManager om, int userId) {
         OverlayInfo themeInfo = null;
@@ -152,6 +161,33 @@ public class ThemeAccentUtils {
             String accent = ACCENTS[i];
             try {
                 om.setEnabled(accent,
+                        false /*disable*/, userId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // QS Switcher
+    public static void updateQS(IOverlayManager om, int userId, int qsSetting) {
+        if (qsSetting == 0) {
+            unloadQS(om, userId);
+        } else  {
+            try {
+                om.setEnabled(QS_THEMES[qsSetting],
+                        true, userId);
+            } catch (RemoteException e) {
+            }
+        }
+    }
+
+    // unload all the QS overlays
+    public static void unloadQS(IOverlayManager om, int userId) {
+        // skip index 0
+        for (int i = 1; i < QS_THEMES.length; i++) {
+            String theme = QS_THEMES[i];
+            try {
+                om.setEnabled(theme,
                         false /*disable*/, userId);
             } catch (RemoteException e) {
                 e.printStackTrace();
