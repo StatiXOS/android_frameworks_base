@@ -76,6 +76,7 @@ public class ThemeAccentUtils {
         "com.statix.overlay.qs.split", // 2
         "com.statix.overlay.qs.superbubble", // 3
         "com.statix.overlay.qs.teardrop", // 4
+        "com.statix.overlay.qs.hexagon", // 5
     };
 
     // Unloads the stock dark theme
