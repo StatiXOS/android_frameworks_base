@@ -69,4 +69,9 @@
   <!-- Oreo's recents component activity -->
   <java-symbol type="string" name="config_recentsComponentNameOreo" />
 
+  <!-- ADB notification -->
+  <java-symbol type="string" name="adb_net_active_notification_title" />
+  <java-symbol type="string" name="adb_both_active_notification_title" />
+  <java-symbol type="string" name="adb_active_generic_notification_message" />
+
 </resources>
