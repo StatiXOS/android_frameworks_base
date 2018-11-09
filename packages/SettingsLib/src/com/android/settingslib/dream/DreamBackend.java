@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
@@ -260,7 +261,10 @@ public class DreamBackend {
         logd("launchSettings(%s)", dreamInfo);
         if (dreamInfo == null || dreamInfo.settingsComponentName == null)
             return;
-        mContext.startActivity(new Intent().setComponent(dreamInfo.settingsComponentName));
+        Intent dreamIntent = new Intent();
+        dreamIntent.setComponent(dreamInfo.settingsComponentName);
+        dreamIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivityAsUser(dreamIntent, UserHandle.CURRENT);
     }
 
     public void preview(DreamInfo dreamInfo) {
