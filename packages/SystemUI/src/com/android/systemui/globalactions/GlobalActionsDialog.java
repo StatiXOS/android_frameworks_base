@@ -635,7 +635,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                     dialog.dismiss();
                     Intent globalActionSettings = new Intent();
                     globalActionSettings.setClassName("com.android.settings",
-                            "com.android.settings.Settings$CarbonFibersSystemActivity");
+                            "com.android.settings.Settings$SparksActivity");
                     globalActionSettings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(globalActionSettings);
                 }
