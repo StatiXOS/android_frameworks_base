@@ -53,7 +53,7 @@ import java.util.ArrayList;
 public class BrightnessController implements ToggleSlider.Listener {
     private static final String TAG = "StatusBar.BrightnessController";
 
-    private static final int SLIDER_ANIMATION_DURATION = 3000;
+    private static final int SLIDER_ANIMATION_DURATION = 2000;
 
     private static final int MSG_UPDATE_ICON = 0;
     private static final int MSG_UPDATE_SLIDER = 1;
@@ -368,6 +368,14 @@ public class BrightnessController implements ToggleSlider.Listener {
             mSliderAnimator.cancel();
         }
 
+        setBrightness(tracking, stopTracking, value);
+    }
+
+    public void setBrightnessFromSliderButtons(int value) {
+        setBrightness(false, true, value);
+    }
+
+    private void setBrightness(boolean tracking, boolean stopTracking, int value) {
         final int min;
         final int max;
         final int metric;
