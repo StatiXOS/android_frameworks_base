@@ -95,6 +95,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     private final int mColorForeground;
     private final CellSignalState mInfo = new CellSignalState();
     private OnClickListener mExpandClickListener;
+    private View mBackground;
 
     public QSFooterImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -104,6 +105,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        mBackground = findViewById(R.id.qs_footer_background);
         mDivider = findViewById(R.id.qs_footer_divider);
         mEdit = findViewById(android.R.id.edit);
         mEdit.setOnClickListener(view ->
@@ -188,6 +190,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     @Nullable
     private TouchAnimator createFooterAnimator() {
         return new TouchAnimator.Builder()
+                .addFloat(mBackground, "alpha", 0, 0.90f)
                 .addFloat(mDivider, "alpha", 0, 1)
                 .addFloat(mCarrierText, "alpha", 0, 0, 1)
                 .addFloat(mMobileGroup, "alpha", 0, 1)

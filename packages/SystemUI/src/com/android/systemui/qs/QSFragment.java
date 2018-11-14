@@ -241,7 +241,7 @@ public class QSFragment extends Fragment implements QS, CommandQueue.Callbacks {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        return isCustomizing();
+        return isCustomizing() || mQSPanel.onInterceptTouchEvent(event);
     }
 
     @Override
@@ -317,7 +317,6 @@ public class QSFragment extends Fragment implements QS, CommandQueue.Callbacks {
         // Let the views animate their contents correctly by giving them the necessary context.
         mHeader.setExpansion(mKeyguardShowing, expansion, panelTranslationY);
         mFooter.setExpansion(mKeyguardShowing ? 1 : expansion);
-        mQSPanel.getQsTileRevealController().setExpansion(expansion);
         mQSPanel.getTileLayout().setExpansion(expansion);
         mQSPanel.setTranslationY(translationScaleY * heightDiff);
         mQSDetail.setFullyExpanded(fullyExpanded);

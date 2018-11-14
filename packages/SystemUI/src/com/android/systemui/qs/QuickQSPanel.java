@@ -21,6 +21,7 @@ import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Space;
 
@@ -57,7 +58,8 @@ public class QuickQSPanel extends QSPanel {
             for (int i = 0; i < mRecords.size(); i++) {
                 mTileLayout.removeTile(mRecords.get(i));
             }
-            removeView((View) mTileLayout);
+            View tileLayoutView = (View) mTileLayout;
+            ((ViewGroup) tileLayoutView.getParent()).removeView(tileLayoutView);
         }
         mTileLayout = new HeaderTileLayout(context);
         mTileLayout.setListening(mListening);
