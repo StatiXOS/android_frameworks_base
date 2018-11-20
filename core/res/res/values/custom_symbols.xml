@@ -148,5 +148,8 @@
   <java-symbol type="id" name="notification_media_elapsed_time" />
   <java-symbol type="id" name="notification_media_total_time" />
 
+  <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
+  <java-symbol type="bool" name="config_custom_swipe_up_gesture_setting_available" />
+
 </resources>
 
