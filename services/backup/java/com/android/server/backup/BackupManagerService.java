@@ -1910,7 +1910,7 @@ public class BackupManagerService implements BackupManagerServiceInterface {
      */
     public void scheduleNextFullBackupJob(long transportMinLatency) {
         synchronized (mQueueLock) {
-            if (mFullBackupQueue.size() > 0) {
+            if (mFullBackupQueue != null && mFullBackupQueue.size() > 0) {
                 // schedule the next job at the point in the future when the least-recently
                 // backed up app comes due for backup again; or immediately if it's already
                 // due.
