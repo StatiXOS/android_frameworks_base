@@ -227,11 +227,12 @@ public class ZygoteProcess {
                                                   String instructionSet,
                                                   String appDataDir,
                                                   String invokeWith,
+                                                  boolean refreshTheme,
                                                   String[] zygoteArgs) {
         try {
             return startViaZygote(processClass, niceName, uid, gid, gids,
                     runtimeFlags, mountExternal, targetSdkVersion, seInfo,
-                    abi, instructionSet, appDataDir, invokeWith, false /* startChildZygote */,
+                    abi, instructionSet, appDataDir, invokeWith, refreshTheme, false /* startChildZygote */,
                     zygoteArgs);
         } catch (ZygoteStartFailedEx ex) {
             Log.e(LOG_TAG,
@@ -365,6 +366,7 @@ public class ZygoteProcess {
                                                       String instructionSet,
                                                       String appDataDir,
                                                       String invokeWith,
+                                                      boolean refreshTheme,
                                                       boolean startChildZygote,
                                                       String[] extraArgs)
                                                       throws ZygoteStartFailedEx {
@@ -376,6 +378,9 @@ public class ZygoteProcess {
         argsForZygote.add("--setuid=" + uid);
         argsForZygote.add("--setgid=" + gid);
         argsForZygote.add("--runtime-flags=" + runtimeFlags);
+        if (refreshTheme) {
+            argsForZygote.add("--refresh_theme");
+        }
         if (mountExternal == Zygote.MOUNT_EXTERNAL_DEFAULT) {
             argsForZygote.add("--mount-external-default");
         } else if (mountExternal == Zygote.MOUNT_EXTERNAL_READ) {
