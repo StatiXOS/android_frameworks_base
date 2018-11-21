@@ -1910,26 +1910,30 @@ public class BackupManagerService implements BackupManagerServiceInterface {
      */
     public void scheduleNextFullBackupJob(long transportMinLatency) {
         synchronized (mQueueLock) {
-            if (mFullBackupQueue.size() > 0) {
-                // schedule the next job at the point in the future when the least-recently
-                // backed up app comes due for backup again; or immediately if it's already
-                // due.
-                final long upcomingLastBackup = mFullBackupQueue.get(0).lastBackup;
-                final long timeSinceLast = System.currentTimeMillis() - upcomingLastBackup;
-                final long interval = mConstants.getFullBackupIntervalMilliseconds();
-                final long appLatency = (timeSinceLast < interval) ? (interval - timeSinceLast) : 0;
-                final long latency = Math.max(transportMinLatency, appLatency);
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run() {
-                        FullBackupJob.schedule(mContext, latency, mConstants);
+            try {
+                if (mFullBackupQueue.size() > 0) {
+                    // schedule the next job at the point in the future when the least-recently
+                    // backed up app comes due for backup again; or immediately if it's already
+                    // due.
+                    final long upcomingLastBackup = mFullBackupQueue.get(0).lastBackup;
+                    final long timeSinceLast = System.currentTimeMillis() - upcomingLastBackup;
+                    final long interval = mConstants.getFullBackupIntervalMilliseconds();
+                    final long appLatency = (timeSinceLast < interval) ? (interval - timeSinceLast) : 0;
+                    final long latency = Math.max(transportMinLatency, appLatency);
+                    Runnable r = new Runnable() {
+                        @Override
+                        public void run() {
+                            FullBackupJob.schedule(mContext, latency, mConstants);
+                        }
+                    };
+                    mBackupHandler.postDelayed(r, 2500);
+                } else {
+                    if (DEBUG_SCHEDULING) {
+                        Slog.i(TAG, "Full backup queue empty; not scheduling");
                     }
-                };
-                mBackupHandler.postDelayed(r, 2500);
-            } else {
-                if (DEBUG_SCHEDULING) {
-                    Slog.i(TAG, "Full backup queue empty; not scheduling");
                 }
+            } catch (NullPointerException e) {
+                // mFullBackupQueue might be null while booting up with FDE, for now only suppress this.
             }
         }
     }
