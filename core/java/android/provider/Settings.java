@@ -4417,6 +4417,12 @@ public final class Settings {
         public static final String FONT_PACKAGES = "font_packages";
 
         /**
+         * Whether to display 4G icon instead LTE
+         * @hide
+         */
+       public static final String SHOW_FOURG_ICON = "show_fourg_icon";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
