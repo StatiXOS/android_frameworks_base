@@ -8484,12 +8484,6 @@ public class PackageManagerService extends IPackageManager.Stub
         }
     }
 
-    private String[] systemOverlayPackages = {"SysuiDarkTheme",
-                                              "DisplayCutoutEmulationCorner",
-                                              "DisplayCutoutEmulationDouble",
-                                              "DisplayCutoutEmulationNarrow",
-                                              "DisplayCutoutEmulationWide"};
-
     private void scanDirLI(File scanDir, int parseFlags, int scanFlags, long currentTime) {
         final File[] files = scanDir.listFiles();
         if (ArrayUtils.isEmpty(files)) {
