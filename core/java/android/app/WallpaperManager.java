@@ -1888,6 +1888,7 @@ public class WallpaperManager {
             }
         }
 
+<<<<<<< HEAD
         // Check if the package exists
         if (cn != null) {
             try {
@@ -1897,6 +1898,8 @@ public class WallpaperManager {
                                 | PackageManager.MATCH_DIRECT_BOOT_UNAWARE);
             } catch (PackageManager.NameNotFoundException e) {
                 cn = null;
+=======
+>>>>>>> 412a5e0dbaaa... Change default wallpaper component name
         flat = context.getString(com.android.internal.R.string.default_wallpaper_component_custom);
         if (!TextUtils.isEmpty(flat)) {
             final ComponentName cn = ComponentName.unflattenFromString(flat);
