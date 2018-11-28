@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2006, The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+  <!-- Wallpaper component -->
+  <java-symbol type="string" name="default_wallpaper_component_custom" />
+
+  <!-- ChooserActivity blacklist -->
+  <java-symbol type="array" name="resolver_target_actions_pin_custom" />
+  <java-symbol type="array" name="resolver_target_actions_unpin_custom" />
+
+  <!-- App error dialog -->
+  <java-symbol type="id" name="aerr_copy" />
+  <java-symbol type="string" name="url_copy_success" />
+  <java-symbol type="string" name="url_copy_failed" />
+
+  <!-- Power menu -->
+  <java-symbol type="string" name="reboot_to_recovery_title" />
+  <java-symbol type="string" name="reboot_to_recovery_message" />
+  <java-symbol type="string" name="reboot_to_bootloader_title" />
+  <java-symbol type="string" name="reboot_to_bootloader_message" />
+  <java-symbol type="string" name="reboot_title" />
+  <java-symbol type="string" name="reboot_message" />
+  <java-symbol type="color" name="power_menu_power_off" />
+  <java-symbol type="color" name="power_menu_hot_reboot" />
+  <java-symbol type="color" name="power_menu_restart" />
+  <java-symbol type="color" name="power_menu_restart_advanced" />
+  <java-symbol type="color" name="power_menu_advanced_bootloader" />
+  <java-symbol type="color" name="power_menu_advanced_recovery" />
+  <java-symbol type="color" name="power_menu_advanced_system_restart_ui" />
+  <java-symbol type="color" name="power_menu_lockdown" />
+  <java-symbol type="color" name="power_menu_screenshot" />
+  <java-symbol type="array" name="config_custom_globalActionsList" />
+
+  <!-- Screen off delay -->
+  <java-symbol type="integer" name="config_screen_off_delay" />
+
+  <!-- Device keyhandlers -->
+  <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+  <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+
+  <!-- Proximity check on screen on -->
+  <java-symbol type="bool" name="config_proximityCheckOnWake" />
+
+  <!-- Proximity check timeout -->
+  <java-symbol type="integer" name="config_proximityCheckTimeout" />
+
+  <!-- Proximity check on screen on default -->
+  <java-symbol type="bool" name="config_proximityCheckOnWakeEnabledByDefault" />
+
+  <!-- Gesture Sensor -->
+  <java-symbol type="bool" name="config_enableGestureService" />
+
+  <!-- Whether device supports an alt. ambient display -->
+  <java-symbol type="bool" name="config_alt_ambient_display"/>
+
+  <!-- Toast text and bg colors -->
+  <java-symbol type="color" name="toast_bg_color" />
+  <java-symbol type="color" name="toast_text_color" />
+
+  <!-- Fastscroller -->
+  <java-symbol type="color" name="fastscroller_text_color" />
+
+  <!-- Full screen aspect ratio -->
+  <java-symbol type="bool" name="config_haveHigherAspectRatioScreen" />
+  <java-symbol type="dimen" name="config_screenAspectRatio" />
+
+  <!-- Package Manager -->
+  <java-symbol type="array" name="config_disabledComponents" />
+  <java-symbol type="array" name="config_forceEnabledComponents" />
+
+  <!-- Flashlight proximity check -->
+  <java-symbol type="integer" name="config_flashlightProximityTimeout" />
+
+  <!-- Icon packs -->
+  <java-symbol type="drawable" name="adaptive_icon_drawable_wrapper" />
+
+  <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
+  <java-symbol type="bool" name="config_custom_swipe_up_gesture_setting_available" />
+
+  <!-- Ambient display music ticker -->
+  <java-symbol type="bool" name="config_canForceDozeNotifications" />
+</resources>
