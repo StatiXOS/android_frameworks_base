@@ -1897,6 +1897,11 @@ public class WallpaperManager {
                                 | PackageManager.MATCH_DIRECT_BOOT_UNAWARE);
             } catch (PackageManager.NameNotFoundException e) {
                 cn = null;
+        flat = context.getString(com.android.internal.R.string.default_wallpaper_component_custom);
+        if (!TextUtils.isEmpty(flat)) {
+            final ComponentName cn = ComponentName.unflattenFromString(flat);
+            if (cn != null) {
+                return cn;
             }
         }
 
