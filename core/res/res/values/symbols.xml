@@ -3418,6 +3418,8 @@
 
   <java-symbol type="drawable" name="adaptive_icon_drawable_wrapper" />
 
+  <java-symbol type="string" name="config_defaultAssistantComponentName" />
+
   <!-- Weather icons -->
   <java-symbol type="drawable" name="weather_clear_night" />
   <java-symbol type="drawable" name="weather_cloudy" />
@@ -3437,4 +3439,5 @@
   <java-symbol type="drawable" name="weather_sunny" />
   <java-symbol type="drawable" name="weather_thunderstorms" />
   <java-symbol type="drawable" name="weather_windy" />
+ 
 </resources>
