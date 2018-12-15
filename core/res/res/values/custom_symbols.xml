@@ -117,6 +117,7 @@
 
   <!-- System fonts -->
   <java-symbol type="array" name="config_fontPackages" />
+  <java-symbol type="string" name="fontservice_incompatible_font" />
 
   <!-- Notification icon/text dynamic tint -->
   <java-symbol type="bool" name="config_allowNotificationIconTextTinting" />
