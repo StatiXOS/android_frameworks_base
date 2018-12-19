@@ -22,4 +22,6 @@
     <string name="global_action_reboot_fastboot">Fastboot</string>
     <string name="global_action_settings">Settings</string>
 
+    <!-- Allow devices override audio panel location to the left side -->
+    <bool name="config_audioPanelOnLeftSide">false</bool>
 </resources>
