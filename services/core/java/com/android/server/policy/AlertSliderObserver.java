@@ -18,6 +18,7 @@ package com.android.server.policy;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -42,6 +43,7 @@ public class AlertSliderObserver extends UEventObserver {
     private int mState;
 
     private final Context mContext;
+    private final AudioManager mAudioManager;
     private final NotificationManager mNotificationManager;
     private final Vibrator mVibrator;
     private final WakeLock mWakeLock;
@@ -50,8 +52,8 @@ public class AlertSliderObserver extends UEventObserver {
 
     public AlertSliderObserver(Context context) {
         mContext = context;
-        mNotificationManager
-               = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mAudioManager = context.getSystemService(AudioManager.class);
+        mNotificationManager = context.getSystemService(NotificationManager.class);
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         mHasVibrator = mVibrator != null && mVibrator.hasVibrator();
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
@@ -110,16 +112,15 @@ public class AlertSliderObserver extends UEventObserver {
         @Override
         public void handleMessage(Message msg) {
             final boolean inverted = isOrderInverted();
-            final int silentMode = getSilentMode();
             switch (mState) {
                 case 1:
-                    setZenMode(inverted ? Settings.Global.ZEN_MODE_OFF : silentMode);
+                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 2:
-                    setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
                     break;
                 case 3:
-                    setZenMode(inverted ? silentMode : Settings.Global.ZEN_MODE_OFF);
+                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
                     break;
             }
         }
@@ -141,15 +142,5 @@ public class AlertSliderObserver extends UEventObserver {
         return Settings.System.getIntForUser(
                     mContext.getContentResolver(), Settings.System.ALERT_SLIDER_ORDER, 0,
                     UserHandle.USER_CURRENT) != 0;
-    }
-
-    // Get silent mode for silent state:
-    // - ALARMS ONLY (Default)
-    // - TOTAL SILENCE
-    private int getSilentMode() {
-        int silentMode = Settings.System.getIntForUser(
-                mContext.getContentResolver(), Settings.System.ALERT_SLIDER_SILENT_MODE, 0,
-                UserHandle.USER_CURRENT);
-        return silentMode != 0 ? Settings.Global.ZEN_MODE_NO_INTERRUPTIONS : Settings.Global.ZEN_MODE_ALARMS;
     }
 }
