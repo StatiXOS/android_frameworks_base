@@ -4046,11 +4046,19 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         if (isUsingDarkTheme() != useDarkTheme) {
-            ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
+            // define it for labmda
+            final boolean useDark = useDarkTheme;
+            mUiOffloadThread.submit(() -> {
+            ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDark);
+            });
         }
 
         if (isUsingBlackTheme() != useBlackTheme) {
-            ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlackTheme);
+            // define it for lambda
+            final boolean useBlack = useBlackTheme;
+            mUiOffloadThread.submit(() -> {
+            ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlack);
+            });
         }
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
         // to set our default theme.
