@@ -5281,6 +5281,12 @@ public class StatusBar extends SystemUI implements DemoMode,
 	    resolver.registerContentObserver(Settings.System.getUriFor(
  		    Settings.System.QS_SELECTOR),
  		    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CLOCK),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_INFO),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5294,10 +5300,21 @@ public class StatusBar extends SystemUI implements DemoMode,
                 updateAccents(); // Update the accents when users request it
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_SELECTOR))) {
-                unloadQS(); // Unload the accents when users request it
-                updateQS(); // Update the accents when users request it
+                unloadQS(); // Unload the QS when users request it
+                updateQS(); // Update the QS when users request it
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_CLOCK)) ||
+                   uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_INFO))) {
+                updateKeyguardStatusSettings();
             }
         }
+
+        public void update() {
+            updateKeyguardStatusSettings();
+        }
+    }
+
+    private void updateKeyguardStatusSettings() {
+        mNotificationPanel.updateKeyguardStatusSettings();
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
