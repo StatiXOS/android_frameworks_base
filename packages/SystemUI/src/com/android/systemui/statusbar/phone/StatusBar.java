@@ -4034,6 +4034,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.System.SYSTEM_THEME, 0, mLockscreenUserManager.getCurrentUserId());
         boolean useDarkTheme = false;
         boolean useBlackTheme = false;
+        final UiModeManager umm = mContext.getSystemService(UiModeManager.class);
         if (userThemeSetting == 0) { // Automatic from Google
             // The system wallpaper defines if QS should be light or dark.      
             WallpaperColors systemColors = mColorExtractor
@@ -4054,7 +4055,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             // define it for labmda
             final boolean useDark = useDarkTheme;
             mUiOffloadThread.submit(() -> {
-            ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDark);
+                ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDark);
+                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
             });
         }
 
@@ -4062,7 +4064,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             // define it for lambda
             final boolean useBlack = useBlackTheme;
             mUiOffloadThread.submit(() -> {
-            ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlack);
+                ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlack);
+                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
             });
         }
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
