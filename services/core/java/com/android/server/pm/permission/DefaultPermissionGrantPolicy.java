@@ -978,6 +978,12 @@ public final class DefaultPermissionGrantPolicy {
             grantRuntimePermissions(weatherClientPackage, LOCATION_PERMISSIONS, userId);
         }
 
+        // Google sound picker
+        PackageParser.Package googleSoundPackage = getSystemPackage("com.google.android.soundpicker");
+        if (googleSoundPackage != null) {
+            grantRuntimePermissions(googleSoundPackage, STORAGE_PERMISSIONS, true, userId);
+        }
+
         if (mPermissionGrantedCallback != null) {
             mPermissionGrantedCallback.onDefaultRuntimePermissionsGranted(userId);
         }
