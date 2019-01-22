@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="170dp"
+    android:height="170dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+
+    <!-- dial -->
+    <path
+        android:pathData="M256,256m-256,0a256,256 0,1 0,512 0a256,256 0,1 0,-512 0"
+        android:fillColor="@color/analog_clock_statix_face_color"
+        android:fillAlpha="0.8"
+        android:strokeWidth="3"
+        android:strokeColor="#000000"
+        android:strokeAlpha="0"/>
+
+</vector>

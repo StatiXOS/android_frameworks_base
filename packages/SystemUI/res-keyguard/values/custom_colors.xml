@@ -28,5 +28,9 @@
     <color name="analog_clock_hand_minute_color">#212121</color>
     <color name="analog_clock_border_color_dark">#FFFFFF</color>
     <color name="analog_clock_face_color_dark">#212121</color>
+    <color name="analog_clock_statix_face_color">#ffffff</color>
+    <color name="analog_clock_statix_tick_color">#000000</color>
+    <color name="analog_clock_statix_face_color_dark">#000000</color>
+    <color name="analog_clock_statix_tick_color_dark">#ffffff</color>
 
 </resources>
