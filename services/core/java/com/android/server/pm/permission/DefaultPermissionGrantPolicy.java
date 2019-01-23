@@ -967,7 +967,7 @@ public final class DefaultPermissionGrantPolicy {
         // Google dialer
         PackageParser.Package googledialerPackage = getSystemPackage("com.google.android.dialer");
         if (googledialerPackage != null && doesPackageSupportRuntimePermissions(googledialerPackage)) {
-            grantRuntimePermissions(googledialerPackage, PHONE_PERMISSIONS, true, userId);
+            grantRuntimePermissions(googledialerPackage, PHONE_PERMISSIONS, false, userId);
             grantRuntimePermissions(googledialerPackage, CONTACTS_PERMISSIONS, true, userId);
             grantRuntimePermissions(googledialerPackage, SMS_PERMISSIONS, userId);
         }
@@ -1040,7 +1040,7 @@ public final class DefaultPermissionGrantPolicy {
         PackageParser.Package dialerPackage = getPackage(packageName);
         if (dialerPackage != null
                 && doesPackageSupportRuntimePermissions(dialerPackage)) {
-            grantRuntimePermissions(dialerPackage, PHONE_PERMISSIONS, false, true, userId);
+            grantRuntimePermissions(dialerPackage, PHONE_PERMISSIONS, false, false, userId);
             grantRuntimePermissions(dialerPackage, CONTACTS_PERMISSIONS, false, true, userId);
             grantRuntimePermissions(dialerPackage, SMS_PERMISSIONS, false, true, userId);
             grantRuntimePermissions(dialerPackage, MICROPHONE_PERMISSIONS, false, true, userId);
