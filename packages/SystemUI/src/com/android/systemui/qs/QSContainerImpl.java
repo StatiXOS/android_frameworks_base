@@ -190,7 +190,14 @@ public class QSContainerImpl extends FrameLayout {
         layoutParams.topMargin = mContext.getResources().getDimensionPixelSize(
                 com.android.internal.R.dimen.quick_qs_offset_height);
 
+        int gradientTopMargin = mContext.getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.quick_qs_offset_height) : 0;
+
         mQSPanel.setLayoutParams(layoutParams);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) mBackgroundGradient.getLayoutParams();
+        mlp.setMargins(0, gradientTopMargin, 0, 0);
+        mBackgroundGradient.setLayoutParams(mlp);
     }
 
     /**
