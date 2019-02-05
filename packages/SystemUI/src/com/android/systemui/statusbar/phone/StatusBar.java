@@ -4054,27 +4054,29 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (isUsingDarkTheme() == false && isUsingBlackTheme() == false) {
             mUiOffloadThread.submit(() -> {
                 umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
-                mNotificationPanel.setLockscreenClockTheme(false /* useDarkTheme */);
+                mNotificationPanel.setLockscreenClockTheme(false /* useDarkTheme */, false /* useBlackTheme */);
             });
         }
 
         if (isUsingDarkTheme() != useDarkTheme) {
             // define it for labmda
             final boolean useDark = useDarkTheme;
+            final boolean useBlack = useBlackTheme;
             mUiOffloadThread.submit(() -> {
                 ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDark);
                 umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
-                mNotificationPanel.setLockscreenClockTheme(useDark);
+                mNotificationPanel.setLockscreenClockTheme(useDark, useBlack);
             });
         }
 
         if (isUsingBlackTheme() != useBlackTheme) {
             // define it for lambda
             final boolean useBlack = useBlackTheme;
+            final boolean useDark = useDarkTheme;
             mUiOffloadThread.submit(() -> {
                 ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlack);
                 umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
-                mNotificationPanel.setLockscreenClockTheme(useBlack);
+                mNotificationPanel.setLockscreenClockTheme(useDark, useBlack);
             });
         }
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
