@@ -74,6 +74,7 @@ public class CustomAnalogClock extends View {
     private float mHour;
     private boolean mChanged;
     private boolean mUseDarkTheme;
+    private boolean mUseBlackTheme;
 
     private IOverlayManager mOverlayManager;
 
@@ -110,7 +111,9 @@ public class CustomAnalogClock extends View {
 
         final boolean useDarkTheme = ThemeAccentUtils.isUsingDarkTheme(
                 mOverlayManager, ActivityManager.getCurrentUser());
-        onThemeChanged(useDarkTheme, false);
+        final boolean useBlackTheme = ThemeAccentUtils.isUsingBlackTheme(
+                mOverlayManager, ActivityManager.getCurrentUser());
+        onThemeChanged(useDarkTheme, useBlackTheme, false);
 
         mDialAmbient = a.getDrawable(R.styleable.CustomAnalogClock_custom_clock_dial_ambient);
 
@@ -122,9 +125,10 @@ public class CustomAnalogClock extends View {
         mDialHeight = mDial.getIntrinsicHeight();
     }
 
-    public void onThemeChanged(boolean useDarkTheme, boolean forceInvalidate) {
+    public void onThemeChanged(boolean useDarkTheme, boolean useBlackTheme, boolean forceInvalidate) {
         mUseDarkTheme = useDarkTheme;
-        mDial = useDarkTheme ? mDialDark : mDialLight;
+        mUseBlackTheme = useBlackTheme;
+        mDial = (useDarkTheme || useBlackTheme) ? mDialDark : mDialLight;
         if (forceInvalidate) {
             invalidate();
         }
@@ -298,7 +302,7 @@ public class CustomAnalogClock extends View {
             minuteHand.setColorFilter(getResources().getColor(
                     android.R.color.white), PorterDuff.Mode.SRC_ATOP);
         } else {
-            minuteHand.setColorFilter(mUseDarkTheme ? getResources().getColor(
+            minuteHand.setColorFilter((mUseDarkTheme || mUseBlackTheme) ? getResources().getColor(
                     android.R.color.white) : getResources().getColor(
                     android.R.color.black), PorterDuff.Mode.SRC_ATOP);
         }

@@ -417,8 +417,8 @@ public class NotificationPanelView extends PanelView implements
         }
     }
 
-    public void setLockscreenClockTheme(boolean useDarkTheme) {
-        mKeyguardStatusView.onThemeChanged(useDarkTheme);
+    public void setLockscreenClockTheme(boolean useDarkTheme, boolean useBlackTheme) {
+        mKeyguardStatusView.onThemeChanged(useDarkTheme, useBlackTheme);
     }
 
     public void onThemeChanged() {
