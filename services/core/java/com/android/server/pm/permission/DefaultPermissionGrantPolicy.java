@@ -967,8 +967,8 @@ public final class DefaultPermissionGrantPolicy {
         // Google dialer
         PackageParser.Package googledialerPackage = getSystemPackage("com.google.android.dialer");
         if (googledialerPackage != null && doesPackageSupportRuntimePermissions(googledialerPackage)) {
-            grantRuntimePermissions(googledialerPackage, PHONE_PERMISSIONS, true, userId);
-            grantRuntimePermissions(googledialerPackage, CONTACTS_PERMISSIONS, true, userId);
+            grantRuntimePermissions(googledialerPackage, PHONE_PERMISSIONS, userId);
+            grantRuntimePermissions(googledialerPackage, CONTACTS_PERMISSIONS, userId);
             grantRuntimePermissions(googledialerPackage, SMS_PERMISSIONS, userId);
         }
 
@@ -976,6 +976,12 @@ public final class DefaultPermissionGrantPolicy {
         PackageParser.Package weatherClientPackage = getSystemPackage(WeatherClient.SERVICE_PACKAGE);
         if (weatherClientPackage != null && doesPackageSupportRuntimePermissions(weatherClientPackage)) {
             grantRuntimePermissions(weatherClientPackage, LOCATION_PERMISSIONS, userId);
+        }
+
+        // Google sound picker
+        PackageParser.Package googleSoundPackage = getSystemPackage("com.google.android.soundpicker");
+        if (googleSoundPackage != null) {
+            grantRuntimePermissions(googleSoundPackage, STORAGE_PERMISSIONS, true, userId);
         }
 
         if (mPermissionGrantedCallback != null) {
