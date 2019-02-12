@@ -33,6 +33,8 @@
     <string name="tuner_quick_settings">Quick settings</string>
     <string name="tuner_show_brightness_new">Show brightness slider</string>
     <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+    <string name="tuner_keyguard_show_watt_title">Show charging watt</string>
+    <string name="tuner_keyguard_show_watt_summary">Show charging watt value in mW</string>
 
     <!-- navbar editor -->
     <string name="preview">Preview</string>
