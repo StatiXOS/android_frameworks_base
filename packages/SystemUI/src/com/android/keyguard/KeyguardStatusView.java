@@ -219,9 +219,9 @@ public class KeyguardStatusView extends GridLayout implements
         mClockView.setElegantTextHeight(false);
     }
 
-    public void onThemeChanged(boolean useDarkTheme, boolean useBlackTheme) {
-        mCustomClockView.onThemeChanged(useDarkTheme, useBlackTheme, true);
-        mStatixClockView.onThemeChanged(useDarkTheme, useBlackTheme, true);
+    public void onThemeChanged(boolean useDarkTheme) {
+        mCustomClockView.onThemeChanged(useDarkTheme, true);
+        mStatixClockView.onThemeChanged(useDarkTheme, true);
     }
 
     /**

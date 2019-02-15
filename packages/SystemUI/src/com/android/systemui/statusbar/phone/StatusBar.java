@@ -2195,11 +2195,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         return ThemeAccentUtils.isUsingDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
-    // Check for the black system theme
-    public boolean isUsingBlackTheme() {
-        return ThemeAccentUtils.isUsingBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-    }
-
     // Unloads the stock dark theme
     public void unloadStockDarkTheme() {
         ThemeAccentUtils.unloadStockDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
@@ -4050,55 +4045,22 @@ public class StatusBar extends SystemUI implements DemoMode,
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
 
         // The system wallpaper defines if QS should be light or dark.
-        int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.SYSTEM_THEME, 0, mLockscreenUserManager.getCurrentUserId());
-        boolean useDarkTheme = false;
-        boolean useBlackTheme = false;
-        final UiModeManager umm = mContext.getSystemService(UiModeManager.class);
-        if (userThemeSetting == 0) { // Automatic from Google
-            // The system wallpaper defines if QS should be light or dark.      
-            WallpaperColors systemColors = mColorExtractor
-                    .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
-            final boolean wallpaperWantsDarkTheme = systemColors != null
-                    && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
-            final Configuration config = mContext.getResources().getConfiguration();
-            final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
-                    && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
-                        == Configuration.UI_MODE_NIGHT_YES;
-            useDarkTheme = wallpaperWantsDarkTheme /* || nightModeWantsDarkTheme */;
-        } else {
-            useDarkTheme = userThemeSetting == 2;
-            useBlackTheme = userThemeSetting == 3;
-        }
-
-        if (isUsingDarkTheme() == false && isUsingBlackTheme() == false) {
-            mUiOffloadThread.submit(() -> {
-                umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
-                mNotificationPanel.setLockscreenClockTheme(false /* useDarkTheme */, false /* useBlackTheme */);
-            });
-        }
-
+        WallpaperColors systemColors = mColorExtractor
+                .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
+        final boolean wallpaperWantsDarkTheme = systemColors != null
+                && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
+        final Configuration config = mContext.getResources().getConfiguration();
+        final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
+                && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                    == Configuration.UI_MODE_NIGHT_YES;
+        final boolean useDarkTheme = nightModeWantsDarkTheme;
         if (isUsingDarkTheme() != useDarkTheme) {
-            // define it for labmda
-            final boolean useDark = useDarkTheme;
-            final boolean useBlack = useBlackTheme;
             mUiOffloadThread.submit(() -> {
-                ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDark);
-                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
-                mNotificationPanel.setLockscreenClockTheme(useDark, useBlack);
+                ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
+                mNotificationPanel.setLockscreenClockTheme(useDarkTheme);
             });
         }
 
-        if (isUsingBlackTheme() != useBlackTheme) {
-            // define it for lambda
-            final boolean useBlack = useBlackTheme;
-            final boolean useDark = useDarkTheme;
-            mUiOffloadThread.submit(() -> {
-                ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlack);
-                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
-                mNotificationPanel.setLockscreenClockTheme(useDark, useBlack);
-            });
-        }
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
         // to set our default theme.
         final boolean lockDarkText = mColorExtractor.getColors(WallpaperManager.FLAG_LOCK, true
