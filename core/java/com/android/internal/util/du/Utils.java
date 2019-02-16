@@ -143,4 +143,22 @@ public class Utils {
         return String.valueOf((n - c) % 2 == 0 ? (int) temp :
                 ForC ? c * 9/5 + 32 + "°F" :c + "°C");
     }
+
+    // Method to detect navigation bar is in use
+    public static boolean hasNavigationBar() {
+        boolean hasNavbar = false;
+        try {
+            Class<?> windowManagerGlobalClass = Class.forName("android.view.WindowManagerGlobal");
+            Method getWmServiceMethod = windowManagerGlobalClass.getDeclaredMethod("getWindowManagerService");
+            getWmServiceMethod.setAccessible(true);
+            Object iWindowManager = getWmServiceMethod.invoke(null);
+            Class<?> iWindowManagerClass = iWindowManager.getClass();
+            Method hasNavBarMethod = iWindowManagerClass.getDeclaredMethod("hasNavigationBar");
+            hasNavBarMethod.setAccessible(true);
+            hasNavbar = (Boolean) hasNavBarMethod.invoke(iWindowManager);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hasNavbar;
+    }
 }
