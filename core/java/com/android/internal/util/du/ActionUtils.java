@@ -138,6 +138,17 @@ public class ActionUtils {
                 }
             }
         }
+
+        static void Notifications() {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.expandNotificationsPanel();
+                } catch (RemoteException e) {
+                    // do nothing.
+                }
+            }
+        }
     }
 
     // Method to take screenshots
@@ -193,5 +204,9 @@ public class ActionUtils {
     public static void toggleVolumePanel(Context context) {
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
+    }
+
+    public static void Notifications() {
+        Actions.Notifications();
     }
 }
