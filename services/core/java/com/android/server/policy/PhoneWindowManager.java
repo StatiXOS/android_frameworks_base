@@ -282,8 +282,9 @@ import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.internal.utils.ActionHandler;
-import com.android.internal.utils.ActionUtils;
+//import com.android.internal.utils.ActionUtils;
 import com.android.internal.util.ScreenShapeHelper;
+import com.android.internal.util.du.ActionUtils;
 import com.android.internal.util.du.Utils;
 import com.android.internal.widget.PointerLocationView;
 import com.android.server.GestureLauncherService;
@@ -987,7 +988,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     break;
                 case MSG_TOGGLE_TORCH:
                     performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, true);
-                    Utils.toggleCameraFlash();
+                    ActionUtils.toggleCameraFlash();
                     break;
             }
         }
@@ -1640,7 +1641,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             case MULTI_PRESS_POWER_NOTHING:
                 if ((mTorchActionMode == 1) && (!isScreenOn() || isDozeMode())) {
                     performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, true);
-                    Utils.toggleCameraFlash();
+                    ActionUtils.toggleCameraFlash();
                 }
                 break;
             case MULTI_PRESS_POWER_THEATER_MODE:
@@ -2692,10 +2693,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_CURRENT);
         }
 
-        boolean doShowNavbar = Settings.Secure.getIntForUser(resolver,
-                Settings.Secure.NAVIGATION_BAR_VISIBLE,
-                ActionUtils.hasNavbarByDefault(mContext) ? 1 : 0,
-                UserHandle.USER_CURRENT) == 1;
+        boolean doShowNavbar = Utils.hasNavigationBar();
         if (doShowNavbar != mNavbarVisible) {
             mNavbarVisible = doShowNavbar;
         }
