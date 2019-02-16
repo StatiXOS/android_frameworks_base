@@ -126,6 +126,17 @@ public class ActionUtils {
                 }
             }
         }
+
+        public static void clearAllNotifications() {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.onClearAllNotifications(ActivityManager.getCurrentUser());
+                } catch (RemoteException e) {
+                    // do nothing.
+                }
+            }
+        }
     }
 
     // Method to take screenshots
@@ -172,5 +183,9 @@ public class ActionUtils {
                         InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
             }
         }, 20);
+    }
+
+    public static void clearAllNotifications() {
+        FireActions.clearAllNotifications();
     }
 }
