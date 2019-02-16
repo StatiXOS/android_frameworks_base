@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.input.InputManager;
+import android.media.AudioManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -100,14 +101,14 @@ public class ActionUtils {
     }
 
     public static void toggleCameraFlash() {
-        FireActions.toggleCameraFlash();
+        Actions.toggleCameraFlash();
     }
 
-    private static final class FireActions {
+    private static final class Actions {
         private static IStatusBarService mStatusBarService = null;
 
         private static IStatusBarService getStatusBarService() {
-            synchronized (FireActions.class) {
+            synchronized (Actions.class) {
                 if (mStatusBarService == null) {
                     mStatusBarService = IStatusBarService.Stub.asInterface(
                             ServiceManager.getService("statusbar"));
@@ -116,7 +117,7 @@ public class ActionUtils {
             }
         }
 
-        public static void toggleCameraFlash() {
+        static void toggleCameraFlash() {
             IStatusBarService service = getStatusBarService();
             if (service != null) {
                 try {
@@ -127,7 +128,7 @@ public class ActionUtils {
             }
         }
 
-        public static void clearAllNotifications() {
+        static void clearAllNotifications() {
             IStatusBarService service = getStatusBarService();
             if (service != null) {
                 try {
@@ -186,6 +187,11 @@ public class ActionUtils {
     }
 
     public static void clearAllNotifications() {
-        FireActions.clearAllNotifications();
+        Actions.clearAllNotifications();
+    }
+
+    public static void toggleVolumePanel(Context context) {
+        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
     }
 }
