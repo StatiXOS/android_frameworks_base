@@ -149,6 +149,18 @@ public class ActionUtils {
                 }
             }
         }
+
+    // Toggle qs panel
+    static void toggleQsPanel() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.expandSettingsPanel(null);
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
     }
 
     // Method to take screenshots
@@ -206,7 +218,12 @@ public class ActionUtils {
         am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
     }
 
-    public static void Notifications() {
+    public static void toggleNotifications() {
         Actions.Notifications();
+    }
+
+    // Toggle qs panel
+    public static void toggleQsPanel() {
+        Actions.toggleQsPanel();
     }
 }
