@@ -27,6 +27,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
+import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 
@@ -148,14 +149,12 @@ public class Utils {
     public static boolean hasNavigationBar() {
         boolean hasNavbar = false;
         try {
-            Class<?> windowManagerGlobalClass = Class.forName("android.view.WindowManagerGlobal");
-            Method getWmServiceMethod = windowManagerGlobalClass.getDeclaredMethod("getWindowManagerService");
-            getWmServiceMethod.setAccessible(true);
-            Object iWindowManager = getWmServiceMethod.invoke(null);
-            Class<?> iWindowManagerClass = iWindowManager.getClass();
-            Method hasNavBarMethod = iWindowManagerClass.getDeclaredMethod("hasNavigationBar");
-            hasNavBarMethod.setAccessible(true);
-            hasNavbar = (Boolean) hasNavBarMethod.invoke(iWindowManager);
+            Class<?> serviceManager = Class.forName("android.os.ServiceManager");
+            IBinder serviceBinder = (IBinder)serviceManager.getMethod("getService", String.class).invoke(serviceManager, "window");
+            Class<?> stub = Class.forName("android.view.IWindowManager$Stub");
+            Object windowManagerService = stub.getMethod("asInterface", IBinder.class).invoke(stub, serviceBinder);
+            Method hasNavigationBar = windowManagerService.getClass().getMethod("hasNavigationBar");
+            return (boolean)hasNavigationBar.invoke(windowManagerService);
         } catch (Exception e) {
             e.printStackTrace();
         }
