@@ -2693,7 +2693,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_CURRENT);
         }
 
-        boolean doShowNavbar = Utils.hasNavigationBar();
+        boolean doShowNavbar = Settings.Secure.getIntForUser(resolver,
+                Settings.Secure.NAVIGATION_BAR_VISIBLE,	
+                com.android.internal.utils.ActionUtils.hasNavbarByDefault(mContext) ? 1 : 0,	
+                UserHandle.USER_CURRENT) == 1;
         if (doShowNavbar != mNavbarVisible) {
             mNavbarVisible = doShowNavbar;
         }
