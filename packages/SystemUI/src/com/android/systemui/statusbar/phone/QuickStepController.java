@@ -345,13 +345,10 @@ public class QuickStepController implements GestureHelper {
                 break;
             }
             case MotionEvent.ACTION_CANCEL:
-<<<<<<< HEAD
                 mBackActionScheduled = false;
-=======
                 wasConsumed = true;
                 isDoubleTapPending = false;
                 endQuickScrub(true /* animate */);
->>>>>>> b0ea244ed4b... Full nav gesture: home action on the whole bar and doubletap2sleep [1/2]
                 break;
             case MotionEvent.ACTION_UP:
                if (mNavigationBarView.isFullGestureMode()) {

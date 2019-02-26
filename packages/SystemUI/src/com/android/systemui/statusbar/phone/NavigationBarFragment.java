@@ -1146,7 +1146,7 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
     private final AccessibilityServicesStateChangeListener mAccessibilityListener =
             this::updateAccessibilityServicesState;
 
-<<<<<<< HEAD
+
 	private class SettingsObserver extends ContentObserver {
 
 		public SettingsObserver(Handler handler) {
@@ -1181,7 +1181,7 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
 			}
 		}
 	}
-=======
+
     private class SettingsObserver extends ContentObserver {
 
         public SettingsObserver(Handler handler) {
@@ -1219,7 +1219,7 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
             mNavigationBarView.setFullGestureMode(mFullGestureMode, dt2sEnabled);
         }
     }
->>>>>>> b0ea244ed4b... Full nav gesture: home action on the whole bar and doubletap2sleep [1/2]
+
 
     private final Stub mRotationWatcher = new Stub() {
         @Override
