@@ -100,4 +100,8 @@
     <!-- Elmyra -->
     <string name="elmyra_raw_sensor_string_type">com.google.sensor.elmyra.raw</string>
     <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
+
+    <!-- Font Tile -->
+    <string name="quick_settings_font_label">Fonts</string>
+    <string name="quick_settings_font_detail_label">Select a font</string>
 </resources>
