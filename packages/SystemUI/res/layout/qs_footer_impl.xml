@@ -46,13 +46,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|start"
-            android:paddingStart="16dp">
+            android:paddingStart="@dimen/qs_footer_padding_start">
 
             <include
                 layout="@layout/mobile_signal_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/qs_footer_mobilegroup_margin_end"
                 android:visibility="gone" />
 
             <com.android.keyguard.CarrierText
@@ -111,15 +111,25 @@
                 android:src="@drawable/ic_mode_edit"
                 android:tint="?android:attr/colorForeground"/>
 
-            <com.android.keyguard.AlphaOptimizedImageButton
-                android:id="@+id/settings_button"
-                style="@android:style/Widget.Material.Button.Borderless"
+            <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
+                android:id="@+id/settings_button_container"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_drawable"
-                android:src="@drawable/ic_settings_16dp"
-                android:tint="?android:attr/colorForeground"
-                android:contentDescription="@string/accessibility_quick_settings_settings" />
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <com.android.systemui.statusbar.phone.SettingsButton
+                    android:id="@+id/settings_button"
+                    style="@android:style/Widget.Material.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_drawable"
+                    android:contentDescription="@string/accessibility_quick_settings_settings"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_settings_16dp"
+                    android:tint="?android:attr/colorForeground"/>
+
+            </com.android.systemui.statusbar.AlphaOptimizedFrameLayout>
         </com.android.keyguard.AlphaOptimizedLinearLayout>
     </LinearLayout>
 
