@@ -1030,6 +1030,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
         boolean hspaDataDistinguishable;
         boolean inflateSignalStrengths = false;
         boolean alwaysShowDataRatIcon = false;
+        public String patternOfCarrierSpecificDataIcon = "";
 
         static Config readConfig(Context context) {
             Config config = new Config();
@@ -1050,6 +1051,20 @@ public class NetworkControllerImpl extends BroadcastReceiver
             if (b != null) {
                 config.alwaysShowDataRatIcon = b.getBoolean(
                         CarrierConfigManager.KEY_ALWAYS_SHOW_DATA_RAT_ICON_BOOL);
+                config.show4gForLte = b.getBoolean(
+                        CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
+                config.hideLtePlus = b.getBoolean(
+                        CarrierConfigManager.KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL);
+                config.patternOfCarrierSpecificDataIcon = b.getString(
+                        CarrierConfigManager.KEY_SHOW_CARRIER_DATA_ICON_PATTERN_STRING);
+                String nr5GIconConfiguration =
+                        b.getString(CarrierConfigManager.KEY_5G_ICON_CONFIGURATION_STRING);
+                if (!TextUtils.isEmpty(nr5GIconConfiguration)) {
+                    String[] nr5GIconConfigPairs = nr5GIconConfiguration.trim().split(",");
+                    for (String pair : nr5GIconConfigPairs) {
+                        add5GIconMapping(pair, config);
+                    }
+                }
             }
             return config;
         }

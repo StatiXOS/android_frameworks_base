@@ -1175,6 +1175,41 @@ public class CarrierConfigManager {
             "always_show_data_rat_icon_bool";
 
     /**
+<<<<<<< HEAD
+=======
+     * Boolean indicating if default data account should show LTE or 4G icon
+     * @hide
+     */
+    public static final String KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL =
+            "show_4g_for_lte_data_icon_bool";
+
+    /**
+     * Boolean indicating if lte+ icon should be shown if available
+     * @hide
+     */
+    public static final String KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL =
+            "hide_lte_plus_data_icon_bool";
+
+    /**
+     * The string is used to filter redundant string from PLMN Network Name that's supplied by
+     * specific carrier.
+     *
+     * @hide
+     */
+    public static final String KEY_OPERATOR_NAME_FILTER_PATTERN_STRING =
+            "operator_name_filter_pattern_string";
+
+    /**
+     * The string is used to compare with operator name. If it matches the pattern then show
+     * specific data icon.
+     *
+     * @hide
+     */
+    public static final String KEY_SHOW_CARRIER_DATA_ICON_PATTERN_STRING =
+            "show_carrier_data_icon_pattern_string";
+
+    /**
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
      * Boolean to decide whether to show precise call failed cause to user
      * @hide
      */
@@ -2392,6 +2427,15 @@ public class CarrierConfigManager {
         sDefaults.putBoolean(KEY_SHOW_PRECISE_FAILED_CAUSE_BOOL, false);
         sDefaults.putBoolean(KEY_SPN_DISPLAY_RULE_USE_ROAMING_FROM_SERVICE_STATE_BOOL, false);
         sDefaults.putBoolean(KEY_ALWAYS_SHOW_DATA_RAT_ICON_BOOL, false);
+        sDefaults.putBoolean(KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, false);
+        sDefaults.putString(KEY_OPERATOR_NAME_FILTER_PATTERN_STRING, "");
+        sDefaults.putString(KEY_SHOW_CARRIER_DATA_ICON_PATTERN_STRING, "");
+        sDefaults.putBoolean(KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL, true);
+        sDefaults.putBoolean(KEY_LTE_ENABLED_BOOL, true);
+        sDefaults.putBoolean(KEY_SUPPORT_TDSCDMA_BOOL, false);
+        sDefaults.putStringArray(KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY, null);
+        sDefaults.putBoolean(KEY_WORLD_MODE_ENABLED_BOOL, false);
+        sDefaults.putString(KEY_CARRIER_SETTINGS_ACTIVITY_COMPONENT_NAME_STRING, "");
         sDefaults.putBoolean(KEY_CARRIER_CONFIG_APPLIED_BOOL, false);
         sDefaults.putBoolean(KEY_CHECK_PRICING_WITH_CARRIER_FOR_DATA_ROAMING_BOOL, false);
         sDefaults.putIntArray(KEY_LTE_RSRP_THRESHOLDS_INT_ARRAY,

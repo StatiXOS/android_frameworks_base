@@ -259,6 +259,9 @@ public class ServiceState implements Parcelable {
 
     private List<NetworkRegistrationState> mNetworkRegistrationStates = new ArrayList<>();
 
+    private String mOperatorAlphaLongRaw;
+    private String mOperatorAlphaShortRaw;
+
     /**
      * get String description of roaming type
      * @hide
@@ -342,6 +345,11 @@ public class ServiceState implements Parcelable {
         mCellBandwidths = Arrays.copyOf(s.mCellBandwidths, s.mCellBandwidths.length);
         mLteEarfcnRsrpBoost = s.mLteEarfcnRsrpBoost;
         mNetworkRegistrationStates = new ArrayList<>(s.mNetworkRegistrationStates);
+        mNetworkRegistrationInfos = s.mNetworkRegistrationInfos == null ? null :
+                s.getNetworkRegistrationInfoList();
+        mNrFrequencyRange = s.mNrFrequencyRange;
+        mOperatorAlphaLongRaw = s.mOperatorAlphaLongRaw;
+        mOperatorAlphaShortRaw = s.mOperatorAlphaShortRaw;
     }
 
     /**
@@ -376,6 +384,12 @@ public class ServiceState implements Parcelable {
         in.readList(mNetworkRegistrationStates, NetworkRegistrationState.class.getClassLoader());
         mChannelNumber = in.readInt();
         mCellBandwidths = in.createIntArray();
+<<<<<<< HEAD
+=======
+        mNrFrequencyRange = in.readInt();
+        mOperatorAlphaLongRaw = in.readString();
+        mOperatorAlphaShortRaw = in.readString();
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     }
 
     public void writeToParcel(Parcel out, int flags) {
@@ -406,6 +420,12 @@ public class ServiceState implements Parcelable {
         out.writeList(mNetworkRegistrationStates);
         out.writeInt(mChannelNumber);
         out.writeIntArray(mCellBandwidths);
+<<<<<<< HEAD
+=======
+        out.writeInt(mNrFrequencyRange);
+        out.writeString(mOperatorAlphaLongRaw);
+        out.writeString(mOperatorAlphaShortRaw);
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     }
 
     public int describeContents() {
@@ -722,6 +742,7 @@ public class ServiceState implements Parcelable {
 
     @Override
     public int hashCode() {
+<<<<<<< HEAD
         return ((mVoiceRegState * 31)
                 + (mDataRegState * 37)
                 + mVoiceRoamingType
@@ -739,6 +760,33 @@ public class ServiceState implements Parcelable {
                 + mCdmaDefaultRoamingIndicator
                 + (mIsEmergencyOnly ? 1 : 0)
                 + (mIsDataRoamingFromRegistration ? 1 : 0));
+=======
+        return Objects.hash(
+                mVoiceRegState,
+                mDataRegState,
+                mChannelNumber,
+                Arrays.hashCode(mCellBandwidths),
+                mVoiceOperatorAlphaLong,
+                mVoiceOperatorAlphaShort,
+                mVoiceOperatorNumeric,
+                mDataOperatorAlphaLong,
+                mDataOperatorAlphaShort,
+                mDataOperatorNumeric,
+                mIsManualNetworkSelection,
+                mCssIndicator,
+                mNetworkId,
+                mSystemId,
+                mCdmaRoamingIndicator,
+                mCdmaDefaultRoamingIndicator,
+                mCdmaEriIconIndex,
+                mCdmaEriIconMode,
+                mIsEmergencyOnly,
+                mLteEarfcnRsrpBoost,
+                mNetworkRegistrationInfos,
+                mNrFrequencyRange,
+                mOperatorAlphaLongRaw,
+                mOperatorAlphaShortRaw);
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     }
 
     @Override
@@ -777,9 +825,36 @@ public class ServiceState implements Parcelable {
                 && equalsHandlesNulls(mCdmaDefaultRoamingIndicator,
                         s.mCdmaDefaultRoamingIndicator)
                 && mIsEmergencyOnly == s.mIsEmergencyOnly
+<<<<<<< HEAD
                 && mIsDataRoamingFromRegistration == s.mIsDataRoamingFromRegistration
                 && mIsUsingCarrierAggregation == s.mIsUsingCarrierAggregation)
                 && mNetworkRegistrationStates.containsAll(s.mNetworkRegistrationStates);
+=======
+                && equalsHandlesNulls(mOperatorAlphaLongRaw, s.mOperatorAlphaLongRaw)
+                && equalsHandlesNulls(mOperatorAlphaShortRaw, s.mOperatorAlphaShortRaw)
+                && (mNetworkRegistrationInfos == null
+                ? s.mNetworkRegistrationInfos == null : s.mNetworkRegistrationInfos != null
+                && mNetworkRegistrationInfos.containsAll(s.mNetworkRegistrationInfos))
+                && mNrFrequencyRange == s.mNrFrequencyRange;
+    }
+
+    /**
+     * Convert roaming type to string
+     *
+     * @param roamingType roaming type
+     * @return The roaming type in string format
+     *
+     * @hide
+     */
+    public static String roamingTypeToString(@RoamingType int roamingType) {
+        switch (roamingType) {
+            case ROAMING_TYPE_NOT_ROAMING: return "NOT_ROAMING";
+            case ROAMING_TYPE_UNKNOWN: return "UNKNOWN";
+            case ROAMING_TYPE_DOMESTIC: return "DOMESTIC";
+            case ROAMING_TYPE_INTERNATIONAL: return "INTERNATIONAL";
+        }
+        return "Unknown roaming type " + roamingType;
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     }
 
     /**
@@ -915,7 +990,14 @@ public class ServiceState implements Parcelable {
             .append(", mIsDataRoamingFromRegistration=").append(mIsDataRoamingFromRegistration)
             .append(", mIsUsingCarrierAggregation=").append(mIsUsingCarrierAggregation)
             .append(", mLteEarfcnRsrpBoost=").append(mLteEarfcnRsrpBoost)
+<<<<<<< HEAD
             .append(", mNetworkRegistrationStates=").append(mNetworkRegistrationStates)
+=======
+            .append(", mNetworkRegistrationInfos=").append(mNetworkRegistrationInfos)
+            .append(", mNrFrequencyRange=").append(mNrFrequencyRange)
+            .append(", mOperatorAlphaLongRaw=").append(mOperatorAlphaLongRaw)
+            .append(", mOperatorAlphaShortRaw=").append(mOperatorAlphaShortRaw)
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
             .append("}").toString();
     }
 
@@ -947,7 +1029,24 @@ public class ServiceState implements Parcelable {
         mIsDataRoamingFromRegistration = false;
         mIsUsingCarrierAggregation = false;
         mLteEarfcnRsrpBoost = 0;
+<<<<<<< HEAD
         mNetworkRegistrationStates = new ArrayList<>();
+=======
+        mNrFrequencyRange = FREQUENCY_RANGE_UNKNOWN;
+        mNetworkRegistrationInfos.clear();
+        addNetworkRegistrationInfo(new NetworkRegistrationInfo.Builder()
+                .setDomain(NetworkRegistrationInfo.DOMAIN_CS)
+                .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
+                .setRegistrationState(NetworkRegistrationInfo.REGISTRATION_STATE_UNKNOWN)
+                .build());
+        addNetworkRegistrationInfo(new NetworkRegistrationInfo.Builder()
+                .setDomain(NetworkRegistrationInfo.DOMAIN_PS)
+                .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
+                .setRegistrationState(NetworkRegistrationInfo.REGISTRATION_STATE_UNKNOWN)
+                .build());
+        mOperatorAlphaLongRaw = null;
+        mOperatorAlphaShortRaw = null;
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     }
 
     public void setStateOutOfService() {
@@ -1170,6 +1269,12 @@ public class ServiceState implements Parcelable {
         m.putInt("LteEarfcnRsrpBoost", mLteEarfcnRsrpBoost);
         m.putInt("ChannelNumber", mChannelNumber);
         m.putIntArray("CellBandwidths", mCellBandwidths);
+<<<<<<< HEAD
+=======
+        m.putInt("mNrFrequencyRange", mNrFrequencyRange);
+        m.putString("operator-alpha-long-raw", mOperatorAlphaLongRaw);
+        m.putString("operator-alpha-short-raw", mOperatorAlphaShortRaw);
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     }
 
     /** @hide */
@@ -1601,4 +1706,72 @@ public class ServiceState implements Parcelable {
         }
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @hide
+     */
+    public static final int getBetterNRFrequencyRange(int range1, int range2) {
+        return FREQUENCY_RANGE_ORDER.indexOf(range1) > FREQUENCY_RANGE_ORDER.indexOf(range2)
+                ? range1
+                : range2;
+    }
+
+    /**
+     * Returns a copy of self with location-identifying information removed.
+     * Always clears the NetworkRegistrationInfo's CellIdentity fields, but if removeCoarseLocation
+     * is true, clears other info as well.
+     * @hide
+     */
+    public ServiceState sanitizeLocationInfo(boolean removeCoarseLocation) {
+        ServiceState state = new ServiceState(this);
+        if (state.mNetworkRegistrationInfos != null) {
+            state.mNetworkRegistrationInfos = state.mNetworkRegistrationInfos.stream()
+                    .map(NetworkRegistrationInfo::sanitizeLocationInfo)
+                    .collect(Collectors.toList());
+        }
+        if (!removeCoarseLocation) return state;
+
+        state.mDataOperatorAlphaLong = null;
+        state.mDataOperatorAlphaShort = null;
+        state.mDataOperatorNumeric = null;
+        state.mVoiceOperatorAlphaLong = null;
+        state.mVoiceOperatorAlphaShort = null;
+        state.mVoiceOperatorNumeric = null;
+
+        return state;
+    }
+
+    /**
+     * @hide
+     */
+    public void setOperatorAlphaLongRaw(String operatorAlphaLong) {
+        mOperatorAlphaLongRaw = operatorAlphaLong;
+    }
+
+    /**
+     * The current registered raw data network operator name in long alphanumeric format.
+     *
+     * @hide
+     */
+    public String getOperatorAlphaLongRaw() {
+        return mOperatorAlphaLongRaw;
+    }
+
+    /**
+     * @hide
+     */
+    public void setOperatorAlphaShortRaw(String operatorAlphaShort) {
+        mOperatorAlphaShortRaw = operatorAlphaShort;
+    }
+
+    /**
+     * The current registered raw data network operator name in short alphanumeric format.
+     *
+     * @hide
+     */
+    public String getOperatorAlphaShortRaw() {
+        return mOperatorAlphaShortRaw;
+    }
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
 }

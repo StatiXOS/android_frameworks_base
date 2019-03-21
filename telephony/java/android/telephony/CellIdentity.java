@@ -89,10 +89,10 @@ public abstract class CellIdentity implements Parcelable {
 
     // long alpha Operator Name String or Enhanced Operator Name String
     /** @hide */
-    protected final String mAlphaLong;
+    protected String mAlphaLong;
     // short alpha Operator Name String or Enhanced Operator Name String
     /** @hide */
-    protected final String mAlphaShort;
+    protected String mAlphaShort;
 
     /** @hide */
     protected CellIdentity(String tag, int type, String mcc, String mnc, String alphal,
@@ -160,6 +160,13 @@ public abstract class CellIdentity implements Parcelable {
     }
 
     /**
+     * @hide
+     */
+    public void setOperatorAlphaLong(String alphaLong) {
+        mAlphaLong = alphaLong;
+    }
+
+    /**
      * @return The short alpha tag associated with the current scan result (may be the operator
      * name string or extended operator name string).  May be null if unknown.
      */
@@ -167,6 +174,19 @@ public abstract class CellIdentity implements Parcelable {
     public CharSequence getOperatorAlphaShort() {
         return mAlphaShort;
     }
+
+    /**
+     * @hide
+     */
+    public void setOperatorAlphaShort(String alphaShort) {
+        mAlphaShort = alphaShort;
+    }
+
+    /**
+     * @return a CellLocation object for this CellIdentity
+     * @hide
+     */
+    public abstract CellLocation asCellLocation();
 
     @Override
     public boolean equals(Object other) {
