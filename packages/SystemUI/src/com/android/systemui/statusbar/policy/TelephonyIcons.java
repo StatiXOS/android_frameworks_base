@@ -32,6 +32,7 @@ class TelephonyIcons {
     static final int ICON_3G = R.drawable.ic_3g_mobiledata;
     static final int ICON_4G = R.drawable.ic_4g_mobiledata;
     static final int ICON_4G_PLUS = R.drawable.ic_4g_plus_mobiledata;
+    static final int ICON_5G_E = R.drawable.ic_5g_e_mobiledata;
     static final int ICON_1X = R.drawable.ic_1x_mobiledata;
 
     static final MobileIconGroup CARRIER_NETWORK_CHANGE = new MobileIconGroup(
@@ -199,6 +200,50 @@ class TelephonyIcons {
             TelephonyIcons.ICON_LTE_PLUS,
             true);
 
+<<<<<<< HEAD
+=======
+    static final MobileIconGroup LTE_CA_5G_E = new MobileIconGroup(
+            "5Ge",
+            null,
+            null,
+            AccessibilityContentDescriptions.PHONE_SIGNAL_STRENGTH,
+            0, 0,
+            0,
+            0,
+            AccessibilityContentDescriptions.PHONE_SIGNAL_STRENGTH[0],
+            R.string.data_connection_5ge,
+            TelephonyIcons.ICON_5G_E,
+            true);
+
+    static final MobileIconGroup NR_5G = new MobileIconGroup(
+            "5G",
+            null,
+            null,
+            AccessibilityContentDescriptions.PHONE_SIGNAL_STRENGTH,
+            0,
+            0,
+            0,
+            0,
+            AccessibilityContentDescriptions.PHONE_SIGNAL_STRENGTH[0],
+            R.string.data_connection_5g,
+            TelephonyIcons.ICON_5G,
+            true);
+
+    static final MobileIconGroup NR_5G_PLUS = new MobileIconGroup(
+            "5G_PLUS",
+            null,
+            null,
+            AccessibilityContentDescriptions.PHONE_SIGNAL_STRENGTH,
+            0,
+            0,
+            0,
+            0,
+            AccessibilityContentDescriptions.PHONE_SIGNAL_STRENGTH[0],
+            R.string.data_connection_5g_plus,
+            TelephonyIcons.ICON_5G_PLUS,
+            true);
+
+>>>>>>> f07d64bdc9a9... Add 5G evolution icon
     static final MobileIconGroup DATA_DISABLED = new MobileIconGroup(
             "DataDisabled",
             null,
@@ -211,5 +256,29 @@ class TelephonyIcons {
             R.string.cell_data_off_content_description,
             0,
             false);
+
+
+    /** Mapping icon name(lower case) to the icon object. */
+    static final Map<String, MobileIconGroup> ICON_NAME_TO_ICON;
+    static {
+        ICON_NAME_TO_ICON = new HashMap<>();
+        ICON_NAME_TO_ICON.put("carrier_network_change", CARRIER_NETWORK_CHANGE);
+        ICON_NAME_TO_ICON.put("3g", THREE_G);
+        ICON_NAME_TO_ICON.put("wfc", WFC);
+        ICON_NAME_TO_ICON.put("unknown", UNKNOWN);
+        ICON_NAME_TO_ICON.put("e", E);
+        ICON_NAME_TO_ICON.put("1x", ONE_X);
+        ICON_NAME_TO_ICON.put("g", G);
+        ICON_NAME_TO_ICON.put("h", H);
+        ICON_NAME_TO_ICON.put("h+", H_PLUS);
+        ICON_NAME_TO_ICON.put("4g", FOUR_G);
+        ICON_NAME_TO_ICON.put("4g+", FOUR_G_PLUS);
+        ICON_NAME_TO_ICON.put("5ge", LTE_CA_5G_E);
+        ICON_NAME_TO_ICON.put("lte", LTE);
+        ICON_NAME_TO_ICON.put("lte+", LTE_PLUS);
+        ICON_NAME_TO_ICON.put("5g", NR_5G);
+        ICON_NAME_TO_ICON.put("5g_plus", NR_5G_PLUS);
+        ICON_NAME_TO_ICON.put("datadisable", DATA_DISABLED);
+    }
 }
 
