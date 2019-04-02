@@ -1753,7 +1753,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (artworkBitmap != null) {
                 switch (mAlbumArtFilter) {
                     case 1:
-                        artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), ImageHelper.getBlurredImage(mContext, artworkBitmap));
+                        artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), ImageHelper.getBlurredImage(mContext, artworkBitmap, 7.0f));
                         break;
                     case 0:
                     default:
