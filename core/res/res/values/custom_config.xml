@@ -56,4 +56,8 @@
          0: Left side
          1: Right side -->
     <integer name="config_alertSliderLocation">0</integer>
+
+    <!-- Shows the required view for in-display fingerprint -->
+    <bool name="config_supportsInDisplayFingerprint">false</bool>
+
 </resources>
