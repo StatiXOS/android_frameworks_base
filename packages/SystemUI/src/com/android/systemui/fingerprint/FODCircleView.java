@@ -34,8 +34,8 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.Surface;
-import android.view.View.OnTouchListener;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -224,7 +224,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
             mWidth = daemon.getSize();
             mHeight = mWidth; // We do not expect mWidth != mHeight
 
-           mShouldBoostBrightness = daemon.shouldBoostBrightness();
+            mShouldBoostBrightness = daemon.shouldBoostBrightness();
         } catch (NoSuchElementException | RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -259,7 +259,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
                 }
                 mIsPressed = true;
             }
-            canvas.drawCircle(mWidth / 2, mHeight / 2, (float) (mWidth / 2.0f), this.mPaintFingerprint);
+            canvas.drawCircle(mWidth / 2, mHeight / 2, (float) (mWidth / 2.0f), mPaintFingerprint);
         } else {
             setAlpha(mIsDreaming ? 0.5f : 1.0f);
             if (mIsPressed) {
