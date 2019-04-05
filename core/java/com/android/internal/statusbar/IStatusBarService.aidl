@@ -34,6 +34,7 @@ interface IStatusBarService
     void expandNotificationsPanel();
     void collapsePanels();
     void togglePanel();
+    void toggleSettingsPanel();
     void disable(int what, IBinder token, String pkg);
     void disableForUser(int what, IBinder token, String pkg, int userId);
     void disable2(int what, IBinder token, String pkg);
@@ -78,7 +79,8 @@ interface IStatusBarService
      * These methods are needed for global actions control which the UI is shown in sysui.
      */
     void shutdown();
-    void reboot(boolean safeMode, String reason);
+    void reboot(boolean safeMode);
+    void advancedReboot(String mode);
 
     void addTile(in ComponentName tile);
     void remTile(in ComponentName tile);
@@ -103,9 +105,15 @@ interface IStatusBarService
     void hideFingerprintDialog();
 
     /**
-     * ABC
+     * AOSiP
      */
     void toggleCameraFlash();
+    void toggleCameraFlashState(boolean enable);
+    void restartUI();
+
+    // Used to show or hide in display fingerprint view
+    void showInDisplayFingerprintView();
+    void hideInDisplayFingerprintView();
 
     // Start SmartNav methods
     void toggleRecentApps();
