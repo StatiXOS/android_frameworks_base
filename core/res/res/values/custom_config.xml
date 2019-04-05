@@ -98,4 +98,8 @@
     <bool name="config_button_brightness_support">false</bool>
     <integer name="config_button_brightness_default">128</integer>
 
+    <!-- Show a custom view for FOD -->
+    <bool name="config_needCustomFODView">false</bool>
+    <bool name="config_usesOnePlusFOD">false</bool>
+
 </resources>
