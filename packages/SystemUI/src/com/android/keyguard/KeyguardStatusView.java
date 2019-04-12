@@ -44,12 +44,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.ViewClippingUtil;
 import com.android.keyguard.clocks.CustomAnalogClock;
+import com.android.keyguard.clocks.CustomTextClock;
 import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.statusbar.policy.ConfigurationController;
@@ -75,6 +77,7 @@ public class KeyguardStatusView extends GridLayout implements
     private CustomAnalogClock mCustomClockView;
     private CustomAnalogClock mStatixClockView;
     private TextClock mClockView;
+    private LinearLayout mTextClock;
     private View mClockSeparator;
     private TextView mOwnerInfo;
     private KeyguardSliceView mKeyguardSlice;
@@ -192,6 +195,7 @@ public class KeyguardStatusView extends GridLayout implements
         }
         mCustomClockView = findViewById(R.id.custom_clock_view);
         mStatixClockView = findViewById(R.id.statix_clock_view);
+        mTextClock = findViewById(R.id.custom_textclock_view);
         mOwnerInfo = findViewById(R.id.owner_info);
         mKeyguardSlice = findViewById(R.id.keyguard_status_area);
         mClockSeparator = findViewById(R.id.clock_separator);
@@ -252,6 +256,13 @@ public class KeyguardStatusView extends GridLayout implements
         statixlayoutParams.bottomMargin = getResources().getDimensionPixelSize(
                 R.dimen.keyguard_security_view_top_margin);
         mStatixClockView.setLayoutParams(statixlayoutParams);
+
+        //Custom Text clock
+        RelativeLayout.LayoutParams textlayoutParams =
+                (RelativeLayout.LayoutParams) mTextClock.getLayoutParams();
+        textlayoutParams.bottomMargin = getResources().getDimensionPixelSize(
+                R.dimen.keyguard_security_view_top_margin);
+        mTextClock.setLayoutParams(textlayoutParams);
 
         layoutParams = (RelativeLayout.LayoutParams) mClockSeparator.getLayoutParams();
         layoutParams.topMargin = smallClock ? (int) mWidgetPadding : 0;
@@ -443,12 +454,14 @@ public class KeyguardStatusView extends GridLayout implements
                        View.GONE) : View.VISIBLE);
                 mCustomClockView.setVisibility(View.GONE);
                 mStatixClockView.setVisibility(View.GONE);
+                mTextClock.setVisibility(View.GONE);
                 break;
             case 1: // digital (bold)
                 mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE :
                        View.GONE) : View.VISIBLE);
                 mCustomClockView.setVisibility(View.GONE);
                 mStatixClockView.setVisibility(View.GONE);
+                mTextClock.setVisibility(View.GONE);
                 break;
             case 2: // custom analog
                 mCustomClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE :
@@ -461,16 +474,26 @@ public class KeyguardStatusView extends GridLayout implements
                        View.GONE) : View.VISIBLE);
                 mClockView.setVisibility(View.GONE);
                 mCustomClockView.setVisibility(View.GONE);
+                mTextClock.setVisibility(View.GONE);
                 break;
             case 4: // sammy
                 mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE :
                        View.GONE) : View.VISIBLE);
                 mCustomClockView.setVisibility(View.GONE);
                 mStatixClockView.setVisibility(View.GONE);
+                mTextClock.setVisibility(View.GONE);
                 break;
             case 5: // sammy (bold)
                 mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE :
                        View.GONE) : View.VISIBLE);
+                mCustomClockView.setVisibility(View.GONE);
+                mStatixClockView.setVisibility(View.GONE);
+                mTextClock.setVisibility(View.GONE);
+                break;
+            case 6: // custom text clock
+                mTextClock.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE :
+                       View.GONE) : View.VISIBLE);
+                mClockView.setVisibility(View.GONE);
                 mCustomClockView.setVisibility(View.GONE);
                 mStatixClockView.setVisibility(View.GONE);
                 break;
@@ -538,6 +561,7 @@ public class KeyguardStatusView extends GridLayout implements
                     View.GONE) : View.VISIBLE);
             mCustomClockView.setVisibility(View.GONE);
             mStatixClockView.setVisibility(View.GONE);
+            mTextClock.setVisibility(View.GONE);
         } else {
             setStyle();
             refreshTime();
