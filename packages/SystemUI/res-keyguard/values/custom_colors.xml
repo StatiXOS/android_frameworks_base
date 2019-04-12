@@ -32,5 +32,6 @@
     <color name="analog_clock_statix_tick_color">#000000</color>
     <color name="analog_clock_statix_face_color_dark">#000000</color>
     <color name="analog_clock_statix_tick_color_dark">#ffffff</color>
+    <color name="custom_text_clock_top_color">#e7b465</color>
 
 </resources>
