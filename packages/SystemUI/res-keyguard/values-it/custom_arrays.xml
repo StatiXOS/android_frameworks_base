@@ -29,6 +29,16 @@
         <item>Sessanta</item>
     </string-array>
 
+    <string-array translatable="true" name="TensStringVariant">
+        <item></item>
+        <item></item>
+        <item>Vent</item>
+        <item>Trent</item>
+        <item>Quarant</item>
+        <item>Cinquant</item>
+        <item>Sessant</item>
+    </string-array>
+
     <string-array translatable="true" name="UnitsString">
         <item>"Tutto va bene :)"</item>
         <item>Uno</item>

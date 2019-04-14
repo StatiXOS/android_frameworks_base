@@ -45,6 +45,7 @@ import com.android.systemui.R;
 public class CustomTextClock extends TextView {
 
     private final String[] TensString = getResources().getStringArray(R.array.TensString);
+    private final String[] TensStringVariant = getResources().getStringArray(R.array.TensStringVariant);
     private final String[] UnitsString = getResources().getStringArray(R.array.UnitsString);
     private final String[] TensStringH = getResources().getStringArray(R.array.TensStringH);
     private final String[] UnitsStringH = getResources().getStringArray(R.array.UnitsStringH);
@@ -196,10 +197,10 @@ public class CustomTextClock extends TextView {
                 // in a cutted form for Trenta (Trent) and merged with the Uno (1)
                 if (ArrayUtils.contains(langExceptions, Locale.getDefault().getLanguage())) {
                     if (Locale.getDefault().getLanguage() == "it") {
+                        NumString = TensString[tens] + UnitsString[units].toLowerCase() + " e";
                         if (units == 1) {
-                            NumString = TensString[tens].substring(0, TensString.length - 1) + UnitsString[units].toLowerCase();
+                            NumString = TensStringVariant[tens] + UnitsString[units].toLowerCase() + " e";
                         }
-                        NumString = TensString[tens] + UnitsString[units].toLowerCase();
                     }
                 } else {
                     NumString = TensString[tens]+" "+UnitsString[units];
@@ -224,10 +225,11 @@ public class CustomTextClock extends TextView {
                 // Guard exceptions part 2 - same reason as before
                 if (ArrayUtils.contains(langExceptions, Locale.getDefault().getLanguage())) { 
                     if (Locale.getDefault().getLanguage() == "it") {
-                        if (units == 1) {
-                            NumString = TensString[tens].substring(0, TensString.length - 1) + UnitsString[units].toLowerCase();
-                        }
                         NumString = TensString[tens] + UnitsString[units].toLowerCase();
+                        if (units == 1 || units == 8) {
+                            NumString = TensStringVariant[tens] + UnitsString[units].toLowerCase();
+                        }
+
                     }
                 } else {
                     NumString = TensString[tens]+" "+UnitsString[units];

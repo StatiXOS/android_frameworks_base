@@ -29,6 +29,16 @@
         <item>Sixty</item>
     </string-array>
 
+    <string-array translatable="true" name="TensStringVariant">
+        <item></item>
+        <item></item>
+        <item>Twenty</item>
+        <item>Thirty</item>
+        <item>Forty</item>
+        <item>Fifty</item>
+        <item>Sixty</item>
+    </string-array>
+
     <string-array translatable="true" name="UnitsString">
         <item>"O'Clock"</item>          
         <item>"O'One"</item>          
