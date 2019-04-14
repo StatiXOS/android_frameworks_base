@@ -201,6 +201,9 @@ public class CustomTextClock extends TextView {
                         if (units == 1) {
                             NumString = TensStringVariant[tens] + UnitsString[units].toLowerCase() + " e";
                         }
+                        if (units == 3) {
+                            NumString = TensString[tens] + "tré" + " e";
+                        }
                     }
                 } else {
                     NumString = TensString[tens]+" "+UnitsString[units];
@@ -229,7 +232,9 @@ public class CustomTextClock extends TextView {
                         if (units == 1 || units == 8) {
                             NumString = TensStringVariant[tens] + UnitsString[units].toLowerCase();
                         }
-
+                        if (units == 3) {
+                            NumString = TensString[tens] + "tré";
+                        }
                     }
                 } else {
                     NumString = TensString[tens]+" "+UnitsString[units];
