@@ -21,7 +21,7 @@
 
     <string-array translatable="true" name="TensString">
         <item></item>
-        <item></item>
+        <item>Ten</item>
         <item>Twenty</item>
         <item>Thirty</item>
         <item>Forty</item>
