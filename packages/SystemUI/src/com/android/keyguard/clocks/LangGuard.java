@@ -31,6 +31,17 @@ public class LangGuard {
     public static String evaluateExMin (String lang, int units, String[] TensString, String[] UnitsString, int tens) {
         String numString = "";
         switch (lang) {
+
+            case "pt":
+                numString = TensString[tens] + "e " + UnitsString[units].toLowerCase();
+                return numString;
+
+            case "fr":
+                if (units == 1) {
+                    numString = TensString[tens] + "et un";
+                    return numString;
+                }
+
             case "it":
                 if (units == 1) {
                     numString = TensString[tens].substring(0, TensString[tens].length() - 1)+
@@ -50,6 +61,17 @@ public class LangGuard {
     public static String evaluateExHr (String lang, int units, String[] TensString, String[] UnitsString, int tens) {
         String numString = "";
         switch (lang) {
+
+            case "pt":
+                numString = TensString[tens] + "e " + UnitsString[units].toLowerCase();
+                return numString;
+
+            case "fr":
+                if (units == 1) {
+                    numString = TensString[tens] + "et un";
+                    return numString;
+                }
+
             case "it":
                 if (units == 1) {
                     numString = TensString[tens].substring(0, TensString[tens].length() - 1)+
