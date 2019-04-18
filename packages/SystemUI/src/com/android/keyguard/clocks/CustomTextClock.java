@@ -255,7 +255,7 @@ public class CustomTextClock extends TextView {
                 NumString = TensStringH[tens];
             } else {
                 if (LangGuard.isAvailable(langExceptions,curLang)) {
-                    NumString = LangGuard.evaluateExHr(curLang, units, TensString, UnitsString, tens);
+                    NumString = LangGuard.evaluateExHr(curLang, units, TensString, UnitsString, tens, num);
                 } else {
                     NumString = TensString[tens]+" "+UnitsString[units].substring(2, UnitsString[units].length());
                 }

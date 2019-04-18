@@ -42,7 +42,10 @@ public class LangGuard {
 
             case "fr":
                 if (units == 1) {
-                    numString = TensString[tens] + "et un";
+                    numString = TensString[tens] + " et un";
+                    return numString;
+                } else {
+                    numString = TensString[tens] + "-" + UnitsString[units].toLowerCase();
                     return numString;
                 }
 
@@ -65,7 +68,7 @@ public class LangGuard {
         return numString;
     }
 
-    public static String evaluateExHr (String lang, int units, String[] TensString, String[] UnitsString, int tens) {
+    public static String evaluateExHr (String lang, int units, String[] TensString, String[] UnitsString, int tens, int hours) {
         String numString = "";
         switch (lang) {
 
@@ -79,7 +82,11 @@ public class LangGuard {
 
             case "fr":
                 if (units == 1) {
-                    numString = TensString[tens] + "et un";
+                    numString = TensString[tens] + " et un" + "heures";
+                    return numString;
+                }
+                if (hours > 1) {
+                    numString = TensString[tens] + "-" + UnitsString[units].toLowerCase() + "heures";
                     return numString;
                 }
 
