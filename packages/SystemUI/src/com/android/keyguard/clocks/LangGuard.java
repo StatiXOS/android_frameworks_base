@@ -32,6 +32,10 @@ public class LangGuard {
         String numString = "";
         switch (lang) {
 
+            case "nl":
+                numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
+                return numString;
+
             case "pt":
                 numString = TensString[tens] + "e " + UnitsString[units].toLowerCase();
                 return numString;
@@ -64,6 +68,10 @@ public class LangGuard {
     public static String evaluateExHr (String lang, int units, String[] TensString, String[] UnitsString, int tens) {
         String numString = "";
         switch (lang) {
+
+            case "nl":
+                numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
+                return numString;
 
             case "pt":
                 numString = TensString[tens] + "e " + UnitsString[units].toLowerCase();

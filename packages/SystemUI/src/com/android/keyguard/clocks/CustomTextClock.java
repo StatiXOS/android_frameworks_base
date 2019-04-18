@@ -161,7 +161,11 @@ public class CustomTextClock extends TextView {
                 if (hour == 12 && minute == 0) {
                     setText(highNoonFirstRow);
                 } else {
-                    setText(getIntStringHour(hour));
+                    if (curLang == "nl" && minute <= 9 && minute != 0) {
+                        setText(getIntStringMinOneLiner(minute));
+                    } else {
+                        setText(getIntStringHour(hour));
+                     }
                 }
                 break;
 
@@ -179,6 +183,10 @@ public class CustomTextClock extends TextView {
                     if (LangGuard.isAvailable(langExceptions,curLang)) {
                         setVisibility(VISIBLE);
                         setText(getIntStringMinOneLiner(minute));
+                    }
+                    if (curLang == "nl" && minute <= 9 && minute != 0) {
+                        setVisibility(VISIBLE);
+                        setText(getIntStringHour(hour));
                     }
                 }
                 break;
