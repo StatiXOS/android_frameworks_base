@@ -87,7 +87,6 @@
 
     <string-array translatable="false" name="langExceptions">
         <item>it</item>
-        <item>tr</item>
         <item>fr</item>
         <item>pt</item>
     </string-array>
