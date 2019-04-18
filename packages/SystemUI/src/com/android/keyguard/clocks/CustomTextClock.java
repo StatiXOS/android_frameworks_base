@@ -31,20 +31,12 @@ import android.text.format.DateUtils;
 import android.text.format.DateFormat;
 import android.text.format.Time;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
-import android.provider.Settings;
-import android.app.WallpaperManager;
 import android.graphics.Color;
-import android.app.WallpaperColors;
-import android.support.v7.graphics.Palette;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import java.lang.NullPointerException;
 import java.lang.IllegalStateException;
 import android.graphics.Paint;
 import android.os.ParcelFileDescriptor;
-import android.graphics.BitmapFactory;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.keyguard.clocks.ColorText;
@@ -93,7 +85,6 @@ public class CustomTextClock extends TextView {
 
         mContext = context;
         mCalendar = new Time();
-
 
     }
 
@@ -159,8 +150,6 @@ public class CustomTextClock extends TextView {
         int hour = mCalendar.hour;
         int minute = mCalendar.minute;
 
-        Log.d("CustomTextClock", ""+h24);
-
         if (!h24) {
             if (hour > 12) {
                 hour = hour - 12;
@@ -175,6 +164,7 @@ public class CustomTextClock extends TextView {
                     setText(getIntStringHour(hour));
                 }
                 break;
+
             case 1:
                 if (hour == 12 && minute == 0) {
                     setText(highNoonSecondRow);
@@ -192,6 +182,7 @@ public class CustomTextClock extends TextView {
                     }
                 }
                 break;
+
             case 3:
                 if (!LangGuard.isAvailable(langExceptions,curLang)) {
                     if (getIntStringMinSecondRow(minute).contains("Clock") || getIntStringMinSecondRow(minute).contains("null")) {
@@ -205,6 +196,7 @@ public class CustomTextClock extends TextView {
                     setVisibility(GONE); 
                 } 
                 break;
+
             default:
                 break;
         }
@@ -285,9 +277,7 @@ public class CustomTextClock extends TextView {
     }
 
     private String getIntStringMinSecondRow (int num) {   
-        int tens, units;
-        units = num % 10;
-        tens =  num / 10;
+        int units = num % 10;
         String NumString = "";
         if(num >= 20) {
             NumString = UnitsString[units].substring(2, UnitsString[units].length());
@@ -319,7 +309,6 @@ public class CustomTextClock extends TextView {
         } else if (num >= 10 && num < 20) {
             NumString = UnitsString[num];
         }
-
         return NumString;
     }
 
