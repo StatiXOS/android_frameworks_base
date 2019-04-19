@@ -30,7 +30,7 @@
     </string-array>
 
     <string-array translatable="true" name="UnitsString">
-        <item>"Tutto va bene :)"</item>
+        <item>Horas</item>
         <item>Um</item>
         <item>Dois</item>
         <item>Três</item>
