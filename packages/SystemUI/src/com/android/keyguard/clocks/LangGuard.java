@@ -18,7 +18,6 @@
 package com.android.keyguard.clocks;
 
 import com.android.internal.util.ArrayUtils;
-
 import java.io.*;
 import java.lang.String;
 
@@ -31,6 +30,10 @@ public class LangGuard {
     public static String evaluateExMin (String lang, int units, String[] TensString, String[] UnitsString, int tens) {
         String numString = "";
         switch (lang) {
+
+            case "pl":
+                numString = TensString[tens] + " " + UnitsString[units];
+                return numString;
 
             case "nl":
                 numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
@@ -68,9 +71,27 @@ public class LangGuard {
         return numString;
     }
 
-    public static String evaluateExHr (String lang, int units, String[] TensString, String[] UnitsString, int tens, int hours) {
+    public static String evaluateExHr (String lang, int units, String[] TensString, String[] UnitsString, int tens, int hours, String[] UnitsStringH, String[] TensStringH, boolean h24) {
         String numString = "";
         switch (lang) {
+                    
+            case "pl":
+                if ( hours == 0 && h24) {
+                    numString = "Dwudziesta czwarta";
+                    return numString;
+                }
+                if ( hours == 0 && !h24) {
+                    numString = "Dwunasta";
+                    return numString;
+                }
+                if ( hours > 20 ) {
+                    numString = "Dwudziesta" + " " + UnitsStringH[units];
+                    return numString;
+                } else {    
+                    numString = TensStringH[tens] + " " + UnitsStringH[units];
+                    return numString;
+                }
+               
 
             case "nl":
                 numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
