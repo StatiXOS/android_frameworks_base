@@ -248,20 +248,29 @@ public class CustomTextClock extends TextView {
     private String getIntStringHour (int num) {
         int tens, units;
         String NumString = "";
+        units = num % 10 ;
+        tens =  num / 10;
+
         if(num >= 20) {
-            units = num % 10 ;
-            tens =  num / 10;
             if ( units == 0 ) {
                 NumString = TensStringH[tens];
             } else {
                 if (LangGuard.isAvailable(langExceptions,curLang)) {
-                    NumString = LangGuard.evaluateExHr(curLang, units, TensString, UnitsString, tens, num);
+                    NumString = LangGuard.evaluateExHr(curLang, units, TensString, UnitsString, tens, num, UnitsStringH, TensStringH, h24);
                 } else {
                     NumString = TensString[tens]+" "+UnitsString[units].substring(2, UnitsString[units].length());
                 }
             }
-        } else if (num < 20 ) {
-            NumString = UnitsStringH[num];
+        } else {
+            if (num < 20 && num != 0) {
+                NumString = UnitsStringH[num];
+            }
+            if (num == 0 && curLang == "pl") {
+                NumString = LangGuard.evaluateExHr(curLang, units, TensString, UnitsString, tens, num, UnitsStringH, TensStringH, h24);
+            }        
+            if (num == 0 && curLang != "pl") {
+                NumString = UnitsStringH[num];
+            }
         }
 
         return NumString;
