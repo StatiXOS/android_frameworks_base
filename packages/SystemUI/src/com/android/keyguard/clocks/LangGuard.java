@@ -70,6 +70,9 @@ public class LangGuard {
 
             case "ja":
                 numString = TensString[tens] + UnitsString[units];
+
+            case "tr":
+                numString = TensString[tens] + UnitsString[units];
         }
         return numString;
     }
@@ -132,6 +135,9 @@ public class LangGuard {
                 }
 
             case "ja":
+                numString = TensStringH[tens] + UnitsString[units];
+
+            case "tr":
                 numString = TensStringH[tens] + UnitsString[units];
         }
         return numString;
