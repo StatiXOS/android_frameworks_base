@@ -141,7 +141,16 @@ public class CellularTile extends QSTileImpl<SignalState> {
 
     @Override
     protected void handleSecondaryClick() {
+        if (getState().state == Tile.STATE_UNAVAILABLE) {
+            return;
+        }
         if (mDataController.isMobileDataSupported()) {
+            if (mKeyguardMonitor.isSecure() && !mKeyguardMonitor.canSkipBouncer()) {
+                mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+                    showDetail(true);
+                });
+                return;
+            }
             showDetail(true);
         } else {
             mActivityStarter
@@ -162,7 +171,7 @@ public class CellularTile extends QSTileImpl<SignalState> {
         }
 
         final Resources r = mContext.getResources();
-        state.label = r.getString(R.string.mobile_data);
+        state.dualTarget = true;
         boolean mobileDataEnabled = mDataController.isMobileDataSupported()
                 && mDataController.isMobileDataEnabled();
         state.value = mobileDataEnabled;
