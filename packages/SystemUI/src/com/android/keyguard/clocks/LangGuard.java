@@ -40,7 +40,7 @@ public class LangGuard {
                 return numString;
 
             case "pt":
-                numString = TensString[tens] + "e " + UnitsString[units].toLowerCase();
+                numString = TensString[tens] + " e " + UnitsString[units].toLowerCase();
                 return numString;
 
             case "fr":
@@ -63,6 +63,7 @@ public class LangGuard {
                 } else if (units == 8) {
                     numString = TensString[tens].substring(0, TensString[tens].length() - 1)+
                                 UnitsString[units].toLowerCase();
+                    return numString;
                 } else {
                     numString = TensString[tens] + UnitsString[units].toLowerCase();
                     return numString;
@@ -95,19 +96,32 @@ public class LangGuard {
                 if ( hours > 20 ) {
                     numString = "Dwudziesta" + " " + UnitsStringH[units];
                     return numString;
-                } else {    
+                }
+                if (units != 0) {
                     numString = TensStringH[tens] + " " + UnitsStringH[units];
                     return numString;
+                } else {
+                    numString = TensStringH[tens];
+                    return numString;
                 }
-               
 
             case "nl":
-                numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
-                return numString;
+                if (units != 0) {
+                    numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
+                    return numString;
+                } else {
+                    numString = UnitsString[units].substring(0, UnitsString[units].length() - 5);
+                    return numString;
+                }
 
             case "pt":
-                numString = TensString[tens] + "e " + UnitsString[units].toLowerCase();
-                return numString;
+                if (units != 0) {
+                    numString = TensString[tens] + " e " + UnitsString[units].toLowerCase();
+                    return numString;
+                } else {
+                   numString = TensString[tens];
+                   return numString;
+                }
 
             case "fr":
                 if (units == 1) {
@@ -116,6 +130,10 @@ public class LangGuard {
                 }
                 if (hours > 1) {
                     numString = TensString[tens] + "-" + UnitsString[units].toLowerCase() + "heures";
+                    return numString;
+                }
+                if (units == 0) {
+                    numString = TensStringH[tens] + " heures";
                     return numString;
                 }
 
@@ -128,21 +146,33 @@ public class LangGuard {
                     numString = TensStringH[tens].substring(0, TensStringH[tens].length() - 1)+
                                 UnitsString[units].toLowerCase() + " e";
                     return numString;
-                } else if (units == 3) {
+                }
+                if (units == 3) {
                     numString = TensStringH[tens] + "tré" + " e";
                     return numString;                    
-                } else { 
-                    numString = TensStringH[tens] + UnitsString[units].toLowerCase();
+                }
+                if (units == 0) {
+                    numString = TensStringH[tens] + " e";
                     return numString;
                 }
+                    numString = TensStringH[tens] + UnitsString[units].toLowerCase() + " e";
+                    return numString;
 
             case "ja":
-                numString = TensStringH[tens] + " " + UnitsString[units];
-                return numString;
+                if (units != 0) {
+                    numString = TensStringH[tens] + " " + UnitsString[units];
+                    return numString;
+                } else {
+                    numString = TensStringH[tens];
+                }
 
             case "tr":
-                numString = TensStringH[tens] + " " + UnitsString[units];
-                return numString;
+                if (units != 0) {
+                    numString = TensStringH[tens] + " " + UnitsString[units];
+                    return numString;
+                } else {
+                    numString = TensStringH[tens];
+                }
         }
         return numString;
     }
