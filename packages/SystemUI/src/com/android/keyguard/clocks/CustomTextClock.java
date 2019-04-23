@@ -321,10 +321,13 @@ public class CustomTextClock extends TextView {
                     NumString = TensString[tens]+" "+UnitsString[units].substring(2, UnitsString[units].length());
                 }
             }
-        } else if (num < 10 ) {
-            NumString = UnitsString[num];
-        } else if (num >= 10 && num < 20) {
-            NumString = UnitsString[num];
+        } else { 
+            if (num < 10 ) {
+                NumString = UnitsString[num];
+            }
+            if (num >= 10 && num < 20) {
+                NumString = UnitsString[num];
+            }
         }
         return NumString;
     }
