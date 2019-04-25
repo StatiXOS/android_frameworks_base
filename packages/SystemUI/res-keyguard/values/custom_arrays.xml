@@ -87,6 +87,7 @@
 
     <string-array translatable="false" name="langExceptions">
         <item>it</item>
+        <item>pt</item>
     </string-array>
 
 </resources>
