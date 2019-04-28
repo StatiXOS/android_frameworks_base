@@ -21,4 +21,11 @@
 
      <!-- The minimum bottom margin of the keyguard security container -->
     <dimen name="kg_security_container_min_bottom_margin">0dp</dimen>
+
+    <!-- date view padding shiz -->
+    <dimen name="widget_clock_normal_clock_padding">4dp</dimen>
+
+    <!-- Date styles padding-->
+    <dimen name="widget_date_box_padding_hor">8dp</dimen>
+    <dimen name="widget_date_box_padding_ver">4dp</dimen>
 </resources>

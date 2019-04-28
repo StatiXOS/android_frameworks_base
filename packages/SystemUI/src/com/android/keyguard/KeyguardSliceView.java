@@ -33,6 +33,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.text.LineBreaker;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Trace;
 import android.provider.Settings;
@@ -44,6 +45,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -317,6 +319,28 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         mDarkAmount = darkAmount;
         mRow.setDarkAmount(darkAmount);
         updateTextColors();
+    }
+
+    public void setViewBackground(Drawable drawRes) {
+        mRow.setBackground(drawRes);
+    }
+
+    public void setViewBackgroundResource(int drawRes) {
+        mRow.setBackgroundResource(drawRes);
+    }
+
+    public void setViewPadding(int left, int top, int right, int bottom) {
+        mRow.setPadding(left,top,right,bottom);
+    }
+
+    public void setViewsTypeface(Typeface tf) {
+        int childCount = mRow.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v = mRow.getChildAt(i);
+            if (v instanceof Button) {
+                ((Button) v).setTypeface(tf);
+            }
+        }
     }
 
     private void updateTextColors() {
