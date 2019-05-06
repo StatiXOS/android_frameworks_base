@@ -17,6 +17,7 @@ package com.android.systemui.statusbar;
 
 import android.app.Notification;
 import android.content.Context;
+import android.graphics.drawable.Icon;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
@@ -49,7 +50,7 @@ public class NotificationMediaManager implements Dumpable {
     private MediaController mMediaController;
     private String mMediaNotificationKey;
     private MediaMetadata mMediaMetadata;
-    private MediaUpdateListener mListener;
+    private List<MediaUpdateListener> mListeners = new ArrayList<>();
 
     // callback into NavigationFragment for Pulse
     public interface MediaUpdateListener {
@@ -69,9 +70,7 @@ public class NotificationMediaManager implements Dumpable {
                     clearCurrentMediaNotification();
                     mPresenter.updateMediaMetaData(true, true);
                 }
-                if (mListener != null) {
-                    setMediaPlaying();
-                }
+                setMediaPlaying();
             }
         }
 
@@ -83,17 +82,13 @@ public class NotificationMediaManager implements Dumpable {
             }
             mMediaMetadata = metadata;
             mPresenter.updateMediaMetaData(true, true);
-            if (mListener != null) {
-                setMediaPlaying();
-            }
+            setMediaPlaying();
         }
 
         @Override
         public void onSessionDestroyed() {
             super.onSessionDestroyed();
-            if (mListener != null) {
-                setMediaPlaying();
-            }
+            setMediaPlaying();
         }
     };
 
@@ -124,6 +119,17 @@ public class NotificationMediaManager implements Dumpable {
 
     public MediaMetadata getMediaMetadata() {
         return mMediaMetadata;
+    }
+
+    public Icon getMediaIcon() {
+        if (mMediaNotificationKey == null) return null;
+
+        synchronized (mEntryManager.getNotificationData()) {
+            NotificationData.Entry mediaNotification = mEntryManager
+                    .getNotificationData().get(mMediaNotificationKey);
+            if (mediaNotification == null || mediaNotification.expandedIcon == null) return null;
+            return mediaNotification.expandedIcon.getSourceIcon();
+        }
     }
 
     public void findAndUpdateMediaNotifications() {
@@ -200,9 +206,7 @@ public class NotificationMediaManager implements Dumpable {
                 mMediaController = controller;
                 mMediaController.registerCallback(mMediaListener);
                 mMediaMetadata = mMediaController.getMetadata();
-                if (mListener != null) {
-                    setMediaPlaying();
-                }
+                setMediaPlaying();
                 if (DEBUG_MEDIA) {
                     Log.v(TAG, "DEBUG_MEDIA: insert listener, found new controller: "
                             + mMediaController + ", receive metadata: " + mMediaMetadata);
@@ -253,7 +257,7 @@ public class NotificationMediaManager implements Dumpable {
     }
 
     public void addCallback(MediaUpdateListener listener) {
-        mListener = listener;
+        mListeners.add(listener);
     }
 
     public boolean isPlaybackActive() {
@@ -300,9 +304,7 @@ public class NotificationMediaManager implements Dumpable {
                         + mMediaController.getPackageName());
             }
             mMediaController.unregisterCallback(mMediaListener);
-            if (mListener != null) {
-                setMediaPlaying();
-            }
+            setMediaPlaying();
         }
         mMediaController = null;
     }
@@ -327,20 +329,20 @@ public class NotificationMediaManager implements Dumpable {
                     break;
                 }
             }
-            if (mListener != null) {
-                mListener.onMediaUpdated(true);
+            for (MediaUpdateListener listener : mListeners) {
+                listener.onMediaUpdated(true);
             }
         } else {
             mEntryManager.setEntryToRefresh(null);
-            if (mListener != null) {
-                mListener.onMediaUpdated(false);
+            for (MediaUpdateListener listener : mListeners) {
+                listener.onMediaUpdated(true);
             }
         }
     }
 
-    public void setPulseColors(boolean isColorizedMEdia, int[] colors) {
-        if (mListener != null) {
-            mListener.setPulseColors(isColorizedMEdia, colors);
+     public void setPulseColors(boolean isColorizedMEdia, int[] colors) {
+        for (MediaUpdateListener listener : mListeners) {
+            listener.setPulseColors(isColorizedMEdia, colors);
         }
     }
 }
