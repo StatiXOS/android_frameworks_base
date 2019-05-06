@@ -109,4 +109,7 @@
     <string name="high_noon_first_row">High</string>
     <string name="high_noon_second_row">Noon</string>
 
+    <!-- AOD media indication -->
+    <string name="music_controls_no_title">No title</string>
+
 </resources>
