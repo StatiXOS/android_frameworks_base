@@ -2156,6 +2156,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         mHandler.post(mScreenshotRunnable);
                     }
                 });
+            @Override
+            public void onSwipeThreeFinger() {
+                if (!mPocketLockShowing){
+                    mHandler.post(mScreenshotRunnable);
+                }
+            }
+        });
 
         mHandler = new PolicyHandler();
         mWakeGestureListener = new MyWakeGestureListener(mContext, mHandler);
