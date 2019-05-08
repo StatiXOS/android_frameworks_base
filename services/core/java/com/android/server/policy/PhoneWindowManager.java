@@ -1189,6 +1189,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     };
 
     private ImmersiveModeConfirmation mImmersiveModeConfirmation;
+    private SwipeToScreenshotListener mSwipeToScreenshot;
 
     @VisibleForTesting
     SystemGesturesPointerEventListener mSystemGestures;
@@ -1202,8 +1203,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.HUSH_GESTURE_USED, 1);
         mLogger.action(MetricsProto.MetricsEvent.ACTION_HUSH_GESTURE, mRingerToggleChord);
     }
-
-    private OPGesturesListener mOPGestures;
 
     IStatusBarService getStatusBarService() {
         synchronized (mServiceAquireLock) {
@@ -2150,12 +2149,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     context, minHorizontal, maxHorizontal, minVertical, maxVertical, maxRadius);
         }
 
-        mOPGestures = new OPGesturesListener(context, new OPGesturesListener.Callbacks() {
-                    @Override
-                    public void onSwipeThreeFinger() {
-                        mHandler.post(mScreenshotRunnable);
-                    }
-                });
+        mSwipeToScreenshot = new SwipeToScreenshotListener(context, new SwipeToScreenshotListener.Callbacks() {
+            @Override
+            public void onSwipeThreeFinger() {
+                mHandler.post(mScreenshotRunnable);
+            }
+        });
 
         mHandler = new PolicyHandler();
         mWakeGestureListener = new MyWakeGestureListener(mContext, mHandler);
@@ -2477,11 +2476,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (enable) {
             if (haveEnableGesture) return;
             haveEnableGesture = true;
-            mWindowManagerFuncs.registerPointerEventListener(mOPGestures);
+            mWindowManagerFuncs.registerPointerEventListener(mSwipeToScreenshot);
         } else {
             if (!haveEnableGesture) return;
             haveEnableGesture = false;
-            mWindowManagerFuncs.unregisterPointerEventListener(mOPGestures);
+            mWindowManagerFuncs.unregisterPointerEventListener(mSwipeToScreenshot);
         }
     }
 
