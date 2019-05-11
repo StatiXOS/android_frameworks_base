@@ -364,21 +364,18 @@ public class KeyguardStatusView extends GridLayout implements
             case 0: // default
             default:
                 mKeyguardSlice.setViewBackgroundResource(0);
-                mKeyguardSlice.setViewsTypeface(Typeface.DEFAULT);
                 mDateVerPadding = 0;
                 mDateHorPadding = 0;
                 mKeyguardSlice.setViewPadding(mDateHorPadding,mDateVerPadding,mDateHorPadding,mDateVerPadding);
                 break;
             case 1: // semi-transparent box
                 mKeyguardSlice.setViewBackground(getResources().getDrawable(R.drawable.date_box_str_border));
-                mKeyguardSlice.setViewsTypeface(Typeface.DEFAULT_BOLD);
                 mDateHorPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_hor),getResources().getDisplayMetrics()));
                 mDateVerPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_ver),getResources().getDisplayMetrics()));
                 mKeyguardSlice.setViewPadding(mDateHorPadding,mDateVerPadding,mDateHorPadding,mDateVerPadding);
                 break;
             case 2: // semi-transparent box (round)
                 mKeyguardSlice.setViewBackground(getResources().getDrawable(R.drawable.date_str_border));
-                mKeyguardSlice.setViewsTypeface(Typeface.DEFAULT_BOLD);
                 mDateHorPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_hor),getResources().getDisplayMetrics()));
                 mDateVerPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_ver),getResources().getDisplayMetrics()));
                 mKeyguardSlice.setViewPadding(mDateHorPadding,mDateVerPadding,mDateHorPadding,mDateVerPadding);
