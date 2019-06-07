@@ -4320,8 +4320,18 @@ public final class Settings {
         /**
          * Whether to use icon pack for Recents
          * @hide
+         *
          */
+
         public static final String RECENTS_ICON_PACK = "recents_icon_pack";
+
+         /**
+         * Whether to show VoLTE icon or not
+         * @hide
+         */
+        public static final String SHOW_VOLTE_ICON = "volte_icon";
+
+        /**
 
         /**
          * Custom Ambient tilt gesture
