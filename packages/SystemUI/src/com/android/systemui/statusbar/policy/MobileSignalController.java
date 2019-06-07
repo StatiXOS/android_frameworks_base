@@ -77,6 +77,7 @@ public class MobileSignalController extends SignalController<
     private Config mConfig;
 
     private boolean mShow4gForLte;
+    private boolean mVoLTEicon;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -128,6 +129,9 @@ public class MobileSignalController extends SignalController<
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.SHOW_FOURG_ICON), false,
                     this, UserHandle.USER_ALL);
+             resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.SHOW_VOLTE_ICON), false,
+                    this, UserHandle.USER_ALL);
             updateSettings();
         }
          /*
@@ -144,6 +148,11 @@ public class MobileSignalController extends SignalController<
                 Settings.System.SHOW_FOURG_ICON, 0,
                 UserHandle.USER_CURRENT) == 1;
          mapIconSets();
+
+          mVoLTEicon = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_VOLTE_ICON, 0,
+                UserHandle.USER_CURRENT) == 1;
+
         updateTelephony();
     }
 
@@ -309,6 +318,15 @@ public class MobileSignalController extends SignalController<
         }
 
         return getCurrentIconId();
+    }
+
+     private int getVolteResId() {
+        int resId = 0;
+
+        if ( mCurrentState.imsResitered && mVoLTEicon ) {
+            resId = R.drawable.volte;
+        }
+        return resId;
     }
 
     @Override
