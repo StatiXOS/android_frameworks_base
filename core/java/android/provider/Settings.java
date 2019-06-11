@@ -4177,13 +4177,6 @@ public final class Settings {
         public static final String GLOBAL_ACTIONS_SCREENSHOT = "global_actions_screenshot";
 
         /**
-         * Whether to display screenrecord in the power menu
-         *
-         * @hide
-         */
-        public static final String GLOBAL_ACTIONS_SCREENRECORD = "global_actions_screenrecord";
-
-        /**
          * Whether to display settings in the power menu
          *
          * @hide
