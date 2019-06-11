@@ -82,7 +82,6 @@
     <color name="power_menu_flashlight">#ff202020</color>
     <color name="power_menu_settings">#ff202020</color>
     <color name="power_menu_lockdown">#ff202020</color>
-    <color name="power_menu_screenrecord">#ff202020</color>
     <color name="power_menu_user">#ff202020</color>
 
     <!-- Notification icon/text dynamic tint -->
