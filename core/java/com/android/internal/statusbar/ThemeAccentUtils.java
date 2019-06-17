@@ -66,6 +66,7 @@ public class ThemeAccentUtils {
         "com.accents.userten", // 26
         "com.accents.usereleven", // 27
         "com.accents.usertwelve", // 28
+        "com.accents.userthirteen", // 29
     };
 
     // QS overlays
