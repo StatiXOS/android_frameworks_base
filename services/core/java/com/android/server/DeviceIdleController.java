@@ -799,7 +799,7 @@ public class DeviceIdleController extends SystemService
         private final KeyValueListParser mParser = new KeyValueListParser(',');
 
         // Aggressive idle
-        private static final long AGGRESSIVE_WEIGHT = 3;
+        private static final long AGGRESSIVE_WEIGHT = 6;
 
         public Constants(Handler handler, ContentResolver resolver) {
             super(handler);
