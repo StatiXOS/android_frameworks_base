@@ -4425,6 +4425,12 @@ public final class Settings {
          */
         public static final String CUSTOM_BUTTON_BRIGHTNESS = "custom_button_brightness";
 
+	/**
+         * Whether to enable the pixel navbar animation
+         * @hide
+         */
+        public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
+
         /** @hide */
         private static final Validator CUSTOM_BUTTON_BRIGHTNESS_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
