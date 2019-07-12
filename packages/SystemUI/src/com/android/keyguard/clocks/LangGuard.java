@@ -107,7 +107,7 @@ public class LangGuard {
 
             case "nl":
                 if (units != 0) {
-                    numString = UnitsString[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
+                    numString = UnitsStringH[units].substring(0, UnitsString[units].length() - 5) + "en" + TensString[tens].toLowerCase();
                     return numString;
                 } else {
                     numString = UnitsString[units].substring(0, UnitsString[units].length() - 5);
