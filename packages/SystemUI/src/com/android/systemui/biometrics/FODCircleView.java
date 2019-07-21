@@ -47,6 +47,8 @@ import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.tuner.TunerService;
+import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
 
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreenCallback;
@@ -55,7 +57,7 @@ import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FODCircleView extends ImageView implements Handler.Callback, TunerService.Tunable {
+public class FODCircleView extends ImageView implements Handler.Callback, TunerService.Tunable, ConfigurationListener {
     private final String SCREEN_BRIGHTNESS = "system:" + Settings.System.SCREEN_BRIGHTNESS;
 
     private final int MSG_HBM_OFF = 1001;
@@ -157,6 +159,9 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
         }
     };
 
+    private boolean mCutoutMasked;
+    private int mStatusbarHeight;
+
     public FODCircleView(Context context) {
         super(context);
 
@@ -232,6 +237,9 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
             }
         });
 
+        updateCutoutFlags();
+
+        Dependency.get(ConfigurationController.class).addCallback(this);
 
         getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             float drawingDimAmount = mParams.dimAmount;
@@ -490,21 +498,23 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
         defaultDisplay.getRealSize(size);
 
         int rotation = defaultDisplay.getRotation();
+        int cutoutMaskedExtra = mCutoutMasked ? mStatusbarHeight : 0;
+
         switch (rotation) {
             case Surface.ROTATION_0:
                 mParams.x = mPositionX;
-                mParams.y = mPositionY;
+                mParams.y = mPositionY - cutoutMaskedExtra;
                 break;
             case Surface.ROTATION_90:
                 mParams.x = mPositionY;
-                mParams.y = mPositionX;
+                mParams.y = mPositionX - cutoutMaskedExtra;
                 break;
             case Surface.ROTATION_180:
                 mParams.x = mPositionX;
                 mParams.y = size.y - mPositionY - mSize;
                 break;
             case Surface.ROTATION_270:
-                mParams.x = size.x - mPositionY - mSize - mNavigationBarSize;
+                mParams.x = size.x - mPositionY - mSize - mNavigationBarSize- cutoutMaskedExtra;
                 mParams.y = mPositionX;
                 break;
             default:
@@ -616,6 +626,21 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
             mHandler.post(() -> updatePosition());
         }
     };
+
+    public void onOverlayChanged() {
+        updateCutoutFlags();
+    }
+
+    private void updateCutoutFlags() {
+        mStatusbarHeight = getContext().getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.status_bar_height_portrait);
+        boolean cutoutMasked = getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_maskMainBuiltInDisplayCutout);
+        if (mCutoutMasked != cutoutMasked){
+            mCutoutMasked = cutoutMasked;
+            updatePosition();
+	}
+    }
 
     @Override
     public boolean handleMessage(Message msg) {
