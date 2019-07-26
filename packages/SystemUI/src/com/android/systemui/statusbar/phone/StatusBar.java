@@ -1792,6 +1792,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SHOW_LOCKSCREEN_MEDIA_ART),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -1808,6 +1811,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.SHOW_LOCKSCREEN_MEDIA_ART))) {
                 setLockScreenMediaArt();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP))) {
+                setUseLessBoringHeadsUp();
             }
         }
 
@@ -1816,6 +1822,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setStatusBarWindowViewOptions();
             setLockScreenMediaBlurLevel();
             setLockScreenMediaArt();
+            setUseLessBoringHeadsUp();
         }
     }
 
@@ -1841,6 +1848,13 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mMediaManager != null) {
             mMediaManager.setLockScreenMediaArt();
         }
+    }
+
+    private void setUseLessBoringHeadsUp() {
+        boolean lessBoringHeadsUp = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LESS_BORING_HEADS_UP, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mNotificationInterruptionStateProvider.setUseLessBoringHeadsUp(lessBoringHeadsUp);
     }
 
     /**

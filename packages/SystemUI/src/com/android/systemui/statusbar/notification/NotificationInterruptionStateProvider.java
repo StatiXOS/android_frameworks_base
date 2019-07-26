@@ -75,6 +75,8 @@ public class NotificationInterruptionStateProvider {
     protected boolean mUseHeadsUp = false;
     private boolean mDisableNotificationAlerts;
 
+    private boolean mLessBoringHeadsUp;
+
     @Inject
     public NotificationInterruptionStateProvider(Context context, NotificationFilter filter,
             StatusBarStateController stateController, BatteryController batteryController) {
@@ -249,6 +251,10 @@ public class NotificationInterruptionStateProvider {
             return false;
         }
 
+        if (!canHeadsUpCommon(entry) || shouldSkipHeadsUp(sbn)) {
+            return false;
+        }
+
         if (entry.importance < NotificationManager.IMPORTANCE_HIGH) {
             if (DEBUG_HEADS_UP) {
                 Log.d(TAG, "No heads up: unimportant notification: " + sbn.getKey());
@@ -353,6 +359,18 @@ public class NotificationInterruptionStateProvider {
             return false;
         }
         return true;
+    }
+
+    public void setUseLessBoringHeadsUp(boolean lessBoring) {
+        mLessBoringHeadsUp = lessBoring;
+    }
+
+    public boolean shouldSkipHeadsUp(StatusBarNotification sbn) {
+        boolean isImportantHeadsUp = false;
+        String notificationPackageName = sbn.getPackageName().toLowerCase();
+        isImportantHeadsUp = notificationPackageName.contains("dialer") ||
+                notificationPackageName.contains("messaging");
+        return !getShadeController().isDozing() && mLessBoringHeadsUp && !isImportantHeadsUp;
     }
 
     /**

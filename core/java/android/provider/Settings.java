@@ -4665,6 +4665,12 @@ public final class Settings {
        public static final String BATTERY_LIGHT_REALLYFULL_COLOR = "battery_light_reallyfull_color";
 
         /**
+         * Whether to show heads up only for dialer and sms apps
+         * @hide
+         */
+        public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
+
+        /**
          * Whether or not volume button music controls should be enabled to seek media tracks
          * @hide
          */
