@@ -4714,6 +4714,16 @@ public final class Settings {
                  ANY_INTEGER_VALIDATOR;
 
         /**
+         * Whether to show heads up only for dialer and sms apps
+         * @hide
+         */
+        public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
+
+        /** @hide */
+        private static final Validator LESS_BORING_HEADS_UP_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4783,6 +4793,7 @@ public final class Settings {
             ALLOW_INCALL_HOME,
             ANBI_ENABLED_OPTION,
             QS_HEADER_BG_ALPHA,
+            LESS_BORING_HEADS_UP,
         };
 
         /**
@@ -4911,6 +4922,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
             PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
             PRIVATE_SETTINGS.add(QS_HEADER_BG_ALPHA);
+            PRIVATE_SETTINGS.add(LESS_BORING_HEADS_UP);
         }
 
         /**
@@ -5014,6 +5026,7 @@ public final class Settings {
             VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
             VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
             VALIDATORS.put(QS_HEADER_BG_ALPHA, QS_HEADER_BG_ALPHA_VALIDATOR);
+            VALIDATORS.put(LESS_BORING_HEADS_UP, LESS_BORING_HEADS_UP_VALIDATOR);
         }
 
         /**
