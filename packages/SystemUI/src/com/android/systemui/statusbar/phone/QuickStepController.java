@@ -24,6 +24,7 @@ import static com.android.systemui.OverviewProxyService.DEBUG_OVERVIEW_PROXY;
 import static com.android.systemui.OverviewProxyService.TAG_OPS;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_DEAD_ZONE;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_HOME;
+import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_IME_BUTTON;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_ROTATION;
 
 import android.animation.Animator;
@@ -236,7 +237,8 @@ public class QuickStepController implements GestureHelper {
                 // or if we tap on the home button
                 if (!mNavigationBarView.isFullGestureMode()
                         || mNavigationBarView.getDownHitTarget() == HIT_TARGET_HOME
-                        || mNavigationBarView.getDownHitTarget() == HIT_TARGET_ROTATION) {
+                        || mNavigationBarView.getDownHitTarget() == HIT_TARGET_ROTATION
+                        || mNavigationBarView.getDownHitTarget() == HIT_TARGET_IME_BUTTON) {
                         wasConsumed = true;
                         break;
                 }
