@@ -8479,7 +8479,9 @@ public final class Settings {
          * 1: Display the battery as a circle
          * 2: Display the battery as a dotted circle
          * 3: Display the battery as text
-         * 4: Do not display the battery
+         * 4: Display the battery as square
+         * 5: Display the battery in the Q style
+         * 6: Do not display the battery
          * default: 0
          * @hide
          */
@@ -8487,7 +8489,7 @@ public final class Settings {
 
         /** @hide */
         public static final Validator STATUS_BAR_BATTERY_STYLE_VALIDATOR =
-                new SettingsValidators.InclusiveIntegerRangeValidator(0, 4);
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 6);
 
         /**
          * The TCP/IP port to run ADB on, or -1 for USB
