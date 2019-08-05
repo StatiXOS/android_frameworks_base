@@ -35,7 +35,6 @@ oneway interface IStatusBar
     void animateExpandSettingsPanel(String subPanel);
     void animateCollapsePanels();
     void togglePanel();
-    void toggleSettingsPanel();
 
     void showWirelessChargingAnimation(int batteryLevel);
 
@@ -99,13 +98,12 @@ oneway interface IStatusBar
 
     void showAssistDisclosure();
     void startAssist(in Bundle args);
-    void restartUI();
-
+  
     /**
      * Notifies the status bar that a camera launch gesture has been detected.
      *
      * @param source the identifier for the gesture, see {@link StatusBarManager}
-     */
+    **/
     void onCameraLaunchGestureDetected(int source);
 
     /**
@@ -141,7 +139,7 @@ oneway interface IStatusBar
     void showPinningEnterExitToast(boolean entering);
     void showPinningEscapeToast();
 
-    void showShutdownUi(boolean isReboot, String reason);
+    void showShutdownUi(boolean isReboot, String reason, boolean rebootCustom);
 
     // Used to show the dialog when FingerprintService starts authentication
     void showFingerprintDialog(in Bundle bundle, IBiometricPromptReceiver receiver);

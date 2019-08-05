@@ -1160,7 +1160,8 @@ public final class PowerManager {
         try {
             mService.rebootCustom(false, reason, true);
         } catch (RemoteException e) {
-        }
+            throw e.rethrowFromSystemServer();
+	}
     }
 
     /**

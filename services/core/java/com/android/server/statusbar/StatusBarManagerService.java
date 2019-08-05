@@ -1131,7 +1131,7 @@ public class StatusBarManagerService extends IStatusBarService.Stub {
     /**
      * Allows the status bar to reboot the device.
      */
-    @Override
+//    @Override
     public void reboot(boolean safeMode, String reason) {
         enforceStatusBarService();
         long identity = Binder.clearCallingIdentity();
