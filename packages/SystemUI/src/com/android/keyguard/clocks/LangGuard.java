@@ -115,8 +115,17 @@ public class LangGuard {
                 }
 
             case "pt":
-                if (units != 0) {
-                    numString = TensString[tens] + " e " + UnitsString[units].toLowerCase();
+                if (hours == 20) {
+                    numString = "Oito e";
+                    return numString;
+                } if (hours == 21) {
+                    numString = "Nove e";
+                    return numString;
+                } if (hours == 22) {
+                    numString = "Dez e";
+                    return numString;
+                } if (hours == 23) {
+                    numString = "Onze e";
                     return numString;
                 } else {
                    numString = TensString[tens];
