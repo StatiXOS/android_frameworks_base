@@ -77,8 +77,6 @@ import com.android.internal.util.DumpUtils;
 import com.android.server.SystemServerInitThreadPool;
 import com.android.server.SystemService;
 
-import lineageos.app.LineageContextConstants;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -156,7 +154,6 @@ public class FingerprintService extends SystemService implements IHwBinder.Death
     private ClientMonitor mCurrentClient;
     private ClientMonitor mPendingClient;
     private PerformanceStats mPerformanceStats;
-    private final boolean mHasFod;
     private final boolean mNotifyClient;
     private final boolean mCleanupUnusedFingerprints;
 
@@ -278,9 +275,6 @@ public class FingerprintService extends SystemService implements IHwBinder.Death
                 com.android.internal.R.bool.config_notifyClientOnFingerprintCancelSuccess);
         mCleanupUnusedFingerprints = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_cleanupUnusedFingerprints);
-
-        PackageManager packageManager = context.getPackageManager();
-        mHasFod = packageManager.hasSystemFeature(LineageContextConstants.Features.FOD);
     }
 
     @Override
@@ -330,19 +324,23 @@ public class FingerprintService extends SystemService implements IHwBinder.Death
     }
 
     public synchronized IFingerprintInscreen getFingerprintInScreenDaemon() {
-        if (!mHasFod) {
+        if (mFingerprintInscreenDaemonState == FINGERPRINT_IN_SCREEN_UNAVAILABLE) {
             return null;
         }
         if (mFingerprintInscreenDaemon == null) {
             try {
                 mFingerprintInscreenDaemon = IFingerprintInscreen.getService();
                 if (mFingerprintInscreenDaemon != null) {
+                    mFingerprintInscreenDaemonState = FINGERPRINT_IN_SCREEN_AVAILABLE;
                     mFingerprintInscreenDaemon.asBinder().linkToDeath((cookie) -> {
                         mFingerprintInscreenDaemon = null;
                     }, 0);
                 }
             } catch (NoSuchElementException | RemoteException e) {
                 Slog.e(TAG, "Failed to get IFingerprintInscreen interface", e);
+                if (mFingerprintInscreenDaemonState == FINGERPRINT_IN_SCREEN_UNINITIALIZED) {
+                    mFingerprintInscreenDaemonState = FINGERPRINT_IN_SCREEN_UNAVAILABLE;
+                }
             }
         }
         return mFingerprintInscreenDaemon;
@@ -431,7 +429,7 @@ public class FingerprintService extends SystemService implements IHwBinder.Death
     }
 
     protected void handleError(long deviceId, int error, int vendorCode) {
-        IFingerprintInscreen daemon = getFingerprintInScreenDaemon();
+       IFingerprintInscreen daemon = getFingerprintInScreenDaemon();
         if (daemon != null) {
             try {
                 if (daemon.handleError(error, vendorCode)) {

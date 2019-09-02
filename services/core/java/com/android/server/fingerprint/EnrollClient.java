@@ -29,8 +29,6 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.IStatusBarService;
 
-import lineageos.app.LineageContextConstants;
-
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
 
 import java.util.Arrays;
@@ -42,7 +40,7 @@ public abstract class EnrollClient extends ClientMonitor {
     private static final long MS_PER_SEC = 1000;
     private static final int ENROLLMENT_TIMEOUT_MS = 60 * 1000; // 1 minute
     private byte[] mCryptoToken;
-    private final boolean mHasFod;
+    private final boolean mDisplayFODView;
     private IStatusBarService mStatusBarService;
 
     public EnrollClient(Context context, long halDeviceId, IBinder token,
@@ -50,10 +48,9 @@ public abstract class EnrollClient extends ClientMonitor {
             boolean restricted, String owner, IStatusBarService statusBarService) {
         super(context, halDeviceId, token, receiver, userId, groupId, restricted, owner);
         mCryptoToken = Arrays.copyOf(cryptoToken, cryptoToken.length);
+        mDisplayFODView = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_needCustomFODView);
         mStatusBarService = statusBarService;
-
-        PackageManager packageManager = context.getPackageManager();
-        mHasFod = packageManager.hasSystemFeature(LineageContextConstants.Features.FOD);
     }
 
     @Override
@@ -81,7 +78,7 @@ public abstract class EnrollClient extends ClientMonitor {
         MetricsLogger.action(getContext(), MetricsEvent.ACTION_FINGERPRINT_ENROLL);
         try {
             receiver.onEnrollResult(getHalDeviceId(), fpId, groupId, remaining);
-            if (remaining == 0 && mHasFod) {
+            if (remaining == 0 && mDisplayFODView) {
                 IFingerprintInscreen fodDaemon = getFingerprintInScreenDaemon();
                 if (fodDaemon != null) {
                     try {
@@ -110,11 +107,7 @@ public abstract class EnrollClient extends ClientMonitor {
             Slog.w(TAG, "enroll: no fingerprint HAL!");
             return ERROR_ESRCH;
         }
-<<<<<<< HEAD
         if (mDisplayFODView) {
-=======
-        if (mHasFod) {
->>>>>>> 817541a83530... Initial support for in-display fingerprint sensors
             IFingerprintInscreen fodDaemon = getFingerprintInScreenDaemon();
             if (fodDaemon != null) {
                 try {
@@ -150,7 +143,7 @@ public abstract class EnrollClient extends ClientMonitor {
             Slog.w(TAG, "stopEnroll: already cancelled!");
             return 0;
         }
-        if (mHasFod) {
+        if (mDisplayFODView) {
             try {
                 mStatusBarService.hideInDisplayFingerprintView();
             } catch (RemoteException e) {
