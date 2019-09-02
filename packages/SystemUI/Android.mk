@@ -62,7 +62,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     trail-drawing \
     rebound \
     guava \
-    org.lineageos.platform.internal \
     vendor.lineage.biometrics.fingerprint.inscreen-V1.0-java
 
 LOCAL_JAVA_LIBRARIES := telephony-common \
