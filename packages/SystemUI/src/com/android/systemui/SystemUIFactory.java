@@ -150,6 +150,91 @@ public class SystemUIFactory {
         return new VolumeDialogComponent(systemUi, context);
     }
 
+    @Singleton
+    @Provides
+    public NotificationData.KeyguardEnvironment provideKeyguardEnvironment(Context context) {
+        return new KeyguardEnvironmentImpl();
+    }
+
+    @Singleton
+    @Provides
+    public NotificationLockscreenUserManager provideNotificationLockscreenUserManager(
+            Context context) {
+        return new NotificationLockscreenUserManagerImpl(context);
+    }
+
+    @Singleton
+    @Provides
+    public AssistManager provideAssistManager(DeviceProvisionedController controller,
+            Context context) {
+        return new AssistManager(controller, context);
+    }
+
+    @Singleton
+    @Provides
+    @Nullable
+    public DockManager provideDockManager(Context context) {
+        return null;
+    }
+
+    @Singleton
+    @Provides
+    public NotificationEntryManager provideNotificationEntryManager(Context context) {
+        return new NotificationEntryManager(context);
+    }
+
+    @Singleton
+    @Provides
+    public EnhancedEstimates provideEnhancedEstimates(Context context) {
+        return new EnhancedEstimatesImpl(context);
+    }
+
+    @Singleton
+    @Provides
+    @Named(LEAK_REPORT_EMAIL_NAME)
+    @Nullable
+    public String provideLeakReportEmail() {
+        return null;
+    }
+
+    @Singleton
+    @Provides
+    @Nullable
+    public KeyguardLiftController provideKeyguardLiftController(Context context,
+            StatusBarStateController statusBarStateController,
+            AsyncSensorManager asyncSensorManager) {
+        if (!context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            return null;
+        }
+        return new KeyguardLiftController(context, statusBarStateController, asyncSensorManager);
+    }
+
+    @Singleton
+    @Provides
+    public NotificationListener provideNotificationListener(Context context) {
+        return new NotificationListener(context);
+    }
+
+    @Singleton
+    @Provides
+    public NotificationInterruptionStateProvider provideNotificationInterruptionStateProvider(
+            Context context) {
+        return new NotificationInterruptionStateProvider(context);
+    }
+
+    @Singleton
+    @Provides
+    @Named(ALLOW_NOTIFICATION_LONG_PRESS_NAME)
+    public boolean provideAllowNotificationLongPress() {
+        return true;
+    }
+
+    @Singleton
+    @Provides
+    public ShadeController provideShadeController(Context context) {
+        return SysUiServiceProvider.getComponent(context, StatusBar.class);
+    }
+
     @Module
     public static class ContextHolder {
         private Context mContext;
