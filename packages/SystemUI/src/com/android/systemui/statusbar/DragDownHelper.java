@@ -35,6 +35,8 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
 
+import com.statix.internal.util.PowerUtils;
+
 /**
  * A utility class to enable the downward swipe on the lockscreen to go to the full shade and expand
  * the notification where the drag started.
