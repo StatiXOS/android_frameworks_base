@@ -1807,6 +1807,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_TILE_TITLE_VISIBILITY),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -1837,7 +1840,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             setStatusBarWindowViewOptions();
             setLockScreenMediaBlurLevel();
             setLockScreenMediaArt();
+<<<<<<< HEAD
             updateQsPanelResources();
+=======
+            if (mStatusBarWindow != null) {
+                mStatusBarWindow.updateSettings();
+>>>>>>> 3dd17eb7514... base: double tap to sleep on statusbar [1/2]
         }
     }
 
