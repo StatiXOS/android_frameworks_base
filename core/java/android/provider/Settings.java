@@ -4548,6 +4548,13 @@ public final class Settings {
          */
         public static final String GLOBAL_ACTIONS_SETTINGS = "global_actions_settings";
 
+        /** @hide */
+        public static final String BACK_GESTURE_HEIGHT = "back_gesture_height";
+
+        /** @hide */
+        private static final Validator BACK_GESTURE_HEIGHT_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
         /**
          * Whether to display lock in the power menu
          *
@@ -4648,6 +4655,7 @@ public final class Settings {
             ALARM_ALERT,
             NOTIFICATION_LIGHT_PULSE,
             SCREENSHOT_SHUTTER_SOUND,
+            BACK_GESTURE_HEIGHT,
         };
 
         /**
@@ -4768,6 +4776,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
             PRIVATE_SETTINGS.add(SCREENSHOT_SHUTTER_SOUND);
+            PRIVATE_SETTINGS.add(BACK_GESTURE_HEIGHT);
         }
 
         /**
@@ -4863,6 +4872,7 @@ public final class Settings {
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(SCREENSHOT_SHUTTER_SOUND,
                     SCREENSHOT_SHUTTER_SOUND_VALIDATOR);
+            VALIDATORS.put(BACK_GESTURE_HEIGHT, BACK_GESTURE_HEIGHT_VALIDATOR);
         }
 
         /**
