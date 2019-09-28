@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -166,13 +167,9 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     private void setBuildText() {
         if (mBuildText == null) return;
+        String baseVersion = SystemProperties.get("ro.statix.base.version");
         if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)) {
-            mBuildText.setText(mContext.getString(
-                    com.android.internal.R.string.bugreport_status,
-                    Build.VERSION.RELEASE_OR_CODENAME,
-                    Build.ID));
-            // Set as selected for marquee before its made visible, then it won't be announced when
-            // it's made visible.
+            mBuildText.setText("StatiXOS " + baseVersion);
             mBuildText.setSelected(true);
             mShouldShowBuildText = true;
         } else {
