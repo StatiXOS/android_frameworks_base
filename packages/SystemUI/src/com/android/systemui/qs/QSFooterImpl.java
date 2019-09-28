@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -163,12 +164,10 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     private void setBuildText() {
         TextView v = findViewById(R.id.build);
+        String baseVersion = SystemProperties.get("ro.statix.base.version");
         if (v == null) return;
         if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)) {
-            v.setText(mContext.getString(
-                    com.android.internal.R.string.bugreport_status,
-                    Build.VERSION.RELEASE_OR_CODENAME,
-                    Build.ID));
+            v.setText("StatiXOS " + baseVersion);
             v.setVisibility(View.VISIBLE);
         } else {
             v.setVisibility(View.GONE);
