@@ -4161,6 +4161,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                     callback.onPulseStarted();
                     updateNotificationPanelTouchState();
                     setPulsing(true);
+                    KeyguardUpdateMonitor.getInstance(mContext).setPulsing(true);
                 }
 
                 @Override
@@ -4173,6 +4174,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                         mStatusBarWindow.suppressWakeUpGesture(false);
                     }
                     setPulsing(false);
+                    KeyguardUpdateMonitor.getInstance(mContext).setPulsing(false);
                 }
 
                 private void setPulsing(boolean pulsing) {
