@@ -357,7 +357,7 @@ public final class Settings {
         public void forceCurrent() {
             sdkVersion = Build.VERSION.SDK_INT;
             databaseVersion = CURRENT_DATABASE_VERSION;
-            fingerprint = Build.FINGERPRINT;
+            fingerprint = Build.STATIX_FINGERPRINT;
         }
     }
 
@@ -3146,7 +3146,7 @@ public final class Settings {
         // on update drop the files before loading them.
         if (PackageManagerService.CLEAR_RUNTIME_PERMISSIONS_ON_UPGRADE) {
             final VersionInfo internal = getInternalVersion();
-            if (!Build.FINGERPRINT.equals(internal.fingerprint)) {
+            if (!Build.STATIX_FINGERPRINT.equals(internal.fingerprint)) {
                 for (UserInfo user : users) {
                     mRuntimePermissionsPersistence.deleteUserRuntimePermissionsFile(user.id);
                 }
@@ -5448,7 +5448,7 @@ public final class Settings {
         }
 
         private String getExtendedFingerprint(long version) {
-            return Build.FINGERPRINT + "?pc_version=" + version;
+            return Build.STATIX_FINGERPRINT + "?pc_version=" + version;
         }
 
         public void writePermissionsForUserSyncLPr(int userId) {
