@@ -72,6 +72,12 @@
             android:max="9"
             android:min="1"
             android:defaultValue="4" />
+
+        <com.statix.support.preferences.SystemSettingSwitchPreference
+            android:key="footer_text_show"
+            android:title="@string/footer_text_show_title"
+            android:summary="@string/footer_text_show_summary"
+            android:defaultValue="true" />
     </PreferenceScreen>
 
     <PreferenceScreen
