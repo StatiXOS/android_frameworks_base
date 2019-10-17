@@ -55,6 +55,10 @@
             android:title="@string/qs_tile_title_visibility_title"
             android:defaultValue="true" />
 
+        <com.statix.support.preferences.SystemSettingSwitchPreference
+            android:key="footer_text_show"
+            android:title="@string/footer_text_show_title"
+            android:defaultValue="false" />
     </PreferenceScreen>
 
     <PreferenceScreen
