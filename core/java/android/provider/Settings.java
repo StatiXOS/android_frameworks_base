@@ -4973,6 +4973,15 @@ public final class Settings {
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
         /**
+         * Whether footer text shows the build type
+         * @hide
+         */
+        public static final String FOOTER_TEXT_SHOW = "footer_text_show";
+         /** @hide */
+        private static final Validator FOOTER_TEXT_SHOW_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5045,6 +5054,7 @@ public final class Settings {
             QS_HEADER_BG_ALPHA,
             DOUBLE_TAP_SLEEP_GESTURE,
             NAVIGATION_HANDLE_WIDTH,
+            FOOTER_TEXT_SHOW
         };
 
         /**
@@ -5190,6 +5200,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_RIGHT);
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_DOWN);
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_LEFT);
+            PRIVATE_SETTINGS.add(FOOTER_TEXT_SHOW);
         }
 
         /**
@@ -5296,6 +5307,7 @@ public final class Settings {
             VALIDATORS.put(DOUBLE_TAP_SLEEP_GESTURE,
                     DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
 	    VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
+            VALIDATORS.put(FOOTER_TEXT_SHOW, FOOTER_TEXT_SHOW_VALIDATOR);
         }
 
         /**
