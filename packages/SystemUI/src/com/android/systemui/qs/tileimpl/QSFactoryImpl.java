@@ -46,6 +46,7 @@ import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.util.leak.GarbageMonitor;
+import com.android.systemui.qs.tiles.ScreenshotTile;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -170,6 +171,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mNfcTileProvider.get();
             case "dark":
                 return mUiModeNightTileProvider.get();
+            case "screenshot":
+                return new ScreenshotTile(mHost);
         }
 
         // Intent tiles.
