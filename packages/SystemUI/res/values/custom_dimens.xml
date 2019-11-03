@@ -78,5 +78,6 @@
 
     <!-- Network traffic monitor -->
     <dimen name="net_traffic_txt_img_padding">1dp</dimen>
+    <dimen name="net_traffic_sb_txt_img_padding">2dp</dimen>
 
 </resources>
