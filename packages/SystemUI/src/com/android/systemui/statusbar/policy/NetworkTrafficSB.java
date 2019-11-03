@@ -72,6 +72,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     private boolean indicatorUp = false;
     private boolean indicatorDown = false;
     private boolean mHideArrow;
+    private String txtFont;    
     private boolean mScreenOn = true;
 
     private Handler mTrafficHandler = new Handler() {
@@ -106,7 +107,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+                    setTypeface(Typeface.create(txtFont, Typeface.NORMAL));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
                     setLineSpacing(0.75f, 0.75f);
@@ -120,7 +121,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+                    setTypeface(Typeface.create(txtFont, Typeface.NORMAL));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
                     setLineSpacing(0.75f, 0.75f);
@@ -262,7 +263,8 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     public NetworkTrafficSB(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final Resources resources = getResources();
-        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
+        txtFont = getResources().getString(com.android.internal.R.string.config_headlineFontFamilyMedium);
+        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_sb_txt_img_padding);
         mTintColor = resources.getColor(android.R.color.white);
         Handler mHandler = new Handler();
         SettingsObserver settingsObserver = new SettingsObserver(mHandler);
@@ -383,9 +385,8 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
     public void onDensityOrFontScaleChanged() {
         final Resources resources = getResources();
-        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         setCompoundDrawablePadding(txtImgPadding);
-        setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        setTypeface(Typeface.create(txtFont, Typeface.NORMAL));
         setGravity(Gravity.CENTER);
         setMaxLines(2);
         setLineSpacing(0.75f, 0.75f);
@@ -452,4 +453,4 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     @Override
     public void setDecorColor(int color) {
     }
-} 
+}
