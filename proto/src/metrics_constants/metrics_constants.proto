@@ -7421,6 +7421,8 @@ message MetricsEvent {
     // QS Tiles
     CUSTOM_TILE = 9998;
 
+    // custom prefs
+    CUSTOM = 9999;
   }
 }
 
