@@ -40,6 +40,11 @@
             android:min="0"
             android:defaultValue="255" />
 
+        <com.android.systemui.tuner.TunerSwitch
+            android:key="qs_tile_title_visibility"
+            android:title="@string/qs_tile_title_visibility_title"
+            android:defaultValue="true" />
+
         <com.statix.support.preferences.CustomSystemSeekBarPreference
             android:key="qs_rows_portrait"
             android:title="@string/qs_rows_portrait_title"
