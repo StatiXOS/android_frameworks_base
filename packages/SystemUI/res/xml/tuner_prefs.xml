@@ -50,6 +50,11 @@
             android:min="1"
             android:defaultValue="1" />
 
+        <com.statix.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_title_visibility"
+            android:title="@string/qs_tile_title_visibility_title"
+            android:defaultValue="true" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
