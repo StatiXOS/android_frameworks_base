@@ -107,7 +107,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create(txtFont, Typeface.NORMAL));
+                    setTypeface(Typeface.create(txtFont, Typeface.BOLD));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
                     setLineSpacing(0.75f, 0.75f);
@@ -121,7 +121,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create(txtFont, Typeface.NORMAL));
+                    setTypeface(Typeface.create(txtFont, Typeface.BOLD));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
                     setLineSpacing(0.75f, 0.75f);
@@ -386,7 +386,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     public void onDensityOrFontScaleChanged() {
         final Resources resources = getResources();
         setCompoundDrawablePadding(txtImgPadding);
-        setTypeface(Typeface.create(txtFont, Typeface.NORMAL));
+        setTypeface(Typeface.create(txtFont, Typeface.BOLD));
         setGravity(Gravity.CENTER);
         setMaxLines(2);
         setLineSpacing(0.75f, 0.75f);
