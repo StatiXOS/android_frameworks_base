@@ -99,7 +99,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
 
     private static final int TIMEOUT_BIND_MS = 3000; //Maximum msec to wait for a bind
     //Maximum msec to wait for service restart
-    private static final int SERVICE_RESTART_TIME_MS = 200;
+    private static final int SERVICE_RESTART_TIME_MS = 400;
     //Maximum msec to wait for restart due to error
     private static final int ERROR_RESTART_TIME_MS = 3000;
     //Maximum msec to delay MESSAGE_USER_SWITCHED
@@ -1651,13 +1651,13 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                         //     ActivityManager detects it.
                         // The waiting for (b) and (c) is accomplished by
                         // delaying the MESSAGE_RESTART_BLUETOOTH_SERVICE
-                        // message. On slower devices, that delay needs to be
-                        // on the order of (2 * SERVICE_RESTART_TIME_MS).
+                        // message. The delay time is backed off if Bluetooth
+                        // continuously failed to turn on itself.
                         //
                         waitForOnOff(false, true);
                         Message restartMsg =
                                 mHandler.obtainMessage(MESSAGE_RESTART_BLUETOOTH_SERVICE);
-                        mHandler.sendMessageDelayed(restartMsg, 2 * SERVICE_RESTART_TIME_MS);
+                        mHandler.sendMessageDelayed(restartMsg, getServiceRestartMs());
                     }
                     break;
 
@@ -1836,7 +1836,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                             waitForOnOff(false, true);
                             Message restartMsg =
                                     mHandler.obtainMessage(MESSAGE_RESTART_BLUETOOTH_SERVICE);
-                            mHandler.sendMessageDelayed(restartMsg, 2 * SERVICE_RESTART_TIME_MS);
+                            mHandler.sendMessageDelayed(restartMsg, getServiceRestartMs());
                         }
                     }
                     if (newState == BluetoothAdapter.STATE_ON
@@ -1879,7 +1879,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                         // Send a Bluetooth Restart message
                         Message restartMsg =
                                 mHandler.obtainMessage(MESSAGE_RESTART_BLUETOOTH_SERVICE);
-                        mHandler.sendMessageDelayed(restartMsg, SERVICE_RESTART_TIME_MS);
+                        mHandler.sendMessageDelayed(restartMsg, getServiceRestartMs());
                     }
 
                     sendBluetoothServiceDownCallback();
@@ -1902,14 +1902,20 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                     break;
                 }
                 case MESSAGE_RESTART_BLUETOOTH_SERVICE: {
-                    Slog.d(TAG, "MESSAGE_RESTART_BLUETOOTH_SERVICE");
-                    /* Enable without persisting the setting as
-                     it doesnt change when IBluetooth
-                     service restarts */
-                    mEnable = true;
-                    addActiveLog(BluetoothProtoEnums.ENABLE_DISABLE_REASON_RESTARTED,
-                            mContext.getPackageName(), true);
-                    handleEnable(mQuietEnable);
+                    mErrorRecoveryRetryCounter++;
+                    Slog.d(TAG, "MESSAGE_RESTART_BLUETOOTH_SERVICE: retry count="
+                            + mErrorRecoveryRetryCounter);
+                    if (mErrorRecoveryRetryCounter < MAX_ERROR_RESTART_RETRIES) {
+                        /* Enable without persisting the setting as
+                         it doesnt change when IBluetooth
+                         service restarts */
+                        mEnable = true;
+                        addActiveLog(BluetoothProtoEnums.ENABLE_DISABLE_REASON_RESTARTED,
+                                mContext.getPackageName(), true);
+                        handleEnable(mQuietEnable);
+                    } else {
+                        Slog.e(TAG, "Reach maximum retry to restart Bluetooth!");
+                    }
                     break;
                 }
                 case MESSAGE_TIMEOUT_BIND: {
@@ -2348,13 +2354,9 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
 
         mEnable = false;
 
-        if (mErrorRecoveryRetryCounter++ < MAX_ERROR_RESTART_RETRIES) {
-            // Send a Bluetooth Restart message to reenable bluetooth
-            Message restartMsg = mHandler.obtainMessage(MESSAGE_RESTART_BLUETOOTH_SERVICE);
-            mHandler.sendMessageDelayed(restartMsg, ERROR_RESTART_TIME_MS);
-        } else {
-            // todo: notify user to power down and power up phone to make bluetooth work.
-        }
+        // Send a Bluetooth Restart message to reenable bluetooth
+        Message restartMsg = mHandler.obtainMessage(MESSAGE_RESTART_BLUETOOTH_SERVICE);
+        mHandler.sendMessageDelayed(restartMsg, ERROR_RESTART_TIME_MS);
     }
 
     private boolean isBluetoothDisallowed() {
@@ -2388,6 +2390,10 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
         } catch (Exception e) {
             // The component was not found, do nothing.
         }
+    }
+
+    private int getServiceRestartMs() {
+        return (mErrorRecoveryRetryCounter + 1) * SERVICE_RESTART_TIME_MS;
     }
 
     @Override
