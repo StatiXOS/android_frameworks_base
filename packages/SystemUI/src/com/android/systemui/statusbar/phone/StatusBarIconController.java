@@ -39,6 +39,7 @@ import android.widget.LinearLayout.LayoutParams;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.statusbar.StatusBarIcon;
+import com.android.systemui.custom.CustomSettingsService;
 import com.android.systemui.DemoMode;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
@@ -129,6 +130,7 @@ public interface StatusBarIconController {
                 mDarkIconDispatcher.removeDarkReceiver((DarkReceiver) mGroup.getChildAt(i));
             }
             mGroup.removeAllViews();
+            Dependency.get(CustomSettingsService.class).removeObserver(this);
         }
 
         @Override
@@ -196,7 +198,7 @@ public interface StatusBarIconController {
     /**
      * Turns info from StatusBarIconController into ImageViews in a ViewGroup.
      */
-    public static class IconManager implements DemoMode {
+    public static class IconManager implements DemoMode, CustomSettingsService.CustomSettingsObserver {
         protected final ViewGroup mGroup;
         protected final Context mContext;
         protected final int mIconSize;
@@ -293,8 +295,9 @@ public interface StatusBarIconController {
         @VisibleForTesting
         protected StatusBarMobileView addMobileIcon(int index, String slot, MobileIconState state) {
             StatusBarMobileView view = onCreateStatusBarMobileView(slot);
-            view.applyMobileState(state, useOldStyleMobileDataIcons());
+            view.applyMobileState(state);
             mGroup.addView(view, index, onCreateLayoutParams());
+            Dependency.get(CustomSettingsService.class).addIntObserver(this, Settings.System.USE_OLD_MOBILETYPE);
 
             if (mIsInDemoMode) {
                 mDemoStatusIcons.addMobileView(state);
@@ -328,6 +331,7 @@ public interface StatusBarIconController {
 
         protected void destroy() {
             mGroup.removeAllViews();
+            Dependency.get(CustomSettingsService.class).removeObserver(this);
         }
 
         protected void onIconExternal(int viewIndex, int height) {
@@ -397,7 +401,7 @@ public interface StatusBarIconController {
         public void onSetMobileIcon(int viewIndex, MobileIconState state) {
             StatusBarMobileView view = (StatusBarMobileView) mGroup.getChildAt(viewIndex);
             if (view != null) {
-                view.applyMobileState(state, useOldStyleMobileDataIcons());
+                view.applyMobileState(state);
             }
 
             if (mIsInDemoMode) {
@@ -435,10 +439,14 @@ public interface StatusBarIconController {
             return new DemoStatusIcons((LinearLayout) mGroup, mIconSize);
         }
 
-        private boolean useOldStyleMobileDataIcons() {
-            return Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.USE_OLD_MOBILETYPE, 0,
-                    UserHandle.USER_CURRENT) != 0;
+        @Override
+        public void onIntSettingChanged(String key, Integer newValue) {
+            for (int i = 0; i < mGroup.getChildCount(); i++) {
+                View child = mGroup.getChildAt(i);
+                if (child instanceof StatusBarMobileView) {
+                    ((StatusBarMobileView) child).updateDisplayType(newValue == 1);
+                }
+            }
         }
     }
 }

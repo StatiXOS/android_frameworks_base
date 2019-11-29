@@ -16,6 +16,8 @@
 
 package com.android.systemui;
 
+import com.android.systemui.custom.CustomSettingsService;
+import com.android.systemui.custom.CustomSettingsServiceImpl;
 import com.android.systemui.appops.AppOpsController;
 import com.android.systemui.appops.AppOpsControllerImpl;
 import com.android.systemui.classifier.FalsingManagerProxy;
@@ -249,4 +251,10 @@ public abstract class DependencyBinder {
     @Binds
     public abstract RecordingController provideRecordingController(
             RecordingControllerImpl controllerImpl);
+
+    /**
+     */
+    @Binds
+    public abstract CustomSettingsService provideCustomSettingsService(
+            CustomSettingsServiceImpl controllerImpl);
 }
