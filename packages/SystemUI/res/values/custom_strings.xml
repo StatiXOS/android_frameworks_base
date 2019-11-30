@@ -29,10 +29,17 @@
     <string name="global_action_settings">Settings</string>
     <string name="global_action_screenrecord">Screenrecord</string>
     <string name="global_action_flashlight">Flashlight</string>
+    
 
     <string name="tuner_quick_settings">Quick settings</string>
     <string name="tuner_show_brightness_new">Show brightness slider</string>
     <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+    <string name="tuner_battery_percent_disable">Don\'t show percentage</string>
+    <string name="tuner_battery_percent_enable">Always show percentage</string>
+    <string name="tuner_battery_percent_charging">Show percentage when charging</string>
+    <string name="tuner_battery_percent_hide">Don\'t show this icon</string>
+    <string name="tuner_battery_percent_title">Battery percent</string>
+    <string name="tuner_status_bar_show_battery_image">Show battery image</string>
 
     <!-- navbar editor -->
     <string name="preview">Preview</string>
