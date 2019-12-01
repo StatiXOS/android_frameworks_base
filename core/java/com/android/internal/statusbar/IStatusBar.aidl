@@ -180,4 +180,5 @@ oneway interface IStatusBar
      * ABC
      */
     void toggleCameraFlash();
+    void setPartialScreenshot(boolean active);
 }
