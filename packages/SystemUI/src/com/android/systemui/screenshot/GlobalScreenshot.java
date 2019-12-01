@@ -95,6 +95,7 @@ import android.widget.Toast;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.internal.messages.nano.SystemMessageProto.SystemMessage;
+import com.android.internal.util.statix.Utils;
 import com.android.systemui.R;
 import com.android.systemui.SysUiServiceProvider;
 import com.android.systemui.SystemUI;
@@ -760,6 +761,7 @@ class GlobalScreenshot {
     void takeScreenshotPartial(final Consumer<Uri> finisher, final boolean statusBarVisible,
             final boolean navBarVisible) {
         mWindowManager.addView(mScreenshotLayout, mWindowLayoutParams);
+        Utils.setPartialScreenshot(true);
         mScreenshotSelectorView.setSelectionListener(
                 new ScreenshotSelectorView.OnSelectionListener() {
             @Override
@@ -808,6 +810,7 @@ class GlobalScreenshot {
     }
 
     void hideScreenshotSelector() {
+        Utils.setPartialScreenshot(false);
         mWindowManager.removeView(mScreenshotLayout);
         mScreenshotSelectorView.stopSelection();
         mScreenshotSelectorView.setVisibility(View.GONE);
@@ -823,6 +826,8 @@ class GlobalScreenshot {
             mWindowManager.removeView(mScreenshotLayout);
             mScreenshotSelectorView.stopSelection();
         }
+        // called when unbinding screenshot service
+        Utils.setPartialScreenshot(false);
     }
 
     /**
