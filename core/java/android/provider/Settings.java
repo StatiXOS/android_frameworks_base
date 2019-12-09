@@ -5738,6 +5738,8 @@ public final class Settings {
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_WATCHDOG_ON);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_P2P_PENDING_FACTORY_RESET);
+            MOVED_TO_GLOBAL.add(Settings.Global.WIFI_WHIELIST_ROAMING_FEATURE_ENABLED);
+            MOVED_TO_GLOBAL.add(Settings.Global.WIFI_UNSAVED_NETWORK_LINKING_FEATURE_ENABLED);
             MOVED_TO_GLOBAL.add(Settings.Global.WIMAX_NETWORKS_AVAILABLE_NOTIFICATION_ON);
             MOVED_TO_GLOBAL.add(Settings.Global.PACKAGE_VERIFIER_ENABLE);
             MOVED_TO_GLOBAL.add(Settings.Global.PACKAGE_VERIFIER_TIMEOUT);
@@ -11697,6 +11699,22 @@ public final class Settings {
         */
        public static final String WIFI_VERBOSE_LOGGING_ENABLED =
                "wifi_verbose_logging_enabled";
+
+       /**
+        * Setting to enable Wi-Fi whitelist network roaming; disabled by default, and setting to 1
+        * will enable it.
+        * @hide
+        */
+       public static final String WIFI_WHIELIST_ROAMING_FEATURE_ENABLED =
+               "wifi_whitelist_roaming_feature_enabled";
+
+       /**
+        * Setting to enable Wi-Fi unsaved network linking feature; disabled by default, and setting to 1
+        * will enable it.
+        * @hide
+        */
+       public static final String WIFI_UNSAVED_NETWORK_LINKING_FEATURE_ENABLED =
+               "wifi_unsaved_network_linking_feature_enabled";
 
         /**
          * Setting to enable connected MAC randomization in Wi-Fi; disabled by default, and

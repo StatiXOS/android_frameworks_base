@@ -785,6 +785,13 @@ public class WifiConfiguration implements Parcelable {
 
     /**
      * @hide
+     * network ID of linked saved wifi configuration. it is applicable only to
+     * ephemeral networks matching with saved networks.
+     */
+    public int linkedNetworkId;
+
+    /**
+     * @hide
      * The WiFi configuration is considered to have no internet access for purpose of autojoining
      * if there has been a report of it having no internet access, and, it never have had
      * internet access in the past.
@@ -1793,6 +1800,7 @@ public class WifiConfiguration implements Parcelable {
         shared = true;
         dtimInterval = 0;
         mRandomizedMacAddress = MacAddress.fromString(WifiInfo.DEFAULT_MAC_ADDRESS);
+        linkedNetworkId = INVALID_NETWORK_ID;
     }
 
     /**
@@ -1848,6 +1856,7 @@ public class WifiConfiguration implements Parcelable {
                 .append(" PRIO: ").append(this.priority)
                 .append(" HIDDEN: ").append(this.hiddenSSID)
                 .append(" PMF: ").append(this.requirePMF)
+                .append(" linked network ID: ").append(this.linkedNetworkId)
                 .append('\n');
 
 
@@ -2439,6 +2448,7 @@ public class WifiConfiguration implements Parcelable {
             macRandomizationSetting = source.macRandomizationSetting;
             requirePMF = source.requirePMF;
             updateIdentifier = source.updateIdentifier;
+            linkedNetworkId = source.linkedNetworkId;
         }
     }
 
@@ -2510,6 +2520,7 @@ public class WifiConfiguration implements Parcelable {
         dest.writeParcelable(mRandomizedMacAddress, flags);
         dest.writeInt(macRandomizationSetting);
         dest.writeInt(osu ? 1 : 0);
+        dest.writeInt(linkedNetworkId);
     }
 
     /** Implement the Parcelable interface {@hide} */
@@ -2583,6 +2594,7 @@ public class WifiConfiguration implements Parcelable {
                 config.mRandomizedMacAddress = in.readParcelable(null);
                 config.macRandomizationSetting = in.readInt();
                 config.osu = in.readInt() != 0;
+                config.linkedNetworkId = in.readInt();
                 return config;
             }
 

@@ -230,6 +230,9 @@ message SystemMessage {
     // Package: android
     NOTE_TEST_HARNESS_MODE_ENABLED = 54;
 
+    // Inform the user linked ephemeral network connection result
+    NOTE_WIFI_LINKED_NETWORK_CONNECTION_RESULT = 200;
+
     // ADD_NEW_IDS_ABOVE_THIS_LINE
     // Legacy IDs with arbitrary values appear below
     // Legacy IDs existed as stable non-conflicting constants prior to the O release

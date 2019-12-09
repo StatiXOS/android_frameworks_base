@@ -481,4 +481,24 @@ public class BaseWifiService extends IWifiManager.Stub {
     public void updateWifiUsabilityScore(int seqNum, int score, int predictionHorizonSec) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public boolean isWhitelistNetworkRoamingFeatureEnabled() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void enableWhitelistNetworkRoamingFeature(boolean enable) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isUnsavedNetworkLinkingFeatureEnabled() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void enableUnsavedNetworkLinkingFeature(boolean enable) {
+        throw new UnsupportedOperationException();
+    }
 }

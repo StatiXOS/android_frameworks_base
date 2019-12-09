@@ -219,4 +219,12 @@ interface IWifiManager
     void stopDppSession();
 
     void updateWifiUsabilityScore(int seqNum, int score, int predictionHorizonSec);
+
+    boolean isWhitelistNetworkRoamingFeatureEnabled();
+
+    void enableWhitelistNetworkRoamingFeature(boolean enable);
+
+    boolean isUnsavedNetworkLinkingFeatureEnabled();
+
+    void enableUnsavedNetworkLinkingFeature(boolean enable);
 }

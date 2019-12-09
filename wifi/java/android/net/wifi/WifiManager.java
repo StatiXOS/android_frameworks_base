@@ -4938,4 +4938,64 @@ public class WifiManager {
             throw e.rethrowFromSystemServer();
         }
     }
+
+    /* QTI specific changes - START */
+
+     /**
+      * Check whitelist network roaming feature enabled or not.
+      *
+      * @return true if whitelist network roaming feature is enabled.
+      *
+      * @hide no intent to publish
+      */
+      public boolean isWhitelistNetworkRoamingFeatureEnabled() {
+          try {
+              return mService.isWhitelistNetworkRoamingFeatureEnabled();
+          } catch (RemoteException e) {
+              throw e.rethrowFromSystemServer();
+          }
+      }
+
+     /**
+      * Enable/disable whitelist network roaming feature.
+      *
+      * @hide no intent to publish
+      */
+      public void enableWhitelistNetworkRoamingFeature(boolean enable) {
+          try {
+              mService.enableWhitelistNetworkRoamingFeature(enable);
+          } catch (RemoteException e) {
+              throw e.rethrowFromSystemServer();
+          }
+      }
+
+     /**
+      * Check unsaved network linking feature enabled or not.
+      *
+      * @return true if unsaved network linking feature is enabled.
+      *
+      * @hide no intent to publish
+      */
+      public boolean isUnsavedNetworkLinkingFeatureEnabled() {
+          try {
+              return mService.isUnsavedNetworkLinkingFeatureEnabled();
+          } catch (RemoteException e) {
+              throw e.rethrowFromSystemServer();
+          }
+      }
+
+     /**
+      * Enable/disable unsaved network linking feature.
+      *
+      * @hide no intent to publish
+      */
+      public void enableUnsavedNetworkLinkingFeature(boolean enable) {
+          try {
+              mService.enableUnsavedNetworkLinkingFeature(enable);
+          } catch (RemoteException e) {
+              throw e.rethrowFromSystemServer();
+          }
+      }
+
+    /* QTI specific changes - END */
 }

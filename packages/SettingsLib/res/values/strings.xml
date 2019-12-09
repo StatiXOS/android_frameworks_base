@@ -580,6 +580,10 @@
     <string name="wifi_verbose_logging">Enable Wi\u2011Fi Verbose Logging</string>
     <!-- Setting Checkbox title whether to disable WiFi Scan Throttling. [CHAR LIMIT=40] -->
     <string name="wifi_scan_throttling">Wi\u2011Fi scan throttling</string>
+    <!-- Setting Checkbox title whether to enable WiFi whitelist roaming feature. -->
+    <string name="wifi_whitelist_roaming">SSID Bridging \u2011 Fast Handover</string>
+    <!-- Setting Checkbox title whether to enable WiFi unsaved network linking feature. -->
+    <string name="wifi_unsaved_network_linking">SSID Bridging \u2011 Auto Connection</string>
     <!-- Setting Checkbox title whether to always keep mobile data active. [CHAR LIMIT=80] -->
     <string name="mobile_data_always_on">Mobile data always active</string>
     <!-- Setting Checkbox title whether to enable hardware acceleration for tethering. [CHAR LIMIT=80] -->
@@ -633,6 +637,10 @@
 
     <!-- setting Checkbox summary whether to show options for wireless display certification  -->
     <string name="wifi_display_certification_summary">Show options for wireless display certification</string>
+    <!-- Setting Checkbox summary whether to enable WiFi whitelist network roaming feature. -->
+    <string name="wifi_whitelist_roaming_summary">Enable roaming between different SSID WPA/WPA2\u2011PSK APs with same gateway MAC address</string>
+    <!-- Setting Checkbox summary whether to enable WiFi unsaved network linking feature. -->
+    <string name="wifi_unsaved_network_linking_summary">Enable auto connection attempts to a new WPA/WPA2\u2011PSK 5GHz SSID with current connected WPA/WPA2\u2011PSK 2GHz SSID credentials on SSID and BSSID partial match</string>
     <!-- Setting Checkbox summary whether to enable Wifi verbose Logging [CHAR LIMIT=80] -->
     <string name="wifi_verbose_logging_summary">Increase Wi\u2011Fi logging level, show per SSID RSSI in Wi\u2011Fi Picker</string>
     <!-- Setting Checkbox summary whether to disable Wifi scan throttling [CHAR LIMIT=NONE] -->
