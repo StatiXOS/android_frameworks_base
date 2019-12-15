@@ -34,8 +34,8 @@ import com.android.settingslib.Utils;
  * corners.
  */
 public class CornerHandleView extends View {
-    private static final float STROKE_DP_LARGE = 2f;
-    private static final float STROKE_DP_SMALL = 1.95f;
+    private static final float STROKE_DP_LARGE = 4f;
+    private static final float STROKE_DP_SMALL = 3.9f;
     // Radius to use if none is available.
     private static final int FALLBACK_RADIUS_DP = 15;
     private static final float MARGIN_DP = 8;
