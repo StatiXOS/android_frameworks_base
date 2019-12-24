@@ -1,7 +1,6 @@
 package com.android.systemui.power;
 
 import com.android.settingslib.fuelgauge.Estimate;
-import com.android.settingslib.fuelgauge.EstimateKt;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,10 +19,7 @@ public class EnhancedEstimatesImpl implements EnhancedEstimates {
 
     @Override
     public Estimate getEstimate() {
-        // Returns an unknown estimate.
-        return new Estimate(EstimateKt.ESTIMATE_MILLIS_UNKNOWN,
-                false /* isBasedOnUsage */,
-                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+        return null;
     }
 
     @Override
