@@ -4765,6 +4765,12 @@ public final class Settings {
          */
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
 
+		/**
+         * Some creation simillar to samsung OneUI
+         * @hide
+         */
+        public static final String SETTINGS_SPACER = "settings_spacer";
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
