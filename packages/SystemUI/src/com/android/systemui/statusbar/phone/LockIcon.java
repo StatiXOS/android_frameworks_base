@@ -32,9 +32,11 @@ import android.util.SparseArray;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 
 import com.android.internal.graphics.ColorUtils;
+import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.KeyguardAffordanceView;
+import com.android.systemui.tuner.TunerService;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -57,6 +59,10 @@ public class LockIcon extends KeyguardAffordanceView {
     private boolean mKeyguardJustShown;
     private boolean mPredrawRegistered;
     private final SparseArray<Drawable> mDrawableCache = new SparseArray<>();
+
+    // omni additions
+    private static final String TUNER_SHOW_LOCK_ICON = "sysui_keyguard_show_lock_icon";
+    private boolean mHideLockIcon;
 
     private final OnPreDrawListener mOnPreDrawListener = new OnPreDrawListener() {
         @Override
@@ -113,7 +119,7 @@ public class LockIcon extends KeyguardAffordanceView {
      * @return true if the visibility changed
      */
     boolean updateIconVisibility(boolean visible) {
-        boolean wasVisible = getVisibility() == VISIBLE;
+        boolean wasVisible = getVisibility() == VISIBLE || mHideLockIcon;
         if (visible != wasVisible) {
             setVisibility(visible ? VISIBLE : INVISIBLE);
             animate().cancel();
@@ -261,5 +267,12 @@ public class LockIcon extends KeyguardAffordanceView {
             return LOCK_ANIM_RES_IDS[3][lockAnimIndex];
         }
         return LOCK_ANIM_RES_IDS[0][lockAnimIndex];
+    }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        if (key.equals(TUNER_SHOW_LOCK_ICON)) {
+            mHideLockIcon = newValue != null && newValue.equals("0");
+        }
     }
 }
