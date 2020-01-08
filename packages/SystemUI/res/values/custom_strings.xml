@@ -40,6 +40,8 @@
     <string name="tuner_battery_percent_hide">Don\'t show this icon</string>
     <string name="tuner_battery_percent_title">Battery percent</string>
     <string name="tuner_status_bar_show_battery_image">Show battery image</string>
+    <string name="tuner_keyguard_show_lock_icon_title">Show lock status</string>
+    <string name="tuner_keyguard_show_lock_icon_summary">Show current lock status icon on top</string>
 
     <!-- navbar editor -->
     <string name="preview">Preview</string>
