@@ -64,4 +64,6 @@
   <!-- In-display Fingerprint -->
   <java-symbol type="bool" name="config_supportsInDisplayFingerprint" />
 
+    <!-- Whether the OnePlus device has an haptic motor -->
+    <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
 </resources>
