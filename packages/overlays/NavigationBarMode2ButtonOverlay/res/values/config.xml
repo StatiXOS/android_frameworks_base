@@ -22,4 +22,7 @@
          1: 2 button mode (back, home buttons + swipe up for overview)
          2: gestures only for back, home and overview -->
     <integer name="config_navBarInteractionMode">1</integer>
+
+    <!-- HWKeys overlay. We only have a home button to push so make this 65. -->
+    <integer name="config_deviceHardwareKeys">65</integer>
 </resources>
