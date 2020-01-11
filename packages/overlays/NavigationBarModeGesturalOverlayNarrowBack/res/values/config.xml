@@ -54,4 +54,7 @@
          show. -->
     <bool name="config_navBarAlwaysShowOnSideEdgeGesture">true</bool>
 
+    <!-- HWKeys overlay. We don't have a button to push, so make this 64. -->
+    <integer name="config_deviceHardwareKeys">64</integer>
+
 </resources>
