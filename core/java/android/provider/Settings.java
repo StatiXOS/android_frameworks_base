@@ -4601,6 +4601,12 @@ public final class Settings {
         public static final String GLOBAL_ACTIONS_FLASHLIGHT = "global_actions_flashlight";
 
         /**
+        * Whether to allow battery light
+        * @hide
+        */
+        public static final String BATTERY_LIGHT_ENABLED = "battery_light_enabled";
+
+        /**
         * Whether to show battery light when DND mode is active
         * @hide
         */
