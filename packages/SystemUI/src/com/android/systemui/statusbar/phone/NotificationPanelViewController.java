@@ -1091,6 +1091,21 @@ public class NotificationPanelViewController extends PanelViewController {
         keyguardStatusView = (KeyguardStatusView) mLayoutInflater.inflate(
                 R.layout.keyguard_status_view, mNotificationContainerParent, false);
         mNotificationContainerParent.addView(keyguardStatusView, statusIndex);
+
+        statusIndex = mView.indexOfChild(mKeyguardStatusBar);
+        mView.removeView(mKeyguardStatusBar);
+        mKeyguardStatusBar = (KeyguardStatusBarView) mLayoutInflater.inflate(
+                        R.layout.keyguard_status_bar,
+                        mView,
+                        false);
+        mView.addView(mKeyguardStatusBar, statusIndex);
+        if (mQs != null && mQs instanceof QSFragment) {
+            mKeyguardStatusBar.setQSPanel(((QSFragment) mQs).getQsPanel());
+        }
+        mKeyguardStatusBar.setAlpha(mBarState == StatusBarState.KEYGUARD ? 0f : 1f);
+        mKeyguardStatusBar.setVisibility(
+                mBarState == StatusBarState.KEYGUARD ? View.VISIBLE : View.INVISIBLE);
+
         // When it's reinflated, this is centered by default. If it shouldn't be, this will update
         // below when resources are updated.
         mStatusViewCentered = true;
@@ -1108,6 +1123,7 @@ public class NotificationPanelViewController extends PanelViewController {
                 !mKeyguardQsUserSwitchEnabled
                         && mKeyguardUserSwitcherEnabled
                         && isUserSwitcherEnabled;
+
         FrameLayout userAvatarView = (FrameLayout) reInflateStub(
                 R.id.keyguard_qs_user_switch_view /* viewId */,
                 R.id.keyguard_qs_user_switch_stub /* stubId */,
