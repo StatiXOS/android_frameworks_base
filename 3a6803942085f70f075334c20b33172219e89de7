@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32af7599_e344f53e",
+        "filename": "services/core/java/com/android/server/power/PowerManagerService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-01-21T23:17:12Z",
+      "side": 1,
+      "message": "boye",
+      "revId": "3a6803942085f70f075334c20b33172219e89de7",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
+    }
+  ]
+}
