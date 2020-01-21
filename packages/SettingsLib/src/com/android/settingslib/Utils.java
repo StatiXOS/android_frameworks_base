@@ -190,6 +190,8 @@ public class Utils {
     public static String getBatteryStatus(Context context, Intent batteryChangedIntent) {
         final int status = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_STATUS,
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
+        final boolean dashChargeStatus = batteryChangedIntent.getBooleanExtra(
+                BatteryManager.EXTRA_DASH_CHARGER, false);
         final Resources res = context.getResources();
 
         String statusString = res.getString(R.string.battery_info_status_unknown);
@@ -207,7 +209,9 @@ public class Utils {
                         statusString = res.getString(R.string.battery_info_status_charging_slow);
                         break;
                     default:
-                        statusString = res.getString(R.string.battery_info_status_charging);
+                        statusString = dashChargeStatus
+                        ? res.getString(R.string.battery_info_status_dash_charging)
+                        : res.getString(R.string.battery_info_status_charging);
                         break;
                 }
 
