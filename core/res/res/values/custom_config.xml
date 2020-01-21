@@ -92,6 +92,4 @@
 	 or FOD Circle hiding after the screen is put to sleep -->
     <bool name="config_hideFodCircleGoingToSleep">false</bool>
 
-    <!-- Whether device has Dash charging support -->
-    <bool name="config_hasDashCharger">false</bool>
 </resources>
