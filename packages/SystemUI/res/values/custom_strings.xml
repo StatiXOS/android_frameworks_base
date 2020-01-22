@@ -49,4 +49,7 @@
     <string name="status_bar_microphone">Microphone</string>
     <string name="status_bar_vpn">VPN</string>
 
+    <!-- QS Header opacity slider -->
+    <string name="qs_header_bg_title">Adjust header opacity</string>
+
 </resources>
