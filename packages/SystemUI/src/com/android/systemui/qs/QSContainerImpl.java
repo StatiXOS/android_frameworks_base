@@ -21,8 +21,13 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.graphics.Point;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -34,6 +39,7 @@ import com.android.systemui.qs.customize.QSCustomizer;
  */
 public class QSContainerImpl extends FrameLayout {
 
+    public final String TAG = "QSContainerImpl";
     private final Point mSizePoint = new Point();
 
     private int mHeightOverride = -1;
@@ -53,6 +59,9 @@ public class QSContainerImpl extends FrameLayout {
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Handler mHandler = new Handler();
+        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
+        settingsObserver.observe();
     }
 
     @Override
@@ -67,6 +76,7 @@ public class QSContainerImpl extends FrameLayout {
         mStatusBarBackground = findViewById(R.id.quick_settings_status_bar_background);
         mBackgroundGradient = findViewById(R.id.quick_settings_gradient_view);
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
+        updateSettings();
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         setMargins();
@@ -79,6 +89,30 @@ public class QSContainerImpl extends FrameLayout {
         updateResources();
         mSizePoint.set(0, 0); // Will be retrieved on next measure pass.
     }
+
+    private void updateSettings() {
+         int mQsHeaderBgAlpha = Settings.System.getIntForUser(getContext().getContentResolver(),
+                 Settings.System.QS_HEADER_BG_ALPHA, 255,
+                 UserHandle.USER_CURRENT);
+         mStatusBarBackground.setAlpha(mQsHeaderBgAlpha/255);
+     }
+
+    private class SettingsObserver extends ContentObserver {
+         SettingsObserver(Handler handler) {
+             super(handler);
+         }
+
+         void observe() {
+             getContext().getContentResolver().registerContentObserver(Settings.System
+                             .getUriFor(Settings.System.QS_HEADER_BG_ALPHA), false,
+                     this, UserHandle.USER_ALL);
+         }
+
+         @Override
+         public void onChange(boolean selfChange) {
+             updateSettings();
+         }
+     }
 
     @Override
     public boolean performClick() {
