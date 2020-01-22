@@ -32,6 +32,14 @@
             android:title="@string/tuner_brightness_position_bottom"
             sysui:defValue="false" />
 
+        <com.statix.support.preferences.CustomSystemSeekBarPreference
+            android:key="qs_header_bg_alpha"
+            android:title="@string/qs_header_bg_title"
+            allowEditText="true"
+            android:max="255"
+            android:min="0"
+            android:defaultValue="255" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
