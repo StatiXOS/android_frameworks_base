@@ -42,6 +42,7 @@
     <string name="tuner_status_bar_show_battery_image">Show battery image</string>
     <string name="tuner_keyguard_show_lock_icon_title">Show lock status</string>
     <string name="tuner_keyguard_show_lock_icon_summary">Show current lock status icon on top</string>
+    <string name="qs_header_bg_title">Adjust header opacity</string>
 
     <!-- navbar editor -->
     <string name="preview">Preview</string>
