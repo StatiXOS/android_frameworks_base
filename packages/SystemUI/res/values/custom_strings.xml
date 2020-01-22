@@ -42,4 +42,13 @@
 
     <!-- QS Footer Text -->
     <string name="footer_text_show_title">Display footer text</string>
+
+    <!-- Name of the additional status bar icons also exposed with SystemUI Tuner -->
+    <string name="status_bar_camera">Camera</string>
+    <string name="status_bar_location">Location</string>
+    <string name="status_bar_microphone">Microphone</string>
+
+    <!-- QS Header opacity slider -->
+    <string name="qs_header_bg_title">Adjust header opacity</string>
+
 </resources>
