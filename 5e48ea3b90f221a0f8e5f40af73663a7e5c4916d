@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79f9e1a7_c5ca317c",
+        "filename": "packages/SystemUI/src/com/android/systemui/qs/tiles/ScreenshotTile.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-01-23T14:46:06Z",
+      "side": 1,
+      "message": "reee",
+      "revId": "5e48ea3b90f221a0f8e5f40af73663a7e5c4916d",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14bcf648_49d4390c",
+        "filename": "packages/SystemUI/src/com/android/systemui/qs/tiles/ScreenshotTile.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-01-23T14:46:06Z",
+      "side": 1,
+      "message": "reee",
+      "revId": "5e48ea3b90f221a0f8e5f40af73663a7e5c4916d",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
+    }
+  ]
+}
