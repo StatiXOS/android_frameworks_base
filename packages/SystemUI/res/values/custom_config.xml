@@ -25,4 +25,7 @@
 
     <!-- The minimum bottom margin of the keyguard security container -->
     <dimen name="kg_security_container_min_bottom_margin">0dp</dimen>
+
+    <!-- Whether to use fingerprint pressed image -->
+    <bool name="config_fodPressedImage">false</bool>
 </resources>
