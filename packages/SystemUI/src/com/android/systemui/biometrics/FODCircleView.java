@@ -83,6 +83,8 @@ public class FODCircleView extends ImageView {
 
     private Timer mBurnInProtectionTimer;
 
+    private final boolean mFodPressedImage;
+
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
         @Override
@@ -211,6 +213,8 @@ public class FODCircleView extends ImageView {
 
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
+
+	mFodPressedImage = res.getBoolean(R.bool.config_fodPressedImage);
     }
 
     @Override
@@ -307,7 +311,12 @@ public class FODCircleView extends ImageView {
         setDim(true);
         dispatchPress();
 
-        setImageResource(R.drawable.fod_icon_pressed);
+        if (mFodPressedImage) {
+            setImageResource(R.drawable.fod_icon_pressed);
+        } else {
+            setImageDrawable(null);
+        }
+
         invalidate();
     }
 
