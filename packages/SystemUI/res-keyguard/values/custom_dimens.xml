@@ -2,4 +2,6 @@
 <resources>
     <!-- Weather condition icon  -->
     <dimen name="weather_icon_size">17dp</dimen>
+
+    <dimen name="custom_clock_left_padding">32dp</dimen>
 </resources>
