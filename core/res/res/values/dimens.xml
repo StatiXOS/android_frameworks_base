@@ -750,7 +750,7 @@
 
     <dimen name="seekbar_thumb_exclusion_max_size">48dp</dimen>
 
-    <!-- chooser/resolver (sharesheet) spacing -->
+       <!-- chooser/resolver (sharesheet) spacing -->
     <dimen name="chooser_corner_radius">8dp</dimen>
     <dimen name="chooser_row_text_option_translate">25dp</dimen>
     <dimen name="chooser_view_spacing">18dp</dimen>
@@ -772,4 +772,8 @@
     <dimen name="resolver_edge_margin">24dp</dimen>
     <dimen name="resolver_elevation">1dp</dimen>
     <dimen name="chooser_action_button_icon_size">18dp</dimen>
+    <dimen name="extra_qs_footer_height">48dp</dimen>
+    <dimen name="qs_background_inset">0dp</dimen>
+    <dimen name="qs_drag_handle_margin_bottom">-12dp</dimen>
+    <dimen name="qs_notification_padding">20dp</dimen>
 </resources>
