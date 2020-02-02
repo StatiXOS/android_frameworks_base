@@ -4742,6 +4742,16 @@ public final class Settings {
         public static final String QS_TILE_TITLE_VISIBILITY = "qs_tile_title_visibility";
 
         /**
+         * Display cutout
+         * @hide
+         */
+        public static final String BRIGHTNESS_SLIDER_QS_UNEXPANDED = "brightness_slider_qs_unexpanded";
+
+        /** @hide */
+        private static final Validator BRIGHTNESS_SLIDER_QS_UNEXPANDED_VALIDATOR = new
+                SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
+
+        /**
          * Whether the Home button works during call
          * @hide
          */
@@ -5190,6 +5200,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_RIGHT);
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_DOWN);
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_LEFT);
+            PRIVATE_SETTINGS.add(BRIGHTNESS_SLIDER_QS_UNEXPANDED);
         }
 
         /**
@@ -5296,6 +5307,7 @@ public final class Settings {
             VALIDATORS.put(DOUBLE_TAP_SLEEP_GESTURE,
                     DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
 	    VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
+            VALIDATORS.put(BRIGHTNESS_SLIDER_QS_UNEXPANDED, BRIGHTNESS_SLIDER_QS_UNEXPANDED_VALIDATOR);
         }
 
         /**
