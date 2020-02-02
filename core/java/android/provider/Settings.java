@@ -4751,8 +4751,7 @@ public final class Settings {
                  ANY_INTEGER_VALIDATOR;
 
         /**
-         * Whether user can swap the order of the Alert Slider.
-         * * Whether user can invert the order of the Alert Slider.
+         * Whether user can invert the order of the Alert Slider.
          * 0: Default
          * 1: Inverted
          * @hide
@@ -4764,6 +4763,18 @@ public final class Settings {
          * @hide
          */
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+
+        /**
+         * Setting to store icon pack.
+         * @hide
+         */
+        public static final String SELECTED_ICON_PACK = "selected_icon_pack";
+
+        /**
+         * @hide
+         */
+        public static final Validator SELECTED_ICON_PACK_VALIDATOR =
+               ANY_STRING_VALIDATOR;
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -4835,6 +4846,7 @@ public final class Settings {
             ALLOW_INCALL_HOME,
             ANBI_ENABLED_OPTION,
             QS_HEADER_BG_ALPHA,
+            SELECTED_ICON_PACK,
         };
 
         /**
@@ -4964,6 +4976,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
             PRIVATE_SETTINGS.add(QS_HEADER_BG_ALPHA);
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
+            PRIVATE_SETTINGS.add(SELECTED_ICON_PACK);
         }
 
         /**
@@ -5067,6 +5080,7 @@ public final class Settings {
             VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
             VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
             VALIDATORS.put(QS_HEADER_BG_ALPHA, QS_HEADER_BG_ALPHA_VALIDATOR);
+            VALIDATORS.put(SELECTED_ICON_PACK, SELECTED_ICON_PACK_VALIDATOR);
         }
 
         /**
