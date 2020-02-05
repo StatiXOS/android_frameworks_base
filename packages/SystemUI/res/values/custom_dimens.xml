@@ -58,4 +58,8 @@
 
     <!-- QS visibility -->
     <dimen name="qs_tile_height_wo_label">64dp</dimen>
+
+    <dimen name="bt_audio_battery_size">64dp</dimen>
+    <dimen name="bt_audio_icon_padding">20dp</dimen>
+
 </resources>
