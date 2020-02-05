@@ -135,6 +135,8 @@ public class VolumeDialogImpl implements VolumeDialog,
     private ViewGroup mDialogRowsView;
     private ViewGroup mRinger;
     private ImageButton mRingerIcon;
+    private ViewGroup mBtAudioView;
+    private TextView mPercentView;
     private ViewGroup mODICaptionsView;
     private CaptionsToggleImageButton mODICaptionsIcon;
     private View mSettingsView;
@@ -270,6 +272,16 @@ public class VolumeDialogImpl implements VolumeDialog,
         });
 
         mDialogRowsView = mDialog.findViewById(R.id.volume_dialog_rows);
+        mBtAudioView = mDialog.findViewById(R.id.bluetooth_audio);
+        if (mBtAudioView != null) {
+            mPercentView = mBtAudioView.findViewById(R.id.percent_text);
+            if(!isAudioPanelOnLeftSide()) {
+                mBtAudioView.setForegroundGravity(Gravity.RIGHT);
+            } else {
+                mBtAudioView.setForegroundGravity(Gravity.LEFT);
+            }
+        }
+
         mRinger = mDialog.findViewById(R.id.ringer);
         if (mRinger != null) {
             mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
@@ -298,7 +310,7 @@ public class VolumeDialogImpl implements VolumeDialog,
 
         }
         if (mHasAlertSlider) {
-            mRinger.setVisibility(View.GONE);	
+            mRinger.setVisibility(View.GONE);
         }
 
         mSettingsView = mDialog.findViewById(R.id.settings_container);
@@ -329,6 +341,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         updateRowsH(getActiveRow());
+        initBtAudioH();
         initRingerH();
         initSettingsH();
         initODICaptionsH();
@@ -493,6 +506,19 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
     }
 
+    public void initBtAudioH() {
+        if (mBtAudioView != null) {
+            mBtAudioView.setVisibility(
+                mState != null && mState.states.get(getActiveRow().stream).routedToBluetooth ? VISIBLE : GONE);
+        }
+        if (mBtAudioView.getVisibility() == VISIBLE) {
+            BluetoothBatteryReceiver btrr = new BluetoothBatteryReceiver(mContext);
+            int level = btrr.getBatteryLevel();
+            if (level != -1) {
+                mPercentView.setText(Integer.toString(btrr.getBatteryLevel()) + "%");
+            }
+        }
+    }
     public void initSettingsH() {
         if (mSettingsView != null) {
             mSettingsView.setVisibility(
@@ -736,6 +762,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         initSettingsH();
+        initBtAudioH();
         mShowing = true;
         mDialog.show();
         Events.writeEvent(mContext, Events.EVENT_SHOW_DIALOG, reason, mKeyguard.isKeyguardLocked());
