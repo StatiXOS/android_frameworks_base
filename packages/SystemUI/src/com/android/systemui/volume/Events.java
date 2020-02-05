@@ -94,6 +94,7 @@ public class Events {
     public static final int DISMISS_STREAM_GONE = 7;
     public static final int DISMISS_REASON_OUTPUT_CHOOSER = 8;
     public static final int DISMISS_REASON_USB_OVERHEAD_ALARM_CHANGED = 9;
+    public static final int DISMISS_REASON_BT_AUDIO_CLICKED = 10;
     public static final String[] DISMISS_REASONS = {
             "unknown",
             "touch_outside",
@@ -104,7 +105,8 @@ public class Events {
             "done_clicked",
             "a11y_stream_changed",
             "output_chooser",
-            "usb_temperature_below_threshold"
+            "usb_temperature_below_threshold",
+            "bt_audio_icon_clicked"
     };
 
     public static final int SHOW_REASON_UNKNOWN = 0;
