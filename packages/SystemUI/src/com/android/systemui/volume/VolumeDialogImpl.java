@@ -31,6 +31,7 @@ import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+import static com.android.systemui.volume.Events.DISMISS_REASON_BT_AUDIO_CLICKED;
 import static com.android.systemui.volume.Events.DISMISS_REASON_SETTINGS_CLICKED;
 
 import android.animation.ObjectAnimator;
@@ -135,6 +136,9 @@ public class VolumeDialogImpl implements VolumeDialog,
     private ViewGroup mDialogRowsView;
     private ViewGroup mRinger;
     private ImageButton mRingerIcon;
+    private ViewGroup mBtAudioView;
+    private ImageButton mBtAudioIcon;
+    private TextView mPercentView;
     private ViewGroup mODICaptionsView;
     private CaptionsToggleImageButton mODICaptionsIcon;
     private View mSettingsView;
@@ -270,6 +274,17 @@ public class VolumeDialogImpl implements VolumeDialog,
         });
 
         mDialogRowsView = mDialog.findViewById(R.id.volume_dialog_rows);
+        mBtAudioView = mDialog.findViewById(R.id.bluetooth_audio);
+        if (mBtAudioView != null) {
+            mBtAudioIcon = mBtAudioView.findViewById(R.id.bt_audio_icon);
+            mPercentView = mBtAudioView.findViewById(R.id.percent_text);
+            if(!isAudioPanelOnLeftSide()) {
+                mBtAudioView.setForegroundGravity(Gravity.RIGHT);
+            } else {
+                mBtAudioView.setForegroundGravity(Gravity.LEFT);
+            }
+        }
+
         mRinger = mDialog.findViewById(R.id.ringer);
         if (mRinger != null) {
             mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
@@ -298,7 +313,7 @@ public class VolumeDialogImpl implements VolumeDialog,
 
         }
         if (mHasAlertSlider) {
-            mRinger.setVisibility(View.GONE);	
+            mRinger.setVisibility(View.GONE);
         }
 
         mSettingsView = mDialog.findViewById(R.id.settings_container);
@@ -329,6 +344,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         updateRowsH(getActiveRow());
+        initBtAudioH();
         initRingerH();
         initSettingsH();
         initODICaptionsH();
@@ -490,6 +506,30 @@ public class VolumeDialogImpl implements VolumeDialog,
             });
         } else {
             row.icon.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        }
+    }
+
+    public void initBtAudioH() {
+        if (mBtAudioView != null) {
+            mBtAudioView.setVisibility(
+                mState != null && mState.states.get(getActiveRow().stream).routedToBluetooth ? VISIBLE : GONE);
+            mBtAudioIcon.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent btSettings = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
+                    btSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(btSettings);
+                    dismissH(DISMISS_REASON_BT_AUDIO_CLICKED);
+                    return true;
+                }
+            });
+        }
+        if (mBtAudioView.getVisibility() == VISIBLE) {
+            BluetoothBatteryReceiver btrr = new BluetoothBatteryReceiver(mContext);
+            int level = btrr.getBatteryLevel();
+            if (level != -1) {
+                mPercentView.setText(Integer.toString(btrr.getBatteryLevel()) + "%");
+            }
         }
     }
 
@@ -736,6 +776,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         initSettingsH();
+        initBtAudioH();
         mShowing = true;
         mDialog.show();
         Events.writeEvent(mContext, Events.EVENT_SHOW_DIALOG, reason, mKeyguard.isKeyguardLocked());
