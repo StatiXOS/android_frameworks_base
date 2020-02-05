@@ -39,6 +39,35 @@
         android:clipToPadding="false">
 
         <FrameLayout
+            android:id="@+id/bluetooth_audio"
+            android:layout_width="@dimen/bt_audio_battery_height"
+            android:layout_height="@dimen/bt_audio_battery_size"
+            android:layout_marginBottom="@dimen/volume_dialog_spacer"
+            android:translationZ="@dimen/volume_dialog_elevation"
+            android:clipToPadding="false"
+            android:background="@drawable/rounded_bg_full_accent" >
+
+            <com.android.keyguard.AlphaOptimizedImageButton
+                android:id="@+id/bt_audio_icon"
+                android:src="@drawable/ic_headset"
+                android:background="@drawable/rounded_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/bt_audio_icon_padding"
+                android:tint="?android:attr/textColorPrimary"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/percent_text"
+                style="@style/TextAppearance.Volume"
+                android:gravity="center_horizontal|bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/percent_text_padding" />
+
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/ringer"
             android:layout_width="@dimen/volume_dialog_ringer_size"
             android:layout_height="@dimen/volume_dialog_ringer_size"
