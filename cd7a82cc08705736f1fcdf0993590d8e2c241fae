@@ -39,6 +39,30 @@
       "revId": "cd7a82cc08705736f1fcdf0993590d8e2c241fae",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d39072b2_25dad581",
+        "filename": "packages/SystemUI/src/com/android/systemui/volume/VolumeDialogImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-06T16:45:58Z",
+      "side": 1,
+      "message": "Solution: use StreamStates. \n\nThe code should look something like this.\n\nif (mState.states.get(getActiveRow().stream).routedToBluetooth)\n\nwhich should confirm or not that the active volume row is routed to BT out.\n\nFor furter knowledge, follow mState and StreamState along this file.",
+      "parentUuid": "53325be5_97ec6f5f",
+      "range": {
+        "startLine": 516,
+        "startChar": 49,
+        "endLine": 516,
+        "endChar": 69
+      },
+      "revId": "cd7a82cc08705736f1fcdf0993590d8e2c241fae",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
     }
   ]
 }
