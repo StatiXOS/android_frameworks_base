@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e15895ad_150e296c",
+        "filename": "packages/SystemUI/src/com/android/systemui/volume/BluetoothBatteryReceiver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-06T08:26:03Z",
+      "side": 1,
+      "message": "This seems overkill. \nVolume stuff it\u0027s still handled under SysUI and it\u0027s probably more easy and sane to use what we have already rather than creating a new receiver.\nFor reference, it may be useful check what Ezio originally did to obtain device name plus battery status (assuming that commit has been already merged).",
+      "revId": "cd7a82cc08705736f1fcdf0993590d8e2c241fae",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53325be5_97ec6f5f",
+        "filename": "packages/SystemUI/src/com/android/systemui/volume/VolumeDialogImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-06T08:26:03Z",
+      "side": 1,
+      "message": "Well, doesn\u0027t this return true regardless bluetooth device type?",
+      "range": {
+        "startLine": 516,
+        "startChar": 49,
+        "endLine": 516,
+        "endChar": 69
+      },
+      "revId": "cd7a82cc08705736f1fcdf0993590d8e2c241fae",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
+    }
+  ]
+}
