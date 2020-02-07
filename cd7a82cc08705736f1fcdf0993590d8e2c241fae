@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "9b69e2e2_81817e76",
+        "filename": "packages/SystemUI/src/com/android/systemui/volume/BluetoothBatteryReceiver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-07T00:10:33Z",
+      "side": 1,
+      "message": "//this allows us to filter only devices with audio capabilities\nif (state \u003d\u003d BluetoothProfile.STATE_CONNECTED \u0026\u0026 device.isConnectedA2dpDevice() ||\n    device.isConnectedHfpDevice() || device.isConnectedHearingAidDevice()) {\n//your code here\n} else { \n    mBatteryLevel \u003d -1;\n}\n//handle separately mBatteryLevel when you\u0027re about to use getBatteryLevel() elsewhere,\n//treating -1 as an error value to throw out some string like \"Unknown\", or in your specific\n//case it would be better to have \"!!\" since you don\u0027t have much space in the layout type you\u0027ve\n//choose",
+      "revId": "cd7a82cc08705736f1fcdf0993590d8e2c241fae",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53325be5_97ec6f5f",
         "filename": "packages/SystemUI/src/com/android/systemui/volume/VolumeDialogImpl.java",
         "patchSetId": 4
