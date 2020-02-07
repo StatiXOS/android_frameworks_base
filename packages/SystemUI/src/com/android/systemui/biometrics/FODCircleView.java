@@ -86,6 +86,7 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
     private boolean mIsDreaming;
     private boolean mIsShowing;
     private boolean mIsCircleShowing;
+    private boolean mIsAuthenticated;
 
     private float mCurrentDimAmount = 0.0f;
 
@@ -136,6 +137,12 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
             } else {
                 hide();
             }
+        }
+
+        @Override
+        public void onBiometricAuthenticated(int userId, BiometricSourceType biometricSourceType) {
+            super.onBiometricAuthenticated(userId, biometricSourceType);
+            mIsAuthenticated = true;
         }
 
         @Override
@@ -344,6 +351,10 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
     }
 
     public void showCircle() {
+        if (mIsAuthenticated) {
+            return;
+        }
+
         mIsCircleShowing = true;
 
         setKeepScreenOn(true);
@@ -387,6 +398,7 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
         }
 
         mIsShowing = true;
+        mIsAuthenticated = false;
 
         updatePosition();
 
