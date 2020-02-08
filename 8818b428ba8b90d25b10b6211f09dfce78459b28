@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "913d510a_5b303d22",
+        "filename": "packages/SystemUI/res/drawable/rounded_bg_full_accent.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-02-08T00:27:46Z",
+      "side": 1,
+      "message": "is this right sir",
+      "revId": "8818b428ba8b90d25b10b6211f09dfce78459b28",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6",
+      "unresolved": true
+    }
+  ]
+}
