@@ -3679,6 +3679,12 @@ public final class Settings {
         public static final String END_BUTTON_BEHAVIOR = "end_button_behavior";
 
         /**
+         * FOD Animations
+         * @hide
+         */
+        public static final String FOD_RECOGNIZING_ANIMATION = "fod_anim";
+
+        /**
          * END_BUTTON_BEHAVIOR value for "go home".
          * @hide
          */
