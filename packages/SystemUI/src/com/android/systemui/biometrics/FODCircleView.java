@@ -419,7 +419,7 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
         if (mIsCircleShowing) {
             setAlpha(1.0f);
         } else {
-            setAlpha(mIsDreaming ? 0.5f : 1.0f);
+            setAlpha(mIsDreaming ? 0.75f : 1.0f);
         }
     }
 
