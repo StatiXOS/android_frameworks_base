@@ -2413,5 +2413,9 @@ enum PageId {
     SETTINGS_GESTURE_TAP = 1751;
     
     // Panel for Bluetooth
+
     PANEL_BLUETOOTH = 1752;
 
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 1753;
+}
