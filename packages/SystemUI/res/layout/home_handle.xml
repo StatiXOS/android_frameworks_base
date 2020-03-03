@@ -24,4 +24,3 @@
     android:paddingStart="@dimen/navigation_key_padding"
     android:paddingEnd="@dimen/navigation_key_padding"
     />
-
