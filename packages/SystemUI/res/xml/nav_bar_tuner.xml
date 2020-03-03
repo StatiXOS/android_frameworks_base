@@ -26,4 +26,11 @@
         android:entries="@array/nav_bar_layouts"
         android:entryValues="@array/nav_bar_layouts_values" />
 
+    <com.statix.support.preferences.CustomSystemSeekbarPreference
+        android:key="navigation_bar_width"
+        android:title="@string/navigation_bar_handle_customizer"
+        android:max="140"
+        android:min="50"
+        android:defaultValue="140" />
+
 </PreferenceScreen>
