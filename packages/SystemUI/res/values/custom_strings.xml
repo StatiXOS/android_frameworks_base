@@ -97,4 +97,8 @@
     <string name="qs_data_switch_toast_1">Currently only one SIM card is inserted</string>
     <string name="qs_data_switch_changed_1">Switch data card to SIM 1.</string>
     <string name="qs_data_switch_changed_2">Switch data card to SIM 2.</string>
+
+    <!-- NavBar handle width -->
+    <string name="navigation_bar_handle_customizer">Gesture bar width</string>
+
 </resources>
