@@ -24,6 +24,7 @@ import static android.app.StatusBarManager.WindowType;
 import static android.app.StatusBarManager.WindowVisibleState;
 import static android.app.StatusBarManager.windowStateToString;
 import static android.app.WindowConfiguration.WINDOWING_MODE_FULLSCREEN_OR_SPLIT_SCREEN_SECONDARY;
+import static android.view.Display.DEFAULT_DISPLAY;
 
 import static com.android.systemui.Dependency.ALLOW_NOTIFICATION_LONG_PRESS_NAME;
 import static com.android.systemui.Dependency.BG_HANDLER;
@@ -329,6 +330,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     /** If true, the lockscreen will show a distinct wallpaper */
     public static final boolean ENABLE_LOCKSCREEN_WALLPAPER = true;
+
+    private RegisterStatusBarResult mResult;
 
     static {
         boolean onlyCoreApps;
@@ -918,6 +921,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         putComponent(HeadsUpManager.class, mHeadsUpManager);
 
         createNavigationBar(result);
+        mResult = result;
 
         if (ENABLE_LOCKSCREEN_WALLPAPER) {
             mLockscreenWallpaper = new LockscreenWallpaper(mContext, this, mHandler);
@@ -1818,6 +1822,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_HANDLE_WIDTH),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -1842,6 +1849,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_LANDSCAPE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_TITLE_VISIBILITY))) {
                 updateQsPanelResources();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.NAVIGATION_HANDLE_WIDTH))) {
+                updateBarHandleWidth();
             }
         }
 
@@ -1851,6 +1860,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setLockScreenMediaBlurLevel();
             setLockScreenMediaArt();
             updateQsPanelResources();
+            updateBarHandleWidth();
         }
     }
 
@@ -1881,6 +1891,13 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void updateQsPanelResources() {
         if (mQSPanel != null) {
             mQSPanel.updateResources();
+        }
+    }
+
+    private void updateBarHandleWidth() {
+        if (mNavigationBarController != null) {
+            mNavigationBarController.onDisplayRemoved(DEFAULT_DISPLAY);
+            createNavigationBar(mResult);
         }
     }
 
