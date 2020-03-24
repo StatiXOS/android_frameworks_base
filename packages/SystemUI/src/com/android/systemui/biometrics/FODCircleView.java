@@ -153,6 +153,15 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
         @Override
         public void onScreenTurnedOff() {
             hideCircle();
+	}
+
+	@Override
+        public void onBiometricHelp(int msgId, String helpString,
+                BiometricSourceType biometricSourceType) {
+            if (msgId == -1){ // Auth error
+                hideCircle();
+                mHandler.post(() -> mFODAnimation.hideFODanimation());
+            }
         }
     };
 
