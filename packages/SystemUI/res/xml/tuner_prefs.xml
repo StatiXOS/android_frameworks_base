@@ -158,6 +158,12 @@
             android:title="@string/tuner_status_bar_show_battery_image"
             sysui:defValue="true" />
 
+        <Preference
+            android:key="status_bar_traffic"
+            android:title="@string/traffic_title"
+            android:summary="@string/traffic_title_summary" 
+            android:fragment="com.android.systemui.tuner.TrafficFragment"/>
+
     </PreferenceScreen>
 
    <!-- <PreferenceScreen
