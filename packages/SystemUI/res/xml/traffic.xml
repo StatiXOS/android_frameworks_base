@@ -20,11 +20,18 @@
         android:title="@string/network_traffic_state_title"
         android:defaultValue="false" />
 
-    <com.statix.support.preference.CustomSystemSeekBarPreference
+    <com.statix.support.preferences.CustomSystemSeekBarPreference
         android:key="network_traffic_autohide_threshold"
         android:title="@string/network_traffic_autohide_threshold_title"
         android:max="10"
         android:min="0"
         android:defaultValue="0" />
+
+    <com.statix.support.preferences.SystemSettingSwitchPreference
+        android:key="network_traffic_hidearrow"
+        android:title="@string/network_traffic_hidearrow"
+        android:summary="@string/network_traffic_hidearrow_summary"
+        android:dependency="network_traffic_state"
+        android:defaultValue="false" />
 
 </PreferenceScreen>
