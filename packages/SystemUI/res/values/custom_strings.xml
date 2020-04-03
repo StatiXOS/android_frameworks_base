@@ -97,4 +97,8 @@
     <string name="qs_data_switch_toast_1">Currently only one SIM card is inserted</string>
     <string name="qs_data_switch_changed_1">Switch data card to SIM 1.</string>
     <string name="qs_data_switch_changed_2">Switch data card to SIM 2.</string>
+
+     <!-- Old MobileType Toggle -->
+    <string name="use_old_mobiletype_title">Old Mobile Signal</string>
+    
 </resources>
