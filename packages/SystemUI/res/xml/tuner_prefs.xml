@@ -132,6 +132,11 @@
             android:key="mobile"
             android:title="@string/quick_settings_cellular_detail_title" />
 
+        <com.statix.support.preferences.SystemSettingSwitchPreference
+            android:key="use_old_mobiletype"
+            android:title="@string/use_old_mobiletype_title"
+            android:defaultValue="false" />
+
         <com.android.systemui.tuner.StatusBarSwitch
             android:key="airplane"
             android:title="@string/status_bar_airplane" />
