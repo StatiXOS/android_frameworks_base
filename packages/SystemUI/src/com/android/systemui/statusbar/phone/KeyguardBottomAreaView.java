@@ -64,7 +64,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.util.custom.FodUtils;
+import com.android.internal.util.statix.fod.FodUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -73,6 +73,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.assist.AssistManager;
+import com.android.systemui.biometrics.FODCircleView;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.IntentButtonProvider;
 import com.android.systemui.plugins.IntentButtonProvider.IntentButton;
@@ -416,7 +417,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     }
 
     private boolean hasInDisplayFingerprint() {
-        return FodUtils.hasFodSupport(mContext) && mIsFingerprintRunning;
+        return FodUtils.hasFodSupport(mContext) && mIsFingerprintRunning &&
+            FODCircleView.canUnlockWithFp(KeyguardUpdateMonitor.getInstance(mContext));
     }
 
     public boolean isLeftVoiceAssist() {
