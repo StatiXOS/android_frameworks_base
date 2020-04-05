@@ -4,4 +4,8 @@
     <dimen name="weather_icon_size">17dp</dimen>
 
     <dimen name="custom_clock_left_padding">32dp</dimen>
+    
+    <!-- The margin between Emergency Carrier area and pattern/pin
+    view to incorporate the FOD icon -->
+    <dimen name="keyguard_security_fod_view_margin">140dp</dimen>
 </resources>
