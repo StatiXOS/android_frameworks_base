@@ -97,4 +97,18 @@
     <string name="qs_data_switch_toast_1">Currently only one SIM card is inserted</string>
     <string name="qs_data_switch_changed_1">Switch data card to SIM 1.</string>
     <string name="qs_data_switch_changed_2">Switch data card to SIM 2.</string>
+
+    <!-- Screen record -->
+    <string name="quick_settings_screen_record_label">Screen Record</string>
+    <string name="quick_settings_screen_record_start">Start</string>
+    <string name="quick_settings_screen_record_stop">Stop</string>
+    <string name="screenrecord_audio_label">Record audio</string>
+    <string name="screenrecord_description">While recording, Android System can capture any sensitive information that’s visible on your screen or played on your device. This includes passwords, payment info, photos, messages, and audio.</string>
+    <string name="screenrecord_mic_label">Microphone</string>
+    <string name="screenrecord_ongoing_screen_and_audio">Recording screen and audio</string>
+    <string name="screenrecord_ongoing_screen_only">Recording screen</string>
+    <string name="screenrecord_start">Start</string>
+    <string name="screenrecord_start_label">Start Recording?</string>
+    <string name="screenrecord_taps_label">Show touches on screen</string>
+    <string name="status_bar_screen_record">screen_record</string>
 </resources>
