@@ -881,6 +881,18 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         dismissDialog();
     }
 
+    private boolean rebootAction(boolean safeMode) {
+        if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+              mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+                mWindowManagerFuncs.reboot(safeMode, null);
+            });
+            return true;
+        } else {
+            mWindowManagerFuncs.reboot(safeMode, null);
+            return true;
+        }
+    }
+
     /**
      * Implements {@link GlobalActionsPanelPlugin.Callbacks#dismissGlobalActionsMenu()}, which is
      * called when the quick access wallet requests that an intent be started (with lock screen
@@ -926,7 +938,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public boolean onLongPress() {
             if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_SAFE_BOOT)) {
-                mWindowManagerFuncs.reboot(true, null);
+                rebootAction(true);
                 return true;
             }
             return false;
@@ -945,7 +957,13 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public void onPress() {
             // shutdown by making sure radio and power are handled accordingly.
-            mWindowManagerFuncs.shutdown();
+            if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+                  mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+                    mWindowManagerFuncs.shutdown();
+                });
+            } else {
+                mWindowManagerFuncs.shutdown();
+            }
         }
     }
 
@@ -1043,7 +1061,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public boolean onLongPress() {
             if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_SAFE_BOOT)) {
-                mWindowManagerFuncs.reboot(true, null);
+                rebootAction(true);
                 return true;
             }
             return false;
@@ -1067,12 +1085,8 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 handleShow(true);
             } else {
                 mHandler.sendEmptyMessage(MESSAGE_DISMISS);
-                doReboot();
+                rebootAction(false);
             }
-        }
-
-        private void doReboot() {
-            mWindowManagerFuncs.reboot(false, null);
         }
     }
 
@@ -1098,7 +1112,13 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public void onPress() {
-            mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_RECOVERY);
+        if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+              mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+                mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_RECOVERY);
+            });
+            } else {
+                mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_RECOVERY);
+            }
         }
     }
 
@@ -1124,7 +1144,13 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public void onPress() {
-            mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_BOOTLOADER);
+        if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+              mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+                    mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_BOOTLOADER);
+                });
+            } else {
+                    mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_BOOTLOADER);
+            }
         }
     }
 
