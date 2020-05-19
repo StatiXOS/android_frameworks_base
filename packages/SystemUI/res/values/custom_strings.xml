@@ -132,5 +132,8 @@
 
      <!-- Old MobileType Toggle -->
     <string name="use_old_mobiletype_title">Old Mobile Signal</string>
-    
+
+    <!-- FOD View -->
+    <string name="fod_view_title" translatable="false">Fingerprint on display</string>
+    <string name="fod_view_pressed_title" translatable="false">Fingerprint on display.touched</string>
 </resources>
