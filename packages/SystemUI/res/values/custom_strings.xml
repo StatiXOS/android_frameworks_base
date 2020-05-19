@@ -132,10 +132,6 @@
 
      <!-- Old MobileType Toggle -->
     <string name="use_old_mobiletype_title">Old Mobile Signal</string>
-
-    <!-- FOD View -->
-    <string name="fod_view_title" translatable="false">Fingerprint on display</string>
-    <string name="fod_view_pressed_title" translatable="false">Fingerprint on display.touched</string>
     
     <!-- Heads up QS tile -->
     <string name="quick_settings_heads_up_label">Heads up</string>
@@ -143,4 +139,8 @@
     <string name="accessibility_quick_settings_heads_up_on">Heads up on.</string>
     <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off.</string>
     <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on.</string>
+
+    <!-- FOD View -->
+    <string name="fod_view_title" translatable="false">Fingerprint on display</string>
+    <string name="fod_view_pressed_title" translatable="false">Fingerprint on display.touched</string>
 </resources>
