@@ -546,6 +546,7 @@ public class FODCircleView extends ImageView implements Handler.Callback, TunerS
         defaultDisplay.getRealSize(size);
 
         int rotation = defaultDisplay.getRotation();
+        int cutoutMaskedExtra = mCutoutMasked ? mStatusbarHeight : 0;
 
         switch (rotation) {
             case Surface.ROTATION_0:
