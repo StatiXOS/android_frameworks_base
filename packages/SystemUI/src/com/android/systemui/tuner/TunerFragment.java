@@ -41,7 +41,7 @@ public class TunerFragment extends PreferenceFragment {
 
     private static final String KEY_BATTERY_PCT = "battery_pct";
     private static final String KEY_PLUGINS = "plugins";
-    private static final CharSequence KEY_DOZE = "doze";
+//    private static final CharSequence KEY_DOZE = "doze";
 
     public static final String SETTING_SEEN_TUNER_WARNING = "seen_tuner_warning";
 
@@ -73,9 +73,9 @@ public class TunerFragment extends PreferenceFragment {
         if (!PluginPrefs.hasPlugins(getContext())) {
             getPreferenceScreen().removePreference(findPreference(KEY_PLUGINS));
         }
-        if (!alwaysOnAvailable()) {
+        /*if (!alwaysOnAvailable()) {
             getPreferenceScreen().removePreference(findPreference(KEY_DOZE));
-        }
+        }*/
         if (!Build.IS_DEBUGGABLE) {
             for (int i = 0; i < DEBUG_ONLY.length; i++) {
                 Preference preference = findPreference(DEBUG_ONLY[i]);
