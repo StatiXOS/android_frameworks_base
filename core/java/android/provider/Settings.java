@@ -4819,12 +4819,6 @@ public final class Settings {
         private static final Validator DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
-        /** @hide */
-        public static final String GESTURE_PILL_TOGGLE = "gesture_pill_toggle";
-
-        /** @hide */
-        private static final Validator GESTURE_PILL_TOGGLE_VALIDATOR = BOOLEAN_VALIDATOR;
-
         /** Width of the navigation handle.
          *  @hide
          */
@@ -5026,7 +5020,6 @@ public final class Settings {
             ANBI_ENABLED_OPTION,
             QS_HEADER_BG_ALPHA,
             DOUBLE_TAP_SLEEP_GESTURE,
-            GESTURE_PILL_TOGGLE,
             NAVIGATION_HANDLE_WIDTH,
         };
 
@@ -5159,7 +5152,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_HEADER_BG_ALPHA);
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
-            PRIVATE_SETTINGS.add(GESTURE_PILL_TOGGLE);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
             PRIVATE_SETTINGS.add(GESTURES_ENABLED);
             PRIVATE_SETTINGS.add(GESTURE_DOUBLE_TAP);
@@ -5281,8 +5273,6 @@ public final class Settings {
             VALIDATORS.put(QS_HEADER_BG_ALPHA, QS_HEADER_BG_ALPHA_VALIDATOR);
             VALIDATORS.put(DOUBLE_TAP_SLEEP_GESTURE,
                     DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
-            VALIDATORS.put(GESTURE_PILL_TOGGLE, GESTURE_PILL_TOGGLE_VALIDATOR);
-            VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
         }
 
         /**
