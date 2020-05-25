@@ -22,10 +22,13 @@
         android:key="quick_settings"
         android:title="@string/quick_settings" >
 
-        <com.statix.support.preferences.SecureSettingSwitchPreference
+        <com.statix.support.preferences.SecureSettingListPreference
             android:key="qs_show_brightness_slider"
             android:title="@string/tuner_show_brightness_new"
-            android:defaultValue="true" />
+            android:dialogTitle="@string/tuner_show_brightness_new"
+            android:entries="@array/status_bar_brightness_slider_entries"
+            android:entryValues="@array/status_bar_brightness_slider_values"
+            android:defaultValue="1" />
 
         <com.statix.support.preferences.SecureSettingSwitchPreference
             android:key="qs_show_auto_brightness"
