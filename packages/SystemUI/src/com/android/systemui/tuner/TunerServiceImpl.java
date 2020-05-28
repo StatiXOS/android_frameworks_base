@@ -61,8 +61,8 @@ public class TunerServiceImpl extends TunerService {
     // Things that use the tunable infrastructure but are now real user settings and
     // shouldn't be reset with tuner settings.
     private static final String[] RESET_BLACKLIST = new String[] {
-            QSTileHost.TILES_SETTING,
-            Settings.Secure.DOZE_ALWAYS_ON,
+            QSTileHost.TILES_SETTING,/*
+            Settings.Secure.DOZE_ALWAYS_ON,*/
             Settings.Secure.MEDIA_CONTROLS_RESUME
     };
 
