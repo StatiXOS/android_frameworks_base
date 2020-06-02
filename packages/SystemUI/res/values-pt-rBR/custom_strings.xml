@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2017 CarbonROM
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Caffeine QS Tile -->
+    <string name="quick_settings_caffeine_label">Cafeína</string>
+    <string name="accessibility_quick_settings_caffeine_off">Cafeína desativada</string>
+    <string name="accessibility_quick_settings_caffeine_on">Cafeína ativada</string>
+
+    <!-- Dash Charging -->
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Carregamento Dash (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> até completar)</string>
+    <string name="keyguard_plugged_in_dash_charging">Carregamento Dash</string>
+
+    <!-- Power Menu -->
+    <string name="global_action_reboot">Reiniciar</string>
+    <string name="global_action_reboot_more">Reiniciar\u2026</string>
+    <string name="global_action_reboot_sub">Sistema</string>
+    <string name="global_action_reboot_recovery">Recovery</string>
+    <string name="global_action_reboot_bootloader">Bootloader</string>
+    <string name="global_action_dismissable_dialog_text">Reinício avançado está desativado. Deseja reiniciar\u003f</string>
+    <string name="global_action_dnaa">Não exibir novamente</string>
+    <string name="global_action_settings">Configurações</string>
+    <string name="global_action_screenrecord">Gravação de tela</string>
+    <string name="global_action_flashlight">Lanterna</string>
+    
+
+    <string name="tuner_quick_settings">Configurações rápidas</string>
+    <string name="tuner_show_brightness_new">Exibir controle de brilho</string>
+    <string name="tuner_brightness_position_bottom">Controle de brilho na parte inferior</string>
+    <string name="tuner_battery_percent_disable">Não exibir porcentagem</string>
+    <string name="tuner_battery_percent_enable">Sempre exibir porcentagem</string>
+    <string name="tuner_battery_percent_charging">Exibir porcentagem durante o carregamento</string>
+    <string name="tuner_battery_percent_hide">Não exibir esse ícone</string>
+    <string name="tuner_battery_percent_title">Porcentagem de bateria</string>
+    <string name="tuner_status_bar_show_battery_image">Exibir ícone de bateria</string>
+    <string name="tuner_keyguard_show_lock_icon_title">Exibir status de bloqueio</string>
+    <string name="tuner_keyguard_show_lock_icon_summary">Exibir ícone do status de bloqueio no topo</string>
+    <string name="qs_header_bg_title">Ajustar opacidade do cabeçalho</string>
+    <string name="tuner_keyguard_show_watt_title">Exibir watt do carregamento</string>
+    <string name="tuner_keyguard_show_watt_summary">Exbir watt do carregamento em mW</string>
+
+    <!-- navbar editor -->
+    <string name="preview">Prévia</string>
+    <string name="keycode">Código da tecla</string>
+    <string name="no_home_title">Nenhum botão de ínicio encontrado</string>
+    <string name="no_home_message">Um botão de início é necessário para navegar neste dispositivo. Favor adicionar um botão de início antes de salvar.</string>
+    <string name="clipboard_description">A Prancheta permite que itens sejam arrastados diretamente para a área de transferência. Também é possível arrastar os itens diretamente para fora da área de transferência quando presente.</string>
+    <string name="keycode_description">Os botões de código de tecla permitem que teclas do teclado sejam adicionadas à Barra de Navegação. Quando pressionadas, elas emulam a tecla escolhida. Primeiro, a tecla deve ser selecionada para o botão, seguida por uma imagem a ser exibida no botão.</string>
+    <string name="start">Início</string>
+    <string name="center">Centro</string>
+    <string name="end">Fim</string>
+    <string name="space">Espaçador</string>
+    <string name="menu_ime">Menu / Alternador de teclado</string>
+    <string name="select_button">Selecione o botão para adicionar</string>
+    <string name="add_button">Adicionar botão</string>
+    <string name="save">Salvar</string>
+    <string name="reset">Reiniciar</string>
+    <string name="select_keycode">Selecionar botão do teclado</string>
+    <string name="left">Esquerda</string>
+    <string name="right">Direita</string>
+    <string name="navbar_editor_title">Editor</string>
+    <string name="navbar_editor_summary">Configurar barra de navegação</string>
+    <string name="status_bar_vpn">VPN</string>
+
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Captura de tela</string>
+    <string name="quick_settings_region_screenshot_label">Captura de tela parcial</string>
+
+    <!-- QS rows and columns -->
+    <string name="qs_column_rows_settings_title">Configurações do painel de Configurações Rápidas</string>
+    <string name="qs_columns_rows_category_title">Colunas e Linhas do painel de Configurações Rápidas</string>
+    <string name="qs_rows_columns_title">Linhas e Colunas do painel de Configurações Rápidas</string>
+    <string name="qs_rows_portrait_title">Linhas no modo retrato</string>
+    <string name="qs_rows_landscape_title">Linhas no modo paisagem</string>
+    <string name="qs_columns_portrait_title">Colunas no modo retrato</string>
+    <string name="qs_columns_landscape_title">Colunas no modo paisagem</string>
+    <string name="qs_tile_title_visibility_title">Mostrar títulos</string>
+
+    <!-- Reboot/Recovery QS tile -->
+    <string name="quick_settings_reboot_label">Reiniciar</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
+    
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">Alternar cartão de dados</string>
+    <string name="qs_data_switch_toast_0">Atualmente nenhum cartão SIM está inserido</string>
+    <string name="qs_data_switch_toast_1">Atualmente apenas um cartão SIM está inserido</string>
+    <string name="qs_data_switch_changed_1">Alternar cartão de dados para SIM 1.</string>
+    <string name="qs_data_switch_changed_2">Alternar cartão de dados para SIM 2.</string>
+
+    <!-- Screen record -->
+    <string name="quick_settings_screen_record_label">Gravador de Tela</string>
+    <string name="quick_settings_screen_record_start">Iniciar</string>
+    <string name="quick_settings_screen_record_stop">Parar</string>
+    <string name="screenrecord_description">Enquanto estiver gravando, o Sistema Android pode capturar qualquer informação sensível visível na sua tela ou reproduzida no seu dispositivo. Isso inclui senhas, dados de pagamento, fotos, mensagens e áudios.</string>
+    <string name="screenrecord_audio_title">Fonte de áudio</string>
+    <string name="screenrecord_audio_summary">Habilita a escolha de uma entrada de áudio ou a desativação.</string>
+    <string name="screenrecord_audio_recording_internal">Interno</string>
+    <string name="screenrecord_audio_recording_microphone">Microfone</string>
+    <string name="screenrecord_audio_recording_off">Desativado</string>
+    <string name="screenrecord_ongoing_screen_and_audio">Gravando tela e áudio</string>
+    <string name="screenrecord_ongoing_screen_only">Gravando tela</string>
+    <string name="screenrecord_start">Iniciar</string>
+    <string name="screenrecord_start_label">Iniciar Gravação?</string>
+    <string name="screenrecord_taps_label">Mostrar toques na tela</string>
+    <string name="status_bar_screen_record">screen_record</string>
+    <string name="screenrecord_video_bitrate_label">Taxa de bits do vídeo</string>
+    <string name="screenrecord_video_bitrate_summary">Seleciona a taxa de bits do vídeo para melhor qualidade, pelo custo de um arquivo maior.</string>
+
+    <!-- Network traffic -->
+    <string name="traffic_title">Indicadores de tráfego</string>
+    <string name="traffic_title_summary">Customiza os indicadores de tráfego da rede</string>
+    <string name="network_traffic_title">Tráfego de rede</string>
+    <string name="network_traffic_type">Selecione o tipo de atividade da internet</string>
+    <string name="show_network_traffic_up">Upload</string>
+    <string name="show_network_traffic_down">Download</string>
+    <string name="show_network_traffic_all">Upload e Download</string>
+    <string name="network_traffic_state_title">Mostrar atividade da internet na barra de status</string>
+    <string name="network_traffic_autohide_threshold_title">Limite para ocultar automaticamente a atividade da internet (KB/s)</string>
+    <string name="network_traffic_hidearrow">Ocultar setas</string>
+    <string name="network_traffic_hidearrow_summary">Esconde as setas do indicador de tráfego da internet</string>
+
+     <!-- Old MobileType Toggle -->
+    <string name="use_old_mobiletype_title">Usar estilo de sinal móvel antigo</string>
+    
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">Notificações pop-up</string>
+    <string name="accessibility_quick_settings_heads_up_off">Notificações pop-up desativadas.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Notificações pop-up ativadas.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Notificações pop-up foram desativadas.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Notificações pop-up foram ativadas.</string>
+</resources>
