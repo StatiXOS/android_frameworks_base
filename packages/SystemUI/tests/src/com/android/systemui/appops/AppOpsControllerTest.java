@@ -32,6 +32,8 @@ import static org.mockito.Mockito.when;
 
 import static java.lang.Thread.sleep;
 
+import static java.lang.Thread.sleep;
+
 import android.app.AppOpsManager;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -90,7 +92,7 @@ public class AppOpsControllerTest extends SysuiTestCase {
         when(mPackageManager.getPermissionFlags(anyString(), anyString(),
                 eq(UserHandle.getUserHandleForUid(TEST_UID_NON_USER_SENSITIVE)))).thenReturn(0);
 
-        mController = new AppOpsControllerImpl(mContext, Dependency.get(Dependency.BG_LOOPER));
+        mController = new AppOpsControllerImpl(mContext, mTestableLooper.getLooper());
     }
 
     @Test

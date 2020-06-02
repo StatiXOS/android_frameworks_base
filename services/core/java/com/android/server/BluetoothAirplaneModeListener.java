@@ -135,7 +135,7 @@ class BluetoothAirplaneModeListener {
             mHandler.sendMessageDelayed(msg, USER_PREFERENCE_CHECK_DELAY_MS);
             return;
         }
-        mAirplaneHelper.airplaneModeChanged(mBluetoothManager);
+        mAirplaneHelper.onAirplaneModeChanged(mBluetoothManager);
     }
 
     @VisibleForTesting
@@ -223,7 +223,7 @@ class BluetoothAirplaneModeListener {
         }
 
         @VisibleForTesting
-        public void airplaneModeChanged(BluetoothManagerService managerService) {
+        public void onAirplaneModeChanged(BluetoothManagerService managerService) {
             managerService.onAirplaneModeChanged();
         }
 
