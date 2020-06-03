@@ -40,7 +40,6 @@ import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -322,25 +321,25 @@ public class KeyguardSliceProvider extends SliceProvider implements
         if (!WeatherClient.isAvailable(getContext()) || mWeatherInfo == null || mWeatherInfo.getStatus() != WeatherClient.WEATHER_UPDATE_SUCCESS) {
             return;
         }
-        if (mWeatherInfo.getWeatherConditionImage() == 0){
-            Log.d("WeatherClient", "addWeather: Not adding because weather condition image is unknown");
-            return;
-        }
         int temperatureMetric = mWeatherInfo.getTemperature(true);
         int temperatureImperial = mWeatherInfo.getTemperature(false);
         String temperatureText = useMetricUnit ?
                                  Integer.toString(temperatureMetric) + "°C" :
                                  Integer.toString(temperatureImperial) + "°F";
-        int conditionImage = mWeatherInfo.getWeatherConditionImage();
-        IconCompat conditionIcon = IconCompat.createWithResource(getContext(), conditionImage);
+        Drawable conditionImage = mWeatherInfo.getWeatherConditionImage();
         RowBuilder weatherRowBuilder = new RowBuilder(mWeatherUri)
                 .setTitle(temperatureText)
-                .addEndItem(conditionIcon, ListBuilder.ICON_IMAGE);
+                .addEndItem(
+                    IconCompat.createWithResource(getContext(), conditionImage),
+                    ListBuilder.ICON_IMAGE);
         builder.addRow(weatherRowBuilder);
     }
 
     @Override
     public void onWeatherUpdated(WeatherClient.WeatherInfo weatherInfo) {
+        if (weatherInfo.getStatus() == WeatherClient.WEATHER_UPDATE_RUNNING){
+            return;
+        }
         mWeatherInfo = weatherInfo;
         mContentResolver.notifyChange(mSliceUri, null /* observer */);
     }
