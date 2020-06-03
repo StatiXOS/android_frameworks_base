@@ -85,8 +85,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.android.internal.util.statix.WeatherClient;
-
 /**
  * This class is the policy for granting runtime permissions to
  * platform components and default handlers in the system such
@@ -745,12 +743,6 @@ public final class DefaultPermissionGrantPolicy {
         if (!TextUtils.isEmpty(systemCaptionsServicePackageName)) {
             grantPermissionsToSystemPackage(systemCaptionsServicePackageName, userId,
                     MICROPHONE_PERMISSIONS);
-        }
-
-        // Weather client
-        PackageInfo weatherClientPackage = getSystemPackageInfo(WeatherClient.SERVICE_PACKAGE);
-        if (weatherClientPackage != null && doesPackageSupportRuntimePermissions(weatherClientPackage)) {
-            grantRuntimePermissions(weatherClientPackage, ALWAYS_LOCATION_PERMISSIONS, true, userId);
         }
     }
 
