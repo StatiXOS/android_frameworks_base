@@ -17,13 +17,6 @@
  */
 -->
 <resources>
-    <!-- SysUI Tuner: Options for how battery is displayed [CHAR LIMIT=NONE] -->
-    <string-array name="battery_options_new">
-        <item>@string/tuner_battery_percent_disable</item>
-        <item>@string/tuner_battery_percent_enable</item>
-        <item>@string/tuner_battery_percent_charging</item>
-    </string-array>
-
     <!-- Network Traffic Type -->
     <string-array name="show_network_traffic_type_entries" translatable="false">
         <item>@string/show_network_traffic_up</item>

@@ -38,12 +38,6 @@
     <string name="tuner_quick_settings">Configurações rápidas</string>
     <string name="tuner_show_brightness_new">Exibir controle de brilho</string>
     <string name="tuner_brightness_position_bottom">Controle de brilho na parte inferior</string>
-    <string name="tuner_battery_percent_disable">Não exibir porcentagem</string>
-    <string name="tuner_battery_percent_enable">Sempre exibir porcentagem</string>
-    <string name="tuner_battery_percent_charging">Exibir porcentagem durante o carregamento</string>
-    <string name="tuner_battery_percent_hide">Não exibir esse ícone</string>
-    <string name="tuner_battery_percent_title">Porcentagem de bateria</string>
-    <string name="tuner_status_bar_show_battery_image">Exibir ícone de bateria</string>
     <string name="tuner_keyguard_show_lock_icon_title">Exibir status de bloqueio</string>
     <string name="tuner_keyguard_show_lock_icon_summary">Exibir ícone do status de bloqueio no topo</string>
     <string name="qs_header_bg_title">Ajustar opacidade do cabeçalho</string>
