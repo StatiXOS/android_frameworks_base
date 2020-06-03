@@ -79,7 +79,6 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
     private static final String VISIBLE_BY_POLICY = "visible_by_policy";
     private static final String VISIBLE_BY_USER = "visible_by_user";
     private static final String VISIBILITY = "visibility";
-    private static final String SLOT_CLOCK = "clock";
     private static final String QSHEADER = "qsheader";
 
     private final CurrentUserTracker mCurrentUserTracker;
