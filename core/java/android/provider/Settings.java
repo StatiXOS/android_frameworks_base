@@ -4780,16 +4780,6 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
-          * Whether to change the transparency of the qs header
-          * @hide
-          */
-         public static final String QS_HEADER_BG_ALPHA = "qs_header_bg_alpha";
-
-         /** @hide */
-         private static final Validator QS_HEADER_BG_ALPHA_VALIDATOR =
-                 ANY_INTEGER_VALIDATOR;
-
-        /**
          * Whether user can swap the order of the Alert Slider.
          * * Whether user can invert the order of the Alert Slider.
          * 0: Default
@@ -5052,7 +5042,6 @@ public final class Settings {
             BACK_GESTURE_HEIGHT,
             ALLOW_INCALL_HOME,
             ANBI_ENABLED_OPTION,
-            QS_HEADER_BG_ALPHA,
             DOUBLE_TAP_SLEEP_GESTURE,
             NAVIGATION_HANDLE_WIDTH,
         };
@@ -5183,7 +5172,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BRIGHTNESS);
             PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
             PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
-            PRIVATE_SETTINGS.add(QS_HEADER_BG_ALPHA);
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
@@ -5304,7 +5292,6 @@ public final class Settings {
             VALIDATORS.put(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED, BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED_VALIDATOR);
             VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
             VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
-            VALIDATORS.put(QS_HEADER_BG_ALPHA, QS_HEADER_BG_ALPHA_VALIDATOR);
             VALIDATORS.put(DOUBLE_TAP_SLEEP_GESTURE,
                     DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
 	    VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
