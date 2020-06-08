@@ -199,3 +199,4 @@ public class DividedLinesClockController implements ClockPlugin {
         return false;
     }
 }
+>>>>>>> ef74c683ec4... dos2unix
