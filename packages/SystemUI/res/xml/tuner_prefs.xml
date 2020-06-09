@@ -40,6 +40,12 @@
             android:min="0"
             android:defaultValue="255" />
 
+        <com.statix.support.preferences.CustomSystemSeekBarPreference
+            android:key="brightness_slider_qs_unexpanded"
+            android:title="@string/brightness_slider_qs_unexpanded"
+            android:summary="@string/brightness_slider_qs_unexpanded_summary"
+            android:defaultValue="false" />
+
         <com.statix.support.preferences.SystemSettingSwitchPreference
             android:key="qs_tile_title_visibility"
             android:title="@string/qs_tile_title_visibility_title"
