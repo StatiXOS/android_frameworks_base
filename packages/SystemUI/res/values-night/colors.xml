@@ -84,7 +84,7 @@
     <color name="biometric_dialog_error">#fff28b82</color> <!-- red 300 -->
 
     <!-- MIUI style brightness bar -->
-    <color name="brightness_slider_progress">#9B9B9D</color>
-    <color name="brightness_slider_background">@android:color/black</color>
+    <color name="brightness_slider_progress">@*android:color/accent_device_default_dark</color>
+    <color name="brightness_slider_background">@*android:color/primary_dark_device_default_settings</color>
     <color name="brightness_slider_icons">@android:color/white</color>
 </resources>
