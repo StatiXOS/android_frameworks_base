@@ -85,6 +85,6 @@
 
     <!-- MIUI style brightness bar -->
     <color name="brightness_slider_progress">#9B9B9D</color>
-    <color name="brightness_slider_background">@android:color/black</color>
+    <color name="brightness_slider_background">#992E2E2E</color>
     <color name="brightness_slider_icons">@android:color/white</color>
 </resources>
