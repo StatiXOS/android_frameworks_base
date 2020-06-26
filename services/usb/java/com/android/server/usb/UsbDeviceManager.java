@@ -1268,7 +1268,7 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
                             new Notification.Builder(mContext, ADB_NOTIF_CHANNEL)
                                     .setSmallIcon(com.android.internal.R.drawable.stat_sys_adb)
                                     .setWhen(0)
-                                    .setOngoing(false)
+                                    .setOngoing(true)
                                     .setTicker(title)
                                     .setDefaults(0)  // please be quiet
                                     .setColor(mContext.getColor(
