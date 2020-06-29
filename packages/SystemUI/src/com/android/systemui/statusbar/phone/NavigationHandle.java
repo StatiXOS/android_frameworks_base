@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import static android.provider.Settings.System.NAVIGATION_HANDLE_WIDTH;
+import static android.provider.Settings.System.NAVIGATION_HANDLE_RADIUS;
 
 import android.animation.ArgbEvaluator;
 import android.annotation.ColorInt;
@@ -42,6 +43,7 @@ public class NavigationHandle extends View implements ButtonInterface {
     private final int mRadius;
     private final int mBottom;
     private final int mBaseWidth;
+    private final int mBaseRadius;
 
     public NavigationHandle(Context context) {
         this(context, null);
@@ -121,6 +123,22 @@ public class NavigationHandle extends View implements ButtonInterface {
             return (int) (1.33 * mBaseWidth);
         } else {
             return 2 * mBaseWidth;
+        }
+    }
+    
+    private int getCustomRadius() {
+        /* 0: default (stock AOSP)
+           1: medium
+           2: thick (iOS)
+        */
+        int userSelection = Settings.System.getInt(getContext().getContentResolver(),
+                NAVIGATION_HANDLE_RADIUS, 0);
+        if (userSelection == 0) {
+            return mRadius;
+        } else if (userSelection == 1) {
+            return (int) (0.5 * mRadius);
+        } else {
+            return 2 * mRadius;
         }
     }
 }
