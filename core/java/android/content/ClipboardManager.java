@@ -130,12 +130,20 @@ public class ClipboardManager extends android.text.ClipboardManager {
      *
      * @see #setPrimaryClip(ClipData)
      */
-    public @Nullable ClipData getPrimaryClip() {
+    public @Nullable ClipData getPrimaryClip(boolean notify) {
         try {
+            if (notify) mService.displayToast(mContext.getOpPackageName());
             return mService.getPrimaryClip(mContext.getOpPackageName(), mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
+    }
+
+    /** Overloaded copy */
+    public @Nullable ClipData getPrimaryClip() {
+        boolean notify = false;
+        if (mContext.getOpPackageName().equals("com.android.chrome")) notify = true;
+        return getPrimaryClip(notify);
     }
 
     /**
