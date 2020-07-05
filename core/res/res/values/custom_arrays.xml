@@ -39,4 +39,8 @@
         <item>voiceassist</item>
         <item>restart</item>
     </string-array>
+  
+    <string-array translatable="false" name="config_notifyClipboardPackages">
+        <item>com.android.chrome</item>
+    </string-array>
 </resources>
