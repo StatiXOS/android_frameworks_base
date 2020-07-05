@@ -176,6 +176,7 @@ public class ClipboardService extends SystemService {
     private final AutofillManagerInternal mAutofillInternal;
     private final IBinder mPermissionOwner;
     private HostClipboardMonitor mHostClipboardMonitor = null;
+    private String mPreviousPastePackageName;
     private Thread mHostMonitorThread = null;
 
     private final SparseArray<PerUserClipboard> mClipboards = new SparseArray<>();
@@ -365,6 +366,7 @@ public class ClipboardService extends SystemService {
                             intendingUid, intendingUserId)) {
                     return;
                 }
+                mPreviousPastePackageName = callingPackage;
                 checkDataOwnerLocked(clip, intendingUid);
                 setPrimaryClipInternal(clip, intendingUid);
             }
@@ -462,6 +464,7 @@ public class ClipboardService extends SystemService {
                 PerUserClipboard clipboard = getClipboard(intendingUserId);
                 if (clipboard.primaryClip != null) {
                     CharSequence text = clipboard.primaryClip.getItemAt(0).getText();
+                    displayToast(callingPackage);
                     return text != null && text.length() > 0;
                 }
                 return false;
@@ -743,24 +746,34 @@ public class ClipboardService extends SystemService {
         }
     }
 
-    private boolean clipboardAccessAllowed(int op, String callingPackage, int uid,
-            @UserIdInt int userId) {
+    private void displayToast(String destPkg) {
         // create toast that app has tried to access clipboard
         final PackageManager pm = getContext().getPackageManager();
-        ApplicationInfo ai;
+        ApplicationInfo aiDest;
+        ApplicationInfo aiSource;
         try {
-            ai = pm.getApplicationInfo(callingPackage, 0);
+            aiSource = pm.getApplicationInfo(mPreviousPastePackageName, 0);
         } catch (final NameNotFoundException e) {
-            ai = null;
+            aiSource = null;
         }
-        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+        try {
+            aiDest = pm.getApplicationInfo(destPkg, 0);
+        } catch (final NameNotFoundException e) {
+            aiDest = null;
+        }
+        final String sourceApplicationName = (String) (aiSource != null ? pm.getApplicationLabel(aiSource) : "(unknown)");
+        final String destApplicationName = (String) (aiDest != null ? pm.getApplicationLabel(aiDest) : "(unknown)");
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getContext(), applicationName + " tried to access the clipboard", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), destApplicationName + " pasted from " + sourceApplicationName, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean clipboardAccessAllowed(int op, String callingPackage, int uid,
+            @UserIdInt int userId) {
         // Check the AppOp.
         if (mAppOps.noteOp(op, uid, callingPackage) != AppOpsManager.MODE_ALLOWED) {
             return false;
