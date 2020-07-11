@@ -438,6 +438,19 @@
     </style>
 
     <style name="TunerPreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
+    <item name="preferenceCategoryStyle">@style/Preference.Statix.Category</item>
+    </style>
+
+    <style name="Preference.Statix.Category" parent="@style/Preference.Category">
+        <item name="android:layout">@layout/statix_preference_category_material</item>
+        <item name="android:selectable">false</item>
+        <item name="allowDividerBelow">false</item>
+        <item name="android:shouldDisableView">false</item>
+    </style>
+
+    <style name="PreferenceCategoryTitleTextStyle">
+        <item name="android:textAppearance">?preferenceCategoryTitleTextAppearance</item>
+        <item name="android:textColor">?android:colorAccent</item>
     </style>
 
     <style name="TextAppearance.NotificationInfo.Confirmation">
