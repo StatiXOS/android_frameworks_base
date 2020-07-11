@@ -22,6 +22,10 @@
         android:key="quick_settings"
         android:title="@string/quick_settings" >
 
+    <PreferenceCategory
+        android:key="qs_brightness"
+        android:title="@string/qs_brightness_title">
+
         <com.android.systemui.tuner.TunerSwitch
             android:key="qs_show_brightness"
             android:title="@string/tuner_show_brightness_new"
@@ -31,19 +35,11 @@
             android:key="qs_brightness_position_bottom"
             android:title="@string/tuner_brightness_position_bottom"
             sysui:defValue="false" />
+    </PreferenceCategory>
 
-        <com.statix.support.preferences.CustomSystemSeekBarPreference
-            android:key="qs_header_bg_alpha"
-            android:title="@string/qs_header_bg_title"
-            allowEditText="true"
-            android:max="255"
-            android:min="0"
-            android:defaultValue="255" />
-
-        <com.statix.support.preferences.SystemSettingSwitchPreference
-            android:key="qs_tile_title_visibility"
-            android:title="@string/qs_tile_title_visibility_title"
-            android:defaultValue="true" />
+    <PreferenceCategory
+        android:key="qs_rows_and_columns"
+        android:title="@string/qs_rows_columns_title">
 
         <com.statix.support.preferences.CustomSystemSeekBarPreference
             android:key="qs_rows_portrait"
@@ -74,9 +70,29 @@
             android:defaultValue="4" />
 
         <com.statix.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_title_visibility"
+            android:title="@string/qs_tile_title_visibility_title"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="misc_category"
+        android:title="@string/misc_title">
+
+        <com.statix.support.preferences.SystemSettingSwitchPreference
             android:key="footer_text_show"
             android:title="@string/footer_text_show_title"
             android:defaultValue="false" />
+
+        <com.statix.support.preferences.CustomSystemSeekBarPreference
+            android:key="qs_header_bg_alpha"
+            android:title="@string/qs_header_bg_title"
+            allowEditText="true"
+            android:max="255"
+            android:min="0"
+            android:defaultValue="255" />
+    </PreferenceCategory>
+
     </PreferenceScreen>
 
     <PreferenceScreen
