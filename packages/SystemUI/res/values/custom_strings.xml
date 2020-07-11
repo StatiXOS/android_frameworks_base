@@ -37,6 +37,7 @@
     <string name="tuner_quick_settings">Quick settings</string>
     <string name="tuner_show_brightness_new">Show brightness slider</string>
     <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+    <string name="qs_brightness_title">QS Brightness</string>
     <string name="tuner_keyguard_show_lock_icon_title">Show lock status</string>
     <string name="tuner_keyguard_show_lock_icon_summary">Show current lock status icon on top</string>
     <string name="qs_header_bg_title">Adjust header opacity</string>
@@ -71,6 +72,7 @@
     <string name="quick_settings_region_screenshot_label">Partial screenshot</string>
 
     <!-- QS rows and columns -->
+    <string name="qs_rows_and_columns_title">QS rows and columns</string>
     <string name="qs_column_rows_settings_title">QS panel settings</string>
     <string name="qs_columns_rows_category_title">QS columns and rows</string>
     <string name="qs_rows_columns_title">QS rows and columns</string>
@@ -141,4 +143,7 @@
 
     <!-- QS Footer Text -->
     <string name="footer_text_show_title">Display footer text</string>
+    
+    <!-- Misc -->
+    <string name="misc_title">Misc.</string>
 </resources>
