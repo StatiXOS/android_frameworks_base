@@ -4950,7 +4950,7 @@ public final class Settings {
          * @hide
          */
         public static final String SCREENRECORD_AUDIO_SOURCE = "screenrecord_audio_source";
-        
+
 	/**
          * Gestures nav: whether show it or hide completely
          * @hide
@@ -4980,6 +4980,13 @@ public final class Settings {
          /** @hide */
         private static final Validator FOOTER_TEXT_SHOW_VALIDATOR =
                 BOOLEAN_VALIDATOR;
+
+        /**
+         * Toggle for clipboard access toast.
+         * @hide
+         */
+
+        public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
