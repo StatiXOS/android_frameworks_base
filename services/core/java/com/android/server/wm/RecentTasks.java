@@ -47,6 +47,7 @@ import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
 import android.app.AppGlobals;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -72,6 +73,7 @@ import android.view.WindowManagerPolicyConstants.PointerEventListener;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.function.pooled.PooledLambda;
+import com.android.internal.util.statix.Utils;
 import com.android.server.am.ActivityManagerService;
 
 import com.google.android.collect.Sets;
@@ -354,9 +356,8 @@ class RecentTasks {
      * Loads the static recents component.  This is called after the system is ready, but before
      * any dependent services (like SystemUI) is started.
      */
-    void loadRecentsComponent(Resources res) {
-        final String rawRecentsComponent = res.getString(
-                com.android.internal.R.string.config_recentsComponentName);
+    void loadRecentsComponent(Context context) {
+        final String rawRecentsComponent = Utils.getRecentsComponent(context);
         if (TextUtils.isEmpty(rawRecentsComponent)) {
             return;
         }
@@ -538,7 +539,7 @@ class RecentTasks {
     }
 
     void onSystemReadyLocked() {
-        loadRecentsComponent(mService.mContext.getResources());
+        loadRecentsComponent(mService.mContext);
         mTasks.clear();
     }
 

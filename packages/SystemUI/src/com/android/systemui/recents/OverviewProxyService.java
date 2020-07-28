@@ -56,6 +56,7 @@ import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.policy.ScreenDecorationsUtils;
+import com.android.internal.util.statix.Utils;
 import com.android.systemui.Dumpable;
 import com.android.systemui.SysUiServiceProvider;
 import com.android.systemui.recents.OverviewProxyService.OverviewProxyListener;
@@ -471,8 +472,7 @@ public class OverviewProxyService implements CallbackController<OverviewProxyLis
         mStatusBarWinController = statusBarWinController;
         mDeviceProvisionedController = provisionController;
         mConnectionBackoffAttempts = 0;
-        mRecentsComponentName = ComponentName.unflattenFromString(context.getString(
-                com.android.internal.R.string.config_recentsComponentName));
+        mRecentsComponentName = ComponentName.unflattenFromString(Utils.getRecentsComponent(context));
         mQuickStepIntent = new Intent(ACTION_QUICKSTEP)
                 .setPackage(mRecentsComponentName.getPackageName());
         mWindowCornerRadius = ScreenDecorationsUtils.getWindowCornerRadius(mContext.getResources());

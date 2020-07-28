@@ -261,11 +261,9 @@ public class Utils {
         return result > Math.round(px);
     }
 
-    
     public static void setPartialScreenshot(boolean active) {
         FireActions.setPartialScreenshot(active);
     }
-
 
     public static boolean shouldShowGestureNav(Context context) {
         boolean setNavbarHeight = Settings.System.getIntForUser(context.getContentResolver(),
@@ -313,6 +311,19 @@ public class Utils {
         public List<OverlayInfo> getOverlayInfosForTarget(String target, int userId)
                 throws RemoteException {
             return mService.getOverlayInfosForTarget(target, userId);
+        }
+    }
+
+    // get recents component name
+    public static String getRecentsComponent(Context context) {
+        String defaultProvider = context.getResources().getString(
+                com.android.internal.R.string.config_recentsComponentName);
+        String customProvider = Settings.System.getString(context.getContentResolver(), "custom_recents_provider");
+        if (customProvider == null) {
+            Settings.System.putString(context.getContentResolver(), "custom_recents_provider", defaultProvider);
+            return defaultProvider;
+        } else {
+            return customProvider;
         }
     }
 }

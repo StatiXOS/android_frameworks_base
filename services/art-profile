@@ -16459,7 +16459,7 @@ PLcom/android/server/wm/RecentTasks;->isUserRunning(II)Z
 HSPLcom/android/server/wm/RecentTasks;->isVisibleRecentTask(Lcom/android/server/wm/TaskRecord;)Z
 HSPLcom/android/server/wm/RecentTasks;->loadParametersFromResources(Landroid/content/res/Resources;)V
 HSPLcom/android/server/wm/RecentTasks;->loadPersistedTaskIdsForUserLocked(I)V
-HSPLcom/android/server/wm/RecentTasks;->loadRecentsComponent(Landroid/content/res/Resources;)V
+HSPLcom/android/server/wm/RecentTasks;->loadRecentsComponent(Landroid/content/Context;)V
 HSPLcom/android/server/wm/RecentTasks;->loadUserRecentsLocked(I)V
 HSPLcom/android/server/wm/RecentTasks;->notifyTaskPersisterLocked(Lcom/android/server/wm/TaskRecord;Z)V
 HSPLcom/android/server/wm/RecentTasks;->onSystemReadyLocked()V

@@ -4988,6 +4988,15 @@ public final class Settings {
 
         public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
 
+
+        /**
+         * Recents provider
+         * @hide
+         */
+        public static final String CUSTOM_RECENTS_PROVIDER = "custom_recents_provider";
+        /** @hide */
+        private static final Validator CUSTOM_RECENTS_PROVIDER_VALIDATOR = ANY_STRING_VALIDATOR;
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -5208,6 +5217,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_DOWN);
             PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_LEFT);
             PRIVATE_SETTINGS.add(FOOTER_TEXT_SHOW);
+            PRIVATE_SETTINGS.add(SHOW_CLIPBOARD_TOAST);
+            PRIVATE_SETTINGS.add(CUSTOM_RECENTS_PROVIDER);
         }
 
         /**
@@ -5315,6 +5326,7 @@ public final class Settings {
                     DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
 	    VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
             VALIDATORS.put(FOOTER_TEXT_SHOW, FOOTER_TEXT_SHOW_VALIDATOR);
+            VALIDATORS.put(CUSTOM_RECENTS_PROVIDER, CUSTOM_RECENTS_PROVIDER_VALIDATOR);
         }
 
         /**
