@@ -28,4 +28,10 @@
     <string name="reboot_system_title">Reiniciar sistema</string>
     <string name="reboot_system_message">Reiniciando sistema\u2026</string>
 
+    <!-- ADB over network notification -->
+    <string name="adb_net_active_notification_title">ADB através da rede ativado</string>
+    <!-- ADB over USB and network notification -->
+    <string name="adb_both_active_notification_title">ADB através do USB &amp; da rede ativado</string>
+    <!-- ADB notification message-->
+    <string name="adb_active_generic_notification_message">Toque para desativar a depuração.</string>
 </resources>
