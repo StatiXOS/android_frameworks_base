@@ -3596,6 +3596,11 @@ public final class Settings {
             }
         }
 
+	/** Screen off FOD
+	* @hide
+	*/
+	public static final String FOD_GESTURE = "fod_gesture";
+
         /**
          * Convenience function to write a batch of configuration-related
          * settings from a {@link Configuration} object.
