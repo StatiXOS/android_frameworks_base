@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -36,7 +37,7 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
     protected int mMaxAllowedRows = 3;
 
     // Prototyping with less rows
-    private final boolean mLessRows;
+    private boolean mLessRows;
     private int mMinRows = 1;
     private int mMaxColumns = NO_MAX_COLUMNS;
     private int mResourceColumns;
@@ -109,6 +110,7 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
     }
 
     public boolean updateResources() {
+        Log.d(TAG, "updateResources called");
         final Resources res = mContext.getResources();
         mResourceColumns = Math.max(1, res.getInteger(R.integer.quick_settings_num_columns));
         mCellHeight = mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_height);
@@ -116,6 +118,7 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
         mCellMarginVertical= res.getDimensionPixelSize(R.dimen.qs_tile_margin_vertical);
         mCellMarginTop = res.getDimensionPixelSize(R.dimen.qs_tile_margin_top);
         mMaxAllowedRows = Math.max(1, getResources().getInteger(R.integer.quick_settings_max_rows));
+        mLessRows = (Settings.System.getInt(mContext.getContentResolver(), "qs_less_rows", 0) != 0);
         if (mLessRows) mMaxAllowedRows = Math.max(mMinRows, mMaxAllowedRows - 1);
         if (updateColumns()) {
             requestLayout();

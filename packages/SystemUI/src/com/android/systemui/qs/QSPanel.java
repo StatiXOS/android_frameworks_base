@@ -577,6 +577,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             updateMediaHostContentMargins();
             updateHorizontalLinearLayoutMargins();
             updatePadding();
+            mTileLayout.updateResources();
             return true;
         }
         return false;

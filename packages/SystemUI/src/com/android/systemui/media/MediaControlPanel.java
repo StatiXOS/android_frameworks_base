@@ -27,6 +27,7 @@ import android.graphics.drawable.Icon;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -115,6 +116,7 @@ public class MediaControlPanel {
         }
         mSeekBarViewModel.onDestroy();
         mMediaViewController.onDestroy();
+        Settings.System.putInt(mContext.getContentResolver(), "qs_less_rows", 0);
     }
 
     private void loadDimens() {
@@ -328,6 +330,9 @@ public class MediaControlPanel {
         // Seek Bar
         final MediaController controller = getController();
         mBackgroundExecutor.execute(() -> mSeekBarViewModel.updateController(controller));
+
+        // write to settings
+        Settings.System.putInt(mContext.getContentResolver(), "qs_less_rows", 1);
 
         // Set up long press menu
         // TODO: b/156036025 bring back media guts

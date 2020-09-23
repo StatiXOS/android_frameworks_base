@@ -4784,6 +4784,13 @@ public final class Settings {
         public static final String ENABLE_DARKER_THEME = "enable_darker_theme";
 
         /**
+         * If we should have less rows in QS
+         * only true if we're using qs media player
+         * @hide
+         */
+        public static final String QS_LESS_ROWS = "qs_less_rows";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
