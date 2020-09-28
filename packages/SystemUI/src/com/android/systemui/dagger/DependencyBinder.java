@@ -29,6 +29,8 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.GlobalActions;
 import com.android.systemui.plugins.VolumeDialogController;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
+import com.android.systemui.statix.StatixSettingsService;
+import com.android.systemui.statix.StatixSettingsServiceImpl;
 import com.android.systemui.power.PowerNotificationWarnings;
 import com.android.systemui.power.PowerUI;
 import com.android.systemui.qs.QSHost;
@@ -265,4 +267,10 @@ public abstract class DependencyBinder {
     @Binds
     public abstract RingerModeTracker provideRingerModeTracker(
             RingerModeTrackerImpl ringerModeTrackerImpl);
+
+    /**
+     */
+    @Binds
+    public abstract StatixSettingsService provideStatixSettingsService(
+            StatixSettingsServiceImpl controllerImpl);
 }
