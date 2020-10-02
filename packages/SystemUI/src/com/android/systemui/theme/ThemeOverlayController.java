@@ -79,6 +79,8 @@ public class ThemeOverlayController extends SystemUI {
 
     static final String OVERLAY_STATIX_BLACK_THEME =
             "com.statix.overlay.android.blacktheme";
+    static final String OVERLAY_STATIX_BLACK_THEME_SYSUI =
+            "com.statix.overlay.systemui.blacktheme";
 
     private OverlayManager mOverlayManager;
 
@@ -86,13 +88,18 @@ public class ThemeOverlayController extends SystemUI {
         UserHandle userId = UserHandle.of(ActivityManager.getCurrentUser());
         try {
             mOverlayManager.setEnabled(OVERLAY_STATIX_BLACK_THEME, state, userId);
+            mOverlayManager.setEnabled(OVERLAY_STATIX_BLACK_THEME_SYSUI, state, userId);
             if (DEBUG) {
                 Log.d(TAG, "applyBlackTheme: overlayPackage="
                         + OVERLAY_STATIX_BLACK_THEME + " userId=" + userId);
+                Log.d(TAG, "applyBlackTheme: overlayPackage="
+                        + OVERLAY_STATIX_BLACK_THEME_SYSUI + " userId=" + userId);
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to " + (state ? "enable" : "disable")
                     + " overlay " + OVERLAY_STATIX_BLACK_THEME + " for user " + userId);
+            Log.e(TAG, "Failed to " + (state ? "enable" : "disable")
+                    + " overlay " + OVERLAY_STATIX_BLACK_THEME_SYSUI + " for user " + userId);
         }
     }
 
