@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.net.Uri.Builder;
 import android.provider.Settings;
 import android.util.KeyValueListParser;
 import android.util.Log;
@@ -43,9 +44,8 @@ public class EnhancedEstimatesImpl implements EnhancedEstimates {
 
     @Override
     public Estimate getEstimate() {
-        Uri build = new Uri.Builder().scheme("content").authority("com.google.android.apps.turbo.estimated_time_remaining").appendPath("time_remaining").build();
         try {
-            Cursor query = mContext.getContentResolver().query(build, (String[])null, (String)null, (String[])null, (String)null);
+            Cursor query = mContext.getContentResolver().query(new Builder().scheme("content").authority("com.google.android.apps.turbo.estimated_time_remaining").appendPath("time_remaining").build(), null, null, null, null);
             if (query != null) {
                 try {
                     if (query.moveToFirst()) {
