@@ -78,6 +78,7 @@ public class FODCircleView extends ImageView {
     private boolean mIsCircleShowing;
     private boolean mIsDreaming;
     private boolean mIsKeyguard;
+    private boolean mIsScreenTurnedOn;
     private boolean mTouchedOutside;
 
     private Handler mHandler;
@@ -181,6 +182,7 @@ public class FODCircleView extends ImageView {
 
         @Override
         public void onScreenTurnedOff() {
+            mIsScreenTurnedOn = false;
             if (!mHideFodCircleGoingToSleep) {
                 hide();
             }
@@ -188,13 +190,15 @@ public class FODCircleView extends ImageView {
 
         @Override
         public void onStartedWakingUp() {
-            if (mUpdateMonitor.isFingerprintDetectionRunning()) {
+            if (!mIsScreenTurnedOn && 
+                    mUpdateMonitor.isFingerprintDetectionRunning()) {
                 show();
             }
         }
 
         @Override
         public void onScreenTurnedOn() {
+            mIsScreenTurnedOn = false;
             if (mUpdateMonitor.isFingerprintDetectionRunning()) {
                 show();
             }
