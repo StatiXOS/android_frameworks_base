@@ -112,11 +112,7 @@ class MediaHost @Inject constructor(
     }
 
     private fun updateViewVisibility() {
-        visible = if (showsOnlyActiveMedia) {
-            mediaDataManager.hasActiveMedia()
-        } else {
-            mediaDataManager.hasAnyMedia()
-        }
+        visible = mediaDataManager.hasAnyMedia()
         val newVisibility = if (visible) View.VISIBLE else View.GONE
         if (newVisibility != hostView.visibility) {
             hostView.visibility = newVisibility
