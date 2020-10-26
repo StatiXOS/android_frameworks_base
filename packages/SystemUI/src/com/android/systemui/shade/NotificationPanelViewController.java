@@ -48,6 +48,10 @@ import android.annotation.NonNull;
 import android.app.Fragment;
 import android.app.StatusBarManager;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -65,6 +69,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Process;
 import android.os.Trace;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.VibrationEffect;
 import android.provider.Settings;
@@ -73,6 +78,7 @@ import android.transition.TransitionManager;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.MathUtils;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -528,6 +534,15 @@ public final class NotificationPanelViewController extends PanelViewController {
     private final NotificationShadeDepthController mDepthController;
     private final int mDisplayId;
 
+    private GestureDetector mDoubleTapGestureListener;
+
+    /**
+     * Cache the resource id of the theme to avoid unnecessary work in onThemeChanged.
+     *
+     * onThemeChanged is forced when the theme might not have changed. So, to avoid unncessary
+     * work, check the current id with the cached id.
+     */
+    private int mThemeResId;
     private KeyguardIndicationController mKeyguardIndicationController;
     private int mHeadsUpInset;
     private boolean mHeadsUpPinnedMode;
@@ -870,6 +885,16 @@ public final class NotificationPanelViewController extends PanelViewController {
         });
         mBottomAreaShadeAlphaAnimator.setDuration(160);
         mBottomAreaShadeAlphaAnimator.setInterpolator(Interpolators.ALPHA_OUT);
+        mDoubleTapGestureListener = new GestureDetector(mView.getContext(),
+                new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent event) {
+                final PowerManager pm = (PowerManager) mView.getContext().getSystemService(
+                        Context.POWER_SERVICE);
+                pm.goToSleep(event.getEventTime());
+                return true;
+            }
+        });
         mConversationNotificationManager = conversationNotificationManager;
         mAuthController = authController;
         mLockIconViewController = lockIconViewController;
@@ -4240,6 +4265,12 @@ public final class NotificationPanelViewController extends PanelViewController {
                 if (mCentralSurfaces.isBouncerShowingScrimmed()
                         || mCentralSurfaces.isBouncerShowingOverDream()) {
                     return false;
+                }
+
+                if (mBarState == StatusBarState.KEYGUARD && Settings.Secure.getIntForUser(
+                        mView.getContext().getContentResolver(),
+                        Settings.Secure.DOUBLE_TAP_TO_WAKE, 0, UserHandle.USER_CURRENT) == 1) {
+                    mDoubleTapGestureListener.onTouchEvent(event);
                 }
 
                 // Make sure the next touch won't the blocked after the current ends.
