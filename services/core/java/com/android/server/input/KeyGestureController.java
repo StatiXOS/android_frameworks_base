@@ -77,6 +77,7 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
+import android.view.WindowManagerPolicyConstants;
 import android.widget.Toast;
 
 import com.android.internal.R;
@@ -91,6 +92,7 @@ import com.android.server.LocalServices;
 import com.android.server.UiThread;
 import com.android.server.input.data.InputDataStore;
 import com.android.server.pm.UserManagerInternal;
+import com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs;
 import com.android.server.wm.WindowManagerInternal;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -222,6 +224,8 @@ final class KeyGestureController {
     @UserIdInt
     @GuardedBy("mUserLock")
     private int mCurrentUserId = UserHandle.USER_SYSTEM;
+    private boolean haveEnableGesture = false;
+    private SwipeToScreenshotListener mSwipeToScreenshot;
 
     // Pending actions
     private boolean mPendingMetaAction;
@@ -279,6 +283,10 @@ final class KeyGestureController {
         mSettingsObserver = new SettingsObserver(mHandler);
         mAppLaunchShortcutManager = new AppLaunchShortcutManager(mContext);
         mInputGestureManager = new InputGestureManager(mContext);
+        mSwipeToScreenshot = new SwipeToScreenshotListener(mContext, () -> 
+            mHandler.sendMessage(mHandler.obtainMessage(MSG_SCREENSHOT_SHORTCUT,
+                    SCREENSHOT_KEY_OTHER, DEFAULT_DISPLAY))
+        );
         mAccessibilityShortcutController = injector.getAccessibilityShortcutController(mContext,
                 mHandler);
         mDisplayManager = Objects.requireNonNull(mContext.getSystemService(DisplayManager.class));
@@ -318,6 +326,10 @@ final class KeyGestureController {
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP,
                 mContext.getResources().getInteger(
                         com.android.internal.R.integer.config_keyChordPowerVolumeUp));
+
+        boolean threeFingerGesture = Settings.System.getIntForUser(resolver,
+                Settings.System.SWIPE_TO_SCREENSHOT, 0, UserHandle.USER_CURRENT) == 1;
+        enableSwipeThreeFingerGesture(threeFingerGesture);
     }
 
     private void initKeyCombinationRules() {
@@ -630,7 +642,7 @@ final class KeyGestureController {
         }
 
         // Capture shortcuts and system keys if focused window is not capturing keys
-        if (mInterceptStages.get(INTERCEPT_STAGE_SHORTCUTS_AFTER_KEY_CAPTURE).interceptKey(focus,
+        if (mWindowManagerCallbacks != null && mInterceptStages.get(INTERCEPT_STAGE_SHORTCUTS_AFTER_KEY_CAPTURE).interceptKey(focus,
                 event)) {
             return KEY_INTERCEPT_RESULT_CONSUMED;
         }
@@ -1276,6 +1288,9 @@ final class KeyGestureController {
     public void setWindowManagerCallbacks(
             @NonNull InputManagerService.WindowManagerCallbacks callbacks) {
         mWindowManagerCallbacks = callbacks;
+        if (haveEnableGesture && mWindowManagerCallbacks != null) {
+            mWindowManagerCallbacks.registerPointerEventListener(mSwipeToScreenshot, DEFAULT_DISPLAY);
+        }
     }
 
     private boolean isDefaultDisplayOn() {
@@ -1661,6 +1676,9 @@ final class KeyGestureController {
             resolver.registerContentObserver(Settings.Global.getUriFor(
                             Settings.Global.KEY_CHORD_POWER_VOLUME_UP), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                            Settings.System.SWIPE_TO_SCREENSHOT), false, this,
+                    UserHandle.USER_ALL);
         }
 
         @Override
@@ -1737,6 +1755,22 @@ final class KeyGestureController {
             return (long) (KEYGUARD_SCREENSHOT_CHORD_DELAY_MULTIPLIER * delayMs);
         }
         return delayMs;
+    }
+
+    public void enableSwipeThreeFingerGesture(boolean enable) {
+        if (enable) {
+            if (haveEnableGesture) return;
+            haveEnableGesture = true;
+            if (mWindowManagerCallbacks != null) {
+                mWindowManagerCallbacks.registerPointerEventListener(mSwipeToScreenshot, DEFAULT_DISPLAY);
+            }
+        } else {
+            if (!haveEnableGesture) return;
+            haveEnableGesture = false;
+            if (mWindowManagerCallbacks != null) {
+                mWindowManagerCallbacks.unregisterPointerEventListener(mSwipeToScreenshot, DEFAULT_DISPLAY);
+            }
+        }
     }
 
     public void dump(IndentingPrintWriter ipw) {

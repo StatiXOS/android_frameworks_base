@@ -1054,4 +1054,11 @@ interface IActivityManager {
      */
     oneway void reportOptimizationInfo(in IBinder app, in String compilerFilter,
             in String compilationReason);
+
+    /**
+     * @hide
+     *
+     *  Should disable touch if three fingers to screen shot is active?
+     */
+    boolean isSwipeToScreenshotGestureActive();
 }
