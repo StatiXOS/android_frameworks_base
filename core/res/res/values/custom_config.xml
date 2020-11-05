@@ -88,4 +88,7 @@
     <string-array name="config_forceEnabledComponents" translatable="false">
     </string-array>
 
+    <!-- Hide FOD while Waking up or Going to sleep from lockscreen to avoid HBM flicker -->
+    <bool name="config_inDisplayFingerprintFlickersLocksceenAnimations">false</bool>
+
 </resources>
