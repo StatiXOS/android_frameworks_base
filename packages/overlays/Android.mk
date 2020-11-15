@@ -31,6 +31,9 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorAquamarineOverlay \
 	AccentColorTangerineOverlay \
 	FontNotoSerifSourceOverlay \
+	FontKaiOverlay \
+	FontVictorOverlay \
+	FontSamOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
