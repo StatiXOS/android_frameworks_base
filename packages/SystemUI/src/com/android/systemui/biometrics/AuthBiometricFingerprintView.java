@@ -22,12 +22,14 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import com.android.systemui.R;
 
 public class AuthBiometricFingerprintView extends AuthBiometricView {
 
     private static final String TAG = "BiometricPrompt/AuthBiometricFingerprintView";
+    mHasFodSupport = FodUtils.hasFodSupport(context);
 
     public AuthBiometricFingerprintView(Context context) {
         this(context, null);
@@ -35,6 +37,12 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
 
     public AuthBiometricFingerprintView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if (mHasFodSupport){
+        int paddingTop = getResources().getDimensionPixelSize(R.dimen.fp_dialog_indicator_padding_top_fingerprint_in_display);
+        int paddingBottom = getResources().getDimensionPixelSize(R.dimen.fp_dialog_indicator_padding_bottom_fingerprint_in_display);
+        mErrorText.setPadding(0, paddingTop, 0, paddingBottom);
+        mBiometricIcon.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -82,6 +90,9 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private void updateIcon(int lastState, int newState) {
+        if (mHasFodSupport){
+            return;
+        }
         final Drawable icon = getAnimationForTransition(lastState, newState);
         if (icon == null) {
             Log.e(TAG, "Animation not found, " + lastState + " -> " + newState);
@@ -101,6 +112,9 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private boolean shouldAnimateForTransition(int oldState, int newState) {
+        if (mHasFodSupport){
+            return false;
+        }
         switch (newState) {
             case STATE_HELP:
             case STATE_ERROR:
@@ -120,6 +134,9 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private Drawable getAnimationForTransition(int oldState, int newState) {
+        if (mHasFodSupport){
+            return null;
+        }
         int iconRes;
 
         switch (newState) {
