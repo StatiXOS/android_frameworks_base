@@ -22,12 +22,16 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import com.android.systemui.R;
+
+import com.android.internal.util.statix.Utils;
 
 public class AuthBiometricFingerprintView extends AuthBiometricView {
 
     private static final String TAG = "BiometricPrompt/AuthBiometricFingerprintView";
+    private final boolean mHasFodSupport;
 
     public AuthBiometricFingerprintView(Context context) {
         this(context, null);
@@ -35,6 +39,17 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
 
     public AuthBiometricFingerprintView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mHasFodSupport = Utils.hasFodSupport(context);
+        if (mHasFodSupport){
+        int paddingTop = getResources().getDimensionPixelSize(R.dimen.
+                                                               fp_dialog_indicator_padding_top_fod);
+        int paddingBottom = getResources().
+                              getDimensionPixelSize(R.dimen.fp_dialog_indicator_padding_bottom_fod);
+        int paddingHorizontal = getResources().getDimensionPixelSize(R.dimen.
+			                                    fp_dialog_indicator_padding_horizontal);
+        mIndicatorView.setPadding(paddingHorizontal, paddingTop, paddingHorizontal, paddingBottom);
+        mIconView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -82,6 +97,9 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private void updateIcon(int lastState, int newState) {
+        if (mHasFodSupport){
+            return;
+        }
         final Drawable icon = getAnimationForTransition(lastState, newState);
         if (icon == null) {
             Log.e(TAG, "Animation not found, " + lastState + " -> " + newState);
@@ -101,6 +119,9 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private boolean shouldAnimateForTransition(int oldState, int newState) {
+        if (mHasFodSupport){
+            return false;
+        }
         switch (newState) {
             case STATE_HELP:
             case STATE_ERROR:
@@ -120,6 +141,9 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private Drawable getAnimationForTransition(int oldState, int newState) {
+        if (mHasFodSupport){
+            return null;
+        }
         int iconRes;
 
         switch (newState) {
