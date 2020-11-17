@@ -5213,6 +5213,13 @@ public final class Settings {
         public static final String MULTI_AUDIO_FOCUS_ENABLED = "multi_audio_focus_enabled";
 
         /**
+         * Auxiliary Button
+         * Provides an extra mappable action
+         * @hide
+         */
+        public static final String AUX_BUTTON = "aux_button";
+
+        /**
          * @hide
          */
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
