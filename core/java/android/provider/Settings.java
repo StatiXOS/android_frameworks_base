@@ -5153,6 +5153,22 @@ public final class Settings {
         public static final String MULTI_AUDIO_FOCUS_ENABLED = "multi_audio_focus_enabled";
 
         /**
+<<<<<<< HEAD   (8dbdff base: Global Actions with Advanced Reboot [1/2])
+=======
+         * Whether to enable our custom black theme
+         * @hide
+         */
+        public static final String ENABLE_DARKER_THEME = "enable_darker_theme";
+
+        /**
+         * Auxiliary Button
+         * Provides an extra mappable action
+         * @hide
+         */
+        public static final String AUX_BUTTON = "aux_button";
+
+        /**
+>>>>>>> CHANGE (a56bed base: Introduce auxiliary key handler [2/2])
          * @hide
          */
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
