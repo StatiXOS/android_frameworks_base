@@ -20,6 +20,7 @@ import android.annotation.IntDef;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
@@ -57,6 +58,14 @@ public class LockIcon extends KeyguardAffordanceView {
     private boolean mKeyguardJustShown;
     private boolean mPredrawRegistered;
     private final SparseArray<Drawable> mDrawableCache = new SparseArray<>();
+
+    public void onThemeChanged() {
+           TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(
+               null, new int[]{ R.attr.wallpaperTextColor }, 0, 0);
+           int iconColor = typedArray.getColor(0, Color.WHITE);
+           typedArray.recycle();
+           onThemeChange(iconColor);
+       }
 
     private final OnPreDrawListener mOnPreDrawListener = new OnPreDrawListener() {
         @Override

@@ -1456,6 +1456,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mAmbientIndicationContainer instanceof AutoReinflateContainer) {
             ((AutoReinflateContainer) mAmbientIndicationContainer).inflateLayout();
         }
+        mLockscreenLockIconController.getView().onThemeChanged();
         mNotificationIconAreaController.onThemeChanged();
     }
 
