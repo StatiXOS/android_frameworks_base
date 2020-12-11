@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e6324e_e6f27efb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-12-11T04:40:45Z",
+      "side": 1,
+      "message": "Don\u0027t kek the Java part lol",
+      "revId": "6c4eaaeffe3ed48ee7b88207f846758e6d938fd2",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
