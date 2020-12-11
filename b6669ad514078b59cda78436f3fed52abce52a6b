@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b3b79d_4a8a9dc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-12-11T04:50:25Z",
+      "side": 1,
+      "message": "lag go brrr on mata",
+      "revId": "b6669ad514078b59cda78436f3fed52abce52a6b",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
