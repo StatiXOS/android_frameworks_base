@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf487a2_18049653",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000013
+      },
+      "writtenOn": "2020-12-24T04:14:48Z",
+      "side": 1,
+      "message": "merged in master. https://android-review.googlesource.com/c/platform/frameworks/base/+/1453295",
+      "revId": "747bfb09ff87edc6f98106727e7538734ef61236",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
