@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f5303b_78d123e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000013
+      },
+      "writtenOn": "2020-12-27T05:39:12Z",
+      "side": 1,
+      "message": "doesn\u0027t build on it\u0027s actual state (not a hard fix), but then the toggle gets broken",
+      "revId": "74a678a89327b5a30c425c31ebc5b856c4f5a462",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
