@@ -142,10 +142,10 @@
             android:title="@string/tuner_lock_screen"
             android:fragment="com.android.systemui.tuner.LockscreenFragment" />
 
-    <Preference
+<!--    <Preference
             android:key="plugins"
             android:title="@string/plugins"
-            android:fragment="com.android.systemui.tuner.PluginFragment" />
+            android:fragment="com.android.systemui.tuner.PluginFragment" /> -->
 
     <!-- Warning, this goes last. -->
     <Preference
