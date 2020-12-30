@@ -791,6 +791,10 @@ public final class DefaultPermissionGrantPolicy {
                 getDefaultSystemHandlerActivityPackage(pm,
                         StorageManager.ACTION_MANAGE_STORAGE, userId),
                 userId, STORAGE_PERMISSIONS);
+        
+        // Google SafetyHub
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.apps.safetyhub", userId,
+                CONTACTS_PERMISSIONS);
 
         // Companion devices
         grantSystemFixedPermissionsToSystemPackage(pm,
