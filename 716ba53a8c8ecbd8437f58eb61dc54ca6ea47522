@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35b4d62_896a2ad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-30T13:16:50Z",
+      "side": 1,
+      "message": "Fixes A2DP on davinci with AOSP Bluetooth",
+      "revId": "716ba53a8c8ecbd8437f58eb61dc54ca6ea47522",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
