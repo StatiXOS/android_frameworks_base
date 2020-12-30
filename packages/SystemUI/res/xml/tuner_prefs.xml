@@ -137,10 +137,10 @@
         android:fragment="com.android.systemui.tuner.NavBarTuner" />
 -->
 
-    <Preference
+<!--    <Preference
             android:key="lockscreen"
             android:title="@string/tuner_lock_screen"
-            android:fragment="com.android.systemui.tuner.LockscreenFragment" />
+            android:fragment="com.android.systemui.tuner.LockscreenFragment" /> -->
 
 <!--    <Preference
             android:key="plugins"
