@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8df475_855c3d36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000013
+      },
+      "writtenOn": "2020-12-31T23:43:21Z",
+      "side": 1,
+      "message": "do we really need all those permissions, tho?",
+      "revId": "9b51d0d4ffc8e48b1fc072e173d7e31417114a2c",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
