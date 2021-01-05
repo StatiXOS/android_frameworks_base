@@ -24,7 +24,7 @@
 
         <com.statix.support.preferences.CustomSystemSeekBarPreference
             android:key="qs_columns_portrait"
-            android:title="@string/qs_rows_columns_title"
+            android:title="@string/qs_columns_portrait_title"
             android:max="7"
             android:min="1"
             android:defaultValue="3" />
