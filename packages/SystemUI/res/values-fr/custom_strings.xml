@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2017 CarbonROM
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="quick_settings_caffeine_label">Caféine</string>
+    <string name="accessibility_quick_settings_caffeine_off">Désactivation de caféine</string>
+    <string name="accessibility_quick_settings_caffeine_on">Activation de caféine</string>
+    <string name="global_action_reboot">Redémarrage</string>
+    <string name="global_action_reboot_more">Redémarrage\u2026</string>
+    <string name="global_action_reboot_sub">Système</string>
+    <string name="global_action_reboot_recovery">Recovery</string>
+    <string name="global_action_reboot_bootloader">Bootloader</string>
+    <string name="global_action_settings">Paramètres</string>
+    <string name="quick_settings_heads_up_label">Notifications</string>
+    <string name="accessibility_quick_settings_heads_up_off">Désactivation des notifications.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Activation des notifications.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Notifications désactivées.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Notifications activées.</string>
+    <string name="qs_rows_portrait_title">Lignes d\'icônes en mode portrait</string>
+    <string name="qs_rows_landscape_title">Lignes d\'icônes en mode paysage</string>
+    <string name="qs_columns_portrait_title">Colonnes d\'icônes en mode portrait</string>
+    <string name="qs_columns_landscape_title">Colonnes d\'icônes en mode paysage</string>
+    <string name="qs_tile_title_visibility_title">Afficher les titres des icônes</string>
+    <string name="footer_text_show_title">Afficher le pied de page</string>
+    <string name="status_bar_camera">Caméra</string>
+    <string name="status_bar_location">Localisation</string>
+    <string name="status_bar_microphone">Microphone</string>
+    <string name="status_bar_vpn">VPN</string>
+    <string name="qs_header_bg_title">Ajuster l\'opacité de l\'en-tête</string>
+    <string name="tuner_show_brightness_new">Show brightness slider</string>
+    <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+</resources>
