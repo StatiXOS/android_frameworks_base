@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2018-2019 StatixOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="aerr_copy">Copie de l\'URL du log de crash</string>
+    <string name="url_copy_success">Copie de l\'URL réussie</string>
+    <string name="url_copy_failed">Une erreur est survenue lors de l\'envoi du log à dogbin</string>
+    <string name="reboot_to_bootloader_title">Redémarrer le bootloader</string>
+    <string name="reboot_to_bootloader_message">Redémarrage au bootloader en cours\u2026</string>
+    <string name="reboot_to_recovery_title">Redémarrer le recovery</string>
+    <string name="reboot_to_recovery_message">Redémarrage au recovery en cours\u2026</string>
+    <string name="reboot_system_title">Redémarrage du système</string>
+    <string name="reboot_system_message">Redémarrage du système en cours\u2026</string>
+    <string name="volume_dialog_ringer_guidance_normal">Appels et notifications vont sonner</string>
+    <string name="alert_slider_state_path"/>
+    <string name="alert_slider_uevent_match_path"/>
+    <string name="pocket_lock_message_long_press">Maintenez le bouton d\'alimentation appuyé pour déverrouiller</string>
+</resources>
