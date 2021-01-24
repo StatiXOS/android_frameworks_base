@@ -15,6 +15,7 @@ package com.android.systemui.qs.tileimpl;
 
 import static com.android.systemui.qs.tileimpl.QSIconViewImpl.QS_ANIM_LENGTH;
 
+import android.annotation.ColorInt;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -31,6 +32,8 @@ import android.graphics.drawable.shapes.PathShape;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.text.TextUtils;
 import android.util.Log;
@@ -71,6 +74,7 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
     private final int mColorActive;
     private final int mColorInactive;
     private final int mColorDisabled;
+    private int mColorDisabledAlpha;
     private int mCircleColor;
     private int mBgSize;
 
@@ -127,7 +131,11 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
         mColorActive = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
         mColorDisabled = Utils.getDisabled(context,
                 Utils.getColorAttrDefaultColor(context, android.R.attr.textColorTertiary));
+        mColorDisabledAlpha = adjustAlpha(mColorActive, 0.5f);
         mColorInactive = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+
+        boolean setQsUseNewTint = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.QS_PANEL_BG_USE_NEW_TINT, 0, UserHandle.USER_CURRENT) == 1;
 
         setPadding(0, 0, 0, 0);
         setClipChildren(false);
@@ -229,6 +237,15 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
         }
     }
 
+    @ColorInt
+    private static int adjustAlpha(@ColorInt int color, float factor) {
+        int alpha = Math.round(Color.alpha(color) * factor);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        return Color.argb(alpha, red, green, blue);
+    }
+
     protected void handleStateChanged(QSTile.State state) {
         updateStrokeShapeWidth(state);
         int circleColor = getCircleColor(state.state);
@@ -304,7 +321,9 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
                 return mColorActive;
             case Tile.STATE_INACTIVE:
             case Tile.STATE_UNAVAILABLE:
-                return mColorDisabled;
+                if (setQsUseNewTint) {
+                    return mColorDisabledAlpha;
+                }
             default:
                 Log.e(TAG, "Invalid state " + state);
                 return 0;
