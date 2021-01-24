@@ -39,4 +39,6 @@
     <string name="qs_header_bg_title">Ajustar la opacidad del encabezado</string>
     <string name="tuner_show_brightness_new">Mostrar la barra ajustadora de brillo</string>
     <string name="tuner_brightness_position_bottom">Barra ajustadora de brillo debajo</string>
+    <string name="drag_or_tap_to_add_tiles">Hold &amp; drag or tap to add tiles</string>
+    <string name="drag_or_tap_to_rearrange_tiles">Hold &amp; drag to rearrange or tap to remove</string>
 </resources>
