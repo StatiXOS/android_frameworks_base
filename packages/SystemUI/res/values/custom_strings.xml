@@ -68,4 +68,7 @@
 
     <!-- Ambient Music Ticker -->
     <string name="ambientmusic_songinfo" formatted="false">%s by %s</string>
+
+    <!-- QS tiles tinting -->
+    <string name="qs_bg_use_new_tint">Tint QS tiles</string>
 </resources>
