@@ -39,4 +39,6 @@
     <string name="qs_header_bg_title">Adjust header opacity</string>
     <string name="tuner_show_brightness_new">Show brightness slider</string>
     <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+    <string name="drag_or_tap_to_add_tiles">Przytrzymaj &amp; przeciągnij lub dotknij, aby dodać kafelki</string>
+    <string name="drag_or_tap_to_rearrange_tiles">Przytrzymaj &amp; przeciągnij, aby zmienić kolejność, lub dotknij, aby usunąć</string>
 </resources>
