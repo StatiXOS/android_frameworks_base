@@ -630,11 +630,7 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
     private void saveScreenshotAndToast(Consumer<Uri> finisher) {
         // Play the shutter sound to notify that we've taken a screenshot
         mScreenshotHandler.post(() -> {
-            if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.SCREENSHOT_SHUTTER_SOUND, 1, UserHandle.USER_CURRENT) == 1) {
-                // Play the shutter sound to notify that we've taken a screenshot
-                mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
-            }
+            playShutterSound();
         });
 
         saveScreenshotInWorkerThread(finisher, new ActionsReadyListener() {
@@ -689,11 +685,7 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
                     }
                 });
 
-                if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.SCREENSHOT_SHUTTER_SOUND, 1, UserHandle.USER_CURRENT) == 1) {
-                    // Play the shutter sound to notify that we've taken a screenshot
-                    mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
-                }
+                playShutterSound();
 
                 mScreenshotPreview.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 mScreenshotPreview.buildLayer();
@@ -1145,6 +1137,14 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
                     new ColorDrawable(Color.BLACK), insetDrawable});
         } else {
             return insetDrawable;
+        }
+    }
+
+    private void playShutterSound() {
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.SCREENSHOT_SHUTTER_SOUND, 1, UserHandle.USER_CURRENT) == 1) {
+            // Play the shutter sound to notify that we've taken a screenshot
+            mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
         }
     }
 }
