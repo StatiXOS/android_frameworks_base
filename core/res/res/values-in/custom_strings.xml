@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2018-2019 StatixOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="aerr_copy">Salin URL log kerusakan</string>
+    <string name="url_copy_success">URL berhasil disalin</string>
+    <string name="url_copy_failed">Terjadi kesalahan saat mengunggah log ke dogbin</string>
+    <string name="reboot_to_bootloader_title">Mulai ulang bootloader</string>
+    <string name="reboot_to_bootloader_message">Memulai ulang ke bootloader\u2026</string>
+    <string name="reboot_to_recovery_title">Mulai ulang pemulihan</string>
+    <string name="reboot_to_recovery_message">Memulai ulang ke pemulihan\u2026</string>
+    <string name="reboot_system_title">Mulai ulang sistem</string>
+    <string name="reboot_system_message">Memulai ulang sistem\u2026</string>
+    <string name="volume_dialog_ringer_guidance_normal">Panggilan dan notifikasi akan berdering</string>
+    <string name="alert_slider_state_path"/>
+    <string name="alert_slider_uevent_match_path"/>
+    <string name="pocket_lock_message_long_press">Tekan dan tahan tombol daya untuk membuka kunci</string>
+</resources>

@@ -37,6 +37,8 @@
     <string name="status_bar_microphone">Microfone</string>
     <string name="status_bar_vpn">VPN</string>
     <string name="qs_header_bg_title">Ajustar opacidade do cabeçalho</string>
-    <string name="tuner_show_brightness_new">Show brightness slider</string>
-    <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+    <string name="tuner_show_brightness_new">Mostrar controle de brilho</string>
+    <string name="tuner_brightness_position_bottom">Controle de brilho na parte inferior</string>
+    <string name="drag_or_tap_to_add_tiles">Segure e arraste ou toque para adicionar atalhos</string>
+    <string name="drag_or_tap_to_rearrange_tiles">Segure e arraste para reorganizar ou toque para remover</string>
 </resources>
