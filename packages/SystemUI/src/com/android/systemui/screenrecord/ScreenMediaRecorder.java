@@ -50,6 +50,8 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.WindowManager;
 
+import com.android.systemui.R;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -81,6 +83,7 @@ public class ScreenMediaRecorder {
     private ScreenRecordingMuxer mMuxer;
     private ScreenInternalAudioRecorder mAudio;
     private ScreenRecordingAudioSource mAudioSource;
+    private int mMaxRefreshRate;
 
     private Context mContext;
     MediaRecorder.OnInfoListener mListener;
@@ -92,6 +95,8 @@ public class ScreenMediaRecorder {
         mUser = user;
         mListener = listener;
         mAudioSource = audioSource;
+        mMaxRefreshRate = mContext.getResources().getInteger(
+                R.integer.config_screenRecorderMaxFramerate);
     }
 
     private void prepare() throws IOException, RemoteException, RuntimeException {
@@ -131,6 +136,7 @@ public class ScreenMediaRecorder {
         int width = dimens[0];
         int height = dimens[1];
         refreshRate = dimens[2];
+        if (mMaxRefreshRate != 0 && refereshRate > mMaxRefreshRate) refereshRate = mMaxRefreshRate;
         int vidBitRate = width * height * refreshRate / VIDEO_FRAME_RATE
                 * VIDEO_FRAME_RATE_TO_RESOLUTION_RATIO;
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
