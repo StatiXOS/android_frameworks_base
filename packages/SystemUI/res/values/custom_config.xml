@@ -11,4 +11,7 @@
             1 - LOCAL HBM
     -->
     <integer name="config_udfps_hbm_type">1</integer>
+
+    <!-- If not zero, limits the internal screen recorder's framerate to the set value. -->
+    <integer name="config_screenRecorderMaxFramerate">0</integer>
 </resources>
