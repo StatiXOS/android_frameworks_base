@@ -18,5 +18,5 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="status_deep_sleep">(Derin Uyku: %1$d%2$s)</string>
+    <string name="status_deep_sleep">(Tidur nyenyak: %1$d%2$s)</string>
 </resources>

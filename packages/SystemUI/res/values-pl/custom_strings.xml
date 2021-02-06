@@ -26,10 +26,10 @@
     <string name="accessibility_quick_settings_heads_up_on">Heads up on.</string>
     <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off.</string>
     <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on.</string>
-    <string name="qs_rows_portrait_title">Tiles rows on portrait</string>
-    <string name="qs_rows_landscape_title">Tiles rows on landscape</string>
-    <string name="qs_columns_portrait_title">Tiles columns on portrait</string>
-    <string name="qs_columns_landscape_title">Tiles columns on landscape</string>
+    <string name="qs_rows_portrait_title">Rzędy płytek pionowo</string>
+    <string name="qs_rows_landscape_title">Rzędy płytek poziomo</string>
+    <string name="qs_columns_portrait_title">Rzędy kolumn pionowo</string>
+    <string name="qs_columns_landscape_title">Rzędy kolumn poziomo</string>
     <string name="qs_tile_title_visibility_title">Show tiles titles</string>
     <string name="footer_text_show_title">Display footer text</string>
     <string name="status_bar_camera">Camera</string>
@@ -37,6 +37,8 @@
     <string name="status_bar_microphone">Microphone</string>
     <string name="status_bar_vpn">VPN</string>
     <string name="qs_header_bg_title">Adjust header opacity</string>
-    <string name="tuner_show_brightness_new">Show brightness slider</string>
-    <string name="tuner_brightness_position_bottom">Brightness slider on bottom</string>
+    <string name="tuner_show_brightness_new">Pokaż pasek jasności</string>
+    <string name="tuner_brightness_position_bottom">Pasek jasności na dole</string>
+    <string name="drag_or_tap_to_add_tiles">Przytrzymaj &amp; przeciągnij lub dotknij, aby dodać kafelki</string>
+    <string name="drag_or_tap_to_rearrange_tiles">Przytrzymaj &amp; przeciągnij, aby zmienić kolejność, lub dotknij, aby usunąć</string>
 </resources>
