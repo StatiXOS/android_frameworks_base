@@ -39,4 +39,6 @@
     <string name="qs_header_bg_title">Регулировка непрозрачности заголовка</string>
     <string name="tuner_show_brightness_new">Показать ползунок яркости</string>
     <string name="tuner_brightness_position_bottom">Ползунок яркости внизу</string>
+    <string name="drag_or_tap_to_add_tiles">Hold &amp; drag or tap to add tiles</string>
+    <string name="drag_or_tap_to_rearrange_tiles">Hold &amp; drag to rearrange or tap to remove</string>
 </resources>
