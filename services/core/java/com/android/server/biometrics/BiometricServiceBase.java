@@ -683,9 +683,7 @@ public abstract class BiometricServiceBase extends SystemService
     @Override
     public void onStart() {
         listenForUserSwitches();
-        if (com.android.internal.util.statix.Utils.hasPowerButtonFingerprint(mContext)) {
-            registerForWindowManger();
-        }
+        registerForWindowManger();
     }
 
     @Override
