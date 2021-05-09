@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "450c2c90_4d347cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000013
+      },
+      "writtenOn": "2021-05-09T21:19:31Z",
+      "side": 1,
+      "message": "properly fix wifi disabled icon colors.",
+      "revId": "67a99e07ada55f4e48dd8eebaa4b7348149384df",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
