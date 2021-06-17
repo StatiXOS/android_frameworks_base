@@ -16,7 +16,10 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.app.IUiModeManager;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.ServiceManager;
 import android.os.Trace;
 
 import com.android.systemui.dock.DockManager;
@@ -92,7 +95,8 @@ public enum ScrimState {
     BOUNCER {
         @Override
         public void prepare(ScrimState previousState) {
-            mBehindAlpha = mDefaultScrimAlpha;
+            mBehindTint = isDarkMode() ? Color.BLACK : Color.WHITE;
+            mBehindAlpha = 1f;
             mFrontAlpha = 0f;
             mBubbleAlpha = 0f;
         }
@@ -104,9 +108,10 @@ public enum ScrimState {
     BOUNCER_SCRIMMED {
         @Override
         public void prepare(ScrimState previousState) {
-            mBehindAlpha = 0;
+            mFrontTint = isDarkMode() ? Color.BLACK : Color.WHITE;
+            mBehindAlpha = 0f;
             mBubbleAlpha = 0f;
-            mFrontAlpha = mDefaultScrimAlpha;
+            mFrontAlpha = 1f;
         }
     },
 
@@ -369,5 +374,16 @@ public enum ScrimState {
     public void setKeyguardFadingAway(boolean fadingAway, long duration) {
         mKeyguardFadingAway = fadingAway;
         mKeyguardFadingAwayDuration = duration;
+    }
+
+    private static boolean isDarkMode() {
+        IUiModeManager uiModeManager = IUiModeManager.Stub.asInterface(
+                    ServiceManager.getService(Context.UI_MODE_SERVICE));
+        try {
+            return uiModeManager.getNightMode() == 2;
+        } catch (android.os.RemoteException e) {
+            // assume light mode
+            return false;
+        }
     }
 }
