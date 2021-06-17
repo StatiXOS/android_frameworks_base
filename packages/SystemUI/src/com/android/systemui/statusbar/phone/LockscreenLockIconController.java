@@ -526,7 +526,7 @@ public class LockscreenLockIconController {
                 || mShowingLaunchAffordance;
         boolean fingerprintOrBypass = mFingerprintUnlock
                 || mKeyguardBypassController.getBypassEnabled();
-        if (fingerprintOrBypass && !mBouncerShowingScrimmed) {
+        if (fingerprintOrBypass || mBouncerShowingScrimmed) {
             if ((mHeadsUpManagerPhone.isHeadsUpGoingAway()
                     || mHeadsUpManagerPhone.hasPinnedHeadsUp()
                     || mStatusBarState == StatusBarState.KEYGUARD
