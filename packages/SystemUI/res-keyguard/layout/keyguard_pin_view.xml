@@ -18,186 +18,179 @@
 -->
 
 <com.android.keyguard.KeyguardPINView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:androidprv="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/keyguard_pin_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        androidprv:layout_maxWidth="@dimen/keyguard_security_width"
-        androidprv:layout_maxHeight="@dimen/keyguard_security_max_height"
-        android:orientation="vertical"
-        >
+    android:orientation="vertical"
+    android:id="@+id/keyguard_pin_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    androidprv:layout_maxWidth="@dimen/keyguard_security_width"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layoutDirection="ltr"
-            >
+        android:orientation="vertical"
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_marginBottom="8.0dip"
+        android:layout_weight="1.0"
+        android:layoutDirection="ltr">
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+
         <com.android.keyguard.AlphaOptimizedRelativeLayout
-                android:id="@+id/row0"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:paddingBottom="16dp"
-                >
+            android:id="@+id/row0"
+            android:paddingBottom="16.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
             <com.android.keyguard.PasswordTextView
-                    android:id="@+id/pinEntry"
-                    android:layout_width="@dimen/keyguard_security_width"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginRight="72dp"
-                    androidprv:scaledTextSize="@integer/scaled_password_text_size"
-                    android:textColor="?attr/wallpaperTextColor"
-                    android:contentDescription="@string/keyguard_accessibility_pin_area"
-                    />
-            <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/pin_divider"
-                    />
+                android:id="@+id/pinEntry"
+                android:layout_width="@dimen/keyguard_security_width"
+                android:layout_height="@dimen/keyguard_password_height"
+                android:layout_marginRight="72.0dip"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/keyguard_accessibility_pin_area"
+                androidprv:scaledTextSize="@integer/scaled_password_text_size"
+                style="@style/Widget.TextView.Password" />
+
         </com.android.keyguard.AlphaOptimizedRelativeLayout>
+
         <LinearLayout
-                android:id="@+id/row1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/row1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/num_pad_row_margin_bottom">
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key1"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="1"
-                    />
+                android:id="@+id/key1"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="1"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key2"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="2"
-                    />
+                android:id="@+id/key2"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="2"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key3"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="3"
-                    />
+                android:id="@+id/key3"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                androidprv:digit="3"
+                androidprv:textView="@id/pinEntry" />
+
         </LinearLayout>
+
         <LinearLayout
-                android:id="@+id/row2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/row2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/num_pad_row_margin_bottom">
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key4"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="4"
-                    />
+                android:id="@+id/key4"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="4"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key5"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="5"
-                    />
+                android:id="@+id/key5"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="5"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key6"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="6"
-                    />
+                android:id="@+id/key6"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                androidprv:digit="6"
+                androidprv:textView="@id/pinEntry" />
+
         </LinearLayout>
+
         <LinearLayout
-                android:id="@+id/row3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                >
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/row3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/num_pad_row_margin_bottom">
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key7"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="7"
-                    />
+                android:id="@+id/key7"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="7"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key8"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="8"
-                    />
+                android:id="@+id/key8"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="8"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key9"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="9"
-                    />
+                android:id="@+id/key9"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                androidprv:digit="9"
+                androidprv:textView="@id/pinEntry" />
+
         </LinearLayout>
+
         <LinearLayout
-                android:id="@+id/row4"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/row4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
             <com.android.keyguard.AlphaOptimizedImageButton
-                    android:id="@+id/delete_button"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/ripple_drawable_pin"
-                    android:contentDescription="@string/keyboardview_keycode_delete"
-                    style="@style/Keyguard.ImageButton.NumPadDelete"
-                    />
+                android:id="@+id/delete_button"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:contentDescription="@string/keyboardview_keycode_delete" 
+                style="@style/NumPadKey.Delete"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end" />
+
             <com.android.keyguard.NumPadKey
-                    android:id="@+id/key0"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    androidprv:textView="@+id/pinEntry"
-                    androidprv:digit="0"
-                    />
+                android:id="@+id/key0"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:layout_marginEnd="@dimen/num_pad_key_margin_end"
+                androidprv:digit="0"
+                androidprv:textView="@id/pinEntry" />
+
             <com.android.keyguard.AlphaOptimizedImageButton
-                    android:id="@+id/key_enter"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    style="@style/Keyguard.ImageButton.NumPadEnter"
-                    android:background="@drawable/ripple_drawable_pin"
-                    android:contentDescription="@string/keyboardview_keycode_enter"
-                    />
+                android:id="@+id/key_enter"
+                android:layout_width="@dimen/num_pad_key_width"
+                android:layout_height="@dimen/num_pad_key_width"
+                android:contentDescription="@string/keyboardview_keycode_enter"
+                style="@style/NumPadKey.Enter" />
+
         </LinearLayout>
+
     </LinearLayout>
-    <include layout="@layout/keyguard_eca"
-             android:id="@+id/keyguard_selector_fade_container"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="vertical"
-             android:layout_gravity="bottom|center_horizontal"
-             android:gravity="center_horizontal"/>
+
+    <include android:gravity="center_horizontal" android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/keyguard_eca_top_margin" layout="@layout/keyguard_eca" />
 
 </com.android.keyguard.KeyguardPINView>
