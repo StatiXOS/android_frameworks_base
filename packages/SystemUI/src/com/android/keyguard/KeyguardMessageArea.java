@@ -19,9 +19,7 @@ package com.android.keyguard;
 import static com.android.systemui.util.InjectionInflationController.VIEW_CONTEXT;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -53,14 +51,11 @@ public class KeyguardMessageArea extends TextView implements SecurityMessageDisp
      * lift-to-type from interrupting itself.
      */
     private static final long ANNOUNCEMENT_DELAY = 250;
-    private static final int DEFAULT_COLOR = -1;
 
     private final Handler mHandler;
     private final ConfigurationController mConfigurationController;
 
-    private ColorStateList mDefaultColorState;
     private CharSequence mMessage;
-    private ColorStateList mNextMessageColorState = ColorStateList.valueOf(DEFAULT_COLOR);
     private boolean mBouncerVisible;
 
     private KeyguardUpdateMonitorCallback mInfoCallback = new KeyguardUpdateMonitorCallback() {
@@ -112,22 +107,6 @@ public class KeyguardMessageArea extends TextView implements SecurityMessageDisp
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mConfigurationController.removeCallback(this);
-    }
-
-    @Override
-    public void setNextMessageColor(ColorStateList colorState) {
-        mNextMessageColorState = colorState;
-    }
-
-    @Override
-    public void onThemeChanged() {
-        TypedArray array = mContext.obtainStyledAttributes(new int[] {
-                R.attr.wallpaperTextColor
-        });
-        ColorStateList newTextColors = ColorStateList.valueOf(array.getColor(0, Color.RED));
-        array.recycle();
-        mDefaultColorState = newTextColors;
-        update();
     }
 
     @Override
@@ -200,12 +179,6 @@ public class KeyguardMessageArea extends TextView implements SecurityMessageDisp
         CharSequence status = mMessage;
         setVisibility(TextUtils.isEmpty(status) || !mBouncerVisible ? INVISIBLE : VISIBLE);
         setText(status);
-        ColorStateList colorState = mDefaultColorState;
-        if (mNextMessageColorState.getDefaultColor() != DEFAULT_COLOR) {
-            colorState = mNextMessageColorState;
-            mNextMessageColorState = ColorStateList.valueOf(DEFAULT_COLOR);
-        }
-        setTextColor(colorState);
     }
 
 
