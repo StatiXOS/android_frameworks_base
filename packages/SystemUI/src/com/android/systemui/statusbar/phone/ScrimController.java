@@ -620,6 +620,8 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, OnCo
         // We also want to hide FLAG_SHOW_WHEN_LOCKED activities under the scrim.
         boolean occludedKeyguard = (mState == ScrimState.PULSING || mState == ScrimState.AOD)
                 && mKeyguardOccluded;
+        // We want full opacity on bouncer
+        boolean isBouncer = (mState == ScrimState.BOUNCER || mState == ScrimState.BOUNCER_SCRIMMED);
         if (aodWallpaperTimeout || occludedKeyguard) {
             mBehindAlpha = 1;
         }
