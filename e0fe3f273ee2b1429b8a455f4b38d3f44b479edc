@@ -33,6 +33,23 @@
       "message": "TODO #2: Also take a look at why turning on our GMS friendly primary overlays in dark mode, aren\u0027t reflected on the password/PIN UI. \n\nExpected behavior: The UI should match other system elements when GMS primary overlays are enabled and dark mode is turned on.",
       "revId": "e0fe3f273ee2b1429b8a455f4b38d3f44b479edc",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3e1f30_69387e63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-06-23T05:23:10Z",
+      "side": 1,
+      "message": "currently background scrim is hardcoded to black to have enough contrast with the buttons",
+      "revId": "e0fe3f273ee2b1429b8a455f4b38d3f44b479edc",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
