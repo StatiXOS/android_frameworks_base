@@ -16,6 +16,23 @@
       "message": "TODO: Fix password UI in light mode as the delete and enter button merge with the lock screen background.",
       "revId": "e0fe3f273ee2b1429b8a455f4b38d3f44b479edc",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebc0d953_54ececf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-06-23T05:15:28Z",
+      "side": 1,
+      "message": "TODO #2: Also take a look at why turning on our GMS friendly primary overlays in dark mode, aren\u0027t reflected on the password/PIN UI. \n\nExpected behavior: The UI should match other system elements when GMS primary overlays are enabled and dark mode is turned on.",
+      "revId": "e0fe3f273ee2b1429b8a455f4b38d3f44b479edc",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
