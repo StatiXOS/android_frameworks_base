@@ -50,6 +50,24 @@
       "message": "currently background scrim is hardcoded to black to have enough contrast with the buttons",
       "revId": "e0fe3f273ee2b1429b8a455f4b38d3f44b479edc",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "387ea25b_50a357c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-06-23T05:57:02Z",
+      "side": 1,
+      "message": "Also edit to the first TODO, the UI has contrast issues in dark mode and not light mode.",
+      "parentUuid": "5b3e1f30_69387e63",
+      "revId": "e0fe3f273ee2b1429b8a455f4b38d3f44b479edc",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
