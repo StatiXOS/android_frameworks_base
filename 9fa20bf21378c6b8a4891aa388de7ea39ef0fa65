@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19eeba4f_8c58d918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-06-27T07:17:07Z",
+      "side": 1,
+      "message": "doesn\u0027t show wrong password/pin/pattern in dark mode",
+      "revId": "9fa20bf21378c6b8a4891aa388de7ea39ef0fa65",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
