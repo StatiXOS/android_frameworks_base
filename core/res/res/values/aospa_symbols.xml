@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2021 Paranoid Android
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <!-- Alert Slider -->
+    <java-symbol type="string" name="alert_slider_state_path" />
+    <java-symbol type="string" name="alert_slider_uevent_match_path" />
+    <java-symbol type="bool" name="config_hasAlertSlider" />
+    <java-symbol type="integer" name="config_alertSliderLocation" />
+
+    <!-- Device key handlers -->
+    <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+    <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+
+    <!-- Pocket Lock -->
+    <java-symbol type="layout" name="pocket_lock_view" />
+
+    <!-- Pocket bridge -->
+    <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
+    <java-symbol type="bool" name="config_pocketModeSupported" />
+
+    <!-- Pocket Service -->
+    <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
+
+    <!-- Package Manager -->
+    <java-symbol type="array" name="config_deviceDisabledComponents" />
+    <java-symbol type="array" name="config_globallyDisabledComponents" />
+    <java-symbol type="array" name="config_forceEnabledComponents" />
+
+    <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
+    <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
+
+    <!-- Whether to show WiFi/Hotspot standard -->
+    <java-symbol type="bool" name="config_show_network_standard" />
+
+    <!-- Gestures Settings -->
+    <java-symbol type="integer" name="config_doubleTapKeyCode" />
+    <java-symbol type="integer" name="config_singleTapKeyCode" />
+    <java-symbol type="integer" name="config_drawVKeyCode" />
+    <java-symbol type="integer" name="config_drawInverseVKeyCode" />
+    <java-symbol type="integer" name="config_drawOKeyCode" />
+    <java-symbol type="integer" name="config_drawMKeyCode" />
+    <java-symbol type="integer" name="config_drawWKeyCode" />
+    <java-symbol type="integer" name="config_drawSKeyCode" />
+    <java-symbol type="integer" name="config_drawArrowLeftKeyCode" />
+    <java-symbol type="integer" name="config_drawArrowRightKeyCode" />
+    <java-symbol type="integer" name="config_oneFingerSwipeUpKeyCode" />
+    <java-symbol type="integer" name="config_oneFingerSwipeRightKeyCode" />
+    <java-symbol type="integer" name="config_oneFingerSwipeDownKeyCode" />
+    <java-symbol type="integer" name="config_oneFingerSwipeLeftKeyCode" />
+    <java-symbol type="integer" name="config_twoFingerSwipeKeyCode" />
+
+    <java-symbol type="integer" name="config_doubleTapDefault" />
+    <java-symbol type="integer" name="config_singleTapDefault" />
+    <java-symbol type="integer" name="config_drawVDefault" />
+    <java-symbol type="integer" name="config_drawInverseVDefault" />
+    <java-symbol type="integer" name="config_drawODefault" />
+    <java-symbol type="integer" name="config_drawMDefault" />
+    <java-symbol type="integer" name="config_drawWDefault" />
+    <java-symbol type="integer" name="config_drawSDefault" />
+    <java-symbol type="integer" name="config_drawArrowLeftDefault" />
+    <java-symbol type="integer" name="config_drawArrowRightDefault" />
+    <java-symbol type="integer" name="config_oneFingerSwipeUpDefault" />
+    <java-symbol type="integer" name="config_oneFingerSwipeRightDefault" />
+    <java-symbol type="integer" name="config_oneFingerSwipeDownDefault" />
+    <java-symbol type="integer" name="config_oneFingerSwipeLeftDefault" />
+    <java-symbol type="integer" name="config_twoFingerSwipeDefault" />
+
+    <!-- Whether to to intercept inputs on screen off. -->
+    <java-symbol type="bool" name="config_enableKeyHandler" />
+
+    <!-- Cycle through ringer modes -->
+    <java-symbol type="string" name="volume_dialog_ringer_guidance_normal" />
+
+    <!-- Power Menu Reboot -->
+    <java-symbol name="reboot_to_bootloader_title" type="string" />
+    <java-symbol name="reboot_to_bootloader_message" type="string" />
+    <java-symbol name="reboot_to_fastboot_title" type="string" />
+    <java-symbol name="reboot_to_fastboot_message" type="string" />
+    <java-symbol name="reboot_to_recovery_title" type="string" />
+    <java-symbol name="reboot_to_recovery_message" type="string" />
+    <java-symbol name="reboot_system_title" type="string" />
+    <java-symbol name="reboot_system_message" type="string" />
+    <java-symbol type="array" name="config_rebootActionsList" />
+    <java-symbol type="array" name="values_globalActionsList" />
+
+     <!-- Path to fast charging status file to detect whether an oem fast charger is active -->
+    <java-symbol type="string" name="config_oemFastChargerStatusPath" />
+
+    <!-- Expected value from fast charging status file -->
+    <java-symbol type="string" name="config_oemFastChargerStatusValue" />
+
+    <!-- For dynamic default font styles -->
+    <java-symbol type="string" name="config_bodyFontFamily" />
+
+</resources>
