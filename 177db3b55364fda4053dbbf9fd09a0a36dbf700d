@@ -16,6 +16,24 @@
       "message": "still need to decide if we want to keep this change or drop colorpicker from vendor/support",
       "revId": "177db3b55364fda4053dbbf9fd09a0a36dbf700d",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "524b0272_70353d2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T20:25:37Z",
+      "side": 1,
+      "message": "im not sure we should bother considering the amount of devices on the market with an LED have diminished to near zero",
+      "parentUuid": "76c3c972_188a5c6a",
+      "revId": "177db3b55364fda4053dbbf9fd09a0a36dbf700d",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
