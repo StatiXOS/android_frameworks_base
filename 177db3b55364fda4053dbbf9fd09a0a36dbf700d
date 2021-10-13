@@ -34,6 +34,23 @@
       "parentUuid": "76c3c972_188a5c6a",
       "revId": "177db3b55364fda4053dbbf9fd09a0a36dbf700d",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d0c6037_daf59f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-10-13T04:38:25Z",
+      "side": 1,
+      "message": "I mean I would definitely like this since Zenfone 8 has a notification LED but I don\u0027t know.",
+      "revId": "177db3b55364fda4053dbbf9fd09a0a36dbf700d",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
