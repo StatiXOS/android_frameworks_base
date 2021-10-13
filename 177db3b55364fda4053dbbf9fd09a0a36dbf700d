@@ -51,6 +51,24 @@
       "message": "I mean I would definitely like this since Zenfone 8 has a notification LED but I don\u0027t know.",
       "revId": "177db3b55364fda4053dbbf9fd09a0a36dbf700d",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4b875f_b0c2b80b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-13T13:33:23Z",
+      "side": 1,
+      "message": "the LED will still work, just default colors.",
+      "parentUuid": "5d0c6037_daf59f4e",
+      "revId": "177db3b55364fda4053dbbf9fd09a0a36dbf700d",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
