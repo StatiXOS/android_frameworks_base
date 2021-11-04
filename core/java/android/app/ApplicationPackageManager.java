@@ -809,6 +809,12 @@ public class ApplicationPackageManager extends PackageManager {
 
     @Override
     public boolean hasSystemFeature(String name, int version) {
+        String packageName = ActivityThread.currentPackageName();
+        if (packageName != null &&
+                packageName.contains("com.google.android.apps.photos") &&
+                name.contains("PIXEL_2021_EXPERIENCE")) {
+            return false;
+        }
         return PropImitationHooks.hasSystemFeature(name,
                 mHasSystemFeatureCache.query(new HasSystemFeatureQuery(name, version)));
     }
