@@ -16,6 +16,24 @@
       "message": "On a quick note it complains about TPU stuff for Google app (Which breaks hotword enrollment) so either keep it as redfin or spoof for Google app separately ",
       "revId": "01e3ba0d750c04896fd1eba68d46e9225d3a97b8",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a9ac3c_ae135e9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-11-06T13:50:32Z",
+      "side": 1,
+      "message": "Noted.",
+      "parentUuid": "22a04ce5_185436db",
+      "revId": "01e3ba0d750c04896fd1eba68d46e9225d3a97b8",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
