@@ -15,6 +15,7 @@
  */
 package com.android.internal.util.custom;
 
+import android.app.Application;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
@@ -60,21 +61,31 @@ public class PixelPropsUtils {
     static {
         propsToKeep = new HashMap<>();
         propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<String>(Arrays.asList("FINGERPRINT")));
+        propsToKeep.put("com.google.android.gms", new ArrayList<String>(Arrays.asList("MODEL")));
         propsToChange = new HashMap<>();
         propsToChange.put("BRAND", "google");
         propsToChange.put("MANUFACTURER", "Google");
         propsToChange.put("DEVICE", "redfin");
         propsToChange.put("PRODUCT", "redfin");
-        propsToChange.put("MODEL", "Pixel 5" + " ");
+        propsToChange.put("MODEL", "Pixel 5");
         propsToChange.put("FINGERPRINT", "google/redfin/redfin:12/SQ1A.220105.002/7961164:user/release-keys");
     }
 
-    public static void setProps(String packageName) {
+    public static void setProps(Application app) {
+        String packageName = app.getPackageName();
         if (packageName == null){
             return;
         }
-        if (Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE).replace("statix_", ""))) return;
-        if (packageName.equals(PACKAGE_GMS)) {
+        if (Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE))) {
+            if (packageName.equals(PACKAGE_GMS) && app.getProcessName().equals("com.google.android.gms.unstable")) {
+                setPropValue("MODEL", SystemProperties.get("ro.product.model") + " ");
+                setPropValue("PRODUCT", SystemProperties.get(DEVICE));
+                sIsGms = true;
+            }
+            return;
+        }
+        if (packageName.equals(PACKAGE_GMS) && app.getProcessName().equals("com.google.android.gms.unstable")) {
+            setPropValue("MODEL", "Pixel 5" + " ");
             sIsGms = true;
         }
         if (packageName.startsWith("com.google.") || Arrays.asList(extraPackagesToChange).contains(packageName)){
