@@ -42,30 +42,31 @@ public class PixelPropsUtils {
     };
 
     // Codenames for currently supported Pixels by Google
-    private static final String[] pixelCodenames = {
-        "oriole",
-        "raven",
-        "redfin",
-        "barbet",
-        "bramble",
-        "sunfish",
-        "coral",
-        "flame",
-        "bonito",
-        "sargo",
-        "crosshatch",
-        "blueline"
-    };
+    private static final HashMap<String, String> pixelCodenames = new HashMap<>() {{
+        put("oriole", "Pixel 6");
+        put("raven", "Pixel 6 Pro");
+        put("redfin", "Pixel 5");
+        put("barbet", "Pixel 5a");
+        put("bramble", "Pixel 4a 5G");
+        put("sunfish", "Pixel 4a");
+        put("coral", "Pixel 4 XL");
+        put("flame", "Pixel 4");
+        put("bonito", "Pixel 3a XL");
+        put("sargo", "Pixel 3a");
+        put("crosshatch", "Pixel 3 XL");
+        put("blueline", "Pixel 3");
+    }};
 
     static {
         propsToKeep = new HashMap<>();
         propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<String>(Arrays.asList("FINGERPRINT")));
+        propsToKeep.put("com.google.android.gms", new ArrayList<String>(Arrays.asList("MODEL")));
         propsToChange = new HashMap<>();
         propsToChange.put("BRAND", "google");
         propsToChange.put("MANUFACTURER", "Google");
         propsToChange.put("DEVICE", "redfin");
         propsToChange.put("PRODUCT", "redfin");
-        propsToChange.put("MODEL", "Pixel 5" + " ");
+        propsToChange.put("MODEL", "Pixel 5");
         propsToChange.put("FINGERPRINT", "google/redfin/redfin:12/SQ1A.220105.002/7961164:user/release-keys");
     }
 
@@ -73,10 +74,15 @@ public class PixelPropsUtils {
         if (packageName == null){
             return;
         }
-        if (Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE).replace("statix_", ""))) return;
         if (packageName.equals(PACKAGE_GMS)) {
+            if (pixelCodenames.containsKey(SystemProperties.get(DEVICE).replace("statix_", ""))) {
+                setPropValue("MODEL", pixelCodenames.get(SystemProperties.get(DEVICE).replace("statix_", "")) + " ");
+                return;
+            } else {
+                setPropValue("MODEL", "Pixel 5" + " ");
+            }
             sIsGms = true;
-        }
+        } else if (pixelCodenames.containsKey(SystemProperties.get(DEVICE).replace("statix_", ""))) return;
         if (packageName.startsWith("com.google.") || Arrays.asList(extraPackagesToChange).contains(packageName)){
             if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
             for (Map.Entry<String, Object> prop : propsToChange.entrySet()) {
