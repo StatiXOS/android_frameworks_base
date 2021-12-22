@@ -779,10 +779,7 @@ public class ScreenshotController {
      * failure).
      */
     private void saveScreenshotAndToast(Consumer<Uri> finisher) {
-        // Play the shutter sound to notify that we've taken a screenshot
-        mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
-
-        saveScreenshotInWorkerThread(
+        saveScreenshotInWorkerThread {
                 /* onComplete */ finisher,
                 /* actionsReadyListener */ imageData -> {
                     if (DEBUG_CALLBACK) {
