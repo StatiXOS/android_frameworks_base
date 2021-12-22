@@ -349,9 +349,6 @@ public class ScreenshotController {
         mConfigChanges.applyNewConfig(context.getResources());
         reloadAssets();
 
-        // Setup the Camera shutter sound
-        mCameraSound = new MediaActionSound();
-        mCameraSound.load(MediaActionSound.SHUTTER_CLICK);
     }
 
     void takeScreenshotFullscreen(Consumer<Uri> finisher, RequestCallback requestCallback) {
@@ -779,9 +776,6 @@ public class ScreenshotController {
      * failure).
      */
     private void saveScreenshotAndToast(Consumer<Uri> finisher) {
-        // Play the shutter sound to notify that we've taken a screenshot
-        mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
-
         saveScreenshotInWorkerThread(
                 /* onComplete */ finisher,
                 /* actionsReadyListener */ imageData -> {
@@ -812,9 +806,6 @@ public class ScreenshotController {
 
         mScreenshotAnimation =
                 mScreenshotView.createScreenshotDropInAnimation(screenRect, showFlash);
-
-        // Play the shutter sound to notify that we've taken a screenshot
-        mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
 
         if (DEBUG_ANIM) {
             Log.d(TAG, "starting post-screenshot animation");
