@@ -35,7 +35,12 @@ public class PixelPropsUtils {
     public static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String DEVICE = "ro.statix.device";
 
-    private static final Map<String, Object> propsToChange;
+    private static final Map<String, Object> propsToChangePixel5;
+    private static final Map<String, Object> propsToChangePixelXL;
+    private static final String[] packagesToChangePixelXL = {
+            "com.google.android.apps.photos"
+    };
+
     private static final Map<String, ArrayList<String>> propsToKeep;
     private static final String[] extraPackagesToChange = {
         "com.android.vending",
@@ -70,6 +75,13 @@ public class PixelPropsUtils {
         propsToChange.put("PRODUCT", "raven");
         propsToChange.put("MODEL", "Pixel 6 Pro");
         propsToChange.put("FINGERPRINT", "google/raven/raven:12/SQ3A.220705.003/8671607:user/release-keys");
+        propsToChangePixelXL = new HashMap<>();
+        propsToChangePixelXL.put("BRAND", "google");
+        propsToChangePixelXL.put("MANUFACTURER", "Google");
+        propsToChangePixelXL.put("DEVICE", "marlin");
+        propsToChangePixelXL.put("PRODUCT", "marlin");
+        propsToChangePixelXL.put("MODEL", "Pixel XL");
+        propsToChangePixelXL.put("FINGERPRINT", "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys");
     }
 
     public static void setProps(Application app) {
@@ -91,6 +103,10 @@ public class PixelPropsUtils {
         }
         if ((packageName.startsWith("com.google.") && !Arrays.asList(packagesToKeep).contains(packageName))
                 || Arrays.asList(extraPackagesToChange).contains(packageName)){
+            Map<String, Object> propsToChange = propsToChangePixel5;
+            if (Arrays.asList(packagesToChangePixelXL).contains(packageName)) {
+                propsToChange = propsToChangePixelXL;
+            }
             if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
             for (Map.Entry<String, Object> prop : propsToChange.entrySet()) {
                 String key = prop.getKey();
