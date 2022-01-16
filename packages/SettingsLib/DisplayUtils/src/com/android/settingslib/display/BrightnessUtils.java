@@ -17,12 +17,13 @@
 package com.android.settingslib.display;
 
 import android.util.MathUtils;
+import com.android.internal.display.BrightnessSynchronizer;
 
 /** Utility methods for calculating the display brightness. */
 public class BrightnessUtils {
 
     public static final int GAMMA_SPACE_MIN = 0;
-    public static final int GAMMA_SPACE_MAX = 65535;
+    public static final int GAMMA_SPACE_MAX = 255;
 
     // Hybrid Log Gamma constant values
     private static final float R = 0.5f;
@@ -90,7 +91,7 @@ public class BrightnessUtils {
 
         // Re-normalize to the range [0, 1]
         // in order to derive the correct setting value.
-        return MathUtils.lerp(min, max, normalizedRet / 12);
+        return MathUtils.constrain(BrightnessSynchronizer.brightnessIntToFloat(val), min, max);
     }
 
     /**
@@ -137,6 +138,6 @@ public class BrightnessUtils {
             ret = A * MathUtils.log(normalizedVal - B) + C;
         }
 
-        return Math.round(MathUtils.lerp(GAMMA_SPACE_MIN, GAMMA_SPACE_MAX, ret));
+        return BrightnessSynchronizer.brightnessFloatToInt(MathUtils.constrain(val, min, max));
     }
 }
