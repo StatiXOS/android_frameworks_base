@@ -941,4 +941,9 @@ interface IActivityManager {
      * @param err The binder transaction error
      */
     oneway void frozenBinderTransactionDetected(int debugPid, int code, int flags, int err);
+
+    /**
+     *  Force full screen for devices with cutout
+     */
+    boolean shouldForceCutoutFullscreen(in String packageName);
 }
