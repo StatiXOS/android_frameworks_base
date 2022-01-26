@@ -1823,16 +1823,16 @@ public class CommandQueue extends IStatusBar.Stub implements
                         mCallbacks.get(i).enterStageSplitFromRunningApp((Boolean) msg.obj);
                     }
                     break;
-                case MSG_TOGGLE_CAMERA_FLASH:
-                    for (int i = 0; i < mCallbacks.size(); i++) {
-                        mCallbacks.get(i).toggleCameraFlash();
-                    }
-                    break;
                 case MSG_SHOW_MEDIA_OUTPUT_SWITCHER:
                     args = (SomeArgs) msg.obj;
                     String clientPackageName = (String) args.arg1;
                     for (int i = 0; i < mCallbacks.size(); i++) {
                         mCallbacks.get(i).showMediaOutputSwitcher(clientPackageName);
+                    }
+                    break;
+                case MSG_TOGGLE_CAMERA_FLASH:
+                    for (int i = 0; i < mCallbacks.size(); i++) {
+                        mCallbacks.get(i).toggleCameraFlash();
                     }
                     break;
             }
