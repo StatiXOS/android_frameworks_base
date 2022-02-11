@@ -272,7 +272,7 @@ public class KeyguardClockSwitch extends RelativeLayout {
                 && hasVisibleNotifications == mHasVisibleNotifications) {
             return false;
         }
-        boolean useLargeClock = !hasVisibleNotifications;
+        boolean useLargeClock = !hasVisibleNotifications || Settings.System.getInt(mContext.getContentResolver(), Settings.System.USE_BIG_CLOCK, 1) == 0);
         animateClockChange(useLargeClock);
 
         mHasVisibleNotifications = hasVisibleNotifications;
@@ -329,6 +329,31 @@ public class KeyguardClockSwitch extends RelativeLayout {
         mColorPalette = colors.getColorPalette();
         if (mClockPlugin != null) {
             mClockPlugin.setColorPalette(mSupportsDarkText, mColorPalette);
+        }
+    }
+
+    private final class SettingObserver extends ContentObserver {
+        public SettingObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = getContext().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.USE_BIG_CLOCK),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (uri == Settings.System.getUriFor(
+                    Settings.System.USE_BIG_CLOCK)) {
+                boolean useLargeClock = !mHasVisibleNotifications ||
+                        Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.USE_BIG_CLOCK, 1) == 0);
+                animateClockChange(useLargeClock);
+            }
         }
     }
 
