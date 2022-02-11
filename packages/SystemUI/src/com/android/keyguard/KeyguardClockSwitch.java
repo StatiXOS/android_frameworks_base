@@ -4,9 +4,15 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -82,8 +88,12 @@ public class KeyguardClockSwitch extends RelativeLayout {
 
     private int mClockSwitchYAmount;
 
+    private SettingObserver mSettingObserver;
+
     public KeyguardClockSwitch(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mSettingObserver = new SettingObserver(new Handler(context.getMainLooper()));
+        mSettingObserver.observe();
     }
 
     /**
@@ -272,7 +282,9 @@ public class KeyguardClockSwitch extends RelativeLayout {
                 && hasVisibleNotifications == mHasVisibleNotifications) {
             return false;
         }
-        boolean useLargeClock = !hasVisibleNotifications;
+        boolean useLargeClock = (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.USE_BIG_CLOCK, 1) == 1);
+        if (useLargeClock) useLargeClock &= !hasVisibleNotifications;
         animateClockChange(useLargeClock);
 
         mHasVisibleNotifications = hasVisibleNotifications;
@@ -329,6 +341,31 @@ public class KeyguardClockSwitch extends RelativeLayout {
         mColorPalette = colors.getColorPalette();
         if (mClockPlugin != null) {
             mClockPlugin.setColorPalette(mSupportsDarkText, mColorPalette);
+        }
+    }
+
+    private final class SettingObserver extends ContentObserver {
+        public SettingObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = getContext().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.USE_BIG_CLOCK),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (uri == Settings.System.getUriFor(
+                    Settings.System.USE_BIG_CLOCK)) {
+                boolean useLargeClock = (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.USE_BIG_CLOCK, 1) == 1);
+                if (useLargeClock) useLargeClock &= !mHasVisibleNotifications;
+                animateClockChange(useLargeClock);
+            }
         }
     }
 
