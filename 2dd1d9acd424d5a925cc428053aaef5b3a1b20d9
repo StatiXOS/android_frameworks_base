@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "052f81a2_2a761ef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000100
+      },
+      "writtenOn": "2022-02-23T12:36:14Z",
+      "side": 1,
+      "message": "could you show a screenshot of an example of this? i am dealing with something kinda like what is described but not positive....",
+      "revId": "2dd1d9acd424d5a925cc428053aaef5b3a1b20d9",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
