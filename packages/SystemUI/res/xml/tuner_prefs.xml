@@ -88,6 +88,10 @@
             android:key="airplane"
             android:title="@string/status_bar_airplane" />
 
+    <com.android.systemui.tuner.StatusBarSwitch
+        android:key="roaming"
+        android:title="@string/status_bar_roaming" />
+
         <!-- other weird signal stuff -->
 
         <com.android.systemui.tuner.BatteryPreference
