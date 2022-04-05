@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6eb88f_17b72fb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000071
+      },
+      "writtenOn": "2022-04-05T13:25:02Z",
+      "side": 1,
+      "message": "Merge after April ASB",
+      "revId": "ec694f748ee50b67464c7c62242974c17d736be2",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
