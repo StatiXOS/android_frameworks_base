@@ -131,7 +131,7 @@
                         android:tint="?androidprv:attr/colorAccent"
                         android:soundEffectsEnabled="false"
                         android:padding="10dp"
-                        android:rotation="90" />
+                        android:rotation="-90" />
                 </FrameLayout>
             </LinearLayout>
 
