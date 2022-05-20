@@ -326,7 +326,6 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         mVolumePanelOnLeft = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
-        Log.d(TAG, "mVolumePanelOnLeft: " + Boolean.toString(mVolumePanelOnLeft));
 
         initDimens();
     }
@@ -644,7 +643,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             setGravity(mODICaptionsView, Gravity.LEFT);
             setLayoutGravity(mODICaptionsView, Gravity.LEFT);
 
-            mExpandRows.setRotation(90);
+            mExpandRows.setRotation(-90);
         }
 
         if (mRows.isEmpty()) {
