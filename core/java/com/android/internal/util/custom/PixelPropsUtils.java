@@ -56,11 +56,7 @@ public class PixelPropsUtils {
         "bramble",
         "sunfish",
         "coral",
-        "flame",
-        "bonito",
-        "sargo",
-        "crosshatch",
-        "blueline"
+        "flame"
     };
 
     static {
