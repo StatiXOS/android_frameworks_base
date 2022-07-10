@@ -112,6 +112,11 @@ public class NavigationHandle extends View implements ButtonInterface {
         canvas.drawRoundRect(padding, y, mWidth + padding, y + height, mRadius, mRadius, mPaint);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension((int) getCustomWidth(), View.MeasureSpec.getSize(heightMeasureSpec));
+    }
+
     private double getCustomPadding() {
         int basePadding = (int) (getWidth() / 2) - (int) (mWidth / 2);
         return basePadding;
