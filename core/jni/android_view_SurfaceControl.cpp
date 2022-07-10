@@ -877,11 +877,6 @@ static void nativeSetDropInputMode(JNIEnv* env, jclass clazz, jlong transactionO
     transaction->setDropInputMode(ctrl, static_cast<gui::DropInputMode>(mode));
 }
 
-static void nativeSanitize(JNIEnv* env, jclass clazz, jlong transactionObj) {
-    auto transaction = reinterpret_cast<SurfaceComposerClient::Transaction*>(transactionObj);
-    transaction->sanitize();
-}
-
 static jlongArray nativeGetPhysicalDisplayIds(JNIEnv* env, jclass clazz) {
     const auto displayIds = SurfaceComposerClient::getPhysicalDisplayIds();
     jlongArray array = env->NewLongArray(displayIds.size());
@@ -2035,8 +2030,6 @@ static const JNINativeMethod sSurfaceControlMethods[] = {
              (void*)nativeSetDropInputMode },
     {"nativeGetLayerId", "(J)I",
             (void*)nativeGetLayerId },
-    {"nativeSanitize", "(J)V",
-            (void*) nativeSanitize }
         // clang-format on
 };
 
