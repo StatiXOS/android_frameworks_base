@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c65cd59_f6fc0eb5",
+        "filename": "core/java/android/widget/AbsListView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2022-07-14T04:53:39Z",
+      "side": 1,
+      "message": "Can we use something non-qti? Or does this prop have to do with the qti powerhal?",
+      "revId": "fd47c1cbf22c12d2e4ddbee059e4c5199c093eb3",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
