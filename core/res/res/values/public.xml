@@ -3202,6 +3202,13 @@
   <!-- ===============================================================
     Resources added in version S-V2 of the platform
     =============================================================== -->
+
+    <!-- Font apis -->
+    <public type="string" name="config_bodyFontFamily" id="0x0104003c" />
+    <public type="string" name="config_bodyFontFamilyMedium" id="0x0104003d" />
+    <public type="string" name="config_headlineFontFamily" id="0x0104003e" />
+    <public type="string" name="config_headlineFontFamilyMedium" id="0x0104003f" />
+
   <eat-comment />
 
   <staging-public-group-final type="attr" first-id="0x01ff0000">
