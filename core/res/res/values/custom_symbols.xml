@@ -34,6 +34,9 @@
   <!-- Fingerprint from stock ROM -->
   <java-symbol type="string" name="config_stockFingerprint" />
 
+  <!-- Spoof Certified Model -->
+  <java-symbol type="string" name="config_certifiedModel" />
+
   <!-- Spoof Pixel FP for some apps -->
   <java-symbol type="bool" name="config_spoofGoogleApps" />
   
