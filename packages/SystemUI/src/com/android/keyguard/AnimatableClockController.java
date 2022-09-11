@@ -52,7 +52,7 @@ public class AnimatableClockController extends ViewController<AnimatableClockVie
     private final BroadcastDispatcher mBroadcastDispatcher;
     private final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     private final BatteryController mBatteryController;
-    private final int mDozingColor = Color.WHITE;
+    private int mDozingColor;
     private int mLockScreenColor;
 
     private boolean mIsDozing;
@@ -234,6 +234,8 @@ public class AnimatableClockController extends ViewController<AnimatableClockVie
 
     private void initColors() {
         mLockScreenColor = Utils.getColorAttrDefaultColor(getContext(),
+                com.android.systemui.R.attr.wallpaperTextColorAccent);
+        mDozingColor = Utils.getColorAttrDefaultColor(getContext(),
                 com.android.systemui.R.attr.wallpaperTextColorAccent);
         mView.setColors(mDozingColor, mLockScreenColor);
         mView.animateDoze(mIsDozing, false);

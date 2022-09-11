@@ -3803,6 +3803,11 @@ public class NotificationPanelViewController extends PanelViewController {
     public void setDozing(boolean dozing, boolean animate, PointF wakeUpTouchLocation) {
         if (dozing == mDozing) return;
         mView.setDozing(dozing);
+        if (dozing) {
+            mView.setBackgroundColor(Color.BLUE);
+        } else {
+            mView.setBackgroundColor(Color.TRANSPARENT);
+        }
         mDozing = dozing;
         mNotificationStackScrollLayoutController.setDozing(mDozing, animate, wakeUpTouchLocation);
         mKeyguardBottomArea.setDozing(mDozing, animate);
