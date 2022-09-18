@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2022 Paranoid Android
+ * Copyright (C) 2022 StatiXOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +26,8 @@ import com.android.internal.R;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PropImitationHooks {
 
@@ -41,6 +44,19 @@ public class PropImitationHooks {
     private static final String PACKAGE_FINSKY = "com.android.vending";
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
+
+    private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
+    private static final String PACKAGE_TURBO = "com.google.android.apps.turbo";
+    private static final String PACKAGE_GBOARD = "com.google.android.inputmethod.latin";
+    private static final Map<String, Object> sP7Props = new HashMap<>();
+    static {
+        sP7Props.put("BRAND", "google");
+        sP7Props.put("MANUFACTURER", "Google");
+        sP7Props.put("DEVICE", "cheetah");
+        sP7Props.put("PRODUCT", "cheetah");
+        sP7Props.put("MODEL", "Pixel 7 Pro");
+        sP7Props.put("FINGERPRINT", "google/cheetah/cheetah:13/TD1A.221105.001/9104446:user/release-keys");
+    }
 
     private static volatile boolean sIsGms = false;
     private static volatile boolean sIsFinsky = false;
@@ -63,6 +79,10 @@ public class PropImitationHooks {
         } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
+        } else if (packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_TURBO)
+                            || packageName.equals(PACKAGE_GBOARD)) {
+            dlog("Spoofing Pixel 7 Pro for: " + packageName);
+            sP7Props.forEach((k, v) -> setPropValue(k, v));
         }
     }
 
