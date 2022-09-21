@@ -417,7 +417,7 @@ public class StatusBarIconControllerImpl extends StatusBarIconList implements Tu
         mIconGroups.forEach(l -> l.onRemoveIcon(viewIndex));
     }
 
-    private void handleSet(int index, StatusBarIconHolder holder) {
+    protected void handleSet(int index, StatusBarIconHolder holder) {
         int viewIndex = getViewIndex(index, holder.getTag());
         mIconGroups.forEach(l -> l.onSetIconHolder(viewIndex, holder));
     }

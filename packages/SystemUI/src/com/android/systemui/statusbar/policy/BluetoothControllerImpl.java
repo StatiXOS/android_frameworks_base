@@ -67,14 +67,14 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
             new WeakHashMap<>();
     private final Handler mBgHandler;
     @GuardedBy("mConnectedDevices")
-    private final List<CachedBluetoothDevice> mConnectedDevices = new ArrayList<>();
+    protected final List<CachedBluetoothDevice> mConnectedDevices = new ArrayList<>();
 
     private boolean mEnabled;
     private int mConnectionState = BluetoothAdapter.STATE_DISCONNECTED;
     private boolean mAudioProfileOnly;
     private boolean mIsActive;
 
-    private final H mHandler;
+    protected final H mHandler;
     private int mState;
 
     /**
@@ -246,7 +246,7 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
                 : null;
     }
 
-    private void updateConnected() {
+    protected void updateConnected() {
         // Make sure our connection state is up to date.
         int state = mLocalBluetoothManager.getBluetoothAdapter().getConnectionState();
         List<CachedBluetoothDevice> newList = new ArrayList<>();
@@ -448,11 +448,11 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
         }
     }
 
-    private final class H extends Handler {
+    protected final class H extends Handler {
         private final ArrayList<BluetoothController.Callback> mCallbacks = new ArrayList<>();
 
         private static final int MSG_PAIRED_DEVICES_CHANGED = 1;
-        private static final int MSG_STATE_CHANGED = 2;
+        public static final int MSG_STATE_CHANGED = 2;
         private static final int MSG_ADD_CALLBACK = 3;
         private static final int MSG_REMOVE_CALLBACK = 4;
 

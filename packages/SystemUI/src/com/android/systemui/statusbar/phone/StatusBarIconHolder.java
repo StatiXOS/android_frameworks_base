@@ -40,7 +40,7 @@ public class StatusBarIconHolder {
     private int mType = TYPE_ICON;
     private int mTag = 0;
 
-    private StatusBarIconHolder() {
+    protected StatusBarIconHolder() {
 
     }
 
