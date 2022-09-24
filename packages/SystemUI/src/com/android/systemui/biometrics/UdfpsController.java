@@ -603,7 +603,7 @@ public class UdfpsController implements DozeReceiver {
             @NonNull SystemUIDialogManager dialogManager,
             @NonNull LatencyTracker latencyTracker,
             @NonNull ActivityLaunchAnimator activityLaunchAnimator,
-            @NonNull Optional<AlternateUdfpsTouchProvider> aternateTouchProvider,
+            @NonNull Optional<AlternateUdfpsTouchProvider> alternateTouchProvider,
             @BiometricsBackground Executor biometricsExecutor) {
         mContext = context;
         mExecution = execution;
@@ -633,7 +633,12 @@ public class UdfpsController implements DozeReceiver {
         mUnlockedScreenOffAnimationController = unlockedScreenOffAnimationController;
         mLatencyTracker = latencyTracker;
         mActivityLaunchAnimator = activityLaunchAnimator;
-        mAlternateTouchProvider = aternateTouchProvider.orElse(null);
+        AlternateUdfpsTouchProvider provider = alternateTouchProvider.orElse(null);
+        if (provider != null) {
+            mAlternateTouchProvider = provider.isAvailable() ? provider : null;
+        } else {
+            mAlternateTouchProvider = null;
+        }
         mBiometricExecutor = biometricsExecutor;
 
         mOrientationListener = new BiometricDisplayListener(
