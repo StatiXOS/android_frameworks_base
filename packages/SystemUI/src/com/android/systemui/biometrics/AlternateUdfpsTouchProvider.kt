@@ -51,4 +51,14 @@ interface AlternateUdfpsTouchProvider {
      * See fingerprint/ISession#onUiReady for more details.
      */
     fun onUiReady()
+
+    /**
+     * @hide
+     * isAvailable:
+     *
+     * This operation is used by the callee to verify that the provider is usable.
+     *
+     */
+    fun isAvailable(): Boolean
+
 }

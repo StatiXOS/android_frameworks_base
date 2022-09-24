@@ -634,7 +634,12 @@ public class UdfpsController implements DozeReceiver {
         mUnlockedScreenOffAnimationController = unlockedScreenOffAnimationController;
         mLatencyTracker = latencyTracker;
         mActivityLaunchAnimator = activityLaunchAnimator;
-        mAlternateTouchProvider = alternateTouchProvider.orElse(null);
+        AlternateUdfpsTouchProvider provider = alternateTouchProvider.orElse(null);
+        if (provider != null) {
+            mAlternateTouchProvider = provider.isAvailable() ? provider : null;
+        } else {
+            mAlternateTouchProvider = null;
+        }
         mBiometricExecutor = biometricsExecutor;
 
         mOrientationListener = new BiometricDisplayListener(
