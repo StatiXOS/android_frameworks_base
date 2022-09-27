@@ -48,11 +48,14 @@ import android.annotation.NonNull;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.StatusBarManager;
+import android.app.WallpaperManager;
 import android.content.ContentResolver;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -61,11 +64,13 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.Region;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.biometrics.SensorLocationInternal;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.ParcelFileDescriptor;
 import android.os.PowerManager;
 import android.os.Trace;
 import android.os.UserManager;
@@ -3794,6 +3799,26 @@ public class NotificationPanelViewController extends PanelViewController {
     }
 
     /**
+     * @return Bitmap or Drawable
+     */
+    private Drawable getLockscreenWallpaper() {
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(mView.getContext());
+        ParcelFileDescriptor pfd = wallpaperManager.getWallpaperFile(WallpaperManager.FLAG_LOCK);
+        if (pfd == null)
+            pfd = wallpaperManager.getWallpaperFile(WallpaperManager.FLAG_SYSTEM);
+        if (pfd != null) {
+            final Bitmap result = BitmapFactory.decodeFileDescriptor(pfd.getFileDescriptor());
+            try {
+                pfd.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return new BitmapDrawable(mResources, result);
+        }
+        return wallpaperManager.getDrawable();
+    }
+
+    /**
      * Sets the dozing state.
      *
      * @param dozing              {@code true} when dozing.
@@ -3803,6 +3828,13 @@ public class NotificationPanelViewController extends PanelViewController {
     public void setDozing(boolean dozing, boolean animate, PointF wakeUpTouchLocation) {
         if (dozing == mDozing) return;
         mView.setDozing(dozing);
+        if (dozing) {
+            Drawable background = getLockscreenWallpaper();
+            background.setAlpha(75);
+            mView.setBackground(background);
+        } else {
+            mView.setBackgroundColor(Color.TRANSPARENT);
+        }
         mDozing = dozing;
         mNotificationStackScrollLayoutController.setDozing(mDozing, animate, wakeUpTouchLocation);
         mKeyguardBottomArea.setDozing(mDozing, animate);
