@@ -48,6 +48,7 @@ import android.annotation.NonNull;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.StatusBarManager;
+import android.app.WallpaperManager;
 import android.content.ContentResolver;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
@@ -3803,6 +3804,13 @@ public class NotificationPanelViewController extends PanelViewController {
     public void setDozing(boolean dozing, boolean animate, PointF wakeUpTouchLocation) {
         if (dozing == mDozing) return;
         mView.setDozing(dozing);
+        if (dozing) {
+            Drawable background = WallpaperManager.getInstance(mView.getContext()).getDrawable();
+            background.setAlpha(50);
+            mView.setBackground(background);
+        } else {
+            mView.setBackgroundColor(Color.TRANSPARENT);
+        }
         mDozing = dozing;
         mNotificationStackScrollLayoutController.setDozing(mDozing, animate, wakeUpTouchLocation);
         mKeyguardBottomArea.setDozing(mDozing, animate);
