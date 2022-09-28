@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded1973f_e3a9dbc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2022-09-28T16:20:47Z",
+      "side": 1,
+      "message": "as of now there is a pretty intense battery hit from having this enabled on a Zenfone 8",
+      "revId": "d62f45cabc2a1c1ba307186ee718bfe3313a3862",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
