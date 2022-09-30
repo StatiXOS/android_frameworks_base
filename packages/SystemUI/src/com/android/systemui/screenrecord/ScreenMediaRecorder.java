@@ -139,7 +139,7 @@ public class ScreenMediaRecorder {
         if (mMaxRefreshRate != 0 && refereshRate > mMaxRefreshRate) refereshRate = mMaxRefreshRate;
         int vidBitRate = width * height * refreshRate / VIDEO_FRAME_RATE
                 * VIDEO_FRAME_RATE_TO_RESOLUTION_RATIO;
-        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H265);
         mMediaRecorder.setVideoEncodingProfileLevel(
                 MediaCodecInfo.CodecProfileLevel.AVCProfileHigh,
                 MediaCodecInfo.CodecProfileLevel.AVCLevel3);
