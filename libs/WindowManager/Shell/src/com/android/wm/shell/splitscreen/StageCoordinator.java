@@ -2209,6 +2209,7 @@ public class StageCoordinator extends StageCoordinatorAbstract {
     }
 
     void getStageBounds(Rect outTopOrLeftBounds, Rect outBottomOrRightBounds) {
+        if (mSplitLayout == null) return;
         outTopOrLeftBounds.set(mSplitLayout.getTopLeftBounds());
         outBottomOrRightBounds.set(mSplitLayout.getBottomRightBounds());
     }
