@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "199f0288_6e844a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-10-29T16:26:26Z",
+      "side": 1,
+      "message": "why not just use the drawables from wherever they originally are from",
+      "revId": "f2d8084bcdf1d21f1c6cac882dc25ff63e23e6e4",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
