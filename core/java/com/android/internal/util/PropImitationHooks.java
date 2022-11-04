@@ -18,8 +18,10 @@
 package com.android.internal.util;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.R;
@@ -34,8 +36,8 @@ public class PropImitationHooks {
     private static final String TAG = "PropImitationHooks";
     private static final boolean DEBUG = false;
 
-    private static final String sCertifiedFp =
-            Resources.getSystem().getString(R.string.config_certifiedFingerprint);
+    private static final String[] sCertifiedProps =
+            Resources.getSystem().getStringArray(R.array.config_certifiedBuildProperties);
 
     private static final String sStockFp =
             Resources.getSystem().getString(R.string.config_stockFingerprint);
@@ -63,23 +65,28 @@ public class PropImitationHooks {
     private static volatile boolean sIsGms = false;
     private static volatile boolean sIsFinsky = false;
 
-    public static void setProps(Application app) {
-        final String packageName = app.getPackageName();
-        final String processName = app.getProcessName();
+    public static void setProps(Context context) {
+        final String packageName = context.getPackageName();
+        final String processName = Application.getProcessName();
 
-        if (packageName == null || processName == null) {
+        if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(processName)) {
+            Log.e(TAG, "Null package or process name");
             return;
         }
 
         sIsGms = packageName.equals(PACKAGE_GMS) && processName.equals(PROCESS_GMS_UNSTABLE);
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
 
-        if (sIsGms) {
-            dlog("Setting Pixel XL fingerprint for: " + packageName);
-            spoofBuildGms();
-        } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
-            dlog("Setting certified fingerprint for: " + packageName);
-            setPropValue("FINGERPRINT", sCertifiedFp);
+        /* Set Certified Properties for GMSCore
+         * Set Stock Fingerprint for ARCore
+         * Set Pixel 8 Pro for Google, ASI and GMS device configurator
+         */
+        if (sCertifiedProps.length == 4 && sIsGms) {
+            dlog("Spoofing build for GMS");
+            setPropValue("DEVICE", sCertifiedProps[0]);
+            setPropValue("PRODUCT", sCertifiedProps[1]);
+            setPropValue("MODEL", sCertifiedProps[2]);
+            setPropValue("FINGERPRINT", sCertifiedProps[3]);
         } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
@@ -100,16 +107,6 @@ public class PropImitationHooks {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             Log.e(TAG, "Failed to set prop " + key, e);
         }
-    }
-
-    private static void spoofBuildGms() {
-        // Alter model name and fingerprint to avoid hardware attestation enforcement
-        setPropValue("FINGERPRINT", "motorola/griffin_retcn/griffin:6.0.1/MCC24.246-37/42:user/release-keys");
-        setPropValue("PRODUCT", "griffin_retcn");
-        setPropValue("DEVICE", "griffin");
-        setPropValue("MANUFACTURER", "motorola");
-        setPropValue("BRAND", "motorola");
-        setPropValue("MODEL", "XT1650-05");
     }
 
     private static boolean isCallerSafetyNet() {
