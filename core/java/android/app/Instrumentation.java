@@ -1352,7 +1352,7 @@ public class Instrumentation {
         Application app = getFactory(context.getPackageName())
                 .instantiateApplication(cl, className);
         app.attach(context);
-        PropImitationHooks.setProps(app);
+        PropImitationHooks.setProps(context);
         return app;
     }
     
@@ -1370,7 +1370,7 @@ public class Instrumentation {
             ClassNotFoundException {
         Application app = (Application)clazz.newInstance();
         app.attach(context);
-        PropImitationHooks.setProps(app);
+        PropImitationHooks.setProps(context);
         return app;
     }
 
