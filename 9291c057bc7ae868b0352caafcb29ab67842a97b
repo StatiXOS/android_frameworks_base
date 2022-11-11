@@ -16,6 +16,23 @@
       "message": "Fingerprint icon on BiometricPrompt wasn’t matching the actual sensor location; this could fix that.",
       "revId": "9291c057bc7ae868b0352caafcb29ab67842a97b",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3866e5c_80db19e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-11-11T14:02:58Z",
+      "side": 1,
+      "message": "it is drawn above the navbar in 3 button mode but this aligns the dialog with the sensor",
+      "revId": "9291c057bc7ae868b0352caafcb29ab67842a97b",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
