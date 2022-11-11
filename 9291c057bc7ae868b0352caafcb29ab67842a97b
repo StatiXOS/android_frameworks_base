@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa4f499_89b90eee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000125
+      },
+      "writtenOn": "2022-11-11T12:30:16Z",
+      "side": 1,
+      "message": "Fingerprint icon on BiometricPrompt wasn’t matching the actual sensor location; this could fix that.",
+      "revId": "9291c057bc7ae868b0352caafcb29ab67842a97b",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
