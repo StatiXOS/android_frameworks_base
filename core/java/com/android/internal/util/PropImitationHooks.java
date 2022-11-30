@@ -59,6 +59,7 @@ public class PropImitationHooks {
         if (!sCertifiedFp.isEmpty() && (sIsGms || sIsFinsky)) {
             dlog("Setting certified fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sCertifiedFp);
+            setShippingVersion();
         } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
@@ -74,6 +75,20 @@ public class PropImitationHooks {
             field.setAccessible(false);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             Log.e(TAG, "Failed to set prop " + key, e);
+        }
+    }
+
+    private static void setShippingVersion() {
+        if (Build.VERSION.DEVICE_INITIAL_SDK_INT <= 32) {
+            return;
+        }
+        try {
+            Field field = Build.VERSION.class.getDeclaredField("DEVICE_INITIAL_SDK_INT");
+            field.setAccessible(true);
+            field.set(null, 32);
+            field.setAccessible(false);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Log.e(TAG, "Failed to set shipping version to 32 ", e);
         }
     }
 
