@@ -201,7 +201,7 @@ public class BrightnessDialog extends ComponentActivity {
         BrightnessSliderController controller = mToggleSliderFactory.create(this, frame);
         controller.init();
         frame.addView(controller.getRootView(), MATCH_PARENT, WRAP_CONTENT);
-        mBrightnessController = mBrightnessControllerFactory.create(controller.getIconView(), controller);
+        mBrightnessController = mBrightnessControllerFactory.create(controller);
     }
 
     private int getWindowAvailableWidth() {
