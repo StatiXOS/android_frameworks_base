@@ -123,7 +123,8 @@
         app:layout_constraintHorizontal_bias="1"
     />
 
-    <com.android.systemui.battery.BatteryMeterView
+    <include
+        layout="@layout/battery_view"
         android:id="@+id/batteryRemainingIcon"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/large_screen_shade_header_min_height"

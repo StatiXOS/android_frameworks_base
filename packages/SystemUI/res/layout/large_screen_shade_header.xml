@@ -78,7 +78,8 @@
                 android:layout_height="match_parent"
                 android:paddingEnd="@dimen/signal_cluster_battery_padding" />
 
-            <com.android.systemui.battery.BatteryMeterView
+            <include
+                layout="@layout/battery_view"
                 android:id="@+id/batteryRemainingIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
