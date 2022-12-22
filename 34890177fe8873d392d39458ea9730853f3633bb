@@ -33,6 +33,24 @@
       "message": "can be moved to prop\n\nsys.fflag.override.settings_volume_panel_in_systemui\u003dtrue",
       "revId": "34890177fe8873d392d39458ea9730853f3633bb",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91e4afd_30068c01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-12-22T23:35:45Z",
+      "side": 1,
+      "message": "\u003e can be moved to prop\n\u003e \n\u003e sys.fflag.override.settings_volume_panel_in_systemui\u003dtrue\n\nhttps://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/util/FeatureFlagUtils.java, can pull feature flags via props",
+      "parentUuid": "181040f9_f8543057",
+      "revId": "34890177fe8873d392d39458ea9730853f3633bb",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
