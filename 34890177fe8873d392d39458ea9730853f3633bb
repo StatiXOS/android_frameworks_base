@@ -51,6 +51,24 @@
       "parentUuid": "181040f9_f8543057",
       "revId": "34890177fe8873d392d39458ea9730853f3633bb",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c27e34_7f9e3aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000125
+      },
+      "writtenOn": "2022-12-23T15:36:17Z",
+      "side": 1,
+      "message": "I see... so I can move them to vendor/statix/config/common.mk\n\n    PRODUCT_SYSTEM_DEFAULT_PROPERTIES +\u003d \\\nsys.fflag.override.settings_volume_panel_in_systemui\u003dtrue\n\nAm I right?",
+      "parentUuid": "f91e4afd_30068c01",
+      "revId": "34890177fe8873d392d39458ea9730853f3633bb",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
