@@ -19,6 +19,7 @@ package com.android.internal.util;
 import android.app.Application;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.Build.VERSION;
 import android.util.Log;
 
 import com.android.internal.R;
@@ -63,6 +64,10 @@ public class PropImitationHooks {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
         }
+        if (sIsGms && Build.VERSION.DEVICE_INITIAL_SDK_INT > Build.VERSION_CODES.S) {
+            dlog("Setting sdk to 32");
+            setVersionField("DEVICE_INITIAL_SDK_INT", Build.VERSION_CODES.S);
+        }
     }
 
     private static void setPropValue(String key, Object value){
@@ -74,6 +79,22 @@ public class PropImitationHooks {
             field.setAccessible(false);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             Log.e(TAG, "Failed to set prop " + key, e);
+        }
+    }
+
+    private static void setVersionField(String key, Integer value) {
+        try {
+            // Unlock
+            Field field = Build.VERSION.class.getDeclaredField(key);
+            field.setAccessible(true);
+
+            // Edit
+            field.set(null, value);
+
+            // Lock
+            field.setAccessible(false);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Log.e(TAG, "Failed to spoof Build." + key, e);
         }
     }
 
