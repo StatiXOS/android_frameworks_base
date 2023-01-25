@@ -36,6 +36,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.Vibrator;
+import android.os.VibrationEffect;
 import android.provider.Settings;
 import android.service.vr.IVrManager;
 import android.service.vr.IVrStateCallbacks;
@@ -109,6 +111,10 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
     private float mBrightnessMax = PowerManager.BRIGHTNESS_MAX;
 
     private ValueAnimator mSliderAnimator;
+
+    private Vibrator mVibrator;
+    private static final VibrationEffect BRIGHTNESS_SLIDER_HAPTIC =
+            VibrationEffect.get(VibrationEffect.EFFECT_TICK);
 
     @Override
     public void setMirror(BrightnessMirrorController controller) {
@@ -319,6 +325,11 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
         mAutomaticAvailable = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available);
 
+        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (mVibrator == null || !mVibrator.hasVibrator()) {
+            mVibrator = null;
+        }
+
         if (mIcon != null) {
             if (mAutomaticAvailable) {
                 mIcon.setOnClickListener(new View.OnClickListener() {
@@ -472,6 +483,7 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
         mSliderAnimator = ValueAnimator.ofInt(mControl.getValue(), target);
         mSliderAnimator.addUpdateListener((ValueAnimator animation) -> {
             mExternalChange = true;
+            mVibrator.vibrate(BRIGHTNESS_SLIDER_HAPTIC);
             mControl.setValue((int) animation.getAnimatedValue());
             mExternalChange = false;
         });
