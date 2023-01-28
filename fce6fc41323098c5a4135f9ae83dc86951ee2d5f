@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a871ede_265b0e96",
+        "filename": "core/java/android/app/ActivityThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 6578,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-28T19:53:03Z",
+      "side": 1,
+      "message": "this doesnt look boostfw related",
+      "revId": "fce6fc41323098c5a4135f9ae83dc86951ee2d5f",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
