@@ -45,11 +45,6 @@ public class PropImitationHooks {
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
 
-    private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
-    private static final String PACKAGE_TURBO = "com.google.android.apps.turbo";
-    private static final String PACKAGE_GBOARD = "com.google.android.inputmethod.latin";
-    private static final String PACKAGE_SUBSCRIPTION_RED = "com.google.android.apps.subscriptions.red";
-    private static final String PACKAGE_WILDLIFE = "com.google.android.apps.privacy.wildlife";
     private static final Map<String, Object> sP7Props = new HashMap<>();
     static {
         sP7Props.put("BRAND", "google");
@@ -80,8 +75,7 @@ public class PropImitationHooks {
         } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
-        } else if (packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_TURBO) || packageName.equals(PACKAGE_GBOARD)
-                   || packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_WILDLIFE)) {
+        } else if (packageName.startsWith("com.google.")) {
             dlog("Spoofing Pixel 7 Pro for: " + packageName);
             sP7Props.forEach((k, v) -> setPropValue(k, v));
         }
