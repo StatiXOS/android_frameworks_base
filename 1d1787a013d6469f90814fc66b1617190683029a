@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "742b3966_7aaca081",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-01-31T03:44:48Z",
+      "side": 1,
+      "message": "this does make turbo (go vroooooom) work as the QQS estimated time remaining and the required graph is displayed properly in advanced battery stats but we need to narrow down what exactly needs to be spoofed instead of brutally spoofing every google app",
+      "revId": "1d1787a013d6469f90814fc66b1617190683029a",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
