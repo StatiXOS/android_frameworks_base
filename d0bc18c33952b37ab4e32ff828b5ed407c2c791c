@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17af8b36_a5ae2abe",
+        "filename": "packages/SystemUI/src/com/android/systemui/settings/brightness/BrightnessController.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-02-22T20:43:36Z",
+      "side": 1,
+      "message": "guard w tracking",
+      "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
