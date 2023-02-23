@@ -105,6 +105,24 @@
       "parentUuid": "1b9a25f5_7003f250",
       "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "145344b6_f9179182",
+        "filename": "packages/SystemUI/src/com/android/systemui/settings/brightness/BrightnessController.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2023-02-23T08:58:11Z",
+      "side": 1,
+      "message": "I don\u0027t think curly braces are needed, since it\u0027s just a single line.\n\nwhat do you mean int as bool?",
+      "parentUuid": "b1a59011_a3a9bb86",
+      "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
