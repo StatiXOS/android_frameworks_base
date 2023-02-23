@@ -69,6 +69,24 @@
       "parentUuid": "89ed0fb1_183dfc2a",
       "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9a25f5_7003f250",
+        "filename": "packages/SystemUI/src/com/android/systemui/settings/brightness/BrightnessController.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-02-23T04:29:46Z",
+      "side": 1,
+      "message": "do add curly braces for the if as well",
+      "parentUuid": "d7751158_7369aa1f",
+      "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
