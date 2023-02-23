@@ -16,6 +16,23 @@
       "message": "guard w tracking",
       "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ed0fb1_183dfc2a",
+        "filename": "packages/SystemUI/src/com/android/systemui/settings/brightness/BrightnessController.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-02-23T02:22:43Z",
+      "side": 1,
+      "message": "metric not metrics",
+      "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
