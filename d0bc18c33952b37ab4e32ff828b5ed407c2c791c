@@ -87,6 +87,24 @@
       "parentUuid": "d7751158_7369aa1f",
       "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a59011_a3a9bb86",
+        "filename": "packages/SystemUI/src/com/android/systemui/settings/brightness/BrightnessController.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-02-23T05:22:15Z",
+      "side": 1,
+      "message": "invalid conditional since you\u0027re treating int as a bool",
+      "parentUuid": "1b9a25f5_7003f250",
+      "revId": "d0bc18c33952b37ab4e32ff828b5ed407c2c791c",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
