@@ -52,6 +52,23 @@
       "parentUuid": "5736f74c_ce9d87ab",
       "revId": "f4c67fc1d1ec6b9af85e754ceb5ccbc28a65d988",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a5017d_6aedca8e",
+        "filename": "packages/SystemUI/src/com/android/systemui/settings/brightness/BrightnessController.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000123
+      },
+      "writtenOn": "2023-02-27T10:07:25Z",
+      "side": 1,
+      "message": "should change this to else",
+      "revId": "f4c67fc1d1ec6b9af85e754ceb5ccbc28a65d988",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
