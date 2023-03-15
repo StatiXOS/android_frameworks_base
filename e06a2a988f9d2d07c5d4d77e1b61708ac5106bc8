@@ -16,6 +16,23 @@
       "message": "probably squash this in w the original change",
       "revId": "e06a2a988f9d2d07c5d4d77e1b61708ac5106bc8",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1609a504_e07ef27b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-03-15T13:39:12Z",
+      "side": 1,
+      "message": "yes",
+      "revId": "e06a2a988f9d2d07c5d4d77e1b61708ac5106bc8",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
