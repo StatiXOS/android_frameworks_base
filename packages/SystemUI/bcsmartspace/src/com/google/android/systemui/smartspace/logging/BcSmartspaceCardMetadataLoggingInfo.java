@@ -1,46 +1,44 @@
 package com.google.android.systemui.smartspace.logging;
 
-public class BcSmartspaceCardMetadataLoggingInfo {
-    private final int mCardTypeId;
-    private final int mInstanceId;
+import android.frameworks.stats.VendorAtomValue$$ExternalSyntheticOutline0;
+import java.util.Objects;
+/* loaded from: classes2.dex */
+public final class BcSmartspaceCardMetadataLoggingInfo {
+    public final int mCardTypeId;
+    public final int mInstanceId;
 
-    private BcSmartspaceCardMetadataLoggingInfo(Builder builder) {
-        mInstanceId = builder.mInstanceId;
-        mCardTypeId = builder.mCardTypeId;
-    }
-
-    public int getInstanceId() {
-        return mInstanceId;
-    }
-
-    public int getCardTypeId() {
-        return mCardTypeId;
-    }
-
-    public String toString() {
-        return "BcSmartspaceCardMetadataLoggingInfo{mInstanceId="
-                + mInstanceId
-                + ", mCardTypeId="
-                + mCardTypeId
-                + '}';
-    }
-
+    /* loaded from: classes2.dex */
     public static class Builder {
-        private int mCardTypeId;
-        private int mInstanceId;
+        public int mCardTypeId;
+        public int mInstanceId;
+    }
 
-        public Builder setInstanceId(int i) {
-            mInstanceId = i;
-            return this;
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
+        if (!(obj instanceof BcSmartspaceCardMetadataLoggingInfo)) {
+            return false;
+        }
+        BcSmartspaceCardMetadataLoggingInfo bcSmartspaceCardMetadataLoggingInfo = (BcSmartspaceCardMetadataLoggingInfo) obj;
+        return this.mInstanceId == bcSmartspaceCardMetadataLoggingInfo.mInstanceId && this.mCardTypeId == bcSmartspaceCardMetadataLoggingInfo.mCardTypeId;
+    }
 
-        public Builder setCardTypeId(int i) {
-            mCardTypeId = i;
-            return this;
-        }
+    public final int hashCode() {
+        return Objects.hash(Integer.valueOf(this.mInstanceId), Integer.valueOf(this.mCardTypeId));
+    }
 
-        public BcSmartspaceCardMetadataLoggingInfo build() {
-            return new BcSmartspaceCardMetadataLoggingInfo(this);
-        }
+    public final String toString() {
+        StringBuilder m = VendorAtomValue$$ExternalSyntheticOutline0.m("BcSmartspaceCardMetadataLoggingInfo{mInstanceId=");
+        m.append(this.mInstanceId);
+        m.append(", mCardTypeId=");
+        m.append(this.mCardTypeId);
+        m.append('}');
+        return m.toString();
+    }
+
+    public BcSmartspaceCardMetadataLoggingInfo(Builder builder) {
+        this.mInstanceId = builder.mInstanceId;
+        this.mCardTypeId = builder.mCardTypeId;
     }
 }
