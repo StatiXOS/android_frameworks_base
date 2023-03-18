@@ -1,124 +1,79 @@
 package com.google.android.systemui.smartspace.logging;
 
-public class BcSmartspaceCardLoggingInfo {
-    private final int mCardinality;
-    private final int mDisplaySurface;
-    private int mFeatureType;
-    private final int mInstanceId;
-    private final int mRank;
-    private final int mReceivedLatency;
-    private BcSmartspaceSubcardLoggingInfo mSubcardInfo;
+import android.frameworks.stats.VendorAtomValue$$ExternalSyntheticOutline0;
+import com.android.systemui.smartspace.nano.SmartspaceProto$SmartspaceCardDimensionalInfo;
+import java.util.Objects;
+/* loaded from: classes2.dex */
+public final class BcSmartspaceCardLoggingInfo {
+    public final int mCardinality;
+    public SmartspaceProto$SmartspaceCardDimensionalInfo mDimensionalInfo;
+    public final int mDisplaySurface;
+    public int mFeatureType;
+    public int mInstanceId;
+    public final int mRank;
+    public final int mReceivedLatency;
+    public BcSmartspaceSubcardLoggingInfo mSubcardInfo;
+    public final int mUid;
 
-    private BcSmartspaceCardLoggingInfo(Builder builder) {
-        mInstanceId = builder.mInstanceId;
-        mDisplaySurface = builder.mDisplaySurface;
-        mRank = builder.mRank;
-        mCardinality = builder.mCardinality;
-        mFeatureType = builder.mFeatureType;
-        mReceivedLatency = builder.mReceivedLatency;
-        mSubcardInfo = builder.mSubcardInfo;
-    }
-
-    public int getInstanceId() {
-        return mInstanceId;
-    }
-
-    public int getDisplaySurface() {
-        return mDisplaySurface;
-    }
-
-    public int getRank() {
-        return mRank;
-    }
-
-    public int getCardinality() {
-        return mCardinality;
-    }
-
-    public int getFeatureType() {
-        return mFeatureType;
-    }
-
-    public int getReceivedLatency() {
-        return mReceivedLatency;
-    }
-
-    public BcSmartspaceSubcardLoggingInfo getSubcardInfo() {
-        return mSubcardInfo;
-    }
-
-    public void setFeatureType(int i) {
-        mFeatureType = i;
-    }
-
-    public void setSubcardInfo(BcSmartspaceSubcardLoggingInfo bcSmartspaceSubcardLoggingInfo) {
-        mSubcardInfo = bcSmartspaceSubcardLoggingInfo;
-    }
-
-    public String toString() {
-        return "instance_id = "
-                + getInstanceId()
-                + ", feature type = "
-                + getFeatureType()
-                + ", display surface = "
-                + getDisplaySurface()
-                + ", rank = "
-                + getRank()
-                + ", cardinality = "
-                + getCardinality()
-                + ", receivedLatencyMillis = "
-                + getReceivedLatency()
-                + ", subcardInfo = "
-                + getSubcardInfo();
-    }
-
+    /* loaded from: classes2.dex */
     public static class Builder {
-        private int mCardinality;
-        private int mDisplaySurface = 1;
-        private int mFeatureType;
-        private int mInstanceId;
-        private int mRank;
-        private int mReceivedLatency;
-        private BcSmartspaceSubcardLoggingInfo mSubcardInfo;
+        public int mCardinality;
+        public SmartspaceProto$SmartspaceCardDimensionalInfo mDimensionalInfo;
+        public int mDisplaySurface = 1;
+        public int mFeatureType;
+        public int mInstanceId;
+        public int mRank;
+        public int mReceivedLatency;
+        public BcSmartspaceSubcardLoggingInfo mSubcardInfo;
+        public int mUid;
+    }
 
-        public Builder setInstanceId(int i) {
-            mInstanceId = i;
-            return this;
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
+        if (!(obj instanceof BcSmartspaceCardLoggingInfo)) {
+            return false;
+        }
+        BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = (BcSmartspaceCardLoggingInfo) obj;
+        return this.mInstanceId == bcSmartspaceCardLoggingInfo.mInstanceId && this.mDisplaySurface == bcSmartspaceCardLoggingInfo.mDisplaySurface && this.mRank == bcSmartspaceCardLoggingInfo.mRank && this.mCardinality == bcSmartspaceCardLoggingInfo.mCardinality && this.mFeatureType == bcSmartspaceCardLoggingInfo.mFeatureType && this.mReceivedLatency == bcSmartspaceCardLoggingInfo.mReceivedLatency && this.mUid == bcSmartspaceCardLoggingInfo.mUid && Objects.equals(this.mSubcardInfo, bcSmartspaceCardLoggingInfo.mSubcardInfo) && Objects.equals(this.mDimensionalInfo, bcSmartspaceCardLoggingInfo.mDimensionalInfo);
+    }
 
-        public Builder setDisplaySurface(int i) {
-            mDisplaySurface = i;
-            return this;
-        }
+    public final int hashCode() {
+        return Objects.hash(Integer.valueOf(this.mInstanceId), Integer.valueOf(this.mDisplaySurface), Integer.valueOf(this.mRank), Integer.valueOf(this.mCardinality), Integer.valueOf(this.mFeatureType), Integer.valueOf(this.mReceivedLatency), Integer.valueOf(this.mUid), this.mSubcardInfo);
+    }
 
-        public Builder setRank(int i) {
-            mRank = i;
-            return this;
-        }
+    public final String toString() {
+        StringBuilder m = VendorAtomValue$$ExternalSyntheticOutline0.m("instance_id = ");
+        m.append(this.mInstanceId);
+        m.append(", feature type = ");
+        m.append(this.mFeatureType);
+        m.append(", display surface = ");
+        m.append(this.mDisplaySurface);
+        m.append(", rank = ");
+        m.append(this.mRank);
+        m.append(", cardinality = ");
+        m.append(this.mCardinality);
+        m.append(", receivedLatencyMillis = ");
+        m.append(this.mReceivedLatency);
+        m.append(", uid = ");
+        m.append(this.mUid);
+        m.append(", subcardInfo = ");
+        m.append(this.mSubcardInfo);
+        m.append(", dimensionalInfo = ");
+        m.append(this.mDimensionalInfo);
+        return m.toString();
+    }
 
-        public Builder setCardinality(int i) {
-            mCardinality = i;
-            return this;
-        }
-
-        public Builder setFeatureType(int i) {
-            mFeatureType = i;
-            return this;
-        }
-
-        public Builder setReceivedLatency(int i) {
-            mReceivedLatency = i;
-            return this;
-        }
-
-        public Builder setSubcardInfo(
-                BcSmartspaceSubcardLoggingInfo bcSmartspaceSubcardLoggingInfo) {
-            mSubcardInfo = bcSmartspaceSubcardLoggingInfo;
-            return this;
-        }
-
-        public BcSmartspaceCardLoggingInfo build() {
-            return new BcSmartspaceCardLoggingInfo(this);
-        }
+    public BcSmartspaceCardLoggingInfo(Builder builder) {
+        this.mInstanceId = builder.mInstanceId;
+        this.mDisplaySurface = builder.mDisplaySurface;
+        this.mRank = builder.mRank;
+        this.mCardinality = builder.mCardinality;
+        this.mFeatureType = builder.mFeatureType;
+        this.mReceivedLatency = builder.mReceivedLatency;
+        this.mUid = builder.mUid;
+        this.mSubcardInfo = builder.mSubcardInfo;
+        this.mDimensionalInfo = builder.mDimensionalInfo;
     }
 }
