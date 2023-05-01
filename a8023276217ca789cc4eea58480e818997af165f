@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c5707e4_cb8ded3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000125
+      },
+      "writtenOn": "2023-05-01T13:47:31Z",
+      "side": 1,
+      "message": "It only enables Keyguard shortcuts, the other 3 flags doesn\u0027t seem to be working.\nAnd stuff randomly crashes as well.",
+      "revId": "a8023276217ca789cc4eea58480e818997af165f",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
