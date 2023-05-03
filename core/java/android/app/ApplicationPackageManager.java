@@ -816,6 +816,12 @@ public class ApplicationPackageManager extends PackageManager {
 		name.contains("PIXEL_2022_EXPERIENCE") ||
 		name.contains("PIXEL_2022_MIDYEAR_EXPERIENCE"))) {
 	    return false;
+	} else if (packageName != null &&
+		packageName.contains("com.google.android.as") &&
+		(name.contains("PIXEL_2022_EXPERIENCE") ||
+		name.contains("PIXEL_2022_MIDYEAR_EXPERIENCE"))) {
+	    return false;
+
 	}
         return mHasSystemFeatureCache.query(new HasSystemFeatureQuery(name, version));
     }
