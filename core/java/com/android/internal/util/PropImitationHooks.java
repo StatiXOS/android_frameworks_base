@@ -52,6 +52,7 @@ public class PropImitationHooks {
     private static final String PACKAGE_GBOARD = "com.google.android.inputmethod.latin";
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
     private static final Map<String, Object> sP7Props = new HashMap<>();
+    private static final Map<String, Object> sStockProps = new HashMap<>();
     static {
         sP7Props.put("BRAND", "google");
         sP7Props.put("MANUFACTURER", "Google");
@@ -59,6 +60,13 @@ public class PropImitationHooks {
         sP7Props.put("PRODUCT", "cheetah");
         sP7Props.put("MODEL", "Pixel 7 Pro");
         sP7Props.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ2A.230505.002/9891397:user/release-keys");
+
+        sStockProps.put("BRAND", Build.BRAND);
+        sStockProps.put("MANUFACTURER", Build.MANUFACTURER);
+        sStockProps.put("DEVICE", Build.DEVICE);
+        sStockProps.put("PRODUCT", Build.PRODUCT);
+        sStockProps.put("MODEL", Build.MODEL);
+        sStockProps.put("FINGERPRINT", sStockFp);
     }
 
     private static volatile boolean sIsGms = false;
@@ -78,17 +86,35 @@ public class PropImitationHooks {
         if (sIsGms) {
             dlog("Setting Pixel XL fingerprint for: " + packageName);
             spoofBuildGms();
+            scheduleUndoSpoof();
         } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
             dlog("Setting certified fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sCertifiedFp);
+            scheduleUndoSpoof();
         } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
         } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
-                   || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
+                   || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD)
+                   || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
             dlog("Spoofing Pixel 7 Pro for: " + packageName);
             sP7Props.forEach((k, v) -> setPropValue(k, v));
+            scheduleUndoSpoof();
         }
+    }
+
+    private static void scheduleUndoSpoof() {
+        Thread t = new Thread(() -> {
+                try {
+                    Thread.sleep(2000 /*ms*/);
+                } catch (InterruptedException e) {
+                    // it's fine to be interrupted, enough time has been wasted that
+                    // we should be able to run this with no consequences.
+                }
+                sStockProps.forEach((k, v) -> setPropValue(k, v));
+                dlog("Undid spoof");
+            }, "Undo_spoof-Thread");
+        t.start();
     }
 
     private static void setPropValue(String key, Object value){
