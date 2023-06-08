@@ -109,7 +109,17 @@ filegroup {
     srcs: [
         "src-debug/**/*.kt",
         "src-debug/**/*.java",
+        "src-release/**/Compile.java",
     ],
+    exclude_srcs: [
+        "src-debug/**/Compile.java",
+    ],
+    product_variables: {
+        debuggable: {
+            srcs: ["src-debug/**/Compile.java"],
+            exclude_srcs: ["src-release/**/Compile.java"],
+        },
+    },
 }
 
 android_library {
