@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2022 Paranoid Android
- * Copyright (C) 2022 StatiXOS
+ * Copyright (C) 2023 StatiXOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,12 +46,17 @@ public class PropImitationHooks {
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
 
+    private static final String PACKAGE_PIXEL_LAUNCHER = "com.google.android.apps.nexuslauncher";
     private static final String PACKAGE_SUBSCRIPTION_RED = "com.google.android.apps.subscriptions.red";
     private static final String PACKAGE_TURBO = "com.google.android.apps.turbo";
     private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
     private static final String PACKAGE_GBOARD = "com.google.android.inputmethod.latin";
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
+    private static final Map<String, Object> sDebugProps = new HashMap<>();
     private static final Map<String, Object> sP7Props = new HashMap<>();
+    static {
+	sDebugProps.put("TYPE", "userdebug");
+    }
     static {
         sP7Props.put("BRAND", "google");
         sP7Props.put("MANUFACTURER", "Google");
@@ -88,6 +93,9 @@ public class PropImitationHooks {
                    || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
             dlog("Spoofing Pixel 7 Pro for: " + packageName);
             sP7Props.forEach((k, v) -> setPropValue(k, v));
+        } else if (packageName.equals(PACKAGE_PIXEL_LAUNCHER)) {
+	    dlog("Spoofing userdebug for: " + packageName);
+	    sDebugProps.forEach((k, v) -> setPropValue(k, v));
         }
     }
 
