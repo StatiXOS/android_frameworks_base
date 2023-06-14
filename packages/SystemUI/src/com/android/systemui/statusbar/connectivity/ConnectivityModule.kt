@@ -38,12 +38,6 @@ interface ConnectivityModule {
     @StringKey(InternetTile.TILE_SPEC)
     fun bindInternetTile(internetTile: InternetTile): QSTileImpl<*>
 
-    /** Inject BluetoothTile into tileMap in QSModule */
-    @Binds
-    @IntoMap
-    @StringKey(BluetoothTile.TILE_SPEC)
-    fun bindBluetoothTile(bluetoothTile: BluetoothTile): QSTileImpl<*>
-
     /** Inject CastTile into tileMap in QSModule */
     @Binds
     @IntoMap
