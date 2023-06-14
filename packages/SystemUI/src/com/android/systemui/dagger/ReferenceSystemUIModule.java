@@ -51,6 +51,7 @@ import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
+import com.android.systemui.statusbar.connectivity.BluetoothModule;
 import com.android.systemui.statusbar.dagger.StartCentralSurfacesModule;
 import com.android.systemui.statusbar.events.StatusBarEventsModule;
 import com.android.systemui.statusbar.notification.collection.provider.VisualStabilityProvider;
@@ -96,6 +97,7 @@ import dagger.Provides;
 @Module(includes = {
         AospPolicyModule.class,
         BatterySaverModule.class,
+        BluetoothModule.class,
         GestureModule.class,
         MediaModule.class,
         PowerModule.class,
