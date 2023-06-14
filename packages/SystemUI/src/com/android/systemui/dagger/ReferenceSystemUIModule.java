@@ -87,6 +87,7 @@ import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragmentS
 import com.android.systemui.statusbar.policy.AospPolicyModule;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
+import com.android.systemui.statusbar.policy.FlashlightModule;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyController;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyControllerImpl;
 import com.android.systemui.statusbar.policy.SensorPrivacyController;
@@ -137,6 +138,7 @@ import javax.inject.Named;
         DefaultBlueprintModule.class,
         DeviceStateAutoRotateModule.class,
         EmergencyGestureModule.class,
+        FlashlightModule.class,
         GestureModule.class,
         HeadsUpModule.class,
         KeyguardModule.class,
