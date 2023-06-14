@@ -36,12 +36,6 @@ import dagger.multibindings.StringKey
 @Module
 interface ConnectivityModule {
 
-    /** Inject BluetoothTile into tileMap in QSModule */
-    @Binds
-    @IntoMap
-    @StringKey(BluetoothTile.TILE_SPEC)
-    fun bindBluetoothTile(bluetoothTile: BluetoothTile): QSTileImpl<*>
-
     /** Inject CastTile into tileMap in QSModule */
     @Binds
     @IntoMap
