@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa519e45_a0eeab55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2023-06-17T18:11:33Z",
+      "side": 1,
+      "message": "Can confirm it\u0027s working\nNotification slice appeared",
+      "revId": "117ffce8d76ca25cfeb90cef014878f652dcdae6",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
