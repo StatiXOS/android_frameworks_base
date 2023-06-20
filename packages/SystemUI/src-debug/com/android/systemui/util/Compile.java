@@ -16,8 +16,10 @@
 
 package com.android.systemui.util;
 
+import android.os.SystemProperties;
+
 /** Constants that vary by compilation configuration. */
 public class Compile {
-    /** Whether SystemUI was compiled in debug mode, and supports debug features */
-    public static final boolean IS_DEBUG = true;
+    /** Whether SystemUI supports debug features */
+    public static final boolean IS_DEBUG = SystemProperties.getInt("ro.debuggable", 1) == 1;
 }
