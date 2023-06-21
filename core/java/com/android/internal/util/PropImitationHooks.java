@@ -33,7 +33,7 @@ import java.util.Map;
 public class PropImitationHooks {
 
     private static final String TAG = "PropImitationHooks";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static final String sCertifiedFp =
             Resources.getSystem().getString(R.string.config_certifiedFingerprint);
@@ -61,6 +61,16 @@ public class PropImitationHooks {
         sP7Props.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ3A.230605.012/10204971:user/release-keys");
     }
 
+    private static final Map<String, Object> sPTBProps = new HashMap<>();
+    static {
+        sPTBProps.put("BRAND", "google");
+        sPTBProps.put("MANUFACTURER", "Google");
+        sPTBProps.put("DEVICE", "tangorpro");
+        sPTBProps.put("PRODUCT", "tangorpro");
+        sPTBProps.put("MODEL", "Pixel Tablet");
+        sPTBProps.put("FINGERPRINT", "google/tangorpro/tangorpro:13/TQ3A.230605.009.A1/10100517:user/release-keys");
+    }
+
     private static volatile boolean sIsGms = false;
     private static volatile boolean sIsFinsky = false;
 
@@ -84,10 +94,16 @@ public class PropImitationHooks {
         } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
             dlog("Setting stock fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sStockFp);
-        } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
-                   || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
+        /*} else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED)
+                   ||packageName.equals(PACKAGE_TURBO) || packageName.equals(PACKAGE_GBOARD)
+                   || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
             dlog("Spoofing Pixel 7 Pro for: " + packageName);
-            sP7Props.forEach((k, v) -> setPropValue(k, v));
+            sP7Props.forEach((k, v) -> setPropValue(k, v));*/
+        } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED)
+                   ||packageName.equals(PACKAGE_TURBO) || packageName.equals(PACKAGE_GBOARD)
+                   || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
+            dlog("Spoofing Pixel Tablet for: " + packageName);
+            sPTBProps.forEach((k, v) -> setPropValue(k, v));
         }
     }
 
