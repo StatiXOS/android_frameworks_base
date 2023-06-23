@@ -16,6 +16,23 @@
       "message": "Make a toggle for it",
       "revId": "4fc1ebc8f4b4e557ce74c0ddd54ec5d2ba657d67",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1416f7ff_62489c0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2023-06-23T13:45:44Z",
+      "side": 1,
+      "message": "No",
+      "revId": "4fc1ebc8f4b4e557ce74c0ddd54ec5d2ba657d67",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
