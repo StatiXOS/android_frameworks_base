@@ -4914,4 +4914,8 @@
 
   <!-- Whether to show weather on the lockscreen by default. -->
   <java-symbol type="bool" name="config_lockscreenWeatherEnabledByDefault" />
+  
+  <!-- App version -->
+    <java-symbol type="string" name="old_version_number" />
+    <java-symbol type="string" name="new_version_number" />
 </resources>
