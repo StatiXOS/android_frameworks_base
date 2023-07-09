@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3a3320_77e091b7",
+        "filename": "packages/SystemUI/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-07-09T07:25:35Z",
+      "side": 1,
+      "message": "accidental?",
+      "revId": "17bb5a7a66222576989a8110f963b7d922987da3",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
