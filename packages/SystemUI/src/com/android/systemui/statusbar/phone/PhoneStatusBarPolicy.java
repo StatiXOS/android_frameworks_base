@@ -450,9 +450,7 @@ public class PhoneStatusBarPolicy
                 mResources.getString(R.string.accessibility_quick_settings_bluetooth_on);
         boolean bluetoothVisible = false;
         if (mBluetooth != null) {
-            if (mBluetooth.isBluetoothConnected()
-                    && (mBluetooth.isBluetoothAudioActive()
-                    || !mBluetooth.isBluetoothAudioProfileOnly())) {
+            if (mBluetooth.isBluetoothConnected()) {
                 contentDescription = mResources.getString(
                         R.string.accessibility_bluetooth_connected);
                 bluetoothVisible = mBluetooth.isBluetoothEnabled();
