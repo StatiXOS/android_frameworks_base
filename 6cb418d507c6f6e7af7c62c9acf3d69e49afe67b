@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4afd9f2e_efe11a29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-07-12T02:19:54Z",
+      "side": 1,
+      "message": "Still observing spoofed device info in GMS related stuff",
+      "revId": "6cb418d507c6f6e7af7c62c9acf3d69e49afe67b",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
