@@ -161,6 +161,9 @@ public final class CameraManager {
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     private FoldStateListener mFoldStateListener;
+    @GuardedBy("mLock")
+    private ArrayList<WeakReference<DeviceStateListener>> mDeviceStateListeners = new ArrayList<>();
+    private boolean mFoldedDeviceState;
 
     /**
      * @hide
@@ -169,39 +172,31 @@ public final class CameraManager {
         void onDeviceStateChanged(boolean folded);
     }
 
-    private static final class FoldStateListener implements DeviceStateManager.DeviceStateCallback {
+    private final class FoldStateListener implements DeviceStateManager.DeviceStateCallback {
         private final int[] mFoldedDeviceStates;
-
-        private ArrayList<WeakReference<DeviceStateListener>> mDeviceStateListeners =
-                new ArrayList<>();
-        private boolean mFoldedDeviceState;
 
         public FoldStateListener(Context context) {
             mFoldedDeviceStates = context.getResources().getIntArray(
                     com.android.internal.R.array.config_foldedDeviceStates);
         }
 
-        private synchronized void handleStateChange(int state) {
+        private void handleStateChange(int state) {
             boolean folded = ArrayUtils.contains(mFoldedDeviceStates, state);
-
-            mFoldedDeviceState = folded;
-            ArrayList<WeakReference<DeviceStateListener>> invalidListeners = new ArrayList<>();
-            for (WeakReference<DeviceStateListener> listener : mDeviceStateListeners) {
-                DeviceStateListener callback = listener.get();
-                if (callback != null) {
-                    callback.onDeviceStateChanged(folded);
-                } else {
-                    invalidListeners.add(listener);
+            synchronized (mLock) {
+                mFoldedDeviceState = folded;
+                ArrayList<WeakReference<DeviceStateListener>> invalidListeners = new ArrayList<>();
+                for (WeakReference<DeviceStateListener> listener : mDeviceStateListeners) {
+                    DeviceStateListener callback = listener.get();
+                    if (callback != null) {
+                        callback.onDeviceStateChanged(folded);
+                    } else {
+                        invalidListeners.add(listener);
+                    }
+                }
+                if (!invalidListeners.isEmpty()) {
+                    mDeviceStateListeners.removeAll(invalidListeners);
                 }
             }
-            if (!invalidListeners.isEmpty()) {
-                mDeviceStateListeners.removeAll(invalidListeners);
-            }
-        }
-
-        public synchronized void addDeviceStateListener(DeviceStateListener listener) {
-            listener.onDeviceStateChanged(mFoldedDeviceState);
-            mDeviceStateListeners.add(new WeakReference<>(listener));
         }
 
         @Override
@@ -225,8 +220,9 @@ public final class CameraManager {
     public void registerDeviceStateListener(@NonNull CameraCharacteristics chars) {
         synchronized (mLock) {
             DeviceStateListener listener = chars.getDeviceStateListener();
+            listener.onDeviceStateChanged(mFoldedDeviceState);
             if (mFoldStateListener != null) {
-                mFoldStateListener.addDeviceStateListener(listener);
+                mDeviceStateListeners.add(new WeakReference<>(listener));
             }
         }
     }

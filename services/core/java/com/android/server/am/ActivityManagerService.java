@@ -431,7 +431,6 @@ import libcore.util.EmptyArray;
 
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -453,7 +452,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -4858,7 +4856,12 @@ public class ActivityManagerService extends IActivityManager.Stub
 
             ProfilerInfo profilerInfo = mAppProfiler.setupProfilerInfoLocked(thread, app, instr);
 
-            final String buildSerial = Build.UNKNOWN;
+            // We deprecated Build.SERIAL and it is not accessible to
+            // Instant Apps and target APIs higher than O MR1. Since access to the serial
+            // is now behind a permission we push down the value.
+            final String buildSerial = (!appInfo.isInstantApp()
+                    && appInfo.targetSdkVersion < Build.VERSION_CODES.P)
+                            ? sTheRealBuildSerial : Build.UNKNOWN;
 
             // Figure out whether the app needs to run in autofill compat mode.
             AutofillOptions autofillOptions = null;
@@ -5205,27 +5208,8 @@ public class ActivityManagerService extends IActivityManager.Stub
         t.traceEnd();
     }
 
-    private static boolean isUartEnabled() {
-        // console=null should be set in the kernel cmdline when UART is off
-        final String console_string = "console=null";
-        boolean isEnabled = false;
-        try (Scanner sc = new Scanner(new FileInputStream("/proc/cmdline"))) {
-            StringBuilder scOutput = new StringBuilder();
-            while (sc.hasNextLine()){
-                scOutput.append(sc.nextLine());
-            }
-            isEnabled = !scOutput.toString().contains(console_string);
-        } catch (IOException ignored) {}
-        // This check will only work on userdebug and eng builds due
-        // to the console service not being present on user builds.
-        if (SystemProperties.get("init.svc.console").equals("running")) {
-            isEnabled = true;
-        }
-        return isEnabled;
-    }
-
     private void showConsoleNotificationIfActive() {
-        if (!isUartEnabled()) {
+        if (!SystemProperties.get("init.svc.console").equals("running")) {
             return;
         }
         String title = mContext
@@ -6814,7 +6798,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         mActivityTaskManager.unhandledBack();
     }
 
-    // TODO: Move to ContentProviderHelper?
+    // TODO: Replace this method with one that returns a bound IContentProvider.
     public ParcelFileDescriptor openContentUri(String uriString) throws RemoteException {
         enforceNotIsolatedCaller("openContentUri");
         final int userId = UserHandle.getCallingUserId();
@@ -6843,6 +6827,16 @@ public class ActivityManagerService extends IActivityManager.Stub
                     Log.e(TAG, "Cannot find package for uid: " + uid);
                     return null;
                 }
+
+                final ApplicationInfo appInfo = mPackageManagerInt.getApplicationInfo(
+                        androidPackage.getPackageName(), /*flags*/0, Process.SYSTEM_UID,
+                        UserHandle.USER_SYSTEM);
+                if (!appInfo.isVendor() && !appInfo.isSystemApp() && !appInfo.isSystemExt()
+                        && !appInfo.isProduct()) {
+                    Log.e(TAG, "openContentUri may only be used by vendor/system/product.");
+                    return null;
+                }
+
                 final AttributionSource attributionSource = new AttributionSource(
                         Binder.getCallingUid(), androidPackage.getPackageName(), null);
                 pfd = cph.provider.openFile(attributionSource, uri, "r", null);
@@ -8872,7 +8866,6 @@ public class ActivityManagerService extends IActivityManager.Stub
      * @param incrementalMetrics metrics for apps installed on Incremental.
      * @param errorId a unique id to append to the dropbox headers.
      */
-    @SuppressWarnings("DoNotCall") // Ignore warning for synchronous to call to worker.run()
     public void addErrorToDropBox(String eventType,
             ProcessRecord process, String processName, String activityShortComponentName,
             String parentShortComponentName, ProcessRecord parentProcess,

@@ -1618,8 +1618,6 @@ class StorageManagerService extends IStorageManager.Stub
             // public API requirement of being in a stable location.
             if (vol.disk.isAdoptable()) {
                 vol.mountFlags |= VolumeInfo.MOUNT_FLAG_VISIBLE_FOR_WRITE;
-            } else if (vol.disk.isSd()) {
-                vol.mountFlags |= VolumeInfo.MOUNT_FLAG_VISIBLE_FOR_WRITE;
             }
 
             vol.mountUserId = mCurrentUserId;
@@ -2843,8 +2841,6 @@ class StorageManagerService extends IStorageManager.Stub
         enforcePermission(android.Manifest.permission.MOUNT_FORMAT_FILESYSTEMS);
 
         try {
-            int avgWriteAmount = 0;
-            int targetDirtyRatio = mTargetDirtyRatio;
             int latestWrite = mVold.getWriteAmount();
             if (latestWrite == -1) {
                 Slog.w(TAG, "Failed to get storage write record");
@@ -2857,11 +2853,10 @@ class StorageManagerService extends IStorageManager.Stub
             // (first boot after OTA), We skip the smart idle maintenance
             if (!needsCheckpoint() || !supportsBlockCheckpoint()) {
                 if (!refreshLifetimeConstraint() || !checkChargeStatus()) {
-                    Slog.i(TAG, "Turn off gc_urgent based on checking lifetime and charge status");
-                    targetDirtyRatio = 100;
-                } else {
-                    avgWriteAmount = getAverageWriteAmount();
+                    return;
                 }
+
+                int avgWriteAmount = getAverageWriteAmount();
 
                 Slog.i(TAG, "Set smart idle maintenance: " + "latest write amount: " +
                             latestWrite + ", average write amount: " + avgWriteAmount +
@@ -2870,10 +2865,10 @@ class StorageManagerService extends IStorageManager.Stub
                             ", segment reclaim weight: " + mSegmentReclaimWeight +
                             ", period(min): " + sSmartIdleMaintPeriod +
                             ", min gc sleep time(ms): " + mMinGCSleepTime +
-                            ", target dirty ratio: " + targetDirtyRatio);
+                            ", target dirty ratio: " + mTargetDirtyRatio);
                 mVold.setGCUrgentPace(avgWriteAmount, mMinSegmentsThreshold, mDirtyReclaimRate,
                                       mSegmentReclaimWeight, sSmartIdleMaintPeriod,
-                                      mMinGCSleepTime, targetDirtyRatio);
+                                      mMinGCSleepTime, mTargetDirtyRatio);
             } else {
                 Slog.i(TAG, "Skipping smart idle maintenance - block based checkpoint in progress");
             }

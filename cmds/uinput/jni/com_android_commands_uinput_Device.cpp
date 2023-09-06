@@ -301,7 +301,7 @@ static void setAbsInfo(JNIEnv* env, jclass /* clazz */, jint handle, jint axisCo
     ::ioctl(static_cast<int>(handle), UI_ABS_SETUP, &absSetup);
 }
 
-static const JNINativeMethod sMethods[] = {
+static JNINativeMethod sMethods[] = {
         {"nativeOpenUinputDevice",
          "(Ljava/lang/String;IIIII"
          "Lcom/android/commands/uinput/Device$DeviceCallback;)J",

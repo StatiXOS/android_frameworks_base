@@ -2861,7 +2861,7 @@ public class AlarmManagerService extends SystemService {
             } else if (workSource == null && (UserHandle.isCore(callingUid)
                     || UserHandle.isSameApp(callingUid, mSystemUiUid)
                     || ((mAppStateTracker != null)
-                    && mAppStateTracker.isUidPowerSaveIdleExempt(callingUid)))) {
+                    && mAppStateTracker.isUidPowerSaveUserExempt(callingUid)))) {
                 flags |= FLAG_ALLOW_WHILE_IDLE_UNRESTRICTED;
                 flags &= ~(FLAG_ALLOW_WHILE_IDLE | FLAG_PRIORITIZE);
             }

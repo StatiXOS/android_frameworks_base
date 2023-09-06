@@ -498,8 +498,7 @@ public class CameraServiceProxy extends SystemService
 
             if ((recentTasks != null) && (!recentTasks.getList().isEmpty())) {
                 for (ActivityManager.RecentTaskInfo task : recentTasks.getList()) {
-                    if (task.topActivityInfo != null && packageName.equals(
-                            task.topActivityInfo.packageName)) {
+                    if (packageName.equals(task.topActivityInfo.packageName)) {
                         taskInfo = new TaskInfo();
                         taskInfo.frontTaskId = task.taskId;
                         taskInfo.isResizeable =

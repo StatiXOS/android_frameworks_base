@@ -394,8 +394,9 @@ public class StorageNotification implements CoreStartable {
         final VolumeRecord rec = mStorageManager.findRecordByUuid(vol.getFsUuid());
         final DiskInfo disk = vol.getDisk();
 
-        // Don't annoy when user dismissed in past.
-        if (rec.isSnoozed() && (disk.isAdoptable() || disk.isSd())) {
+        // Don't annoy when user dismissed in past.  (But make sure the disk is adoptable; we
+        // used to allow snoozing non-adoptable disks too.)
+        if (rec.isSnoozed() && disk.isAdoptable()) {
             return null;
         }
         if (disk.isAdoptable() && !rec.isInited() && rec.getType() != VolumeInfo.TYPE_PUBLIC
@@ -438,12 +439,8 @@ public class StorageNotification implements CoreStartable {
                             buildUnmountPendingIntent(vol)))
                     .setContentIntent(browseIntent)
                     .setCategory(Notification.CATEGORY_SYSTEM);
-            // USB disks notification can be persistent
-            if (disk.isUsb()) {
-                builder.setOngoing(true);
-            }
-
-            if (disk.isAdoptable() || disk.isSd()) {
+            // Non-adoptable disks can't be snoozed.
+            if (disk.isAdoptable()) {
                 builder.setDeleteIntent(buildSnoozeIntent(vol.getFsUuid()));
             }
 

@@ -74,7 +74,6 @@ public final class DeviceIdleJobsController extends StateController {
      * True when in device idle mode, so we don't want to schedule any jobs.
      */
     private boolean mDeviceIdleMode;
-    private int[] mPowerSaveWhitelistSystemAppIds;
     private int[] mDeviceIdleWhitelistAppIds;
     private int[] mPowerSaveTempWhitelistAppIds;
 
@@ -134,8 +133,6 @@ public final class DeviceIdleJobsController extends StateController {
         mLocalDeviceIdleController =
                 LocalServices.getService(DeviceIdleInternal.class);
         mDeviceIdleWhitelistAppIds = mLocalDeviceIdleController.getPowerSaveWhitelistUserAppIds();
-        mPowerSaveWhitelistSystemAppIds =
-                mLocalDeviceIdleController.getPowerSaveWhitelistSystemAppIds();
         mPowerSaveTempWhitelistAppIds =
                 mLocalDeviceIdleController.getPowerSaveTempWhitelistAppIds();
         mDeviceIdleUpdateFunctor = new DeviceIdleUpdateFunctor();
@@ -199,9 +196,8 @@ public final class DeviceIdleJobsController extends StateController {
      * Checks if the given job's scheduling app id exists in the device idle user whitelist.
      */
     boolean isWhitelistedLocked(JobStatus job) {
-        final int appId = UserHandle.getAppId(job.getSourceUid());
-        return Arrays.binarySearch(mDeviceIdleWhitelistAppIds, appId) >= 0
-                || Arrays.binarySearch(mPowerSaveWhitelistSystemAppIds, appId) >= 0;
+        return Arrays.binarySearch(mDeviceIdleWhitelistAppIds,
+                UserHandle.getAppId(job.getSourceUid())) >= 0;
     }
 
     /**

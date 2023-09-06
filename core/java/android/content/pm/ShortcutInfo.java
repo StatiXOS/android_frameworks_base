@@ -594,7 +594,7 @@ public final class ShortcutInfo implements Parcelable {
         }
         return id;
     }
-    
+
     /**
      * Throws if any of the mandatory fields is not set.
      *

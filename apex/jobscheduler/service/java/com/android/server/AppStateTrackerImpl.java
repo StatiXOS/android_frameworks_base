@@ -109,12 +109,6 @@ public class AppStateTrackerImpl implements AppStateTracker {
     final SparseBooleanArray mActiveUids = new SparseBooleanArray();
 
     /**
-     * System exemption list in the device idle controller.
-     */
-    @GuardedBy("mLock")
-    private int[] mPowerExemptSystemAppIds = new int[0];
-
-    /**
      * System except-idle + user exemption list in the device idle controller.
      */
     @GuardedBy("mLock")
@@ -1081,7 +1075,6 @@ public class AppStateTrackerImpl implements AppStateTracker {
      * Called by device idle controller to update the power save exemption lists.
      */
     public void setPowerSaveExemptionListAppIds(
-            int[] powerSaveExemptionListSystemAppIdArray,
             int[] powerSaveExemptionListExceptIdleAppIdArray,
             int[] powerSaveExemptionListUserAppIdArray,
             int[] tempExemptionListAppIdArray) {
@@ -1089,7 +1082,6 @@ public class AppStateTrackerImpl implements AppStateTracker {
             final int[] previousExemptionList = mPowerExemptAllAppIds;
             final int[] previousTempExemptionList = mTempExemptAppIds;
 
-            mPowerExemptSystemAppIds = powerSaveExemptionListSystemAppIdArray;
             mPowerExemptAllAppIds = powerSaveExemptionListExceptIdleAppIdArray;
             mTempExemptAppIds = tempExemptionListAppIdArray;
             mPowerExemptUserAppIds = powerSaveExemptionListUserAppIdArray;
@@ -1310,18 +1302,6 @@ public class AppStateTrackerImpl implements AppStateTracker {
     }
 
     /**
-     * @return whether or not a UID is in either the user defined power-save exemption list or the
-               system full exemption list (not including except-idle)
-     */
-    public boolean isUidPowerSaveIdleExempt(int uid) {
-        final int appId = UserHandle.getAppId(uid);
-        synchronized (mLock) {
-            return ArrayUtils.contains(mPowerExemptUserAppIds, appId)
-                    || ArrayUtils.contains(mPowerExemptSystemAppIds, appId);
-        }
-    }
-
-    /**
      * @return whether a UID is in the temp power-save exemption list or not.
      *
      * Note clients normally shouldn't need to access it. It's only for dumpsys.
@@ -1357,9 +1337,6 @@ public class AppStateTrackerImpl implements AppStateTracker {
 
             pw.print("Active uids: ");
             dumpUids(pw, mActiveUids);
-
-            pw.print("System exemption list appids: ");
-            pw.println(Arrays.toString(mPowerExemptSystemAppIds));
 
             pw.print("Except-idle + user exemption list appids: ");
             pw.println(Arrays.toString(mPowerExemptAllAppIds));
@@ -1436,10 +1413,6 @@ public class AppStateTrackerImpl implements AppStateTracker {
                 if (mActiveUids.valueAt(i)) {
                     proto.write(AppStateTrackerProto.ACTIVE_UIDS, mActiveUids.keyAt(i));
                 }
-            }
-
-            for (int appId : mPowerExemptSystemAppIds) {
-                proto.write(AppStateTrackerProto.POWER_SAVE_SYSTEM_EXEMPT_APP_IDS, appId);
             }
 
             for (int appId : mPowerExemptAllAppIds) {

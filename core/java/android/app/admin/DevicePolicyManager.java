@@ -3562,7 +3562,7 @@ public class DevicePolicyManager {
      * Maximum supported password length. Kind-of arbitrary.
      * @hide
      */
-    public static final int MAX_PASSWORD_LENGTH = 64;
+    public static final int MAX_PASSWORD_LENGTH = 16;
 
     /**
      * Service Action: Service implemented by a device owner or profile owner supervision app to
@@ -12402,7 +12402,8 @@ public class DevicePolicyManager {
 
     /**
      * Called by a device admin to set the long support message. This will be displayed to the user
-     * in the device administators settings screen.
+     * in the device administrators settings screen. If the message is longer than 20000 characters
+     * it may be truncated.
      * <p>
      * If the long support message needs to be localized, it is the responsibility of the
      * {@link DeviceAdminReceiver} to listen to the {@link Intent#ACTION_LOCALE_CHANGED} broadcast

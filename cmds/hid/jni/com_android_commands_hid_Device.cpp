@@ -354,7 +354,7 @@ static void closeDevice(JNIEnv* /* env */, jclass /* clazz */, jlong ptr) {
     }
 }
 
-static const JNINativeMethod sMethods[] = {
+static JNINativeMethod sMethods[] = {
         {"nativeOpenDevice",
          "(Ljava/lang/String;IIII[B"
          "Lcom/android/commands/hid/Device$DeviceCallback;)J",

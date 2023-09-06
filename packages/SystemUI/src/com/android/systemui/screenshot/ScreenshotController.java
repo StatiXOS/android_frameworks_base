@@ -254,7 +254,7 @@ public class ScreenshotController {
     // From WizardManagerHelper.java
     private static final String SETTINGS_SECURE_USER_SETUP_COMPLETE = "user_setup_complete";
 
-    private static final int SCREENSHOT_CORNER_DEFAULT_TIMEOUT_MILLIS = 2500;
+    private static final int SCREENSHOT_CORNER_DEFAULT_TIMEOUT_MILLIS = 6000;
 
     private final WindowContext mContext;
     private final FeatureFlags mFlags;
@@ -290,8 +290,6 @@ public class ScreenshotController {
         }
         respondToBack();
     };
-
-    private final FullScreenshotRunnable mFullScreenshotRunnable = new FullScreenshotRunnable();
 
     private ScreenshotView mScreenshotView;
     private final MessageContainerController mMessageContainerController;
@@ -531,20 +529,6 @@ public class ScreenshotController {
     void takeScreenshotFullscreen(ComponentName topComponent, Consumer<Uri> finisher,
             RequestCallback requestCallback) {
         Assert.isMainThread();
-        mScreenshotHandler.removeCallbacks(mFullScreenshotRunnable);
-        /**
-         * Do not let it run the finish callback, it'll reset the service
-         * connection and break the next screenshot.
-         */
-        mCurrentRequestCallback = null;
-        dismissScreenshot(SCREENSHOT_DISMISSED_OTHER);
-        mFullScreenshotRunnable.setArgs(topComponent, finisher, requestCallback);
-        // Wait 50ms to make sure we are on new frame.
-        mScreenshotHandler.postDelayed(mFullScreenshotRunnable, 50);
-    }
-
-    void takeScreenshotFullscreenInternal(ComponentName topComponent, Consumer<Uri> finisher,
-            RequestCallback requestCallback) {
         mCurrentRequestCallback = requestCallback;
         takeScreenshotInternal(topComponent, finisher, getFullScreenRect());
     }
@@ -670,7 +654,8 @@ public class ScreenshotController {
 
             @Override
             public void onTouchOutside() {
-                dismissScreenshot(SCREENSHOT_DISMISSED_OTHER);
+                // TODO(159460485): Remove this when focus is handled properly in the system
+                setWindowFocusable(false);
             }
         }, mActionExecutor, mFlags);
         mScreenshotView.setDefaultDisplay(mDisplayTracker.getDefaultDisplayId());
@@ -1331,24 +1316,6 @@ public class ScreenshotController {
                 public void onFinish() {
                 }
             };
-        }
-    }
-
-    private class FullScreenshotRunnable implements Runnable {
-        ComponentName mTopComponent;
-        Consumer<Uri> mFinisher;
-        RequestCallback mRequestCallback;
-
-        public void setArgs(ComponentName topComponent, Consumer<Uri> finisher,
-                RequestCallback requestCallback) {
-            mTopComponent = topComponent;
-            mFinisher = finisher;
-            mRequestCallback = requestCallback;
-        }
-
-        @Override
-        public void run() {
-            takeScreenshotFullscreenInternal(mTopComponent, mFinisher, mRequestCallback);
         }
     }
 }

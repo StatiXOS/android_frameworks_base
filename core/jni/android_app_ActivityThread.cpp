@@ -33,7 +33,7 @@ static void android_app_ActivityThread_initZygoteChildHeapProfiling(JNIEnv* env,
     android_mallopt(M_INIT_ZYGOTE_CHILD_PROFILING, nullptr, 0);
 }
 
-static const JNINativeMethod gActivityThreadMethods[] = {
+static JNINativeMethod gActivityThreadMethods[] = {
     // ------------ Regular JNI ------------------
     { "nPurgePendingResources",        "()V",
       (void*) android_app_ActivityThread_purgePendingResources },

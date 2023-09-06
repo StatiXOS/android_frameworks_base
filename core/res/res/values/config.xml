@@ -246,7 +246,7 @@
          dozing).  This should be enabled if you have such services and expect apps to
          correctly use them when installed on your device.  Otherwise, keep this disabled
          so that applications can still use their own mechanisms. -->
-    <bool name="config_enableAutoPowerModes">true</bool>
+    <bool name="config_enableAutoPowerModes">false</bool>
 
     <!-- Whether (if true) this is a kind of device that can be moved around (eg. phone/laptop),
          or (if false) something for which movement is either not measurable or should not count
@@ -901,11 +901,11 @@
     <integer name="config_defaultNightDisplayCustomEndTime">21600000</integer>
 
     <!-- Minimum color temperature, in Kelvin, supported by Night display. -->
-    <integer name="config_nightDisplayColorTemperatureMin">1600</integer>
+    <integer name="config_nightDisplayColorTemperatureMin">2596</integer>
 
     <!-- Default color temperature, in Kelvin, to tint the screen when Night display is
          activated. -->
-    <integer name="config_nightDisplayColorTemperatureDefault">2650</integer>
+    <integer name="config_nightDisplayColorTemperatureDefault">2850</integer>
 
     <!-- Maximum color temperature, in Kelvin, supported by Night display. -->
     <integer name="config_nightDisplayColorTemperatureMax">4082</integer>
@@ -1082,7 +1082,7 @@
             4 - Go to voice assist
             5 - Go to assistant (Settings.Secure.ASSISTANT)
     -->
-    <integer name="config_longPressOnPowerBehavior">1</integer>
+    <integer name="config_longPressOnPowerBehavior">5</integer>
 
     <!-- The time in milliseconds after which a press on power button is considered "long". -->
     <integer name="config_longPressOnPowerDurationMs">500</integer>
@@ -1114,7 +1114,7 @@
             1 - Mute toggle
             2 - Global actions menu
     -->
-    <integer name="config_keyChordPowerVolumeUp">1</integer>
+    <integer name="config_keyChordPowerVolumeUp">2</integer>
 
     <!-- Control the behavior when the user long presses the back button.  Non-zero values are only
          valid for watches as part of CDD/CTS.
@@ -2762,7 +2762,7 @@
     <bool name="config_syncstorageengine_masterSyncAutomatically">true</bool>
 
     <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">32</integer>
+    <integer name="config_multiuserMaximumUsers">1</integer>
 
     <!-- Maximum number of users we allow to be running at a time -->
     <integer name="config_multiuserMaxRunningUsers">3</integer>
@@ -2800,7 +2800,7 @@
     <integer name="config_userTypePackageWhitelistMode">13</integer> <!-- 1+4+8 -->
 
     <!-- Whether UI for multi user should be shown -->
-    <bool name="config_enableMultiUserUI">true</bool>
+    <bool name="config_enableMultiUserUI">false</bool>
 
     <!-- Whether the new Auto Selection Network UI should be shown -->
     <bool name="config_enableNewAutoSelectNetworkUI">false</bool>
@@ -4038,7 +4038,7 @@
     <integer name="config_keepPreloadsMinDays">7</integer>
 
     <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
-    <bool name="config_useRoundIcon">true</bool>
+    <bool name="config_useRoundIcon">false</bool>
 
     <!-- Flag indicating whether the assist disclosure can be disabled using
          ASSIST_DISCLOSURE_ENABLED. -->
@@ -4136,7 +4136,7 @@
     <bool name="config_allow3rdPartyAppOnInternal">true</bool>
 
     <!-- Specifies the path that is used by AdaptiveIconDrawable class to crop launcher icons. -->
-    <string name="config_icon_mask" translatable="false">"M50 0C77.6 0 100 22.4 100 50C100 77.6 77.6 100 50 100C22.4 100 0 77.6 0 50C0 22.4 22.4 0 50 0Z"</string>
+    <string name="config_icon_mask" translatable="false">"M50,0L92,0C96.42,0 100,4.58 100 8L100,92C100, 96.42 96.42 100 92 100L8 100C4.58, 100 0 96.42 0 92L0 8 C 0 4.42 4.42 0 8 0L50 0Z"</string>
 
     <!-- The component name, flattened to a string, for the default accessibility service to be
          enabled by the accessibility shortcut. This service must be trusted, as it can be activated
@@ -4511,13 +4511,13 @@
     <string name="config_mediaProjectionPermissionDialogComponent" translatable="false">com.android.systemui/com.android.systemui.media.MediaProjectionPermissionActivity</string>
 
     <!-- Corner radius of system dialogs -->
-    <dimen name="config_dialogCornerRadius">28dp</dimen>
+    <dimen name="config_dialogCornerRadius">2dp</dimen>
     <!-- Corner radius of system buttons -->
-    <dimen name="config_buttonCornerRadius">4dp</dimen>
+    <dimen name="config_buttonCornerRadius">@dimen/control_corner_material</dimen>
     <!-- Corner radius for bottom sheet system dialogs -->
-    <dimen name="config_bottomDialogCornerRadius">16dp</dimen>
+    <dimen name="config_bottomDialogCornerRadius">@dimen/config_dialogCornerRadius</dimen>
     <!-- Corner radius of system progress bars -->
-    <dimen name="config_progressBarCornerRadius">1000dp</dimen>
+    <dimen name="config_progressBarCornerRadius">@dimen/progress_bar_corner_material</dimen>
     <!-- Controls whether system buttons use all caps for text -->
     <bool name="config_buttonTextAllCaps">true</bool>
     <!-- Name of the font family used for system surfaces where the font should use medium weight -->
