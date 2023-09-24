@@ -103,7 +103,6 @@ import javax.inject.Inject;
 @SysUISingleton
 public class ThemeOverlayController implements CoreStartable, Dumpable {
     protected static final String TAG = "ThemeOverlayController";
-            "com.android.system.theme.black";
     private static final boolean DEBUG = true;
 
     protected static final int NEUTRAL = 0;
