@@ -1,7 +1,4 @@
 /*
- * Copyright (c) 2018, The Linux Foundation. All rights reserved.
- * Not a Contribution.
- *
  * Copyright (C) 2013 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -52,24 +49,24 @@ import java.util.Map;
 /**
  * @hide
  */
-public class ApduServiceInfo implements Parcelable {
+public final class ApduServiceInfo implements Parcelable {
     static final String TAG = "ApduServiceInfo";
 
     /**
      * The service that implements this
      */
     @UnsupportedAppUsage
-    protected ResolveInfo mService;
+    final ResolveInfo mService;
 
     /**
      * Description of the service
      */
-    protected String mDescription;
+    final String mDescription;
 
     /**
      * Whether this service represents AIDs running on the host CPU
      */
-    protected boolean mOnHost;
+    final boolean mOnHost;
 
     /**
      * Offhost reader name.
@@ -87,18 +84,18 @@ public class ApduServiceInfo implements Parcelable {
      * Mapping from category to static AID group
      */
     @UnsupportedAppUsage
-    protected HashMap<String, AidGroup> mStaticAidGroups;
+    final HashMap<String, AidGroup> mStaticAidGroups;
 
     /**
      * Mapping from category to dynamic AID group
      */
     @UnsupportedAppUsage
-    protected HashMap<String, AidGroup> mDynamicAidGroups;
+    final HashMap<String, AidGroup> mDynamicAidGroups;
 
     /**
      * Whether this service should only be started when the device is unlocked.
      */
-    protected boolean mRequiresDeviceUnlock;
+    final boolean mRequiresDeviceUnlock;
 
     /**
      * Whether this service should only be started when the device is screen on.
@@ -108,17 +105,17 @@ public class ApduServiceInfo implements Parcelable {
     /**
      * The id of the service banner specified in XML.
      */
-    protected int mBannerResourceId;
+    final int mBannerResourceId;
 
     /**
      * The uid of the package the service belongs to
      */
-    protected int mUid;
+    final int mUid;
 
     /**
      * Settings Activity for this service
      */
-    protected String mSettingsActivityName;
+    final String mSettingsActivityName;
 
     /**
      * @hide
