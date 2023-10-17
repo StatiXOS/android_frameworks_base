@@ -2095,7 +2095,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
 
         mHandler = new PolicyHandler();
-        mSwipeToScreenshot = new SwipeToScreenshotListener(context, new SwipeToScreenshotListener.Callbacks() {
+        mSwipeToScreenshot = new SwipeToScreenshotListener(mContext, new SwipeToScreenshotListener.Callbacks() {
             @Override
             public void onSwipeThreeFinger() {
                 interceptScreenshotChord(
