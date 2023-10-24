@@ -71,12 +71,16 @@ public class PropImitationHooks {
             return;
         }
 
-        sIsGms = packageName.equals(PACKAGE_GMS) && processName.equals(PROCESS_GMS_UNSTABLE);
+        sIsGms = packageName.equals(PACKAGE_GMS);
+        sIsGmsUnstable = processName.equals(PROCESS_GMS_UNSTABLE);
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
 
         if (sIsGms) {
-            dlog("Setting Pixel XL fingerprint for: " + packageName);
-            spoofBuildGms();
+            setPropValue("TIME", System.currentTimeMillis());
+            if (sIsGmsUnstable) {
+                dlog("Setting Pixel XL fingerprint for: " + packageName);
+                spoofBuildGms();
+            }
         } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
             dlog("Setting certified fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sCertifiedFp);
