@@ -60,8 +60,7 @@ public class PropImitationHooks {
         sP8Props.put("FINGERPRINT", "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys");
     }
 
-    private static volatile boolean sIsGms = false;
-    private static volatile boolean sIsFinsky = false;
+    private static volatile boolean sIsGms, sIsGmsUnstable, sIsFinsky;
 
     public static void setProps(Application app) {
         final String packageName = app.getPackageName();
@@ -71,12 +70,16 @@ public class PropImitationHooks {
             return;
         }
 
-        sIsGms = packageName.equals(PACKAGE_GMS) && processName.equals(PROCESS_GMS_UNSTABLE);
+        sIsGms = packageName.equals(PACKAGE_GMS);
+        sIsGmsUnstable = processName.equals(PROCESS_GMS_UNSTABLE);
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
 
         if (sIsGms) {
-            dlog("Setting Pixel XL fingerprint for: " + packageName);
-            spoofBuildGms();
+            setPropValue("TIME", System.currentTimeMillis());
+            if (sIsGmsUnstable) {
+                dlog("Setting Pixel XL fingerprint for: " + packageName);
+                spoofBuildGms();
+            }
         } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
             dlog("Setting certified fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", sCertifiedFp);
