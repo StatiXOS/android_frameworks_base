@@ -55,10 +55,10 @@ public class PropImitationHooks {
     static {
         sP8Props.put("BRAND", "google");
         sP8Props.put("MANUFACTURER", "Google");
-        sP8Props.put("DEVICE", "husky");
-        sP8Props.put("PRODUCT", "husky");
-        sP8Props.put("MODEL", "Pixel 8 Pro");
-        sP8Props.put("FINGERPRINT", "google/husky/husky:14/UD1A.230803.041/10808477:user/release-keys");
+        sP8Props.put("DEVICE", "barbet");
+        sP8Props.put("PRODUCT", "barbet");
+        sP8Props.put("MODEL", "Pixel 5a");
+        sP8Props.put("FINGERPRINT", "google/barbet/barbet:14/UP1A.231105.001/10817346:user/release-keys");
     }
 
     private static volatile boolean sIsGms = false;
@@ -86,7 +86,7 @@ public class PropImitationHooks {
             setPropValue("FINGERPRINT", sStockFp);
         } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
                    || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
-            dlog("Spoofing Pixel 8 Pro for: " + packageName);
+            dlog("Spoofing Pixel 5a for: " + packageName);
             sP8Props.forEach((k, v) -> setPropValue(k, v));
         }
     }
