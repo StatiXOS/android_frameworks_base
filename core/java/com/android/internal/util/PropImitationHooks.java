@@ -20,7 +20,6 @@ package com.android.internal.util;
 import android.app.Application;
 import android.content.res.Resources;
 import android.os.Build;
-import android.os.Build.VERSION;
 import android.util.Log;
 
 import com.android.internal.R;
@@ -103,27 +102,14 @@ public class PropImitationHooks {
         }
     }
 
-    private static void setVersionField(String key, Integer value) {
-        try {
-            // Unlock
-            Field field = Build.VERSION.class.getDeclaredField(key);
-            field.setAccessible(true);
-            // Edit
-            field.set(null, value);
-            // Lock
-            field.setAccessible(false);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            Log.e(TAG, "Failed to spoof Build." + key, e);
-        }
-    }
-
     private static void spoofBuildGms() {
         // Alter model name and fingerprint to avoid hardware attestation enforcement
-        setPropValue("FINGERPRINT", "google/marlin/marlin:7.1.2/NJH47F/4146041:user/release-keys");
-        setPropValue("PRODUCT", "marlin");
-        setPropValue("DEVICE", "marlin");
-        setPropValue("MODEL", "Pixel XL");
-        setVersionField("DEVICE_INITIAL_SDK_INT", Build.VERSION_CODES.N_MR1);
+        setPropValue("FINGERPRINT", "asus/WW_Phone/ASUS_X00HD_4:7.1.1/NMF26F/14.2016.1801.372-20180119:user/release-keys");
+        setPropValue("PRODUCT", "WW_Phone");
+        setPropValue("DEVICE", "ASUS_X00HD_4");
+        setPropValue("MANUFACTURER", "Asus");
+        setPropValue("BRAND", "Asus");
+        setPropValue("MODEL", "ASUS_X00HD");
     }
 
     private static boolean isCallerSafetyNet() {
