@@ -78,7 +78,7 @@ public class PropImitationHooks {
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
 
         if (sIsGms) {
-            setPropValue("TIME", System.currentTimeMillis());
+            setPropValue("TIME", String.valueOf(System.currentTimeMillis()));
             if (sIsGmsUnstable) {
                 dlog("Setting Pixel XL fingerprint for: " + packageName);
                 spoofBuildGms();
@@ -96,14 +96,30 @@ public class PropImitationHooks {
         }
     }
 
-    private static void setPropValue(String key, Object value){
+    private static void setPropValue(String key, String value){
         try {
             dlog("Setting prop " + key + " to " + value.toString());
-            Field field = Build.class.getDeclaredField(key);
+            // Unlock
+            Class clazz = Build.class;
+            if (key.startsWith("VERSION:")) {
+                clazz = Build.VERSION.class;
+                key = key.substring(8);
+            }
+            Field field = clazz.getDeclaredField(key);
             field.setAccessible(true);
-            field.set(null, value);
+
+            // Edit
+            if (field.getType().equals(Long.TYPE)) {
+                field.set(null, Long.parseLong(value));
+            } else if (field.getType().equals(Integer.TYPE)) {
+                field.set(null, Integer.parseInt(value));
+            } else {
+                field.set(null, value);
+            }
+
+            // Lock
             field.setAccessible(false);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Failed to set prop " + key, e);
         }
     }
