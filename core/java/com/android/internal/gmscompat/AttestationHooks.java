@@ -36,18 +36,29 @@ public final class AttestationHooks {
 
     private AttestationHooks() { }
 
-    private static void setBuildField(String key, Object value) {
+    private static void setBuildField(String key, String value) {
         try {
             // Unlock
-            Field field = Build.class.getDeclaredField(key);
+            Class clazz = Build.class;
+            if (key.startsWith("VERSION:")) {
+                clazz = Build.VERSION.class;
+                key = key.substring(8);
+            }
+            Field field = clazz.getDeclaredField(key);
             field.setAccessible(true);
 
             // Edit
-            field.set(null, value);
+            if (field.getType().equals(Long.TYPE)) {
+                field.set(null, Long.parseLong(value));
+            } else if (field.getType().equals(Integer.TYPE)) {
+                field.set(null, Integer.parseInt(value));
+            } else {
+                field.set(null, value);
+            }
 
             // Lock
             field.setAccessible(false);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Failed to spoof Build." + key, e);
         }
     }
@@ -62,7 +73,7 @@ public final class AttestationHooks {
         }
 
         if (PACKAGE_GMS.equals(packageName)) {
-            setBuildField("TIME", System.currentTimeMillis());
+            setBuildField("TIME", String.valueOf(System.currentTimeMillis()));
             if (PROCESS_UNSTABLE.equals(processName)) {
               sIsGms = true;
               setBuildField("FINGERPRINT", "google/marlin/marlin:7.1.2/NJH47F/4146041:user/release-keys");
