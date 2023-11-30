@@ -1,18 +1,10 @@
 /*
  * Copyright (C) 2022 Paranoid Android
  * Copyright (C) 2023 StatiXOS
+ * Copyright (C) 2024 The LeafOS Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * SPDX-License-Identifier: Apache-2.0
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 
 package com.android.internal.util;
@@ -21,20 +13,30 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.Environment;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Iterator;
 
 public class PropImitationHooks {
 
-    private static final String TAG = "PropImitationHooks";
-    private static final boolean DEBUG = false;
+    private static final String TAG = PropImitationHooks.class.getSimpleName();
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String sCertifiedFp =
             Resources.getSystem().getString(R.string.config_certifiedFingerprint);
@@ -62,6 +64,8 @@ public class PropImitationHooks {
         sP8Props.put("FINGERPRINT", "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys");
     }
 
+    private static final String DATA_FILE = "gms_certified_props.json";
+
     private static volatile boolean sIsGms, sIsGmsUnstable, sIsFinsky;
 
     public static void setProps(Context context) {
@@ -80,7 +84,6 @@ public class PropImitationHooks {
         if (sIsGms) {
             setPropValue("TIME", String.valueOf(System.currentTimeMillis()));
             if (sIsGmsUnstable) {
-                dlog("Setting Pixel XL fingerprint for: " + packageName);
                 spoofBuildGms();
             }
         } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
@@ -125,13 +128,28 @@ public class PropImitationHooks {
     }
 
     private static void spoofBuildGms() {
-        // Alter model name and fingerprint to avoid hardware attestation enforcement
-        setPropValue("FINGERPRINT", "motorola/griffin_retcn/griffin:6.0.1/MCC24.246-37/42:user/release-keys");
-        setPropValue("PRODUCT", "griffin_retcn");
-        setPropValue("DEVICE", "griffin");
-        setPropValue("MANUFACTURER", "motorola");
-        setPropValue("BRAND", "motorola");
-        setPropValue("MODEL", "XT1650-05");
+        File dataFile = new File(Environment.getDataSystemDirectory(), DATA_FILE);
+        String savedProps = readFromFile(dataFile);
+
+        if (TextUtils.isEmpty(savedProps)) {
+            Log.e(TAG, "No props found to spoof");
+            return;
+        }
+
+        dlog("Found props");
+        try {
+            JSONObject parsedProps = new JSONObject(savedProps);
+            Iterator<String> keys = parsedProps.keys();
+
+            while (keys.hasNext()) {
+                String key = keys.next();
+                String value = parsedProps.getString(key);
+                dlog(key + ": " + value);
+
+                setBuildField(key, value);
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "Error parsing JSON data", e);
     }
 
     private static boolean isCallerSafetyNet() {
@@ -145,6 +163,23 @@ public class PropImitationHooks {
             dlog("Blocked key attestation sIsGms=" + sIsGms + " sIsFinsky=" + sIsFinsky);
             throw new UnsupportedOperationException();
         }
+    }
+
+    private static String readFromFile(File file) {
+        StringBuilder content = new StringBuilder();
+
+        if (file.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    content.append(line);
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error reading from file", e);
+            }
+        }
+        return content.toString();
     }
 
     public static void dlog(String msg) {
