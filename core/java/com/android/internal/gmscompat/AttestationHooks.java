@@ -1,17 +1,9 @@
 /*
  * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2024 The LeafOS Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * SPDX-License-Identifier: Apache-2.0
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 
 package com.android.internal.gmscompat;
@@ -19,22 +11,35 @@ package com.android.internal.gmscompat;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /** @hide */
 public final class AttestationHooks {
-    private static final String TAG = "GmsCompat/Attestation";
+    private static final String TAG = AttestationHooks.class.getSimpleName();
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_UNSTABLE = "com.google.android.gms.unstable";
     private static final String SAMSUNG = "com.samsung.android.";
+    private static final String DATA_FILE = "gms_certified_props.json";
 
     private static volatile boolean sIsGms = false;
 
-    private AttestationHooks() { }
+    private AttestationHooks() {}
 
     private static void setBuildField(String key, String value) {
         try {
@@ -75,18 +80,42 @@ public final class AttestationHooks {
         if (PACKAGE_GMS.equals(packageName)) {
             setBuildField("TIME", String.valueOf(System.currentTimeMillis()));
             if (PROCESS_UNSTABLE.equals(processName)) {
-              sIsGms = true;
-              setBuildField("FINGERPRINT", "google/marlin/marlin:7.1.2/NJH47F/4146041:user/release-keys");
-              setBuildField("PRODUCT", "marlin");
-              setBuildField("DEVICE", "marlin");
-              setBuildField("MODEL", "Pixel XL");
+                sIsGms = true;
+                setGmsCertifiedProps();
             }
         }
 
-        // Samsung apps like SmartThings, Galaxy Wearable crashes on samsung devices running AOSP
+        // Samsung apps like SmartThings, Galaxy Wearable crashes
+        // on samsung devices running AOSP
         if (packageName.startsWith(SAMSUNG)) {
-          setBuildField("BRAND", "google");
-          setBuildField("MANUFACTURER", "google");
+            setBuildField("BRAND", "google");
+            setBuildField("MANUFACTURER", "google");
+        }
+    }
+
+    private static void setGmsCertifiedProps() {
+        File dataFile = new File(Environment.getDataSystemDirectory(), DATA_FILE);
+        String savedProps = readFromFile(dataFile);
+
+        if (TextUtils.isEmpty(savedProps)) {
+            Log.e(TAG, "No props found to spoof");
+            return;
+        }
+
+        dlog("Found props");
+        try {
+            JSONObject parsedProps = new JSONObject(savedProps);
+            Iterator<String> keys = parsedProps.keys();
+
+            while (keys.hasNext()) {
+                String key = keys.next();
+                String value = parsedProps.getString(key);
+                dlog(key + ": " + value);
+
+                setBuildField(key, value);
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "Error parsing JSON data", e);
         }
     }
 
@@ -100,5 +129,26 @@ public final class AttestationHooks {
         if (sIsGms && isCallerSafetyNet()) {
             throw new UnsupportedOperationException();
         }
+    }
+
+    private static String readFromFile(File file) {
+        StringBuilder content = new StringBuilder();
+
+        if (file.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    content.append(line);
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error reading from file", e);
+            }
+        }
+        return content.toString();
+    }
+
+    private static void dlog(String message) {
+        if (DEBUG) Log.d(TAG, message);
     }
 }
