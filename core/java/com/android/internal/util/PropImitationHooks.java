@@ -104,12 +104,12 @@ public class PropImitationHooks {
 
     private static void spoofBuildGms() {
         // Alter model name and fingerprint to avoid hardware attestation enforcement
-        setPropValue("FINGERPRINT", "asus/WW_Phone/ASUS_X00HD_4:7.1.1/NMF26F/14.2016.1801.372-20180119:user/release-keys");
-        setPropValue("PRODUCT", "WW_Phone");
-        setPropValue("DEVICE", "ASUS_X00HD_4");
-        setPropValue("MANUFACTURER", "Asus");
-        setPropValue("BRAND", "Asus");
-        setPropValue("MODEL", "ASUS_X00HD");
+        setPropValue("FINGERPRINT", "motorola/griffin_retcn/griffin:6.0.1/MCC24.246-37/42:user/release-keys");
+        setPropValue("PRODUCT", "griffin_retcn");
+        setPropValue("DEVICE", "griffin");
+        setPropValue("MANUFACTURER", "motorola");
+        setPropValue("BRAND", "motorola");
+        setPropValue("MODEL", "XT1650-05");
     }
 
     private static boolean isCallerSafetyNet() {
