@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb982c0_77a8dd19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-12-24T14:07:59Z",
+      "side": 1,
+      "message": "The PA patch currently doesn\u0027t build:\nhttps://pastebin.com/95TVhvaA",
+      "revId": "be6da5381bddbdc900377a9ed02beb565c3ebf5f",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
