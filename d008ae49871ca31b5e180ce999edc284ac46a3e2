@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8ff6fb6_eb235290",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-12-24T05:26:13Z",
+      "side": 1,
+      "message": "There should be a newer patch from PA I believe that basically overlays the battery bar on top of other system icon packs we have for more consistency. We had that last cycle; can you look into it?",
+      "revId": "d008ae49871ca31b5e180ce999edc284ac46a3e2",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
