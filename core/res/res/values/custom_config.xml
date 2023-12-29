@@ -29,6 +29,9 @@
     <!-- Build fingerprint from stock ROM -->
     <string name="config_stockFingerprint" translatable="false"></string>
 
+    <!-- Whether to spoof GMS as Pixel Tablet -->
+    <bool name="config_spoofasTablet">false</bool>
+
     <!-- The list of components which should be automatically disabled for a specific device.
       Note: this MUST not be used to randomly disable components, ask for approval first! -->
      <string-array name="config_deviceDisabledComponents" translatable="false">
