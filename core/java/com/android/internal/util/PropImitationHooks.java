@@ -35,7 +35,6 @@ import com.android.internal.R;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,18 +54,27 @@ public class PropImitationHooks {
     private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
     private static final String PACKAGE_GBOARD = "com.google.android.inputmethod.latin";
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
-    private static final Map<String, String> sP8Props = new HashMap<>();
-    static {
-        sP8Props.put("BRAND", "google");
-        sP8Props.put("MANUFACTURER", "Google");
-        sP8Props.put("DEVICE", "husky");
-        sP8Props.put("PRODUCT", "husky");
-        sP8Props.put("MODEL", "Pixel 8 Pro");
-        sP8Props.put("FINGERPRINT", "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys");
-    }
 
     private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY = ComponentName.unflattenFromString(
             "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
+
+    private static final Map<String, String> sPixelEightProps = Map.of(
+        "PRODUCT", "husky",
+        "DEVICE", "husky",
+        "MANUFACTURER", "Google",
+        "BRAND", "google",
+        "MODEL", "Pixel 8 Pro",
+        "FINGERPRINT", "google/husky/husky:14/AP1A.240505.005/11677807:user/release-keys"
+    );
+
+    private static final Map<String, String> sPixelTabletProps = Map.of(
+        "PRODUCT", "tangorpro",
+        "DEVICE", "tangorpro",
+        "MANUFACTURER", "Google",
+        "BRAND", "google",
+        "MODEL", "Pixel Tablet",
+        "FINGERPRINT", "google/tangorpro/tangorpro:14/AP1A.240505.004/11583682:user/release-keys"
+    );
 
     private static final Set<String> sPixelFeatures = Set.of(
         "PIXEL_2017_PRELOAD",
@@ -82,7 +90,7 @@ public class PropImitationHooks {
     private static volatile String sStockFp;
 
     private static volatile String sProcessName;
-    private static volatile boolean sIsPixelDevice, sIsGms, sIsFinsky, sIsPhotos;
+    private static volatile boolean sIsPixelDevice, sIsGms, sIsFinsky, sIsPhotos, sIsTablet;
 
     public static void setProps(Context context) {
         final String packageName = context.getPackageName();
@@ -101,6 +109,7 @@ public class PropImitationHooks {
 
         sCertifiedProps = res.getStringArray(R.array.config_certifiedBuildProperties);
         sStockFp = res.getString(R.string.config_stockFingerprint);
+        sIsTablet = res.getBoolean(R.bool.config_spoofasTablet);
 
         sProcessName = processName;
         sIsPixelDevice = Build.MANUFACTURER.equals("Google") && Build.MODEL.contains("Pixel");
@@ -110,7 +119,7 @@ public class PropImitationHooks {
 
         /* Set Certified Properties for GMSCore
          * Set Stock Fingerprint for ARCore
-         * Set Pixel 8 Pro for Google, ASI and GMS device configurator
+         * Set Pixel 8 Pro / Pixel Tablet for Google, ASI and GMS device configurator
          */
         if (sIsGms) {
             setCertifiedPropsForGms();
@@ -119,8 +128,13 @@ public class PropImitationHooks {
             setPropValue("FINGERPRINT", sStockFp);
         } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
                    || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
-            dlog("Spoofing Pixel 8 Pro for: " + packageName);
-            sP8Props.forEach((k, v) -> setPropValue(k, v));
+            if (sIsTablet) {
+                dlog("Spoofing Pixel Tablet for: " + packageName + " process: " + processName);
+                sPixelTabletProps.forEach(PropImitationHooks::setPropValue);
+            } else {
+                dlog("Spoofing Pixel 8 Pro for: " + packageName + " process: " + processName);
+                sPixelEightProps.forEach(PropImitationHooks::setPropValue);
+            }
         }
     }
 
