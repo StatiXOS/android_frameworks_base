@@ -16,6 +16,24 @@
       "message": "The PA patch currently doesn\u0027t build:\nhttps://pastebin.com/95TVhvaA",
       "revId": "be6da5381bddbdc900377a9ed02beb565c3ebf5f",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3ebaa14_f928537c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-12-29T17:14:13Z",
+      "side": 1,
+      "message": "skill issue",
+      "parentUuid": "cbb982c0_77a8dd19",
+      "revId": "be6da5381bddbdc900377a9ed02beb565c3ebf5f",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
