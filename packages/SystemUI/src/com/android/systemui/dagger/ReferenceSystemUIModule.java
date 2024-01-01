@@ -27,6 +27,7 @@ import com.android.systemui.battery.BatterySaverModule;
 import com.android.systemui.dock.DockManager;
 import com.android.systemui.dock.DockManagerImpl;
 import com.android.systemui.doze.DozeHost;
+import com.android.systemui.globalactions.GlobalActionsModule;
 import com.android.systemui.media.dagger.MediaModule;
 import com.android.systemui.navigationbar.NavigationBarControllerModule;
 import com.android.systemui.navigationbar.gestural.GestureModule;
@@ -90,6 +91,7 @@ import javax.inject.Named;
         CollapsedStatusBarFragmentStartableModule.class,
         FlashlightModule.class,
         GestureModule.class,
+        GlobalActionsModule.class,
         HeadsUpModule.class,
         MediaModule.class,
         MultiUserUtilsModule.class,
