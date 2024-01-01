@@ -30,6 +30,7 @@ import com.android.systemui.display.ui.viewmodel.ConnectingDisplayViewModel;
 import com.android.systemui.dock.DockManager;
 import com.android.systemui.dock.DockManagerImpl;
 import com.android.systemui.doze.DozeHost;
+import com.android.systemui.globalactions.GlobalActionsModule;
 import com.android.systemui.media.dagger.MediaModule;
 import com.android.systemui.media.muteawait.MediaMuteAwaitConnectionCli;
 import com.android.systemui.media.nearby.NearbyMediaDevicesManager;
@@ -101,6 +102,7 @@ import javax.inject.Named;
         ConnectingDisplayViewModel.StartableModule.class,
         FlashlightModule.class,
         GestureModule.class,
+        GlobalActionsModule.class,
         HeadsUpModule.class,
         KeyboardShortcutsModule.class,
         MediaModule.class,
