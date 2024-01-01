@@ -17,12 +17,9 @@
 package com.android.systemui.dagger;
 
 import com.android.systemui.classifier.FalsingManagerProxy;
-import com.android.systemui.globalactions.GlobalActionsComponent;
-import com.android.systemui.globalactions.GlobalActionsImpl;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.FalsingManager;
-import com.android.systemui.plugins.GlobalActions;
 import com.android.systemui.plugins.VolumeDialogController;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.StatusBarStateControllerImpl;
@@ -57,15 +54,6 @@ public abstract class PluginModule {
     /** */
     @Binds
     abstract FalsingManager provideFalsingManager(FalsingManagerProxy falsingManagerImpl);
-
-    /** */
-    @Binds
-    abstract GlobalActions provideGlobalActions(GlobalActionsImpl controllerImpl);
-
-    /** */
-    @Binds
-    abstract GlobalActions.GlobalActionsManager provideGlobalActionsManager(
-            GlobalActionsComponent controllerImpl);
 
     /** */
     @Binds
