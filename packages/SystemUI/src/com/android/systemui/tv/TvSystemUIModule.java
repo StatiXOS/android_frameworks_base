@@ -31,6 +31,7 @@ import com.android.systemui.dagger.qualifiers.Main;
 import com.android.systemui.dock.DockManager;
 import com.android.systemui.dock.DockManagerImpl;
 import com.android.systemui.doze.DozeHost;
+import com.android.systemui.globalactions.GlobalActionsModule;
 import com.android.systemui.navigationbar.gestural.GestureModule;
 import com.android.systemui.plugins.qs.QSFactory;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
@@ -89,6 +90,7 @@ import javax.inject.Named;
         includes = {
                 AospPolicyModule.class,
                 GestureModule.class,
+                GlobalActionsModule.class,
                 MultiUserUtilsModule.class,
                 PowerModule.class,
                 QSModule.class,
