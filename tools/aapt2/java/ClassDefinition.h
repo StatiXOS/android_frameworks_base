@@ -241,7 +241,7 @@ enum class ClassQualifier { kNone, kStatic };
 class ClassDefinition : public ClassMember {
  public:
   static void WriteJavaFile(const ClassDefinition* def, android::StringPiece package, bool final,
-                            bool strip_api_annotations, io::OutputStream* out);
+                            bool include_generated, bool strip_api_annotations, io::OutputStream* out);
 
   ClassDefinition(android::StringPiece name, ClassQualifier qualifier, bool createIfEmpty)
       : name_(name), qualifier_(qualifier), create_if_empty_(createIfEmpty) {
@@ -264,6 +264,8 @@ class ClassDefinition : public ClassMember {
 
  private:
   DISALLOW_COPY_AND_ASSIGN(ClassDefinition);
+
+  void PrintGeneratedAnnotation(text::Printer* printer) const;
 
   std::string name_;
   ClassQualifier qualifier_;
