@@ -667,7 +667,7 @@ bool JavaClassGenerator::Generate(StringPiece package_name_to_generate,
 
   if (out != nullptr) {
     AppendJavaDocAnnotations(options_.javadoc_annotations, r_class.GetCommentBuilder());
-    ClassDefinition::WriteJavaFile(&r_class, out_package_name, options_.use_final, !is_public, out);
+    ClassDefinition::WriteJavaFile(&r_class, out_package_name, options_.use_final, options_.include_generated, !is_public, out);
   }
   return true;
 }
