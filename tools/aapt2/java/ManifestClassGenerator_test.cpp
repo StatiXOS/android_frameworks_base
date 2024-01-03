@@ -217,7 +217,7 @@ static ::testing::AssertionResult GetManifestClassText(IAaptContext* context, xm
   }
 
   StringOutputStream out(out_str);
-  manifest_class->WriteJavaFile(manifest_class.get(), "android", true, strip_api_annotations, &out);
+  manifest_class->WriteJavaFile(manifest_class.get(), "android", true, false, strip_api_annotations, &out);
   out.Flush();
   return ::testing::AssertionSuccess();
 }

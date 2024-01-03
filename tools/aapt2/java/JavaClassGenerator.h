@@ -44,6 +44,9 @@ struct JavaClassGeneratorOptions {
   // Specifies whether to use the 'final' modifier on resource entries. Default is true.
   bool use_final = true;
 
+  // Specifies whether to include the '@Generated' annotation in the R.java file.
+  bool include_generated = false;
+
   // If set, generates code to rewrite the package ID of resources.
   // Implies use_final == true. Default is unset.
   std::optional<OnResourcesLoadedCallbackOptions> rewrite_callback_options;
