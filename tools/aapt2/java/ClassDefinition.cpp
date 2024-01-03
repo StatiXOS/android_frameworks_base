@@ -74,6 +74,12 @@ bool ClassDefinition::empty() const {
   return true;
 }
 
+void ClassDefinition::PrintGeneratedAnnotation(Printer* printer) const {
+  printer->Println("import javax.annotation.processing.Generated;");
+
+  printer->Println("@Generated(\"aapt2\")");
+}
+
 void ClassDefinition::Print(bool final, Printer* printer, bool strip_api_annotations) const {
   if (empty() && !create_if_empty_) {
     return;
@@ -111,10 +117,13 @@ constexpr static const char* sWarningHeader =
     " */\n\n";
 
 void ClassDefinition::WriteJavaFile(const ClassDefinition* def, StringPiece package, bool final,
-                                    bool strip_api_annotations, io::OutputStream* out) {
+                                    bool include_generated, bool strip_api_annotations, io::OutputStream* out) {
   Printer printer(out);
   printer.Print(sWarningHeader).Print("package ").Print(package).Println(";");
   printer.Println();
+  if (include_generated) {
+    def->PrintGeneratedAnnotation(&printer);
+  }
   def->Print(final, &printer, strip_api_annotations);
 }
 

@@ -1273,6 +1273,11 @@ class Linker {
       template_options.use_final = false;
     }
 
+    // The @Generated annotation is available on U+.
+    if (context_->GetMinSdkVersion() >= 34) {
+      template_options.include_generated = true;
+    }
+
     if (context_->GetPackageType() == PackageType::kSharedLib) {
       template_options.use_final = false;
       template_options.rewrite_callback_options = OnResourcesLoadedCallbackOptions{};
@@ -1391,7 +1396,10 @@ class Linker {
       return false;
     }
 
-    ClassDefinition::WriteJavaFile(manifest_class.get(), package_utf8, true,
+    // The @Generated annotation is available on U+.
+    bool include_generated = context_->GetMinSdkVersion() >= 34;
+
+    ClassDefinition::WriteJavaFile(manifest_class.get(), package_utf8, true, include_generated,
                                    false /* strip_api_annotations */, &fout);
     fout.Flush();
 
