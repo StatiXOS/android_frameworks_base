@@ -18,6 +18,24 @@
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5db2230_0195a30a",
+        "filename": "tools/aapt2/cmd/Link.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-01-04T07:16:56Z",
+      "side": 1,
+      "message": "template_options is in a different fn",
+      "parentUuid": "7200fa5f_9de83b3d",
+      "revId": "63a3f09882d0b26fb94b229736b39688270b6527",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b19ee25_433a493d",
