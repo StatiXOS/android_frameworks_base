@@ -51,6 +51,24 @@
       "message": "this could belong in https://github.com/StatiXOS/android_frameworks_base/blob/udc/tools/aapt2/java/AnnotationProcessor.cpp#L126 going by how other annotations and strip_api_annotations is handled there",
       "revId": "63a3f09882d0b26fb94b229736b39688270b6527",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a438f04_5e3402ce",
+        "filename": "tools/aapt2/java/ClassDefinition.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-01-08T02:33:02Z",
+      "side": 1,
+      "message": "it seems like that\u0027s only for javadocs, which isn\u0027t that important imo.",
+      "parentUuid": "4b19ee25_433a493d",
+      "revId": "63a3f09882d0b26fb94b229736b39688270b6527",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
