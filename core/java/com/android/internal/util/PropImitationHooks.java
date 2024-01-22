@@ -104,12 +104,12 @@ public class PropImitationHooks {
 
     private static void spoofBuildGms() {
         // Alter model name and fingerprint to avoid hardware attestation enforcement
-        setPropValue("FINGERPRINT", "essential/mata/mata:8.1.0/OPM1.180104.092/224:user/release-keys");
-        setPropValue("PRODUCT", "mata");
-        setPropValue("DEVICE", "mata");
-        setPropValue("MANUFACTURER", "Essential Products");
-        setPropValue("BRAND", "essential");
-        setPropValue("MODEL", "PH-1");
+        setPropValue("FINGERPRINT", "Cat/CatS60/CatS60:6.0.1/MMB29M/LTE_D0201121.0_S60_0.031.02:user/release-keys");
+        setPropValue("PRODUCT", "CatS60");
+        setPropValue("DEVICE", "CatS60");
+        setPropValue("MANUFACTURER", "BullittGroupLimited");
+        setPropValue("BRAND", "Cat");
+        setPropValue("MODEL", "S60");
     }
 
     private static boolean isCallerSafetyNet() {
