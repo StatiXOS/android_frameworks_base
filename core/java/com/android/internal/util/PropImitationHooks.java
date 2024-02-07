@@ -57,7 +57,7 @@ public class PropImitationHooks {
         sP8Props.put("DEVICE", "husky");
         sP8Props.put("PRODUCT", "husky");
         sP8Props.put("MODEL", "Pixel 8 Pro");
-        sP8Props.put("FINGERPRINT", "google/husky/husky:14/UQ1A.240105.004/11206848:user/release-keys");
+        sP8Props.put("FINGERPRINT", sCertifiedFp);
     }
 
     private static volatile boolean sIsGms = false;
