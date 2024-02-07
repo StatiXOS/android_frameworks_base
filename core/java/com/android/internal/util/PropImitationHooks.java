@@ -34,13 +34,8 @@ public class PropImitationHooks {
     private static final String TAG = "PropImitationHooks";
     private static final boolean DEBUG = false;
 
-    private static final String sCertifiedFp =
-            Resources.getSystem().getString(R.string.config_certifiedFingerprint);
+    private static final String[] PIXEL_PROPS = Resources.getSystem().getStringArray(R.array.config_pixelProps);
 
-    private static final String sStockFp =
-            Resources.getSystem().getString(R.string.config_stockFingerprint);
-
-    private static final String PACKAGE_ARCORE = "com.google.ar.core";
     private static final String PACKAGE_FINSKY = "com.android.vending";
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
@@ -52,12 +47,12 @@ public class PropImitationHooks {
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
     private static final Map<String, Object> sP8Props = new HashMap<>();
     static {
-        sP8Props.put("BRAND", "google");
-        sP8Props.put("MANUFACTURER", "Google");
-        sP8Props.put("DEVICE", "husky");
-        sP8Props.put("PRODUCT", "husky");
-        sP8Props.put("MODEL", "Pixel 8 Pro");
-        sP8Props.put("FINGERPRINT", "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys");
+        sP8Props.put("BRAND", PIXEL_PROPS[0]);
+        sP8Props.put("MANUFACTURER", PIXEL_PROPS[1]);
+        sP8Props.put("DEVICE", PIXEL_PROPS[2]);
+        sP8Props.put("PRODUCT", PIXEL_PROPS[3]);
+        sP8Props.put("MODEL", PIXEL_PROPS[4]);
+        sP8Props.put("FINGERPRINT", PIXEL_PROPS[5]);
     }
 
     private static volatile boolean sIsGms = false;
@@ -79,10 +74,7 @@ public class PropImitationHooks {
             spoofBuildGms();
         } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
             dlog("Setting certified fingerprint for: " + packageName);
-            setPropValue("FINGERPRINT", sCertifiedFp);
-        } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
-            dlog("Setting stock fingerprint for: " + packageName);
-            setPropValue("FINGERPRINT", sStockFp);
+            setPropValue("FINGERPRINT", PIXEL_PROPS[5]);
         } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
                    || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
             dlog("Spoofing Pixel 8 Pro for: " + packageName);
