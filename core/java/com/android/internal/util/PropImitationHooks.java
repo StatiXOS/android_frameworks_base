@@ -66,6 +66,9 @@ public class PropImitationHooks {
 
     private static final String DATA_FILE = "gms_certified_props.json";
 
+    private static final boolean SPOOF_GMS =
+            SystemProperties.getBoolean("persist.sys.spoof.gms", true);
+
     private static volatile boolean sIsGms = false;
     private static volatile boolean sIsFinsky = false;
 
@@ -82,7 +85,7 @@ public class PropImitationHooks {
         sIsGmsUnstable = processName.equals(PROCESS_GMS_UNSTABLE);
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
 
-        if (sIsGms) {
+        if (SPOOF_GMS && sIsGms) {
             setPropValue("TIME", String.valueOf(System.currentTimeMillis()));
             if (sIsGmsUnstable) {
                 dlog("Setting Pixel XL fingerprint for: " + packageName);
