@@ -37,6 +37,9 @@ public final class AttestationHooks {
     private static final String SAMSUNG = "com.samsung.android.";
     private static final String DATA_FILE = "gms_certified_props.json";
 
+    private static final boolean SPOOF_GMS =
+            SystemProperties.getBoolean("persist.sys.spoof.gms", true);
+
     private static volatile boolean sIsGms = false;
 
     private AttestationHooks() {}
@@ -77,7 +80,7 @@ public final class AttestationHooks {
             return;
         }
 
-        if (PACKAGE_GMS.equals(packageName)) {
+        if (SPOOF_GMS && PACKAGE_GMS.equals(packageName)) {
             setBuildField("TIME", String.valueOf(System.currentTimeMillis()));
             if (PROCESS_UNSTABLE.equals(processName)) {
                 sIsGms = true;
