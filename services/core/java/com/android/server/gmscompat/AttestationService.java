@@ -8,6 +8,7 @@
 package com.android.server.gmscompat;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -59,7 +60,9 @@ public final class AttestationService extends SystemService {
 
     @Override
     public void onBootPhase(int phase) {
-        if (SPOOF_GMS && phase == PHASE_BOOT_COMPLETED) {
+        if (SPOOF_GMS
+                && isAppInstalled("com.google.android.gms")
+                && phase == PHASE_BOOT_COMPLETED) {
             Log.i(TAG, "Scheduling the service");
             mScheduler.scheduleAtFixedRate(
                     new FetchGmsCertifiedProps(), INITIAL_DELAY, INTERVAL, TimeUnit.MINUTES);
@@ -133,6 +136,17 @@ public final class AttestationService extends SystemService {
                         || actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
                         || actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
                         || actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH));
+    }
+
+    private boolean isAppInstalled(String packageName) {
+        PackageManager pm = mContext.getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.i(TAG, packageName + " is not installed");
+            return false;
+        }
     }
 
     private void dlog(String message) {
