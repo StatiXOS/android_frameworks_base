@@ -37,6 +37,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class PropImitationHooks {
 
@@ -47,6 +48,7 @@ public class PropImitationHooks {
     private static final String PACKAGE_FINSKY = "com.android.vending";
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
+    private static final String PACKAGE_GPHOTOS = "com.google.android.apps.photos";
 
     private static final String PACKAGE_SUBSCRIPTION_RED = "com.google.android.apps.subscriptions.red";
     private static final String PACKAGE_TURBO = "com.google.android.apps.turbo";
@@ -66,11 +68,21 @@ public class PropImitationHooks {
     private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY = ComponentName.unflattenFromString(
             "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
 
+    private static final Set<String> sPixelFeatures = Set.of(
+        "PIXEL_2017_PRELOAD",
+        "PIXEL_2018_PRELOAD",
+        "PIXEL_2019_MIDYEAR_PRELOAD",
+        "PIXEL_2019_PRELOAD",
+        "PIXEL_2020_EXPERIENCE",
+        "PIXEL_2020_MIDYEAR_EXPERIENCE",
+        "PIXEL_EXPERIENCE"
+    );
+
     private static volatile String[] sCertifiedProps;
     private static volatile String sStockFp;
 
     private static volatile String sProcessName;
-    private static volatile boolean sIsGms, sIsFinsky;
+    private static volatile boolean sIsPixelDevice, sIsGms, sIsFinsky, sIsPhotos;
 
     public static void setProps(Context context) {
         final String packageName = context.getPackageName();
@@ -91,8 +103,10 @@ public class PropImitationHooks {
         sStockFp = res.getString(R.string.config_stockFingerprint);
 
         sProcessName = processName;
+        sIsPixelDevice = Build.MANUFACTURER.equals("Google") && Build.MODEL.contains("Pixel");
         sIsGms = packageName.equals(PACKAGE_GMS) && processName.equals(PROCESS_GMS_UNSTABLE);
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
+        sIsPhotos = packageName.equals(PACKAGE_GPHOTOS);
 
         /* Set Certified Properties for GMSCore
          * Set Stock Fingerprint for ARCore
@@ -207,6 +221,15 @@ public class PropImitationHooks {
             dlog("Blocked key attestation sIsGms=" + sIsGms + " sIsFinsky=" + sIsFinsky);
             throw new UnsupportedOperationException();
         }
+    }
+
+    public static boolean hasSystemFeature(String name, boolean has) {
+        if (sIsPhotos && !sIsPixelDevice && has
+                && sPixelFeatures.stream().anyMatch(name::contains)) {
+            dlog("Blocked system feature " + name + " for Google Photos");
+            has = false;
+        }
+        return has;
     }
 
     public static void dlog(String msg) {
