@@ -16,6 +16,23 @@
       "message": "Tested, works",
       "revId": "cd40c522abf7ea6571c7de134e00e0da75a0d1bc",
       "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dd90120_347e402c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000125
+      },
+      "writtenOn": "2024-04-15T09:45:25Z",
+      "side": 1,
+      "message": "Great idea, but I suppose we can complete set the spoofing section via overlay (the same way with certified props), and squash into this patch once done 👍",
+      "revId": "cd40c522abf7ea6571c7de134e00e0da75a0d1bc",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
     }
   ]
 }
