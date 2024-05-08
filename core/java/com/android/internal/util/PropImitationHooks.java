@@ -50,14 +50,14 @@ public class PropImitationHooks {
     private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
     private static final String PACKAGE_GBOARD = "com.google.android.inputmethod.latin";
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
-    private static final Map<String, Object> sP8Props = new HashMap<>();
+    private static final Map<String, Object> sPTProps = new HashMap<>();
     static {
-        sP8Props.put("BRAND", "google");
-        sP8Props.put("MANUFACTURER", "Google");
-        sP8Props.put("DEVICE", "husky");
-        sP8Props.put("PRODUCT", "husky");
-        sP8Props.put("MODEL", "Pixel 8 Pro");
-        sP8Props.put("FINGERPRINT", "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys");
+        sPTProps.put("BRAND", "google");
+        sPTProps.put("MANUFACTURER", "Google");
+        sPTProps.put("DEVICE", "tangorpro");
+        sPTProps.put("PRODUCT", "tangorpro");
+        sPTProps.put("MODEL", "Pixel Tablet");
+        sPTProps.put("FINGERPRINT", "google/tangorpro/tangorpro:14/AP1A.240505.004/11583682:user/release-keys");
     }
 
     private static volatile boolean sIsGms = false;
@@ -85,8 +85,8 @@ public class PropImitationHooks {
             setPropValue("FINGERPRINT", sStockFp);
         } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
                    || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_GBOARD) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
-            dlog("Spoofing Pixel 8 Pro for: " + packageName);
-            sP8Props.forEach((k, v) -> setPropValue(k, v));
+            dlog("Spoofing Pixel Tablet for: " + packageName);
+            sPTProps.forEach((k, v) -> setPropValue(k, v));
         }
     }
 
