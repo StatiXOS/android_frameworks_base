@@ -159,7 +159,7 @@ constructor(
     protected lateinit var qsTileBackground: RippleDrawable
     private lateinit var qsTileFocusBackground: Drawable
     private lateinit var backgroundDrawable: LayerDrawable
-    private lateinit var backgroundBaseDrawable: Drawable
+    protected lateinit var backgroundBaseDrawable: Drawable
     private lateinit var backgroundOverlayDrawable: Drawable
 
     private var backgroundColor: Int = 0
@@ -801,7 +801,7 @@ constructor(
         setOverlayColor(overlayColor)
     }
 
-    private fun setColor(color: Int) {
+    protected fun setColor(color: Int) {
         backgroundBaseDrawable.mutate().setTint(color)
         backgroundColor = color
     }
@@ -858,7 +858,7 @@ constructor(
         return locInScreen.get(1) >= -height
     }
 
-    private fun getBackgroundColorForState(state: Int, disabledByPolicy: Boolean = false): Int {
+    protected open fun getBackgroundColorForState(state: Int, disabledByPolicy: Boolean = false): Int {
         return when {
             state == Tile.STATE_UNAVAILABLE || disabledByPolicy -> colorUnavailable
             state == Tile.STATE_ACTIVE -> colorActive
