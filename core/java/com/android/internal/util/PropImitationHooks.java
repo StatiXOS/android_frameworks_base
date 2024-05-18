@@ -33,7 +33,7 @@ import java.util.Map;
 public class PropImitationHooks {
 
     private static final String TAG = "PropImitationHooks";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = Build.IS_DEBUGGABLE;
 
     private static final String[] PIXEL_PROPS = Resources.getSystem().getStringArray(R.array.pixel_props);
 
