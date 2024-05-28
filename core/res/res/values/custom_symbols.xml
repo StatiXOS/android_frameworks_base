@@ -28,7 +28,8 @@
   <java-symbol type="array" name="config_rebootActionsList" />
   <java-symbol type="array" name="values_globalActionsList" />
 
-  <!-- Fingerprint from stock ROM -->
+  <!-- PropImitationHooks -->
+  <java-symbol type="array" name="config_pixelBuildProperties" />
   <java-symbol type="string" name="config_stockFingerprint" />
   
   <!-- Package Manager -->
