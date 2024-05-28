@@ -12,6 +12,20 @@
     limitations under the License.
 -->
 <resources>
+    <!-- Build properties from a Pixel device against current platform SPL level -->
+    <string-array name="config_pixelBuildProperties" translatable="false">
+      <!--
+        Each entry must be of the format
+            FIELD:value
+        with the field belonging to android.os.Build or android.os.Build.VERSION class.
+        Example:
+        <item>BRAND:foo</item>
+        <item>DEVICE:bar</item>
+        <item>FINGERPRINT:foo/bar/bar:1.0/lorem/ipsum:dolor/sit-amet</item>
+        <item>VERSION.RELEASE:1.0</item>
+      -->
+    </string-array>
+
     <!-- Fingerprint from stock ROM -->
     <string name="config_stockFingerprint" translatable="false"></string>
 
