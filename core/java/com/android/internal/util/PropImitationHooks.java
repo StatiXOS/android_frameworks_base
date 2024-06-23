@@ -19,6 +19,7 @@ package com.android.internal.util;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class PropImitationHooks {
 
     private static final String[] PIXEL_PROPS = Resources.getSystem().getStringArray(R.array.config_pixelProps);
 
+    private static final String PACKAGE_SVT = "com.statix.svt";
     private static final String PACKAGE_FINSKY = "com.android.vending";
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
@@ -72,7 +74,7 @@ public class PropImitationHooks {
 
         if (sIsGms) {
             dlog("Setting Pixel XL fingerprint for: " + packageName);
-            spoofBuildGms();
+            spoofBuildGms(context);
         } else if (!sCertifiedFp.isEmpty() && sIsFinsky) {
             dlog("Setting certified fingerprint for: " + packageName);
             setPropValue("FINGERPRINT", PIXEL_PROPS[5]);
@@ -96,14 +98,30 @@ public class PropImitationHooks {
         }
     }
 
-    private static void spoofBuildGms() {
-        // Alter model name and fingerprint to avoid hardware attestation enforcement
-        setPropValue("FINGERPRINT", "motorola/griffin_retcn/griffin:6.0.1/MCC24.246-37/42:user/release-keys");
-        setPropValue("PRODUCT", "griffin_retcn");
-        setPropValue("DEVICE", "griffin");
-        setPropValue("MANUFACTURER", "motorola");
-        setPropValue("BRAND", "motorola");
-        setPropValue("MODEL", "XT1650-05");
+    private static void spoofBuildGms(Context context) {
+        PackageManager pm = context.getPackageManager();
+
+        try {
+            Resources resources = pm.getResourcesForApplication(PACKAGE_SVT);
+
+            int resourceId = resources.getIdentifier("certifiedBuildProperties", "array", PACKAGE_SVT);
+            String[] sCertifiedProps = resources.getStringArray(resourceId);
+
+            if (sCertifiedProps.length == 6) {
+                String[] array = {"MODEL", "DEVICE", "PRODUCT", "BRAND", "MANUFACTURER", "FINGERPRINT"};
+
+                for (int i = 0; i < array.length; i++) {
+                    if (!sCertifiedProps[i].isEmpty()) {
+                        setBuildField(array[i], sCertifiedProps[i]);
+                    }
+                }
+            } else {
+                Log.e(TAG, "Insufficient array size for certified props: "
+                    + sCertifiedProps.length + ", required 6");
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.i(TAG, "Error accessing resources for '" + PACKAGE_SVT + "': " + e.getMessage());
+        }
     }
 
     private static boolean isCallerSafetyNet() {
