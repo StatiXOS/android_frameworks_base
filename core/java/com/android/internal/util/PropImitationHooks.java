@@ -49,44 +49,58 @@ public class PropImitationHooks {
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
     private static final String PACKAGE_GPHOTOS = "com.google.android.apps.photos";
 
-    private static final String PACKAGE_SUBSCRIPTION_RED = "com.google.android.apps.subscriptions.red";
-    private static final String PACKAGE_TURBO = "com.google.android.apps.turbo";
-    private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
+    private static final String PACKAGE_SUBSCRIPTION_RED = "com.google.android.apps.subscriptions.red";
+    private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
 
     private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY = ComponentName.unflattenFromString(
             "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
 
     private static final Map<String, String> sPixelEightProps = Map.of(
-        "PRODUCT", "husky",
-        "DEVICE", "husky",
-        "HARDWARE", "husky",
-        "MANUFACTURER", "Google",
-        "BRAND", "google",
-        "MODEL", "Pixel 8 Pro",
-        "ID", "AP2A.240705.005",
-        "FINGERPRINT", "google/husky/husky:14/AP2A.240705.005/11942872:user/release-keys"
+            "PRODUCT", "husky",
+            "DEVICE", "husky",
+            "HARDWARE", "husky",
+            "MANUFACTURER", "Google",
+            "BRAND", "google",
+            "MODEL", "Pixel 8 Pro",
+            "ID", "AP2A.240705.005",
+            "FINGERPRINT", "google/husky/husky:14/AP2A.240705.005/11942872:user/release-keys"
     );
 
     private static final Map<String, String> sPixelTabletProps = Map.of(
-        "PRODUCT", "tangorpro",
-        "DEVICE", "tangorpro",
-        "HARDWARE", "tangorpro",
-        "MANUFACTURER", "Google",
-        "BRAND", "google",
-        "MODEL", "Pixel Tablet",
-        "ID", "AP2A.240705.005",
-        "FINGERPRINT", "google/tangorpro/tangorpro:14/AP2A.240705.005/11942872:user/release-keys"
+            "PRODUCT", "tangorpro",
+            "DEVICE", "tangorpro",
+            "HARDWARE", "tangorpro",
+            "MANUFACTURER", "Google",
+            "BRAND", "google",
+            "MODEL", "Pixel Tablet",
+            "ID", "AP2A.240705.005",
+            "FINGERPRINT", "google/tangorpro/tangorpro:14/AP2A.240705.005/11942872:user/release-keys"
     );
 
     private static final Set<String> sPixelFeatures = Set.of(
-        "PIXEL_2017_PRELOAD",
-        "PIXEL_2018_PRELOAD",
-        "PIXEL_2019_MIDYEAR_PRELOAD",
-        "PIXEL_2019_PRELOAD",
-        "PIXEL_2020_EXPERIENCE",
-        "PIXEL_2020_MIDYEAR_EXPERIENCE",
-        "PIXEL_EXPERIENCE"
+            "PIXEL_2017_EXPERIENCE",
+            "PIXEL_2017_PRELOAD",
+            "PIXEL_2018_EXPERIENCE",
+            "PIXEL_2018_PRELOAD",
+            "PIXEL_2019_EXPERIENCE",
+            "PIXEL_2019_MIDYEAR_EXPERIENCE",
+            "PIXEL_2019_MIDYEAR_PRELOAD",
+            "PIXEL_2019_PRELOAD",
+            "PIXEL_2020_EXPERIENCE",
+            "PIXEL_2020_MIDYEAR_EXPERIENCE",
+            "PIXEL_2021_MIDYEAR_EXPERIENCE",
+            "PIXEL_EXPERIENCE"
+    );
+
+    private static final Set<String> sTensorFeatures = Set.of(
+            "PIXEL_2021_EXPERIENCE",
+            "PIXEL_2022_EXPERIENCE",
+            "PIXEL_2022_MIDYEAR_EXPERIENCE",
+            "PIXEL_2023_EXPERIENCE",
+            "PIXEL_2023_MIDYEAR_EXPERIENCE",
+            "PIXEL_2024_EXPERIENCE",
+            "PIXEL_2024_MIDYEAR_EXPERIENCE"
     );
 
     private static volatile String[] sCertifiedProps;
@@ -120,25 +134,41 @@ public class PropImitationHooks {
         sIsFinsky = packageName.equals(PACKAGE_FINSKY);
         sIsPhotos = packageName.equals(PACKAGE_GPHOTOS);
 
-        /* Set Certified Properties for GMSCore
-         * Set Stock Fingerprint for ARCore
+        /* Set certified properties for GMSCore
+         * Set stock fingerprint for ARCore
          * Set Pixel 8 Pro / Pixel Tablet for Google, ASI and GMS device configurator
          */
-        if (sIsGms) {
-            setCertifiedPropsForGms();
-        } else if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
-            dlog("Setting stock fingerprint for: " + packageName);
-            setPropValue("FINGERPRINT", sStockFp);
-        } else if (packageName.equals(PACKAGE_SUBSCRIPTION_RED) || packageName.equals(PACKAGE_TURBO)
-                   || packageName.equals(PACKAGE_VELVET) || packageName.equals(PACKAGE_SETUPWIZARD) || packageName.equals(PACKAGE_GMS)) {
-            if (sIsTablet) {
-                dlog("Spoofing Pixel Tablet for: " + packageName + " process: " + processName);
-                sPixelTabletProps.forEach(PropImitationHooks::setPropValue);
-            } else {
-                dlog("Spoofing Pixel 8 Pro for: " + packageName + " process: " + processName);
-                sPixelEightProps.forEach(PropImitationHooks::setPropValue);
-            }
+        switch (processName) {
+            case PROCESS_GMS_UNSTABLE:
+                dlog("Setting certified props for: " + packageName + " process: " + processName);
+                setCertifiedPropsForGms();
+                return;
         }
+
+        switch (packageName) {
+            case PACKAGE_GMS:
+            case PACKAGE_SETUPWIZARD:
+            case PACKAGE_SUBSCRIPTION_RED:
+            case PACKAGE_VELVET:
+                if (sIsTablet) {
+                    dlog("Spoofing Pixel Tablet for: " + packageName + " process: " + processName);
+                    setProps(sPixelTabletProps);
+                } else {
+                    dlog("Spoofing Pixel 8 Pro for: " + packageName + " process: " + processName);
+                    setProps(sPixelEightProps);
+                }
+                return;
+            case PACKAGE_ARCORE:
+                if (!sStockFp.isEmpty()) {
+                    dlog("Setting stock fingerprint for: " + packageName);
+                    setPropValue("FINGERPRINT", sStockFp);;
+                }
+                return;
+        }
+    }
+
+    private static void setProps(Map<String, String> props) {
+        props.forEach(PropImitationHooks::setPropValue);
     }
 
     private static void setPropValue(String key, String value) {
@@ -242,7 +272,8 @@ public class PropImitationHooks {
 
     public static boolean hasSystemFeature(String name, boolean has) {
         if (sIsPhotos && !sIsPixelDevice && has
-                && sPixelFeatures.stream().anyMatch(name::contains)) {
+                && (sPixelFeatures.stream().anyMatch(name::contains)
+                || sTensorFeatures.stream().anyMatch(name::contains))) {
             dlog("Blocked system feature " + name + " for Google Photos");
             has = false;
         }
