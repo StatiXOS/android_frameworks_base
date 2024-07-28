@@ -88,7 +88,7 @@ public class RecordingService extends Service implements ScreenMediaRecorderList
     private final UiEventLogger mUiEventLogger;
     private final NotificationManager mNotificationManager;
     private final UserContextProvider mUserContextTracker;
-    private int mNotificationId = NOTIF_BASE_ID;
+    protected int mNotificationId = NOTIF_BASE_ID;
     private RecordingServiceStrings mStrings;
 
     @Inject
