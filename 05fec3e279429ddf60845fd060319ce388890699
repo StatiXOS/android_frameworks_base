@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f63892b_ed1f4b8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-08T16:57:12Z",
+      "side": 1,
+      "message": "this seems kind of useless tbh. just add apps to the allowlist. most user apps are things people don\u0027t really care about cloning at all.",
+      "revId": "05fec3e279429ddf60845fd060319ce388890699",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
