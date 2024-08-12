@@ -2149,7 +2149,7 @@
     <!-- SysUI Tuner: Options for how battery is displayed [CHAR LIMIT=NONE] -->
     <string-array name="battery_options">
         <item>Always show percentage</item>
-        <item>Show percentage when charging (default)</item>
+        <item>Show percentage on lock screen when charging (default)</item>
         <item>Don\'t show this icon</item>
     </string-array>
 
