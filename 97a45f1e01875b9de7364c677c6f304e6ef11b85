@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12865890_becc0cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-23T15:22:01Z",
+      "side": 1,
+      "message": "this seems way too complicated, i think we can localize a lot of this in settings or even systemui.",
+      "revId": "97a45f1e01875b9de7364c677c6f304e6ef11b85",
+      "serverId": "039621b9-0c7c-40f3-867c-684f4bc911d6"
+    }
+  ]
+}
