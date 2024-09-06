@@ -76,9 +76,7 @@ constructor(
     private val devicePolicyManager: DevicePolicyManager,
 ) : CommunalSettingsRepository {
 
-    private val flagEnabled: Boolean by lazy {
-        featureFlagsClassic.isEnabled(Flags.COMMUNAL_SERVICE_ENABLED) && communalHub()
-    }
+    private val flagEnabled: Boolean = true
 
     override fun getEnabledState(user: UserInfo): Flow<CommunalEnabledState> {
         if (!user.isMain) {
