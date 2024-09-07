@@ -153,7 +153,7 @@ constructor(
     /** Controls if tile background is set to a [RippleDrawable] see [setClickable] */
     protected var showRippleEffect = true
 
-    private lateinit var qsTileBackground: RippleDrawable
+    protected lateinit var qsTileBackground: RippleDrawable
     private lateinit var qsTileFocusBackground: Drawable
     private lateinit var backgroundDrawable: LayerDrawable
     private lateinit var backgroundBaseDrawable: Drawable
