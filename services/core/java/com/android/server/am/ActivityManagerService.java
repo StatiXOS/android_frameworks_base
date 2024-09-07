@@ -21199,6 +21199,7 @@ public class ActivityManagerService extends IActivityManager.Stub
     @GuardedBy("this")
     void clearPendingTopAppLocked() {
         mPendingStartActivityUids.clear();
+    }
 
     public boolean isSwipeToScreenshotGestureActive() {
         synchronized (this) {
