@@ -550,15 +550,21 @@ private fun EmptyStateCta(
 ) {
     val colors = LocalAndroidColorScheme.current
     Card(
-        modifier = Modifier.height(Dimensions.GridHeight).padding(contentPadding),
+        modifier = Modifier
+            .height(Dimensions.GridHeight)
+            .padding(contentPadding),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         border = BorderStroke(3.dp, colors.secondary),
         shape = RoundedCornerShape(size = 80.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 110.dp),
-            verticalArrangement =
-                Arrangement.spacedBy(Dimensions.Spacing, Alignment.CenterVertically),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 40.dp),
+            verticalArrangement = Arrangement.spacedBy(
+                Dimensions.Spacing,
+                Alignment.CenterVertically
+            ),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
@@ -566,18 +572,20 @@ private fun EmptyStateCta(
                 style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center,
                 color = colors.secondary,
+                modifier = Modifier.fillMaxWidth(0.9f)
             )
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(0.8f),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Button(
-                    modifier = Modifier.height(56.dp),
-                    colors =
-                        ButtonDefaults.buttonColors(
-                            containerColor = colors.primary,
-                            contentColor = colors.onPrimary,
-                        ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colors.primary,
+                        contentColor = colors.onPrimary,
+                    ),
                     onClick = {
                         viewModel.onOpenWidgetEditor(
                             shouldOpenWidgetPickerOnStart = true,
@@ -586,14 +594,14 @@ private fun EmptyStateCta(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription =
-                            stringResource(R.string.label_for_button_in_empty_state_cta),
+                        contentDescription = stringResource(R.string.label_for_button_in_empty_state_cta),
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(Modifier.width(ButtonDefaults.IconSpacing))
                     Text(
                         text = stringResource(R.string.label_for_button_in_empty_state_cta),
                         style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
@@ -637,10 +645,7 @@ private fun Toolbar(
             modifier = Modifier.align(Alignment.CenterStart),
             onClick = onOpenWidgetPicker,
         ) {
-            Icon(Icons.Default.Add, stringResource(R.string.hub_mode_add_widget_button_text))
-            Text(
-                text = stringResource(R.string.hub_mode_add_widget_button_text),
-            )
+            Icon(Icons.Default.Add, contentDescription = stringResource(R.string.hub_mode_add_widget_button_text))
         }
 
         AnimatedVisibility(
@@ -657,19 +662,7 @@ private fun Toolbar(
                     Modifier.graphicsLayer { alpha = removeButtonAlpha }
                         .onGloballyPositioned { setRemoveButtonCoordinates(it) }
             ) {
-                Row(
-                    horizontalArrangement =
-                        Arrangement.spacedBy(
-                            ButtonDefaults.IconSpacing,
-                            Alignment.CenterHorizontally
-                        ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(Icons.Default.Close, stringResource(R.string.button_to_remove_widget))
-                    Text(
-                        text = stringResource(R.string.button_to_remove_widget),
-                    )
-                }
+                Icon(Icons.Default.Close, contentDescription = stringResource(R.string.button_to_remove_widget))
             }
         }
 
@@ -678,13 +671,7 @@ private fun Toolbar(
             modifier = Modifier.align(Alignment.CenterEnd),
             onClick = onEditDone,
         ) {
-            Icon(
-                Icons.Default.Check,
-                stringResource(id = R.string.hub_mode_editing_exit_button_text)
-            )
-            Text(
-                text = stringResource(R.string.hub_mode_editing_exit_button_text),
-            )
+            Icon(Icons.Default.Check, contentDescription = stringResource(R.string.hub_mode_editing_exit_button_text))
         }
     }
 }
@@ -804,12 +791,6 @@ private fun AnimatedVisibilityScope.ButtonToEditWidgets(
                     contentDescription = stringResource(R.string.button_to_configure_widgets_text),
                     tint = colors.onSecondary,
                     modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = stringResource(R.string.button_to_configure_widgets_text),
-                    style = MaterialTheme.typography.titleSmall,
-                    color = colors.onSecondary
                 )
             }
         }
