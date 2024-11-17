@@ -47,6 +47,7 @@ public class PropImitationHooks {
     private static final String PACKAGE_FINSKY = "com.android.vending";
     private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final String PROCESS_GMS_UNSTABLE = PACKAGE_GMS + ".unstable";
+    private static final String PACKAGE_DIALER = "com.google.android.dialer";
     private static final String PACKAGE_GPHOTOS = "com.google.android.apps.photos";
 
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
@@ -150,6 +151,7 @@ public class PropImitationHooks {
         }
 
         switch (packageName) {
+            case PACKAGE_DIALER:
             case PACKAGE_GMS:
             case PACKAGE_SETUPWIZARD:
             case PACKAGE_SUBSCRIPTION_RED:
@@ -216,7 +218,7 @@ public class PropImitationHooks {
                                             + " was:"
                                             + was
                                             + ", killing myself!"); // process will restart
-                                                                    // automatically later
+                            // automatically later
                             Process.killProcess(Process.myPid());
                         }
                     }
