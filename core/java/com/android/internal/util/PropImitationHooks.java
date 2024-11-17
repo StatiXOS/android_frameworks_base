@@ -25,8 +25,8 @@ import android.app.TaskStackListener;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,58 +50,62 @@ public class PropImitationHooks {
     private static final String PACKAGE_GPHOTOS = "com.google.android.apps.photos";
 
     private static final String PACKAGE_SETUPWIZARD = "com.google.android.setupwizard";
-    private static final String PACKAGE_SUBSCRIPTION_RED = "com.google.android.apps.subscriptions.red";
+    private static final String PACKAGE_SUBSCRIPTION_RED =
+            "com.google.android.apps.subscriptions.red";
     private static final String PACKAGE_VELVET = "com.google.android.googlequicksearchbox";
 
-    private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY = ComponentName.unflattenFromString(
-            "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
+    private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY =
+            ComponentName.unflattenFromString(
+                    "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
 
-    private static final Map<String, String> sPixelNineProps = Map.of(
-            "PRODUCT", "komodo",
-            "DEVICE", "komodo",
-            "HARDWARE", "komodo",
-            "MANUFACTURER", "Google",
-            "BRAND", "google",
-            "MODEL", "Pixel 9 Pro XL",
-            "ID", "AP3A.241105.008",
-            "FINGERPRINT", "google/komodo/komodo:15/AP3A.241105.008/12485168:user/release-keys"
-    );
+    private static final Map<String, String> sPixelNineProps =
+            Map.of(
+                    "PRODUCT", "komodo",
+                    "DEVICE", "komodo",
+                    "HARDWARE", "komodo",
+                    "MANUFACTURER", "Google",
+                    "BRAND", "google",
+                    "MODEL", "Pixel 9 Pro XL",
+                    "ID", "AP3A.241105.008",
+                    "FINGERPRINT",
+                            "google/komodo/komodo:15/AP3A.241105.008/12485168:user/release-keys");
 
-    private static final Map<String, String> sPixelTabletProps = Map.of(
-            "PRODUCT", "tangorpro",
-            "DEVICE", "tangorpro",
-            "HARDWARE", "tangorpro",
-            "MANUFACTURER", "Google",
-            "BRAND", "google",
-            "MODEL", "Pixel Tablet",
-            "ID", "AP3A.241105.007",
-            "FINGERPRINT", "google/tangorpro/tangorpro:15/AP3A.241105.007/12470370:user/release-keys"
-    );
+    private static final Map<String, String> sPixelTabletProps =
+            Map.of(
+                    "PRODUCT", "tangorpro",
+                    "DEVICE", "tangorpro",
+                    "HARDWARE", "tangorpro",
+                    "MANUFACTURER", "Google",
+                    "BRAND", "google",
+                    "MODEL", "Pixel Tablet",
+                    "ID", "AP3A.241105.007",
+                    "FINGERPRINT",
+                            "google/tangorpro/tangorpro:15/AP3A.241105.007/12470370:user/release-keys");
 
-    private static final Set<String> sPixelFeatures = Set.of(
-            "PIXEL_2017_EXPERIENCE",
-            "PIXEL_2017_PRELOAD",
-            "PIXEL_2018_EXPERIENCE",
-            "PIXEL_2018_PRELOAD",
-            "PIXEL_2019_EXPERIENCE",
-            "PIXEL_2019_MIDYEAR_EXPERIENCE",
-            "PIXEL_2019_MIDYEAR_PRELOAD",
-            "PIXEL_2019_PRELOAD",
-            "PIXEL_2020_EXPERIENCE",
-            "PIXEL_2020_MIDYEAR_EXPERIENCE",
-            "PIXEL_2021_MIDYEAR_EXPERIENCE",
-            "PIXEL_EXPERIENCE"
-    );
+    private static final Set<String> sPixelFeatures =
+            Set.of(
+                    "PIXEL_2017_EXPERIENCE",
+                    "PIXEL_2017_PRELOAD",
+                    "PIXEL_2018_EXPERIENCE",
+                    "PIXEL_2018_PRELOAD",
+                    "PIXEL_2019_EXPERIENCE",
+                    "PIXEL_2019_MIDYEAR_EXPERIENCE",
+                    "PIXEL_2019_MIDYEAR_PRELOAD",
+                    "PIXEL_2019_PRELOAD",
+                    "PIXEL_2020_EXPERIENCE",
+                    "PIXEL_2020_MIDYEAR_EXPERIENCE",
+                    "PIXEL_2021_MIDYEAR_EXPERIENCE",
+                    "PIXEL_EXPERIENCE");
 
-    private static final Set<String> sTensorFeatures = Set.of(
-            "PIXEL_2021_EXPERIENCE",
-            "PIXEL_2022_EXPERIENCE",
-            "PIXEL_2022_MIDYEAR_EXPERIENCE",
-            "PIXEL_2023_EXPERIENCE",
-            "PIXEL_2023_MIDYEAR_EXPERIENCE",
-            "PIXEL_2024_EXPERIENCE",
-            "PIXEL_2024_MIDYEAR_EXPERIENCE"
-    );
+    private static final Set<String> sTensorFeatures =
+            Set.of(
+                    "PIXEL_2021_EXPERIENCE",
+                    "PIXEL_2022_EXPERIENCE",
+                    "PIXEL_2022_MIDYEAR_EXPERIENCE",
+                    "PIXEL_2023_EXPERIENCE",
+                    "PIXEL_2023_MIDYEAR_EXPERIENCE",
+                    "PIXEL_2024_EXPERIENCE",
+                    "PIXEL_2024_MIDYEAR_EXPERIENCE");
 
     private static volatile String[] sCertifiedProps;
     private static volatile String sStockFp;
@@ -154,14 +158,19 @@ public class PropImitationHooks {
                     dlog("Spoofing Pixel Tablet for: " + packageName + " process: " + processName);
                     setProps(sPixelTabletProps);
                 } else {
-                    dlog("Spoofing Pixel 9 Pro XL for: " + packageName + " process: " + processName);
+                    dlog(
+                            "Spoofing Pixel 9 Pro XL for: "
+                                    + packageName
+                                    + " process: "
+                                    + processName);
                     setProps(sPixelNineProps);
                 }
                 return;
             case PACKAGE_ARCORE:
                 if (!sStockFp.isEmpty()) {
                     dlog("Setting stock fingerprint for: " + packageName);
-                    setPropValue("FINGERPRINT", sStockFp);;
+                    setPropValue("FINGERPRINT", sStockFp);
+                    ;
                 }
                 return;
         }
@@ -195,17 +204,23 @@ public class PropImitationHooks {
             return;
         }
         final boolean was = isGmsAddAccountActivityOnTop();
-        final TaskStackListener taskStackListener = new TaskStackListener() {
-            @Override
-            public void onTaskStackChanged() {
-                final boolean is = isGmsAddAccountActivityOnTop();
-                if (is ^ was) {
-                    dlog("GmsAddAccountActivityOnTop is:" + is + " was:" + was +
-                            ", killing myself!"); // process will restart automatically later
-                    Process.killProcess(Process.myPid());
-                }
-            }
-        };
+        final TaskStackListener taskStackListener =
+                new TaskStackListener() {
+                    @Override
+                    public void onTaskStackChanged() {
+                        final boolean is = isGmsAddAccountActivityOnTop();
+                        if (is ^ was) {
+                            dlog(
+                                    "GmsAddAccountActivityOnTop is:"
+                                            + is
+                                            + " was:"
+                                            + was
+                                            + ", killing myself!"); // process will restart
+                            // automatically later
+                            Process.killProcess(Process.myPid());
+                        }
+                    }
+                };
         if (!was) {
             dlog("Spoofing build for GMS");
             setCertifiedProps();
@@ -235,7 +250,8 @@ public class PropImitationHooks {
         try {
             final ActivityTaskManager.RootTaskInfo focusedTask =
                     ActivityTaskManager.getService().getFocusedRootTaskInfo();
-            return focusedTask != null && focusedTask.topActivity != null
+            return focusedTask != null
+                    && focusedTask.topActivity != null
                     && focusedTask.topActivity.equals(GMS_ADD_ACCOUNT_ACTIVITY);
         } catch (Exception e) {
             Log.e(TAG, "Unable to get top activity!", e);
@@ -258,8 +274,9 @@ public class PropImitationHooks {
     }
 
     private static boolean isCallerSafetyNet() {
-        return sIsGms && Arrays.stream(Thread.currentThread().getStackTrace())
-                .anyMatch(elem -> elem.getClassName().contains("DroidGuard"));
+        return sIsGms
+                && Arrays.stream(Thread.currentThread().getStackTrace())
+                        .anyMatch(elem -> elem.getClassName().contains("DroidGuard"));
     }
 
     public static void onEngineGetCertificateChain() {
@@ -271,9 +288,11 @@ public class PropImitationHooks {
     }
 
     public static boolean hasSystemFeature(String name, boolean has) {
-        if (sIsPhotos && !sIsPixelDevice && has
+        if (sIsPhotos
+                && !sIsPixelDevice
+                && has
                 && (sPixelFeatures.stream().anyMatch(name::contains)
-                || sTensorFeatures.stream().anyMatch(name::contains))) {
+                        || sTensorFeatures.stream().anyMatch(name::contains))) {
             dlog("Blocked system feature " + name + " for Google Photos");
             has = false;
         }
