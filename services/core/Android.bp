@@ -228,6 +228,8 @@ java_library_static {
         "dreams_flags_lib",
         "aconfig_new_storage_flags_lib",
         "powerstats_flags_lib",
+        "//hardware/xiaomi:vendor.xiaomi.hardware.fingerprintextension-V1-java",
+        "//hardware/xiaomi:vendor.xiaomi.hw.touchfeature-V1-java",
     ],
     javac_shard_size: 50,
     javacflags: [
