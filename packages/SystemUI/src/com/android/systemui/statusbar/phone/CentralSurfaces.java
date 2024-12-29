@@ -71,10 +71,8 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     int FADE_KEYGUARD_START_DELAY = 100;
     int FADE_KEYGUARD_DURATION = 300;
     int FADE_KEYGUARD_DURATION_PULSING = 96;
-    long[] CAMERA_LAUNCH_GESTURE_VIBRATION_TIMINGS =
-            new long[]{20, 20, 20, 20, 100, 20};
-    int[] CAMERA_LAUNCH_GESTURE_VIBRATION_AMPLITUDES =
-            new int[]{39, 82, 139, 213, 0, 127};
+    long[] CAMERA_LAUNCH_GESTURE_VIBRATION_TIMINGS = new long[] { 20, 20, 20, 20, 100, 20 };
+    int[] CAMERA_LAUNCH_GESTURE_VIBRATION_AMPLITUDES = new int[] { 39, 82, 139, 213, 0, 127 };
 
     /** If true, the lockscreen will show a distinct wallpaper */
     boolean ENABLE_LOCKSCREEN_WALLPAPER = true;
@@ -104,9 +102,11 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     /**
      * Returns an ActivityOptions bundle created using the given parameters.
      *
-     * @param displayId        The ID of the display to launch the activity in. Typically this would
+     * @param displayId        The ID of the display to launch the activity in.
+     *                         Typically this would
      *                         be the display the status bar is on.
-     * @param animationAdapter The animation adapter used to start this activity, or {@code null}
+     * @param animationAdapter The animation adapter used to start this activity, or
+     *                         {@code null}
      *                         for the default animation.
      */
     static Bundle getActivityOptions(int displayId,
@@ -121,13 +121,16 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     /**
      * Returns an ActivityOptions bundle created using the given parameters.
      *
-     * @param displayId         The ID of the display to launch the activity in. Typically this
+     * @param displayId         The ID of the display to launch the activity in.
+     *                          Typically this
      *                          would be the
      *                          display the status bar is on.
-     * @param animationAdapter  The animation adapter used to start this activity, or {@code null}
+     * @param animationAdapter  The animation adapter used to start this activity,
+     *                          or {@code null}
      *                          for the default animation.
      * @param isKeyguardShowing Whether keyguard is currently showing.
-     * @param eventTime         The event time in milliseconds since boot, not including sleep. See
+     * @param eventTime         The event time in milliseconds since boot, not
+     *                          including sleep. See
      *                          {@link ActivityOptions#setSourceInfo}.
      */
     static Bundle getActivityOptions(int displayId,
@@ -163,7 +166,7 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
 
     /**
      * @return a PackageManager for userId or if userId is < 0 (USER_ALL etc) then
-     * return PackageManager for mContext
+     *         return PackageManager for mContext
      */
     static PackageManager getPackageManagerForUser(Context context, int userId) {
         Context contextForUser = context;
@@ -172,10 +175,9 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
             try {
                 // Create a context for the correct user so if a package isn't installed
                 // for user 0 we can still load information about the package.
-                contextForUser =
-                        context.createPackageContextAsUser(context.getPackageName(),
-                                Context.CONTEXT_RESTRICTED,
-                                new UserHandle(userId));
+                contextForUser = context.createPackageContextAsUser(context.getPackageName(),
+                        Context.CONTEXT_RESTRICTED,
+                        new UserHandle(userId));
             } catch (PackageManager.NameNotFoundException e) {
                 // Shouldn't fail to find the package name for system ui.
             }
@@ -184,7 +186,8 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     }
 
     /** Default impl for CoreStartable. */
-    default void start() {}
+    default void start() {
+    }
 
     boolean updateIsKeyguard();
 
@@ -200,7 +203,8 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     boolean isLaunchingActivityOverLockscreen();
 
     /**
-     * Whether an activity launch over lockscreen is causing the shade to be dismissed.
+     * Whether an activity launch over lockscreen is causing the shade to be
+     * dismissed.
      */
     boolean isDismissingShadeForActivityLaunch();
 
@@ -248,7 +252,10 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
 
     void endAffordanceLaunch();
 
-    /** Should the keyguard be hidden immediately in response to a back press/gesture. */
+    /**
+     * Should the keyguard be hidden immediately in response to a back
+     * press/gesture.
+     */
     boolean shouldKeyguardHideImmediately();
 
     void showBouncerWithDimissAndCancelIfKeyguard(OnDismissAction performAction,
@@ -268,7 +275,8 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     void setTransitionToFullShadeProgress(float transitionToFullShadeProgress);
 
     /**
-     * Sets the amount of progress to the bouncer being fully hidden/visible. 1 means the bouncer
+     * Sets the amount of progress to the bouncer being fully hidden/visible. 1
+     * means the bouncer
      * is fully hidden, while 0 means the bouncer is visible.
      */
     void setPrimaryBouncerHiddenFraction(float expansion);
@@ -283,9 +291,12 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     void awakenDreams();
 
     /**
-     * Handle a touch event while dreaming or on the glanceable hub when the touch was initiated
-     * within a prescribed swipeable area. This method is provided for cases where swiping in
-     * certain areas should be handled by CentralSurfaces instead (e.g. swiping hub open, opening
+     * Handle a touch event while dreaming or on the glanceable hub when the touch
+     * was initiated
+     * within a prescribed swipeable area. This method is provided for cases where
+     * swiping in
+     * certain areas should be handled by CentralSurfaces instead (e.g. swiping hub
+     * open, opening
      * the notification shade over dream or hub).
      */
     void handleExternalShadeWindowTouch(MotionEvent event);
@@ -347,4 +358,14 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
      */
     ActivityTransitionAnimator.Controller getAnimatorControllerFromNotification(
             ExpandableNotificationRow associatedView);
+
+    void startActivity(android.content.Intent intent, boolean dismiss);
+
+    void startPendingIntentDismissingKeyguard(android.app.PendingIntent intent);
+
+    com.android.systemui.shade.ShadeViewController getNotificationPanelViewController();
+
+    void wakeUpDeviceifDozing();
+
+    com.android.systemui.shade.NotificationShadeWindowView getNotificationShadeWindowView();
 }
