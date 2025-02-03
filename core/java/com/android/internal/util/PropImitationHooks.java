@@ -58,17 +58,17 @@ public class PropImitationHooks {
             ComponentName.unflattenFromString(
                     "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
 
-    private static final Map<String, String> sPixelNineProps =
+    private static final Map<String, String> sPixelTenProps =
             Map.of(
-                    "PRODUCT", "komodo",
-                    "DEVICE", "komodo",
-                    "HARDWARE", "komodo",
+                    "PRODUCT", "mustang",
+                    "DEVICE", "mustang",
+                    "HARDWARE", "mustang",
                     "MANUFACTURER", "Google",
                     "BRAND", "google",
-                    "MODEL", "Pixel 9 Pro XL",
-                    "ID", "AP4A.241205.013",
+                    "MODEL", "Pixel 10 Pro XL",
+                    "ID", "BP4A.251205.006",
                     "FINGERPRINT",
-                            "google/komodo/komodo:15/AP4A.241205.013/12621605:user/release-keys");
+                            "google/mustang/mustang:16/BP4A.251205.006/14401865:user/release-keys");
 
     private static final Map<String, String> sPixelTabletProps =
             Map.of(
@@ -78,9 +78,9 @@ public class PropImitationHooks {
                     "MANUFACTURER", "Google",
                     "BRAND", "google",
                     "MODEL", "Pixel Tablet",
-                    "ID", "AP4A.241205.013",
+                    "ID", "BP3A.251105.013.A1",
                     "FINGERPRINT",
-                            "google/tangorpro/tangorpro:15/AP4A.241205.013/12621605:user/release-keys");
+                            "google/tangorpro/tangorpro:16/BP3A.251105.013.A1/14171100:user/release-keys");
 
     private static final Set<String> sPixelFeatures =
             Set.of(
@@ -140,7 +140,7 @@ public class PropImitationHooks {
 
         /* Set certified properties for GMSCore
          * Set stock fingerprint for ARCore
-         * Set Pixel 9 Pro XL / Pixel Tablet for Google, ASI and GMS device configurator
+         * Set Pixel 10 Pro XL / Pixel Tablet for Google, ASI and GMS device configurator
          */
         switch (processName) {
             case PROCESS_GMS_UNSTABLE:
@@ -159,11 +159,11 @@ public class PropImitationHooks {
                     setProps(sPixelTabletProps);
                 } else {
                     dlog(
-                            "Spoofing Pixel 9 Pro XL for: "
+                            "Spoofing Pixel 10 Pro XL for: "
                                     + packageName
                                     + " process: "
                                     + processName);
-                    setProps(sPixelNineProps);
+                    setProps(sPixelTenProps);
                 }
                 return;
             case PACKAGE_ARCORE:
