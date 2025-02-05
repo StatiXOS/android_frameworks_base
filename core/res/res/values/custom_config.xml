@@ -12,21 +12,9 @@
     limitations under the License.
 -->
 <resources>
-    <!-- Build properties from a GMS certified device against current platform SPL level -->
-    <string-array name="config_certifiedBuildProperties" translatable="false">
-      <!--
-        Each entry must be of the format
-            FIELD:value
-        with the field belonging to android.os.Build or android.os.Build.VERSION class.
-        Example:
-        <item>BRAND:foo</item>
-        <item>DEVICE:bar</item>
-        <item>FINGERPRINT:foo/bar/bar:1.0/lorem/ipsum:dolor/sit-amet</item>
-        <item>VERSION.RELEASE:1.0</item>
-      -->
-    </string-array>
-
-    <!-- Build fingerprint from stock ROM -->
+    <!-- Fingerprint from a certified device against current platform SPL level -->
+    <string name="config_certifiedFingerprint" translatable="false"></string>
+    <!-- Fingerprint from stock ROM -->
     <string name="config_stockFingerprint" translatable="false"></string>
 
     <!-- Whether to spoof GMS as Pixel Tablet -->
