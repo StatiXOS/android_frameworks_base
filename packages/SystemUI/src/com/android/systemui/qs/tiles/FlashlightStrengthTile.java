@@ -25,6 +25,8 @@ import android.hardware.camera2.CameraCharacteristics.Key;
 import android.hardware.camera2.CameraManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Vibrator;
+import android.os.VibrationEffect;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -71,6 +73,10 @@ public class FlashlightStrengthTile extends FlashlightTile implements TouchableQ
     private int mCurrentLevel;
     private boolean mClicked = true;
 
+    private Vibrator mVibrator;
+    private static final VibrationEffect FLASHLIGHT_MOVE_HAPTIC =
+            VibrationEffect.get(VibrationEffect.EFFECT_TICK);
+
     @Nullable private String mCameraId;
 
     private final CameraManager.TorchCallback mTorchCallback = new CameraManager.TorchCallback() {
@@ -105,6 +111,11 @@ public class FlashlightStrengthTile extends FlashlightTile implements TouchableQ
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (!mSupportsSettingFlashLevel || !mState.value) return false;
 
+                    mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+                    if (mVibrator == null || !mVibrator.hasVibrator()) {
+                        mVibrator = null;
+                    }
+
                     switch (motionEvent.getAction()) {
                         case MotionEvent.ACTION_DOWN -> {
                             initX = motionEvent.getX();
@@ -123,6 +134,7 @@ public class FlashlightStrengthTile extends FlashlightTile implements TouchableQ
                                         mContext.getContentResolver(),
                                         FLASHLIGHT_BRIGHTNESS_SETTING,
                                         mCurrentPercent);
+				mVibrator.vibrate(FLASHLIGHT_MOVE_HAPTIC);
                                 handleClick(null);
                             }
                             return true;
