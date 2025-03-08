@@ -290,7 +290,7 @@ public class ScreenMediaRecorder extends MediaProjection.Callback {
     /**
     * Start screen recording
     */
-    void start() throws IOException, RemoteException, RuntimeException {
+    public void start() throws IOException, RemoteException, RuntimeException {
         Log.d(TAG, "start recording");
         prepare();
         mMediaRecorder.start();
@@ -301,7 +301,7 @@ public class ScreenMediaRecorder extends MediaProjection.Callback {
     /**
      * End screen recording, throws an exception if stopping recording failed
      */
-    void end(@StopReason int stopReason) throws IOException {
+    public void end(@StopReason int stopReason) throws IOException {
         Closer closer = new Closer();
 
         // MediaRecorder might throw RuntimeException if stopped immediately after starting
@@ -344,7 +344,7 @@ public class ScreenMediaRecorder extends MediaProjection.Callback {
         }
     }
 
-    private  void recordInternalAudio() throws IllegalStateException {
+    private void recordInternalAudio() throws IllegalStateException {
         if (mAudioSource == INTERNAL || mAudioSource == MIC_AND_INTERNAL) {
             mAudio.start();
         }
@@ -353,7 +353,7 @@ public class ScreenMediaRecorder extends MediaProjection.Callback {
     /**
      * Store recorded video
      */
-    protected SavedRecording save() throws IOException, IllegalStateException {
+    public SavedRecording save() throws IOException, IllegalStateException {
         String fileName = new SimpleDateFormat("'screen-'yyyyMMdd-HHmmss'.mp4'")
                 .format(new Date());
 
@@ -415,7 +415,7 @@ public class ScreenMediaRecorder extends MediaProjection.Callback {
     /**
      * Release the resources without saving the data
      */
-    protected void release() {
+    public void release() {
         if (mTempVideoFile != null) {
             mTempVideoFile.delete();
         }

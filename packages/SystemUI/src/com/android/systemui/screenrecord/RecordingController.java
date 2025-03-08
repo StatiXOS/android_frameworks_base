@@ -73,9 +73,9 @@ public class RecordingController
     private final ScreenRecordPermissionViewBinder.Factory
             mScreenRecordPermissionViewBinderFactory;
 
-    protected static final String INTENT_UPDATE_STATE =
+    public static final String INTENT_UPDATE_STATE =
             "com.android.systemui.screenrecord.UPDATE_STATE";
-    protected static final String EXTRA_STATE = "extra_state";
+    public static final String EXTRA_STATE = "extra_state";
 
     private final CopyOnWriteArrayList<RecordingStateChangeCallback> mListeners =
             new CopyOnWriteArrayList<>();
