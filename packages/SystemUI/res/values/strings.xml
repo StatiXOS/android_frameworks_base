@@ -751,6 +751,7 @@
     <!-- QuickSettings: Do not disturb - Total silence [CHAR LIMIT=NONE] -->
     <!-- QuickSettings: Modes [CHAR LIMIT=NONE] -->
     <string name="quick_settings_modes_label">Modes</string>
+    <string name="quick_settings_ambient_music_modes_label">Ambient Music</string>
     <!-- QuickSettings: Bluetooth [CHAR LIMIT=NONE] -->
     <string name="quick_settings_bluetooth_label">Bluetooth</string>
     <!-- QuickSettings: Bluetooth (Multiple) [CHAR LIMIT=NONE] -->

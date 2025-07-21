@@ -27,6 +27,7 @@ import com.android.systemui.qs.pipeline.shared.TileSpec
 import com.android.systemui.qs.shared.model.TileCategory
 import com.android.systemui.qs.tileimpl.QSTileImpl
 import com.android.systemui.qs.tiles.AlarmTile
+import com.android.systemui.qs.tiles.AmbientMusicModesTile
 import com.android.systemui.qs.tiles.CameraToggleTile
 import com.android.systemui.qs.tiles.DndTile
 import com.android.systemui.qs.tiles.LocationTile
@@ -46,6 +47,10 @@ import com.android.systemui.qs.tiles.impl.alarm.domain.interactor.AlarmTileDataI
 import com.android.systemui.qs.tiles.impl.alarm.domain.interactor.AlarmTileUserActionInteractor
 import com.android.systemui.qs.tiles.impl.alarm.domain.model.AlarmTileModel
 import com.android.systemui.qs.tiles.impl.alarm.ui.mapper.AlarmTileMapper
+import com.android.systemui.qs.tiles.impl.ambientmusicmodes.domain.interactor.AmbientMusicModesTileDataInteractor
+import com.android.systemui.qs.tiles.impl.ambientmusicmodes.domain.interactor.AmbientMusicModesTileUserActionInteractor
+import com.android.systemui.qs.tiles.impl.ambientmusicmodes.domain.model.AmbientMusicModesTileModel
+import com.android.systemui.qs.tiles.impl.ambientmusicmodes.ui.mapper.AmbientMusicModesTileMapper
 import com.android.systemui.qs.tiles.impl.flashlight.domain.interactor.FlashlightTileDataInteractor
 import com.android.systemui.qs.tiles.impl.flashlight.domain.interactor.FlashlightTileUserActionInteractor
 import com.android.systemui.qs.tiles.impl.flashlight.domain.model.FlashlightTileModel
@@ -149,6 +154,16 @@ interface PolicyModule {
             modesTile: Provider<ModesTile>,
         ): QSTileImpl<*> {
             return if (ModesUi.isEnabled) modesTile.get() else dndTile.get()
+        }
+
+        /** Inject AmbientMusicModesTile into tileMap in QSModule */
+        @Provides
+        @IntoMap
+        @StringKey(AmbientMusicModesTile.TILE_SPEC)
+        fun bindAmbientMusicModesTile(
+            ambientMusicModesTile: Provider<AmbientMusicModesTile>,
+        ): QSTileImpl<*> {
+            return ambientMusicModesTile.get()
         }
 
         /** Inject ModesDndTile into tileViewModelMap in QSModule */
@@ -442,6 +457,22 @@ interface PolicyModule {
                 )
             }
 
+        /** Inject Ambient Music Modes tile config */
+        @Provides
+        @IntoMap
+        @StringKey(AmbientMusicModesTile.TILE_SPEC)
+        fun provideAmbientMusicModesTileConfig(uiEventLogger: QsEventLogger): QSTileConfig =
+            QSTileConfig(
+                tileSpec = TileSpec.create(AmbientMusicModesTile.TILE_SPEC),
+                uiConfig =
+                    QSTileUIConfig.Resource(
+                        iconRes = R.drawable.ic_qs_ambient_music_modes,
+                        labelRes = R.string.quick_settings_ambient_music_modes_label,
+                    ),
+                instanceId = uiEventLogger.getNewInstanceId(),
+                category = TileCategory.CONNECTIVITY,
+            )
+
         /** Inject ModesTile into tileViewModelMap in QSModule */
         @Provides
         @IntoMap
@@ -460,6 +491,23 @@ interface PolicyModule {
                     mapper,
                 )
             else StubQSTileViewModel
+
+        /** Inject AmbientMusicModesTile into tileViewModelMap in QSModule */
+        @Provides
+        @IntoMap
+        @StringKey(AmbientMusicModesTile.TILE_SPEC)
+        fun provideAmbientMusicModesTileViewModel(
+            factory: QSTileViewModelFactory.Static<AmbientMusicModesTileModel>,
+            mapper: AmbientMusicModesTileMapper,
+            stateInteractor: AmbientMusicModesTileDataInteractor,
+            userActionInteractor: AmbientMusicModesTileUserActionInteractor,
+        ): QSTileViewModel =
+            factory.create(
+                TileSpec.create(AmbientMusicModesTile.TILE_SPEC),
+                userActionInteractor,
+                stateInteractor,
+                mapper,
+            )
 
         @Provides
         @IntoMap
