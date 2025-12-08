@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 public class PowerUtil {
 
     private static final long SEVEN_MINUTES_MILLIS = TimeUnit.MINUTES.toMillis(7);
-    private static final long FIFTEEN_MINUTES_MILLIS = TimeUnit.MINUTES.toMillis(15);
+    public static final long FIFTEEN_MINUTES_MILLIS = TimeUnit.MINUTES.toMillis(15);
     private static final long ONE_DAY_MILLIS = TimeUnit.DAYS.toMillis(1);
     private static final long TWO_DAYS_MILLIS = TimeUnit.DAYS.toMillis(2);
     private static final long ONE_HOUR_MILLIS = TimeUnit.HOURS.toMillis(1);
