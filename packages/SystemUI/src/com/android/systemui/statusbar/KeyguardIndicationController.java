@@ -223,7 +223,7 @@ public class KeyguardIndicationController {
     private boolean mBatteryDefender;
     /** Whether the battery defender is triggered with the device plugged. */
     private boolean mEnableBatteryDefender;
-    private boolean mBatteryDead;
+    protected boolean mBatteryDead;
     private boolean mIncompatibleCharger;
     private int mChargingWattage;
     private int mBatteryLevel = -1;
