@@ -7989,7 +7989,7 @@
     <bool name="config_override_wfc_roaming_mode_while_using_ntn">true</bool>
 
     <!-- How long to wait from eligible to freeze to freezing an app (milliseconds) -->
-    <integer name="config_defaultFreezerDebounceTimeout">10000</integer>
+    <integer name="config_defaultFreezerDebounceTimeout">2500</integer>
 
     <!-- Whether contextual mode (e.g. Do Not Disturb Mode) sync is supported by this device. -->
     <bool name="config_supportContextualModeSync">true</bool>
