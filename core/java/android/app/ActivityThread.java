@@ -7891,6 +7891,12 @@ public final class ActivityThread extends ClientTransactionHandler
         }
 
         WindowManagerGlobal.getInstance().trimMemory(level);
+
+        if (level >= ComponentCallbacks2.TRIM_MEMORY_BACKGROUND
+                || level >= ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL) {
+            ArrayMap.trimCaches();
+            ArraySet.trimCaches();
+        }
     }
 
     private void setupGraphicsSupport(Context context) {

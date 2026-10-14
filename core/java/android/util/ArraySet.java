@@ -284,6 +284,21 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
     }
 
     /**
+     * Clear all cached array structures to free memory under memory pressure.
+     * @hide
+     */
+    public static void trimCaches() {
+        synchronized (sBaseCacheLock) {
+            sBaseCache = null;
+            sBaseCacheSize = 0;
+        }
+        synchronized (sTwiceBaseCacheLock) {
+            sTwiceBaseCache = null;
+            sTwiceBaseCacheSize = 0;
+        }
+    }
+
+    /**
      * Create a new empty ArraySet.  The default capacity of an array map is 0, and
      * will grow once items are added to it.
      */
