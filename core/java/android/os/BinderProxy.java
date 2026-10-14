@@ -151,7 +151,7 @@ public final class BinderProxy implements IBinder {
          * Remove ith entry from the hash bucket indicated by hash.
          */
         private void remove(int hash, int index) {
-            Long[] keyArray = mMainIndexKeys[hash];
+            long[] keyArray = mMainIndexKeys[hash];
             ArrayList<WeakReference<BinderProxy>> valueArray = mMainIndexValues[hash];
             int size = valueArray.size();  // KeyArray may have extra elements.
             // Move last entry into empty slot, and truncate at end.
@@ -168,7 +168,7 @@ public final class BinderProxy implements IBinder {
          */
         BinderProxy get(long key) {
             int myHash = hash(key);
-            Long[] keyArray = mMainIndexKeys[myHash];
+            long[] keyArray = mMainIndexKeys[myHash];
             if (keyArray == null) {
                 return null;
             }
@@ -201,7 +201,7 @@ public final class BinderProxy implements IBinder {
             ArrayList<WeakReference<BinderProxy>> valueArray = mMainIndexValues[myHash];
             if (valueArray == null) {
                 valueArray = mMainIndexValues[myHash] = new ArrayList<>();
-                mMainIndexKeys[myHash] = new Long[1];
+                mMainIndexKeys[myHash] = new long[1];
             }
             int size = valueArray.size();
             WeakReference<BinderProxy> newWr = new WeakReference<>(value);
@@ -211,7 +211,7 @@ public final class BinderProxy implements IBinder {
             for (int i = 0; i < size; ++i) {
                 if (valueArray.get(i).refersTo(null)) {
                     valueArray.set(i, newWr);
-                    Long[] keyArray = mMainIndexKeys[myHash];
+                    long[] keyArray = mMainIndexKeys[myHash];
                     keyArray[i] = key;
                     if (i < size - 1) {
                         // "Randomly" check one of the remaining entries in [i+1, size), so that
@@ -225,10 +225,10 @@ public final class BinderProxy implements IBinder {
                 }
             }
             valueArray.add(size, newWr);
-            Long[] keyArray = mMainIndexKeys[myHash];
+            long[] keyArray = mMainIndexKeys[myHash];
             if (keyArray.length == size) {
                 // size >= 1, since we initially allocated one element
-                Long[] newArray = new Long[size + size / 2 + 2];
+                long[] newArray = new long[size + size / 2 + 2];
                 System.arraycopy(keyArray, 0, newArray, 0, size);
                 newArray[size] = key;
                 mMainIndexKeys[myHash] = newArray;
@@ -401,7 +401,7 @@ public final class BinderProxy implements IBinder {
         // is always at least the same size, but may be larger.
         // If either a particular keys array, or the corresponding values ArrayList
         // are null, then they both are.
-        private final Long[][] mMainIndexKeys = new Long[MAIN_INDEX_SIZE][];
+        private final long[][] mMainIndexKeys = new long[MAIN_INDEX_SIZE][];
         private final ArrayList<WeakReference<BinderProxy>>[] mMainIndexValues =
                 new ArrayList[MAIN_INDEX_SIZE];
     }
