@@ -125,6 +125,29 @@ public final class RenderEffect {
     }
 
     /**
+     * Create a {@link RenderEffect} that blurs the contents and enhances color saturation,
+     * producing a rich and vibrant frosted glass aesthetic matching iOS 18 material blur.
+     *
+     * @param radiusX Radius of blur along the X axis
+     * @param radiusY Radius of blur along the Y axis
+     * @param edgeTreatment Policy for how to blur content near edges of the blur kernel
+     * @param saturation Saturation boost multiplier (e.g. 1.3f for vibrant 130% saturation)
+     * @hide
+     */
+    @NonNull
+    public static RenderEffect createSaturatedBlurEffect(
+            float radiusX,
+            float radiusY,
+            @NonNull TileMode edgeTreatment,
+            float saturation
+    ) {
+        RenderEffect blur = createBlurEffect(radiusX, radiusY, edgeTreatment);
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(saturation);
+        return createColorFilterEffect(new ColorMatrixColorFilter(matrix), blur);
+    }
+
+    /**
      * Create a {@link RenderEffect} that renders the contents of the input {@link Bitmap}.
      * This is useful to create an input for other {@link RenderEffect} types such as
      * {@link RenderEffect#createBlurEffect(float, float, RenderEffect, TileMode)} or
