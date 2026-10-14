@@ -103,7 +103,7 @@ object ShadeColors {
     private fun notificationScrimStandard(context: Context): Int {
         return ColorUtils.setAlphaComponent(
             context.getColor(R.color.notification_scrim_base),
-            (0.5f * 255).toInt(),
+            (0.35f * 255).toInt(),
         )
     }
 
