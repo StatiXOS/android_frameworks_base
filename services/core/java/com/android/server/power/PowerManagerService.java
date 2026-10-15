@@ -270,6 +270,9 @@ public final class PowerManagerService extends SystemService
     // Hard ceiling for maximum concurrent partial wakelocks allowed per UID to prevent resource exhaustion.
     private static final int MAX_PARTIAL_WAKELOCKS_PER_UID = 64;
 
+    // System-wide maximum duration for unexempted non-system partial wake locks on battery (10 minutes).
+    private static final long MAX_UNEXEMPT_WAKELOCK_DURATION_MS = 10 * 60 * 1000L;
+
     // Default setting for double tap to wake.
     private static final int DEFAULT_DOUBLE_TAP_TO_WAKE = 0;
 
@@ -3216,6 +3219,9 @@ public final class PowerManagerService extends SystemService
             final long now = mClock.uptimeMillis();
             mNotifyLongDispatched = now;
             final long when = now - MIN_LONG_WAKE_CHECK_INTERVAL;
+            final long unexemptDropWhen = now - MAX_UNEXEMPT_WAKELOCK_DURATION_MS;
+            final boolean onBatteryAndInactive = !mIsPowered && !isGloballyInteractiveInternal();
+            boolean needPowerUpdate = false;
             long nextCheckTime = Long.MAX_VALUE;
             final int numWakeLocks = mWakeLocks.size();
             for (int i = 0; i < numWakeLocks; i++) {
@@ -3234,7 +3240,34 @@ public final class PowerManagerService extends SystemService
                             }
                         }
                     }
+
+                    // Autonomous power management: drop runaway non-exempt wake locks
+                    // held longer than 10 minutes on battery while screen is off to enable deep sleep.
+                    if (onBatteryAndInactive && !wakeLock.mDisabled) {
+                        final int appid = UserHandle.getAppId(wakeLock.mOwnerUid);
+                        if (appid >= Process.FIRST_APPLICATION_UID
+                                && Arrays.binarySearch(mDeviceIdleWhitelist, appid) < 0
+                                && Arrays.binarySearch(mDeviceIdleTempWhitelist, appid) < 0) {
+                            if (wakeLock.mAcquireTime < unexemptDropWhen) {
+                                Slog.w(TAG, "Dropping runaway unexempt partial wake lock held for >"
+                                        + (MAX_UNEXEMPT_WAKELOCK_DURATION_MS / 1000) + "s by UID "
+                                        + wakeLock.mOwnerUid + " tag=" + wakeLock.mTag);
+                                if (wakeLock.setDisabled(true)) {
+                                    needPowerUpdate = true;
+                                }
+                            } else {
+                                long dropTime = wakeLock.mAcquireTime + MAX_UNEXEMPT_WAKELOCK_DURATION_MS;
+                                if (dropTime < nextCheckTime) {
+                                    nextCheckTime = dropTime;
+                                }
+                            }
+                        }
+                    }
                 }
+            }
+            if (needPowerUpdate) {
+                mDirty |= DIRTY_WAKE_LOCKS;
+                updatePowerStateLocked();
             }
             mNotifyLongScheduled = 0;
             mHandler.removeMessages(MSG_CHECK_FOR_LONG_WAKELOCKS);
