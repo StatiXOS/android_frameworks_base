@@ -264,6 +264,9 @@ public final class PowerManagerService extends SystemService
     // How long a partial wake lock must be held until we consider it a long wake lock.
     static final long MIN_LONG_WAKE_CHECK_INTERVAL = 60*1000;
 
+    // Minimum delay (in ms) between issuing consecutive interactive CPU power boosts.
+    private static final long MIN_INTERACTION_HINT_INTERVAL = 100;
+
     // Default setting for double tap to wake.
     private static final int DEFAULT_DOUBLE_TAP_TO_WAKE = 0;
 
@@ -2333,7 +2336,7 @@ public final class PowerManagerService extends SystemService
 
         Trace.traceBegin(Trace.TRACE_TAG_POWER, "userActivity");
         try {
-            if (eventTime > mLastInteractivePowerHintTime) {
+            if (eventTime - mLastInteractivePowerHintTime >= MIN_INTERACTION_HINT_INTERVAL) {
                 setPowerBoostInternal(Boost.INTERACTION, 0);
                 mLastInteractivePowerHintTime = eventTime;
             }
