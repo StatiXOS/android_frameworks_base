@@ -7354,10 +7354,10 @@
     <string name="config_defaultQrCodeComponentIntentAction"></string>
 
     <!-- Whether Low Power Standby is supported and can be enabled. -->
-    <bool name="config_lowPowerStandbySupported">false</bool>
+    <bool name="config_lowPowerStandbySupported">true</bool>
 
     <!-- If supported, whether Low Power Standby is enabled by default. -->
-    <bool name="config_lowPowerStandbyEnabledByDefault">false</bool>
+    <bool name="config_lowPowerStandbyEnabledByDefault">true</bool>
 
     <!-- The amount of time after becoming non-interactive (in ms) after which
          Low Power Standby can activate. -->
