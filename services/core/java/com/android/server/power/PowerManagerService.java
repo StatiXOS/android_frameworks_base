@@ -267,6 +267,9 @@ public final class PowerManagerService extends SystemService
     // Minimum delay (in ms) between issuing consecutive interactive CPU power boosts.
     private static final long MIN_INTERACTION_HINT_INTERVAL = 100;
 
+    // Hard ceiling for maximum concurrent partial wakelocks allowed per UID to prevent resource exhaustion.
+    private static final int MAX_PARTIAL_WAKELOCKS_PER_UID = 64;
+
     // Default setting for double tap to wake.
     private static final int DEFAULT_DOUBLE_TAP_TO_WAKE = 0;
 
@@ -1786,6 +1789,13 @@ public final class PowerManagerService extends SystemService
                     state = new UidState(uid);
                     state.mProcState = ActivityManager.PROCESS_STATE_NONEXISTENT;
                     mUidState.put(uid, state);
+                }
+                if (UserHandle.getAppId(uid) >= Process.FIRST_APPLICATION_UID
+                        && (flags & PowerManager.WAKE_LOCK_LEVEL_MASK) == PowerManager.PARTIAL_WAKE_LOCK
+                        && state.mNumWakeLocks >= MAX_PARTIAL_WAKELOCKS_PER_UID) {
+                    Slog.w(TAG, "UID " + uid + " exceeded max concurrent partial wake locks ("
+                            + MAX_PARTIAL_WAKELOCKS_PER_UID + ")! Rejecting lock tag=" + tag);
+                    throw new IllegalStateException("Too many concurrent wake locks for UID " + uid);
                 }
                 state.mNumWakeLocks++;
                 wakeLock = new WakeLock(lock, displayId, flags, tag, packageName, ws, historyTag,
