@@ -1879,7 +1879,17 @@ public class IntentFilter implements Parcelable {
      * @return True if the category is explicitly mentioned in the filter.
      */
     public final boolean hasCategory(String category) {
-        return mCategories != null && mCategories.contains(category);
+        if (mCategories == null || category == null) {
+            return false;
+        }
+        final int size = mCategories.size();
+        for (int i = 0; i < size; i++) {
+            final String cur = mCategories.get(i);
+            if (cur == category || cur.equals(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
