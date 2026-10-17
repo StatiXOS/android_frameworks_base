@@ -180,6 +180,27 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
     private final Pools.SynchronizedPool<ForAllWindowsConsumerWrapper> mConsumerWrapperPool =
             new Pools.SynchronizedPool<>(3);
 
+    private static final class TraversalBoundaryContext {
+        boolean boundaryFound;
+    }
+
+    private static final Pools.SynchronizedPool<TraversalBoundaryContext> sBoundaryContextPool =
+            new Pools.SynchronizedPool<>(8);
+
+    private static TraversalBoundaryContext obtainBoundaryContext() {
+        TraversalBoundaryContext ctx = sBoundaryContextPool.acquire();
+        if (ctx == null) {
+            ctx = new TraversalBoundaryContext();
+        }
+        ctx.boundaryFound = false;
+        return ctx;
+    }
+
+    private static void releaseBoundaryContext(TraversalBoundaryContext ctx) {
+        ctx.boundaryFound = false;
+        sBoundaryContextPool.release(ctx);
+    }
+
     // The display this window container is on.
     protected DisplayContent mDisplayContent;
 
@@ -1805,17 +1826,22 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
      */
     final boolean forAllActivities(Predicate<ActivityRecord> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom) {
-        return forAllActivities(
-                callback, boundary, includeBoundary, traverseTopToBottom, new boolean[1]);
+        final TraversalBoundaryContext ctx = obtainBoundaryContext();
+        try {
+            return forAllActivities(
+                    callback, boundary, includeBoundary, traverseTopToBottom, ctx);
+        } finally {
+            releaseBoundaryContext(ctx);
+        }
     }
 
     private boolean forAllActivities(Predicate<ActivityRecord> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom,
-            boolean[] boundaryFound) {
+            TraversalBoundaryContext ctx) {
         if (traverseTopToBottom) {
             for (int i = mChildren.size() - 1; i >= 0; --i) {
                 if (processForAllActivitiesWithBoundary(callback, boundary, includeBoundary,
-                        traverseTopToBottom, boundaryFound, mChildren.get(i))) {
+                        traverseTopToBottom, ctx, mChildren.get(i))) {
                     return true;
                 }
             }
@@ -1823,7 +1849,7 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
             final int count = mChildren.size();
             for (int i = 0; i < count; i++) {
                 if (processForAllActivitiesWithBoundary(callback, boundary, includeBoundary,
-                        traverseTopToBottom, boundaryFound, mChildren.get(i))) {
+                        traverseTopToBottom, ctx, mChildren.get(i))) {
                     return true;
                 }
             }
@@ -1834,18 +1860,18 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
 
     private boolean processForAllActivitiesWithBoundary(Predicate<ActivityRecord> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom,
-            boolean[] boundaryFound, WindowContainer wc) {
+            TraversalBoundaryContext ctx, WindowContainer wc) {
         if (wc == boundary) {
-            boundaryFound[0] = true;
+            ctx.boundaryFound = true;
             if (!includeBoundary) return false;
         }
 
-        if (boundaryFound[0]) {
+        if (ctx.boundaryFound) {
             return wc.forAllActivities(callback, traverseTopToBottom);
         }
 
         return wc.forAllActivities(
-                callback, boundary, includeBoundary, traverseTopToBottom, boundaryFound);
+                callback, boundary, includeBoundary, traverseTopToBottom, ctx);
     }
 
     /** @return {@code true} if this node or any of its children contains an activity. */
@@ -1908,17 +1934,22 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
      */
     final ActivityRecord getActivity(Predicate<ActivityRecord> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom) {
-        return getActivity(
-                callback, boundary, includeBoundary, traverseTopToBottom, new boolean[1]);
+        final TraversalBoundaryContext ctx = obtainBoundaryContext();
+        try {
+            return getActivity(
+                    callback, boundary, includeBoundary, traverseTopToBottom, ctx);
+        } finally {
+            releaseBoundaryContext(ctx);
+        }
     }
 
     private ActivityRecord getActivity(Predicate<ActivityRecord> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom,
-            boolean[] boundaryFound) {
+            TraversalBoundaryContext ctx) {
         if (traverseTopToBottom) {
             for (int i = mChildren.size() - 1; i >= 0; --i) {
                 final ActivityRecord r = processGetActivityWithBoundary(callback, boundary,
-                        includeBoundary, traverseTopToBottom, boundaryFound, mChildren.get(i));
+                        includeBoundary, traverseTopToBottom, ctx, mChildren.get(i));
                 if (r != null) {
                     return r;
                 }
@@ -1927,7 +1958,7 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
             final int count = mChildren.size();
             for (int i = 0; i < count; i++) {
                 final ActivityRecord r = processGetActivityWithBoundary(callback, boundary,
-                        includeBoundary, traverseTopToBottom, boundaryFound, mChildren.get(i));
+                        includeBoundary, traverseTopToBottom, ctx, mChildren.get(i));
                 if (r != null) {
                     return r;
                 }
@@ -1944,18 +1975,18 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
 
     private ActivityRecord processGetActivityWithBoundary(Predicate<ActivityRecord> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom,
-            boolean[] boundaryFound, WindowContainer wc) {
+            TraversalBoundaryContext ctx, WindowContainer wc) {
         if (wc == boundary || boundary == null) {
-            boundaryFound[0] = true;
+            ctx.boundaryFound = true;
             if (!includeBoundary) return null;
         }
 
-        if (boundaryFound[0]) {
+        if (ctx.boundaryFound) {
             return wc.getActivity(callback, traverseTopToBottom);
         }
 
         return wc.getActivity(
-                callback, boundary, includeBoundary, traverseTopToBottom, boundaryFound);
+                callback, boundary, includeBoundary, traverseTopToBottom, ctx);
     }
 
     @SuppressWarnings("unchecked")
@@ -2223,16 +2254,21 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
      */
     final Task getTask(Predicate<Task> callback, WindowContainer boundary, boolean includeBoundary,
             boolean traverseTopToBottom) {
-        return getTask(callback, boundary, includeBoundary, traverseTopToBottom, new boolean[1]);
+        final TraversalBoundaryContext ctx = obtainBoundaryContext();
+        try {
+            return getTask(callback, boundary, includeBoundary, traverseTopToBottom, ctx);
+        } finally {
+            releaseBoundaryContext(ctx);
+        }
     }
 
     private Task getTask(Predicate<Task> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom,
-            boolean[] boundaryFound) {
+            TraversalBoundaryContext ctx) {
         if (traverseTopToBottom) {
             for (int i = mChildren.size() - 1; i >= 0; --i) {
                 final Task t = processGetTaskWithBoundary(callback, boundary,
-                        includeBoundary, traverseTopToBottom, boundaryFound, mChildren.get(i));
+                        includeBoundary, traverseTopToBottom, ctx, mChildren.get(i));
                 if (t != null) {
                     return t;
                 }
@@ -2241,7 +2277,7 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
             final int count = mChildren.size();
             for (int i = 0; i < count; i++) {
                 final Task t = processGetTaskWithBoundary(callback, boundary,
-                        includeBoundary, traverseTopToBottom, boundaryFound, mChildren.get(i));
+                        includeBoundary, traverseTopToBottom, ctx, mChildren.get(i));
                 if (t != null) {
                     return t;
                 }
@@ -2291,18 +2327,18 @@ class WindowContainer<E extends WindowContainer> extends ConfigurationContainer<
 
     private Task processGetTaskWithBoundary(Predicate<Task> callback,
             WindowContainer boundary, boolean includeBoundary, boolean traverseTopToBottom,
-            boolean[] boundaryFound, WindowContainer wc) {
+            TraversalBoundaryContext ctx, WindowContainer wc) {
         if (wc == boundary || boundary == null) {
-            boundaryFound[0] = true;
+            ctx.boundaryFound = true;
             if (!includeBoundary) return null;
         }
 
-        if (boundaryFound[0]) {
+        if (ctx.boundaryFound) {
             return wc.getTask(callback, traverseTopToBottom);
         }
 
         return wc.getTask(
-                callback, boundary, includeBoundary, traverseTopToBottom, boundaryFound);
+                callback, boundary, includeBoundary, traverseTopToBottom, ctx);
     }
 
     @Nullable
