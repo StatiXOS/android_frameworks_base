@@ -111,6 +111,12 @@ public final class Message implements Parcelable {
     public int workSourceUid = UID_NONE;
 
     /**
+     * Scheduling priority (nice value) of the sending thread for priority inheritance.
+     * Default is THREAD_PRIORITY_DEFAULT (0).
+     */
+    /*package*/ int callingPriority = Process.THREAD_PRIORITY_DEFAULT;
+
+    /**
      * Name of the thread that sent the message.
      */
     /*package*/ String sendingThreadName;
@@ -418,6 +424,7 @@ public final class Message implements Parcelable {
         replyTo = null;
         sendingUid = UID_NONE;
         workSourceUid = UID_NONE;
+        callingPriority = Process.THREAD_PRIORITY_DEFAULT;
         when = 0;
         target = null;
         callback = null;
@@ -446,6 +453,7 @@ public final class Message implements Parcelable {
         obj = NULL_OBJECT;
         replyTo = null;
         sendingThreadName = null;
+        callingPriority = Process.THREAD_PRIORITY_DEFAULT;
         data = null;
         // A null target indicates a barrier node. In this case, we don't want to clear the field
         // with the sentinel handler.
@@ -468,6 +476,7 @@ public final class Message implements Parcelable {
         this.replyTo = o.replyTo;
         this.sendingUid = o.sendingUid;
         this.workSourceUid = o.workSourceUid;
+        this.callingPriority = o.callingPriority;
 
         if (o.data != null) {
             this.data = (Bundle) o.data.clone();

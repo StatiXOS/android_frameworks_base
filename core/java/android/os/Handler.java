@@ -846,6 +846,12 @@ public class Handler {
             long uptimeMillis) {
         msg.target = this;
         msg.workSourceUid = ThreadLocalWorkSource.getUid();
+        final Looper myLooper = Looper.myLooper();
+        if (myLooper != null) {
+            msg.callingPriority = myLooper.getBasePriority();
+        } else {
+            msg.callingPriority = Process.THREAD_PRIORITY_DEFAULT;
+        }
 
         if (mAsynchronous) {
             msg.setAsynchronous(true);

@@ -107,6 +107,8 @@ public final class Looper {
     @UnsupportedAppUsage
     private Printer mLogging;
     private long mTraceTag;
+    private int mCachedTid = -1;
+    private int mBasePriority = Integer.MAX_VALUE;
 
     /**
      * If set, the looper will show a warning log if a message dispatch takes longer than this.
@@ -292,6 +294,17 @@ public final class Looper {
         if (doctor != null) {
             doctor.startMessageTimer(me.mAlarm);
         }
+
+        if (me.mCachedTid < 0) {
+            me.mCachedTid = Process.myTid();
+            me.mBasePriority = Process.getThreadPriority(me.mCachedTid);
+        }
+        final int targetPriority = msg.callingPriority;
+        final boolean needsPriorityElevation = targetPriority < me.mBasePriority;
+        if (needsPriorityElevation) {
+            Process.setThreadPriority(me.mCachedTid, targetPriority);
+        }
+
         try {
             msg.target.dispatchMessage(msg);
             if (isLooperClearsThreadInterruptedEnabled()) {
@@ -309,6 +322,9 @@ public final class Looper {
             }
             throw exception;
         } finally {
+            if (needsPriorityElevation) {
+                Process.setThreadPriority(me.mCachedTid, me.mBasePriority);
+            }
             if (doctor != null) {
                 doctor.stopMessageTimer(me.mAlarm);
             }
@@ -392,6 +408,8 @@ public final class Looper {
         final int thresholdOverride = getThresholdOverride();
 
         me.mSlowDeliveryDetected = false;
+        me.mCachedTid = Process.myTid();
+        me.mBasePriority = Process.getThreadPriority(me.mCachedTid);
 
         for (;;) {
             if (!loopOnce(me, ident, thresholdOverride)) {
@@ -504,6 +522,16 @@ public final class Looper {
      */
     public boolean isCurrentThread() {
         return Thread.currentThread() == mThread;
+    }
+
+    /*package*/ int getBasePriority() {
+        if (mBasePriority == Integer.MAX_VALUE) {
+            if (mCachedTid < 0) {
+                mCachedTid = Process.myTid();
+            }
+            mBasePriority = Process.getThreadPriority(mCachedTid);
+        }
+        return mBasePriority;
     }
 
     /**
