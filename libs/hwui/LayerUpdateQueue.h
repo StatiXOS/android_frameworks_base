@@ -41,7 +41,11 @@ public:
         Rect damage;
     };
 
-    LayerUpdateQueue() {}
+    static constexpr size_t kInitialCapacity = 4;
+
+    LayerUpdateQueue() {
+        mEntries.reserve(kInitialCapacity);
+    }
     void enqueueLayerWithDamage(RenderNode* renderNode, Rect dirty);
     void clear();
     const std::vector<Entry>& entries() const { return mEntries; }
