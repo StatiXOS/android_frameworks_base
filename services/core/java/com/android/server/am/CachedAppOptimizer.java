@@ -1420,10 +1420,14 @@ public class CachedAppOptimizer {
             }
         }
         reportProcessFreezableChangedLocked(app);
-        app.mOptRecord.setLastUsedTimeout(delayMillis);
+        // Batch non-zero debounce delays into 50ms quantized windows to coalesce wakeups
+        final long coalescedDelay = (delayMillis > 50)
+                ? (((delayMillis + 49) / 50) * 50)
+                : delayMillis;
+        app.mOptRecord.setLastUsedTimeout(coalescedDelay);
         mFreezeHandler.sendMessageDelayed(
                 mFreezeHandler.obtainMessage(SET_FROZEN_PROCESS_MSG, DO_FREEZE, 0, app),
-                delayMillis);
+                coalescedDelay);
         opt.setPendingFreeze(true);
         if (DEBUG_FREEZER) {
             Slog.d(TAG_AM, "Async freezing " + app.getPid() + " " + app.processName);
