@@ -76,8 +76,9 @@ void CommonPool::enqueue(Task&& task) {
         usleep(100);
         lock.lock();
     }
+    const bool wasEmpty = !mWorkQueue.hasWork();
     mWorkQueue.push(std::move(task));
-    if (mWaitingThreads == THREAD_COUNT || (mWaitingThreads > 0 && mWorkQueue.size() > 1)) {
+    if (mWaitingThreads > 0 && wasEmpty) {
         mCondition.notify_one();
     }
 }
