@@ -56,8 +56,8 @@ public class LazyAlarmStore implements AlarmStore {
     });
 
     // Decreasing time order because it is more efficient to remove from the tail of an array list.
-    private static final Comparator<Alarm> sDecreasingTimeOrder = Comparator.comparingLong(
-            Alarm::getWhenElapsed).reversed();
+    private static final Comparator<Alarm> sDecreasingTimeOrder = (a1, a2) ->
+            Long.compare(a2.getWhenElapsed(), a1.getWhenElapsed());
 
     @Override
     public void add(Alarm a) {
