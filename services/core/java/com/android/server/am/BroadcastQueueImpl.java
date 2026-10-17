@@ -1548,17 +1548,25 @@ class BroadcastQueueImpl extends BroadcastQueue {
         // If we've made reasonable progress, periodically retire ourselves to
         // avoid starvation of other processes and stack overflow when a
         // broadcast is immediately finished without waiting
+        final boolean hasWaitingRunnablePeers = mRunnableHead != null && mRunnableHead != queue;
         final boolean shouldRetire;
         if (UserHandle.isCore(queue.uid)) {
             final int nonBlockingDeliveryCount = queue.getActiveAssumedDeliveryCountSinceIdle();
             final int blockingDeliveryCount = (queue.getActiveCountSinceIdle()
                     - queue.getActiveAssumedDeliveryCountSinceIdle());
-            shouldRetire = (blockingDeliveryCount
-                    >= mConstants.MAX_CORE_RUNNING_BLOCKING_BROADCASTS) || (nonBlockingDeliveryCount
-                    >= mConstants.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS);
+            final int maxBlocking = hasWaitingRunnablePeers
+                    ? Math.max(1, mConstants.MAX_CORE_RUNNING_BLOCKING_BROADCASTS / 2)
+                    : mConstants.MAX_CORE_RUNNING_BLOCKING_BROADCASTS;
+            final int maxNonBlocking = hasWaitingRunnablePeers
+                    ? Math.max(1, mConstants.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS / 2)
+                    : mConstants.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS;
+            shouldRetire = (blockingDeliveryCount >= maxBlocking)
+                    || (nonBlockingDeliveryCount >= maxNonBlocking);
         } else {
-            shouldRetire =
-                    (queue.getActiveCountSinceIdle() >= mConstants.MAX_RUNNING_ACTIVE_BROADCASTS);
+            final int maxActive = hasWaitingRunnablePeers
+                    ? Math.max(1, mConstants.MAX_RUNNING_ACTIVE_BROADCASTS / 2)
+                    : mConstants.MAX_RUNNING_ACTIVE_BROADCASTS;
+            shouldRetire = (queue.getActiveCountSinceIdle() >= maxActive);
         }
 
         return !queue.isRunnable() || !queue.isProcessWarm() || shouldRetire;
