@@ -1698,6 +1698,12 @@ public final class Choreographer {
 
         @UnsupportedAppUsage
         public void addCallbackLocked(long dueTime, Object action, Object token) {
+            // Check for redundant identical callback scheduled for the exact same due time
+            for (CallbackRecord p = mHead; p != null; p = p.next) {
+                if (p.action == action && p.token == token && p.dueTime == dueTime) {
+                    return;
+                }
+            }
             CallbackRecord callback = obtainCallbackLocked(dueTime, action, token);
             CallbackRecord entry = mHead;
             if (entry == null) {
