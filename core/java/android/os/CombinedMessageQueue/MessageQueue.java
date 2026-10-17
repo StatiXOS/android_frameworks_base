@@ -169,6 +169,31 @@ public final class MessageQueue {
         return mLooperThread;
     }
 
+    /**
+     * Compute adaptive timeout taking into account wakeup coalescing for non-urgent tasks.
+     * Asynchronous messages (e.g. frame callbacks, input events) and immediate tasks are strictly
+     * exempted to prevent frame latency or jitter. For delayed (> 10ms), synchronous background
+     * tasks, aligns wakeups into 10ms coalescing windows.
+     */
+    private static int computeAdaptiveTimeout(long delayMillis, Message msg) {
+        if (delayMillis <= 0) {
+            return 0;
+        }
+        if (delayMillis > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        int timeout = (int) delayMillis;
+        // Strictly exempt asynchronous messages and sync barriers from coalescing
+        if (msg != null && (msg.isAsynchronous() || msg.target == null)) {
+            return timeout;
+        }
+        // Batch non-critical wakeups beyond 10ms into 10ms quantized boundary windows
+        if (timeout > 10 && timeout <= 1000) {
+            timeout = ((timeout + 9) / 10) * 10;
+        }
+        return timeout;
+    }
+
     static boolean getUseConcurrent() {
         if (!sUseConcurrentInitialized) {
             // We may race and compute the underlying value more than once.
@@ -839,8 +864,7 @@ public final class MessageQueue {
                     /* Message not ready, or we found one to deliver already, set a timeout */
                     long nextMessageWhen = next.when;
                     if (nextMessageWhen > now) {
-                        mNextPollTimeoutMillis = (int) Math.min(nextMessageWhen - now,
-                                Integer.MAX_VALUE);
+                        mNextPollTimeoutMillis = computeAdaptiveTimeout(nextMessageWhen - now, next.mMsg);
                     } else {
                         mNextPollTimeoutMillis = 0;
                     }
@@ -989,7 +1013,7 @@ public final class MessageQueue {
                 if (msg != null) {
                     if (now < msg.when) {
                         // Next message is not ready.  Set a timeout to wake up when it is ready.
-                        nextPollTimeoutMillis = (int) Math.min(msg.when - now, Integer.MAX_VALUE);
+                        nextPollTimeoutMillis = computeAdaptiveTimeout(msg.when - now, msg);
                     } else {
                         // Got a message.
                         mBlocked = false;
